@@ -1,2 +1,2 @@
 <?php
-define("URL", "http://localhost:51386/");
+define("URL", "http://localhost/Conforama-restaurant/");

@@ -35,7 +35,7 @@
                 "-S",
                 "localhost:0"
             ],
-            "program": "${workspaceRoot}/index.php",
+            "program": "${workspaceFolder}/index.php",
             "cwd": "${workspaceRoot}",
             "port": 9003,
             "serverReadyAction": {

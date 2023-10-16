@@ -5,7 +5,7 @@ include_once 'config/parameters.php';
 if(!isset($_GET['controller']))
 {
     // si no se pasa nada se mostrará pagina principal de pedidos.
-    header("Location: " . URL . "?controller=pedido");
+    header("Location:" . URL . '?controller=pedido');
 }
 else
 {
