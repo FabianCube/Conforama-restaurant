@@ -1,11 +1,11 @@
 <?php
-// Creating controller for comands
+include_once 'model/ProductoDAO.php';
 
 class pedidoController
 {
     public function index()
     {
-        echo 'Pagina principal pedidos';
+        var_dump(ProductoDAO::getAllProducts());
     }
 
     public function compra()
