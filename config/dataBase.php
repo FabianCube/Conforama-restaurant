@@ -6,9 +6,11 @@ class DataBase
     {
         $conn = new mysqli($host , $user, $pass, $db);
 
-        if($conn == false)
+        if($conn->connect_error)
         {
-            die('CONECTION ERROR IN ' . $host . '/' . $db);
+            die("[ERROR] Connection failed: " . $conn->connect_error);
         }
+
+        return $conn;
     }
 }
