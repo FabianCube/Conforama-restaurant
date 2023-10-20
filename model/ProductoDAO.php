@@ -15,10 +15,10 @@ class ProductoDAO
             while($row = $result->fetch_assoc()) 
             {
               echo "id: " . $row["PRODUCTO_ID"]. 
-              " - Nombre producto: " . $row["NOMBRE_PRODUCTO"]. 
-              " - Descripcion: " . $row["DESCRIPCION"]. 
-              " - Precio producto: " . $row["PRECIO_PRODUCTO"].
-              " - Categoria id: " . $row["CATEGORIA_ID"]."<br>";
+              "<br> - Nombre producto: " . $row["NOMBRE_PRODUCTO"]. 
+              "<br> - Descripcion: " . $row["DESCRIPCION"]. 
+              "<br> - Precio producto: " . $row["PRECIO_PRODUCTO"].
+              "<br> - Categoria id: " . $row["CATEGORIA_ID"]."<br>";
             }
           } 
           else 
