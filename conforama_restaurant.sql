@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Temps de generació: 18-10-2023 a les 18:44:47
+-- Temps de generació: 20-10-2023 a les 16:54:48
 -- Versió del servidor: 10.4.28-MariaDB
 -- Versió de PHP: 8.2.4
 
@@ -32,6 +32,18 @@ CREATE TABLE `categorias` (
   `NOMBRE_CATEGORIA` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
+--
+-- Bolcament de dades per a la taula `categorias`
+--
+
+INSERT INTO `categorias` (`CATEGORIA_ID`, `NOMBRE_CATEGORIA`) VALUES
+(0, 'CAFES'),
+(1, 'BOCADILLOS'),
+(2, 'SMOOTHIES'),
+(3, 'MUFFINS'),
+(4, 'BATIDOS'),
+(5, 'DONUTS');
+
 -- --------------------------------------------------------
 
 --
@@ -41,8 +53,27 @@ CREATE TABLE `categorias` (
 CREATE TABLE `ingredientes` (
   `INGREDIENTE_ID` int(11) NOT NULL,
   `NOMBRE_INGREDIENTE` varchar(25) NOT NULL,
-  `PRECIO_INGREDIENTE` int(11) NOT NULL
+  `PRECIO_INGREDIENTE` decimal(5,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+--
+-- Bolcament de dades per a la taula `ingredientes`
+--
+
+INSERT INTO `ingredientes` (`INGREDIENTE_ID`, `NOMBRE_INGREDIENTE`, `PRECIO_INGREDIENTE`) VALUES
+(1, 'Azúcar blanco', 0.00),
+(2, 'Azúcar moreno', 0.00),
+(3, 'Miel', 0.30),
+(4, 'Hielo', 0.35),
+(5, 'Anís', 0.55),
+(6, 'Leche de avena', 0.50),
+(7, 'Lechuga', 0.00),
+(8, 'Tomate', 0.00),
+(9, 'Queso', 0.50),
+(10, 'Pan integral', 1.95),
+(11, 'Pepinillos', 0.00),
+(12, 'Menta', 0.00),
+(13, 'Nata', 0.50);
 
 -- --------------------------------------------------------
 
@@ -94,7 +125,7 @@ CREATE TABLE `productos` (
   `PRODUCTO_ID` int(11) NOT NULL,
   `NOMBRE_PRODUCTO` varchar(25) NOT NULL,
   `DESCRIPCION` varchar(255) NOT NULL,
-  `PRECIO_PRODUCTO` int(11) NOT NULL,
+  `PRECIO_PRODUCTO` decimal(5,2) NOT NULL,
   `CATEGORIA_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
@@ -103,7 +134,18 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`PRODUCTO_ID`, `NOMBRE_PRODUCTO`, `DESCRIPCION`, `PRECIO_PRODUCTO`, `CATEGORIA_ID`) VALUES
-(1, 'Café con leche', 'cafe con leche blabla', 3, 1);
+(0, 'Cafe con leche', 'Cafe con leche elaborado en nuestras cocinas, con granos de café locales.', 2.99, 0),
+(1, 'Cafe solo', 'Café solo.', 1.99, 0),
+(2, 'Sandwich vegetal', 'Un delicioso Sandwich vegetal con lechuga, tomate, motzarela.', 4.99, 1),
+(3, 'Sandwich de pollo', 'Sandwich de pollo con sobrasada preparado al momento.', 4.99, 1),
+(4, 'Smoothie de frutos', 'Smootie de frutos del bosque con el toque perfecto de azúcar. ', 3.99, 2),
+(5, 'Soothie fresa', 'Smoothie de fresa con menta, ¡se sirve bien fresquito!', 3.99, 2),
+(6, 'Muffin de chocolate', 'Un delicioso Muffin de chocolate perfecto para acompañar tus cafés.', 1.99, 3),
+(7, 'Muffic con pepitas', 'Muffin con pepitas de cocolate.', 1.99, 3),
+(8, 'Milkshake chocolate', 'Milkshake de chocolate con nata.', 3.99, 4),
+(9, 'Milkshake de cereza', 'Milkshake de cereza.', 3.99, 4),
+(10, 'Donut chocolate blanco', 'Donut de azúcar cubierto con chocolate blanco.', 1.99, 5),
+(11, 'Donut chocolate', 'Donut de azúcar cubierto de chocolate.', 1.99, 5);
 
 -- --------------------------------------------------------
 
@@ -209,13 +251,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT per la taula `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `CATEGORIA_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `CATEGORIA_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT per la taula `ingredientes`
 --
 ALTER TABLE `ingredientes`
-  MODIFY `INGREDIENTE_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `INGREDIENTE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT per la taula `modificacion`
@@ -239,7 +281,7 @@ ALTER TABLE `pedido_producto`
 -- AUTO_INCREMENT per la taula `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `PRODUCTO_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `PRODUCTO_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT per la taula `productos_ingredientes`
