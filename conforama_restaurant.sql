@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Temps de generació: 20-10-2023 a les 16:54:48
+-- Temps de generació: 20-10-2023 a les 17:22:53
 -- Versió del servidor: 10.4.28-MariaDB
 -- Versió de PHP: 8.2.4
 
@@ -156,8 +156,25 @@ INSERT INTO `productos` (`PRODUCTO_ID`, `NOMBRE_PRODUCTO`, `DESCRIPCION`, `PRECI
 CREATE TABLE `productos_ingredientes` (
   `PRODUCTOS_INGREDIENTES_ID` int(4) NOT NULL,
   `PRODUCTO_ID` int(4) NOT NULL,
-  `INGREDIENTE_ID` int(4) NOT NULL
+  `INGREDIENTE_ID` int(4) NOT NULL,
+  `CANTIDAD` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+--
+-- Bolcament de dades per a la taula `productos_ingredientes`
+--
+
+INSERT INTO `productos_ingredientes` (`PRODUCTOS_INGREDIENTES_ID`, `PRODUCTO_ID`, `INGREDIENTE_ID`, `CANTIDAD`) VALUES
+(1, 2, 7, 2),
+(2, 2, 8, 1),
+(3, 2, 9, 2),
+(4, 3, 8, 1),
+(5, 3, 11, 3),
+(6, 3, 9, 2),
+(7, 5, 12, 1),
+(8, 4, 12, 1),
+(9, 8, 13, 1),
+(10, 9, 13, 1);
 
 -- --------------------------------------------------------
 
@@ -167,8 +184,17 @@ CREATE TABLE `productos_ingredientes` (
 
 CREATE TABLE `roles` (
   `ROL_ID` int(11) NOT NULL,
-  `NOMBRE_ROL` int(11) NOT NULL
+  `NOMBRE_ROL` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+--
+-- Bolcament de dades per a la taula `roles`
+--
+
+INSERT INTO `roles` (`ROL_ID`, `NOMBRE_ROL`) VALUES
+(0, 'Admin'),
+(1, 'Desarrollador'),
+(2, 'Cliente');
 
 -- --------------------------------------------------------
 
@@ -184,6 +210,13 @@ CREATE TABLE `usuarios` (
   `EMAIL` varchar(150) NOT NULL,
   `TELEFONO` int(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+--
+-- Bolcament de dades per a la taula `usuarios`
+--
+
+INSERT INTO `usuarios` (`USUARIO_ID`, `ROL_ID`, `NOMBRE_USUARIO`, `APELLIDO_USUARIO`, `EMAIL`, `TELEFONO`) VALUES
+(1, 0, 'Fabian', 'Doizi', 'fabiandoizifp@ibf.cat', 789900000);
 
 --
 -- Índexs per a les taules bolcades
@@ -287,19 +320,19 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT per la taula `productos_ingredientes`
 --
 ALTER TABLE `productos_ingredientes`
-  MODIFY `PRODUCTOS_INGREDIENTES_ID` int(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `PRODUCTOS_INGREDIENTES_ID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT per la taula `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `ROL_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ROL_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT per la taula `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `USUARIO_ID` int(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `USUARIO_ID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
