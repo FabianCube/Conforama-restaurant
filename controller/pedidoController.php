@@ -5,6 +5,7 @@ class pedidoController
 {
     public function index()
     {
+        
         var_dump(ProductoDAO::getAllProducts());
     }
 
