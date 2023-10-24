@@ -11,7 +11,7 @@
     <div class="parent-content">
         <nav class="main-nav">
             <div class="content-nav">
-                <img src="../media/Conforama_logo.png" alt="Logo Conforama">
+                <img class="conforama-logo" src="media/Conforama_logo.png" alt="Logo Conforama">
             </div>
         </nav>
         <nav class="sub-nav">

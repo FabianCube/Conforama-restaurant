@@ -6,10 +6,10 @@ class productosController
     public function index()
     {
         include_once('view/nav.php');
-    }
 
-    public function compra()
-    {
-        echo 'Pagina de compra';
+        // mostrar los productos
+
+        $productos = productoDAO::getAllProducts();
+        var_dump($producto);
     }
 }
