@@ -10,6 +10,6 @@ class productosController
         // mostrar los productos
 
         $productos = productoDAO::getAllProducts();
-        var_dump($producto);
+
     }
 }
