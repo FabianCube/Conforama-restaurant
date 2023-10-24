@@ -8,8 +8,7 @@ abstract class Producto
     protected $precio_producto;
     protected $categoria_id;
 
-    public function __construct()
-    {
+    public function __construct(){ }
 
-    }
+    
 }

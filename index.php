@@ -1,11 +1,12 @@
 <?php
 include_once 'controller/pedidoController.php';
+include_once 'controller/productosController.php';
 include_once 'config/parameters.php';
 
 if(!isset($_GET['controller']))
 {
     // si no se pasa nada se mostrará pagina principal de pedidos.
-    header("Location:" . URL . '?controller=pedido');
+    header("Location:" . URL . '?controller=productos');
 }
 else
 {
@@ -31,7 +32,7 @@ else
     }
     else
     {
-        header("Location:".URL."?controller=pedido");
+        header("Location:".URL."?controller=productos");
         echo $nombre_controller . ' no existe';
     }
 }

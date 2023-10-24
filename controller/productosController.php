@@ -1,11 +1,11 @@
 <?php
 include_once 'model/ProductoDAO.php';
 
-class pedidoController
+class productosController
 {
     public function index()
     {
-        
+        include_once('view/nav.php');
     }
 
     public function compra()
