@@ -1,6 +1,6 @@
 <?php
 include_once 'model/ProductoDAO.php';
-
+include_once 'config/parameters.php';
     $productos = ProductoDAO::getAllProducts();
 ?>
 
@@ -24,6 +24,14 @@ include_once 'model/ProductoDAO.php';
             <td><?=$producto->getNOMBRE_PRODUCTO()?></td>
             <td><?=$producto->getDESCRIPCION()?></td>
             <td><?=$producto->getPRECIO_PRODUCTO()?></td>
+            <td>
+
+            <form action=<?= URL."?controller" ?> method="post">
+                <input name="id" value="<?=$producto->getPRODUCTO_ID()?>">
+                <button type="submit">Eliminar</button>
+            </form>
+            </td>
+            
         </tr>
         <?php } ?>
     </table>
