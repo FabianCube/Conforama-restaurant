@@ -1,6 +1,6 @@
 <?php
 
-abstract class Producto
+class Producto
 {
     protected $producto_id;
     protected $nombre_producto;
@@ -8,10 +8,10 @@ abstract class Producto
     protected $precio_producto;
     protected $categoria_id;
 
-    public function __construct(){ }
+    public function __construct()
+    { }
 
-    
-
+  
     /**
      * Get the value of producto_id
      */ 
