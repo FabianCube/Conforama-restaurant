@@ -25,11 +25,16 @@ include_once 'config/parameters.php';
             <td><?=$producto->getDESCRIPCION()?></td>
             <td><?=$producto->getPRECIO_PRODUCTO()?></td>
             <td>
-
-            <form action=<?= URL."?controller" ?> method="post">
-                <input name="id" value="<?=$producto->getPRODUCTO_ID()?>">
-                <button type="submit">Eliminar</button>
-            </form>
+                <form action=<?= URL."?controller" ?> method="post">
+                    <input name="id" value="<?=$producto->getPRODUCTO_ID()?>">
+                    <button type="submit">Modificar</button>
+                </form>
+            </td>
+            <td>
+                <form action=<?= URL."?controller" ?> method="post">
+                    <input name="id" value="<?=$producto->getPRODUCTO_ID()?>">
+                    <button type="submit">Eliminar</button>
+                </form>
             </td>
             
         </tr>
