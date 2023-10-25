@@ -25,7 +25,7 @@ else
         }
         else
         {
-            $action = 'index';
+            $action = action_default;
         }
 
         $controller->$action();

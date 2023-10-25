@@ -2,112 +2,114 @@
 
 class Producto
 {
-    protected $producto_id;
-    protected $nombre_producto;
-    protected $descripcion;
-    protected $precio_producto;
-    protected $categoria_id;
+    private $PRODUCTO_ID;
+    private $NOMBRE_PRODUCTO;
+    private $DESCRIPCION;
+    private $PRECIO_PRODUCTO;
+    private $CATEGORIA_ID;
 
     public function __construct()
     { }
 
   
+ 
+
     /**
-     * Get the value of producto_id
+     * Get the value of PRODUCTO_ID
      */ 
-    public function getProducto_id()
+    public function getPRODUCTO_ID()
     {
-        return $this->producto_id;
+        return $this->PRODUCTO_ID;
     }
 
     /**
-     * Set the value of producto_id
+     * Set the value of PRODUCTO_ID
      *
      * @return  self
      */ 
-    public function setProducto_id($producto_id)
+    public function setPRODUCTO_ID($PRODUCTO_ID)
     {
-        $this->producto_id = $producto_id;
+        $this->PRODUCTO_ID = $PRODUCTO_ID;
 
         return $this;
     }
 
     /**
-     * Get the value of nombre_producto
+     * Get the value of NOMBRE_PRODUCTO
      */ 
-    public function getNombre_producto()
+    public function getNOMBRE_PRODUCTO()
     {
-        return $this->nombre_producto;
+        return $this->NOMBRE_PRODUCTO;
     }
 
     /**
-     * Set the value of nombre_producto
+     * Set the value of NOMBRE_PRODUCTO
      *
      * @return  self
      */ 
-    public function setNombre_producto($nombre_producto)
+    public function setNOMBRE_PRODUCTO($NOMBRE_PRODUCTO)
     {
-        $this->nombre_producto = $nombre_producto;
+        $this->NOMBRE_PRODUCTO = $NOMBRE_PRODUCTO;
 
         return $this;
     }
 
     /**
-     * Get the value of descripcion
+     * Get the value of DESCRIPCION
      */ 
-    public function getDescripcion()
+    public function getDESCRIPCION()
     {
-        return $this->descripcion;
+        return $this->DESCRIPCION;
     }
 
     /**
-     * Set the value of descripcion
+     * Set the value of DESCRIPCION
      *
      * @return  self
      */ 
-    public function setDescripcion($descripcion)
+    public function setDESCRIPCION($DESCRIPCION)
     {
-        $this->descripcion = $descripcion;
+        $this->DESCRIPCION = $DESCRIPCION;
 
         return $this;
     }
 
     /**
-     * Get the value of precio_producto
+     * Get the value of PRECIO_PRODUCTO
      */ 
-    public function getPrecio_producto()
+    public function getPRECIO_PRODUCTO()
     {
-        return $this->precio_producto;
+        return $this->PRECIO_PRODUCTO;
     }
 
     /**
-     * Set the value of precio_producto
+     * Set the value of PRECIO_PRODUCTO
      *
      * @return  self
      */ 
-    public function setPrecio_producto($precio_producto)
+    public function setPRECIO_PRODUCTO($PRECIO_PRODUCTO)
     {
-        $this->precio_producto = $precio_producto;
+        $this->PRECIO_PRODUCTO = $PRECIO_PRODUCTO;
 
         return $this;
     }
 
     /**
-     * Get the value of categoria_id
+     * Get the value of CATEGORIA_ID
      */ 
-    public function getCategoria_id()
+    public function getCATEGORIA_ID()
     {
-        return $this->categoria_id;
+        return $this->CATEGORIA_ID;
     }
 
     /**
-     * Set the value of categoria_id
+     * Set the value of CATEGORIA_ID
      *
      * @return  self
      */ 
-    public function setCategoria_id($categoria_id)
+    public function setCATEGORIA_ID($CATEGORIA_ID)
     {
-        $this->categoria_id = $categoria_id;
+        $this->CATEGORIA_ID = $CATEGORIA_ID;
 
         return $this;
     }

@@ -22,4 +22,16 @@ class ProductoDAO
 
     return $productos;
   }
+
+  public static function deleteProduct($id)
+  {
+    // logica para eliminar un producto
+    $conn = DataBase::connect();
+
+    $stmt = $conn->prepare("DELETE FROM productos WHERE PRODUCTO_ID=$id");
+    $stmt->execute();
+    $result=$stmt->get_result();
+
+    return $result;
+  }
 }
