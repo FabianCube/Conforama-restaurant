@@ -26,7 +26,7 @@ $productos = ProductoDAO::getAllProducts();
             <td><?=$producto->getDescripcion()?></td>
             <td><?=$producto->getPrecio_producto()?></td>
             <td>
-                <form action=<?= URL."?Controller" ?> method="post">
+                <form action=<?= URL."?controller=productos&action=modificar" ?> method="post">
                     <input name="producto_id" value="<?=$producto->getProducto_id()?>" hidden>
                     <button type="submit">Modificar</button>
                 </form>

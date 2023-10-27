@@ -28,10 +28,35 @@ class ProductoDAO
     // logica para eliminar un producto
     $conn = DataBase::connect();
 
-    $stmt = $conn->prepare("DELETE FROM productos WHERE PRODUCTO_ID=$id");
+    $stmt = $conn->prepare("DELETE FROM productos WHERE producto_id=$id");
     $stmt->execute();
     $result = $stmt->get_result();
 
+    return $result;
+  }
+
+  public static function getOneProduct($id)
+  {
+    $conn = DataBase::connect();
+
+    $stmt = $conn->prepare("SELECT * FROM productos WHERE producto_id=$id");
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $producto = $result->fetch_object('Producto');
+
+    return $producto;
+  }
+
+  public static function modifyProduct($id, $prd)
+  {
+    $conn = DataBase::connect();
+    $stmt = $conn->prepare("UPDATE productos SET nombre_producto=".$prd->getNombre_producto().", descripcion=".$prd->getDescripcion()." where producto_id = $id");
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+
+    header("Location:".URL);
     return $result;
   }
 }

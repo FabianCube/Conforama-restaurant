@@ -19,4 +19,9 @@ class productosController
         ProductoDAO::deleteProduct($producto_id);
         header("Location:".URL);
     }
+
+    public function modificar()
+    {
+        include_once("view/modifyPanel.php");
+    }
 }
