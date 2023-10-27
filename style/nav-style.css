@@ -8,12 +8,13 @@
 {
     width: 100%;
     height: auto;
+    margin-bottom: 0;
     display: flex;
     flex-flow: column;
     justify-content: space-around;
-    position: fixed;
+    /* position: fixed;
     top: 0;
-    left: 0;
+    left: 0; */
 }
 
 .main-nav
