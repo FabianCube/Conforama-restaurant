@@ -30,7 +30,7 @@ class ProductoDAO
 
     $stmt = $conn->prepare("DELETE FROM productos WHERE PRODUCTO_ID=$id");
     $stmt->execute();
-    $result=$stmt->get_result();
+    $result = $stmt->get_result();
 
     return $result;
   }
