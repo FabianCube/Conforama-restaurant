@@ -28,7 +28,7 @@
         <input type="text" name="nombre_producto" value="<?=$producto->getNombre_producto()?>">
 
         <label for="descripcion">Descripcion del producto</label>
-        <textarea name="descripcion" id="" cols="30" rows="6"><?=$producto->getDescripcion()?></textarea>
+        <textarea name="descripcion" cols="30" rows="6"><?=$producto->getDescripcion()?></textarea>
 
         <label for="precio_producto">Precio</label>
         <input type="text" name="precio_producto" value="<?=$producto->getPrecio_producto()?>">
