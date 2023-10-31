@@ -20,22 +20,24 @@
         <input type="submit" value="volver al inicio">
     </form>
 
-    <form action="#" method="post">
+    <form action=<?=URL."?controller=productos&action=updateProduct"?> method="post">
         <label for="producto_id">ID roducto:</label>
-        <input type="text" name="producto_id" value="<?=$producto->getProducto_id()?>" disabled>
+        <input type="text" name="producto_id2" value="<?=$producto->getProducto_id()?>" disabled>
+        <input type="text" name="producto_id" value="<?=$producto->getProducto_id()?>" hidden>
 
         <label for="nombre_producto">Nombre:</label>
         <input type="text" name="nombre_producto" value="<?=$producto->getNombre_producto()?>">
 
-        <label for="descripcion">Descripcion del producto</label>
+        <label for="descripcion">Descripcion del producto:</label>
         <textarea name="descripcion" cols="30" rows="6"><?=$producto->getDescripcion()?></textarea>
 
-        <label for="precio_producto">Precio</label>
+        <label for="precio_producto">Precio:</label>
         <input type="text" name="precio_producto" value="<?=$producto->getPrecio_producto()?>">
 
-        <label for="categoria_id">Caregoría ID</label>
+        <label for="categoria_id">Caregoría ID:</label>
         <input type="text" name="categoria_id" value="<?=$producto->getCategoria_id()?>">
-        <input type="submit" value="Confirmar cambios">
+
+        <input type="submit" name="productUpdated" value="Confirmar cambios">
     </form>
 </body>
 </html>

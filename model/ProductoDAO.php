@@ -47,16 +47,4 @@ class ProductoDAO
 
     return $producto;
   }
-
-  public static function modifyProduct($id, $prd)
-  {
-    $conn = DataBase::connect();
-    $stmt = $conn->prepare("UPDATE productos SET nombre_producto=".$prd->getNombre_producto().", descripcion=".$prd->getDescripcion()." where producto_id = $id");
-    $stmt->execute();
-
-    $result = $stmt->get_result();
-
-    header("Location:".URL);
-    return $result;
-  }
 }
