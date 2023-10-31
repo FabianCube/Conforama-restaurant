@@ -2,8 +2,16 @@
 include_once 'config/dataBase.php';
 include_once 'Producto.php';
 
+/**
+ * Clase ProductoDAO
+ * - Gestiona la informacón para manipularla en SQL.
+ */
 class ProductoDAO
 {
+  /**
+   * getAllProducts()
+   * @return: Un array de productos disponibles.
+   */
   public static function getAllProducts()
   {
     $conn = DataBase::connect();
