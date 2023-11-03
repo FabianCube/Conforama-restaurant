@@ -1,0 +1,55 @@
+:root
+{
+    --title-txt-color: #444444;
+    --product-txt-color: #8A8A8A;
+    --price-txt-color: #E20613;
+    --bc-orange: #EB7713;
+    --tipo-txt-general: 'Nunito', sans-serif;
+    --font11pxToRem: 0.688rem;
+    --font12pxToRem: 0.75rem;
+    --font14pxToRem: 0.875rem;
+    --font18pxToRem: 1.125rem;
+}
+
+.custom-title-card
+{
+    font-family: var(--tipo-txt-general);
+    color: var(--title-txt-color);
+    font-size: var(--font14pxToRem);
+}
+
+.custom-description-product
+{
+    font-family: var(--tipo-txt-general);
+    color: var(--product-txt-color);
+    font-size: var(--font12pxToRem);
+}
+
+.custom-description-product-2
+{
+    font-family: var(--tipo-txt-general);
+    color: var(--title-txt-color);
+    font-size: var(--font12pxToRem);
+}
+
+.custom-product-price
+{
+    font-family: var(--tipo-txt-general);
+    color: var(--price-txt-color);
+    font-size: var(--font18pxToRem);
+}
+
+.custom-label-recomendado
+{
+    width: 150px;
+    height: 25px;
+    background-color: var(--bc-orange);
+}
+
+.custom-txt-recomendado
+{
+    font-family: var(--tipo-txt-general);
+    color: white;
+    font-size: var(--font11pxToRem);
+    line-height: 25px;
+}
