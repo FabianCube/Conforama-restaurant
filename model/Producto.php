@@ -6,6 +6,7 @@ class Producto
     private $nombre_producto;
     private $descripcion;
     private $precio_producto;
+    private $url_img;
     private $categoria_id;
 
     public function __construct()
@@ -108,6 +109,26 @@ class Producto
     public function setCategoria_id($categoria_id)
     {
         $this->categoria_id = $categoria_id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of url_img
+     */ 
+    public function getUrl_img()
+    {
+        return $this->url_img;
+    }
+
+    /**
+     * Set the value of url_img
+     *
+     * @return  self
+     */ 
+    public function setUrl_img($url_img)
+    {
+        $this->url_img = $url_img;
 
         return $this;
     }
