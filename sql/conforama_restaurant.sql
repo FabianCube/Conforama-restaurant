@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Temps de generació: 20-10-2023 a les 17:22:53
--- Versió del servidor: 10.4.28-MariaDB
--- Versió de PHP: 8.2.4
+-- Tiempo de generación: 04-11-2023 a las 13:23:38
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de dades: `conforama_restaurant`
+-- Base de datos: `conforama_restaurant`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `categorias`
+-- Estructura de tabla para la tabla `categorias`
 --
 
 CREATE TABLE `categorias` (
@@ -33,7 +33,7 @@ CREATE TABLE `categorias` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
--- Bolcament de dades per a la taula `categorias`
+-- Volcado de datos para la tabla `categorias`
 --
 
 INSERT INTO `categorias` (`CATEGORIA_ID`, `NOMBRE_CATEGORIA`) VALUES
@@ -47,7 +47,7 @@ INSERT INTO `categorias` (`CATEGORIA_ID`, `NOMBRE_CATEGORIA`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `ingredientes`
+-- Estructura de tabla para la tabla `ingredientes`
 --
 
 CREATE TABLE `ingredientes` (
@@ -57,7 +57,7 @@ CREATE TABLE `ingredientes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
--- Bolcament de dades per a la taula `ingredientes`
+-- Volcado de datos para la tabla `ingredientes`
 --
 
 INSERT INTO `ingredientes` (`INGREDIENTE_ID`, `NOMBRE_INGREDIENTE`, `PRECIO_INGREDIENTE`) VALUES
@@ -78,7 +78,7 @@ INSERT INTO `ingredientes` (`INGREDIENTE_ID`, `NOMBRE_INGREDIENTE`, `PRECIO_INGR
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `modificacion`
+-- Estructura de tabla para la tabla `modificacion`
 --
 
 CREATE TABLE `modificacion` (
@@ -91,7 +91,7 @@ CREATE TABLE `modificacion` (
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `pedidos`
+-- Estructura de tabla para la tabla `pedidos`
 --
 
 CREATE TABLE `pedidos` (
@@ -104,7 +104,7 @@ CREATE TABLE `pedidos` (
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `pedido_producto`
+-- Estructura de tabla para la tabla `pedido_producto`
 --
 
 CREATE TABLE `pedido_producto` (
@@ -118,39 +118,40 @@ CREATE TABLE `pedido_producto` (
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `productos`
+-- Estructura de tabla para la tabla `productos`
 --
 
 CREATE TABLE `productos` (
-  `PRODUCTO_ID` int(11) NOT NULL,
-  `NOMBRE_PRODUCTO` varchar(25) NOT NULL,
-  `DESCRIPCION` varchar(255) NOT NULL,
-  `PRECIO_PRODUCTO` decimal(5,2) NOT NULL,
-  `CATEGORIA_ID` int(11) NOT NULL
+  `producto_id` int(11) NOT NULL,
+  `nombre_producto` varchar(25) NOT NULL,
+  `descripcion` varchar(255) NOT NULL,
+  `precio_producto` decimal(5,2) NOT NULL,
+  `url_img` text NOT NULL,
+  `categoria_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
--- Bolcament de dades per a la taula `productos`
+-- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`PRODUCTO_ID`, `NOMBRE_PRODUCTO`, `DESCRIPCION`, `PRECIO_PRODUCTO`, `CATEGORIA_ID`) VALUES
-(0, 'Cafe con leche', 'Cafe con leche elaborado en nuestras cocinas, con granos de café locales.', 2.99, 0),
-(1, 'Cafe solo', 'Café solo.', 1.99, 0),
-(2, 'Sandwich vegetal', 'Un delicioso Sandwich vegetal con lechuga, tomate, motzarela.', 4.99, 1),
-(3, 'Sandwich de pollo', 'Sandwich de pollo con sobrasada preparado al momento.', 4.99, 1),
-(4, 'Smoothie de frutos', 'Smootie de frutos del bosque con el toque perfecto de azúcar. ', 3.99, 2),
-(5, 'Soothie fresa', 'Smoothie de fresa con menta, ¡se sirve bien fresquito!', 3.99, 2),
-(6, 'Muffin de chocolate', 'Un delicioso Muffin de chocolate perfecto para acompañar tus cafés.', 1.99, 3),
-(7, 'Muffic con pepitas', 'Muffin con pepitas de cocolate.', 1.99, 3),
-(8, 'Milkshake chocolate', 'Milkshake de chocolate con nata.', 3.99, 4),
-(9, 'Milkshake de cereza', 'Milkshake de cereza.', 3.99, 4),
-(10, 'Donut chocolate blanco', 'Donut de azúcar cubierto con chocolate blanco.', 1.99, 5),
-(11, 'Donut chocolate', 'Donut de azúcar cubierto de chocolate.', 1.99, 5);
+INSERT INTO `productos` (`producto_id`, `nombre_producto`, `descripcion`, `precio_producto`, `url_img`, `categoria_id`) VALUES
+(0, 'Cafe con leche', 'Cafe con leche elaborado en nuestras cocinas, con granos de café locales.', 1.99, 'coffe-2.png', 0),
+(1, 'Cafe solo', 'Café solo.', 1.99, 'coffe-1.png', 0),
+(2, 'Sandwich vegetal', 'Un delicioso Sandwich vegetal con lechuga, tomate, motzarela.', 4.99, 'sandwich-1.png', 1),
+(3, 'Sandwich de pollo', 'Sandwich de pollo con sobrasada preparado al momento.', 4.99, 'sandwich-2.png', 1),
+(4, 'Smoothie de frutos', 'Smootie de frutos del bosque con el toque perfecto de azúcar. ', 3.99, 'smoothie-1.png', 2),
+(5, 'Soothie fresa', 'Smoothie de fresa con menta, ¡se sirve bien fresquito!', 3.99, 'smoothie-2.png', 2),
+(6, 'Muffin de chocolate', 'Un delicioso Muffin de chocolate perfecto para acompañar tus cafés.', 1.99, 'muffin-1.png', 3),
+(7, 'Muffic con pepitas', 'Muffin con pepitas de cocolate.', 1.99, 'muffin-2.png', 3),
+(8, 'Milkshake chocolate', 'Milkshake de chocolate con nata.', 3.99, 'milkshake-1.png', 4),
+(9, 'Milkshake de cereza', 'Milkshake de cereza.', 3.99, 'milkshake-2.png', 4),
+(10, 'Donut chocolate blanco', 'Donut de azúcar cubierto con chocolate blanco.', 1.99, 'donut-1.png', 5),
+(11, 'Donut chocolate', 'Donut de azúcar cubierto de chocolate.', 1.99, 'donut-2.png', 5);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `productos_ingredientes`
+-- Estructura de tabla para la tabla `productos_ingredientes`
 --
 
 CREATE TABLE `productos_ingredientes` (
@@ -161,7 +162,7 @@ CREATE TABLE `productos_ingredientes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
--- Bolcament de dades per a la taula `productos_ingredientes`
+-- Volcado de datos para la tabla `productos_ingredientes`
 --
 
 INSERT INTO `productos_ingredientes` (`PRODUCTOS_INGREDIENTES_ID`, `PRODUCTO_ID`, `INGREDIENTE_ID`, `CANTIDAD`) VALUES
@@ -179,7 +180,7 @@ INSERT INTO `productos_ingredientes` (`PRODUCTOS_INGREDIENTES_ID`, `PRODUCTO_ID`
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `roles`
+-- Estructura de tabla para la tabla `roles`
 --
 
 CREATE TABLE `roles` (
@@ -188,7 +189,7 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
--- Bolcament de dades per a la taula `roles`
+-- Volcado de datos para la tabla `roles`
 --
 
 INSERT INTO `roles` (`ROL_ID`, `NOMBRE_ROL`) VALUES
@@ -199,7 +200,7 @@ INSERT INTO `roles` (`ROL_ID`, `NOMBRE_ROL`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `usuarios`
+-- Estructura de tabla para la tabla `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -212,124 +213,124 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
--- Bolcament de dades per a la taula `usuarios`
+-- Volcado de datos para la tabla `usuarios`
 --
 
 INSERT INTO `usuarios` (`USUARIO_ID`, `ROL_ID`, `NOMBRE_USUARIO`, `APELLIDO_USUARIO`, `EMAIL`, `TELEFONO`) VALUES
 (1, 0, 'Fabian', 'Doizi', 'fabiandoizifp@ibf.cat', 789900000);
 
 --
--- Índexs per a les taules bolcades
+-- Índices para tablas volcadas
 --
 
 --
--- Índexs per a la taula `categorias`
+-- Indices de la tabla `categorias`
 --
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`CATEGORIA_ID`);
 
 --
--- Índexs per a la taula `ingredientes`
+-- Indices de la tabla `ingredientes`
 --
 ALTER TABLE `ingredientes`
   ADD PRIMARY KEY (`INGREDIENTE_ID`);
 
 --
--- Índexs per a la taula `modificacion`
+-- Indices de la tabla `modificacion`
 --
 ALTER TABLE `modificacion`
   ADD PRIMARY KEY (`MODIFICACION_ID`);
 
 --
--- Índexs per a la taula `pedidos`
+-- Indices de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
   ADD PRIMARY KEY (`PEDIDO_ID`);
 
 --
--- Índexs per a la taula `pedido_producto`
+-- Indices de la tabla `pedido_producto`
 --
 ALTER TABLE `pedido_producto`
   ADD PRIMARY KEY (`ARTICULO_ID`);
 
 --
--- Índexs per a la taula `productos`
+-- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
-  ADD PRIMARY KEY (`PRODUCTO_ID`);
+  ADD PRIMARY KEY (`producto_id`);
 
 --
--- Índexs per a la taula `productos_ingredientes`
+-- Indices de la tabla `productos_ingredientes`
 --
 ALTER TABLE `productos_ingredientes`
   ADD PRIMARY KEY (`PRODUCTOS_INGREDIENTES_ID`);
 
 --
--- Índexs per a la taula `roles`
+-- Indices de la tabla `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`ROL_ID`);
 
 --
--- Índexs per a la taula `usuarios`
+-- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`USUARIO_ID`);
 
 --
--- AUTO_INCREMENT per les taules bolcades
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT per la taula `categorias`
+-- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
   MODIFY `CATEGORIA_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT per la taula `ingredientes`
+-- AUTO_INCREMENT de la tabla `ingredientes`
 --
 ALTER TABLE `ingredientes`
   MODIFY `INGREDIENTE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT per la taula `modificacion`
+-- AUTO_INCREMENT de la tabla `modificacion`
 --
 ALTER TABLE `modificacion`
   MODIFY `MODIFICACION_ID` int(4) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT per la taula `pedidos`
+-- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
   MODIFY `PEDIDO_ID` int(4) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT per la taula `pedido_producto`
+-- AUTO_INCREMENT de la tabla `pedido_producto`
 --
 ALTER TABLE `pedido_producto`
   MODIFY `ARTICULO_ID` int(4) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT per la taula `productos`
+-- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `PRODUCTO_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `producto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT per la taula `productos_ingredientes`
+-- AUTO_INCREMENT de la tabla `productos_ingredientes`
 --
 ALTER TABLE `productos_ingredientes`
   MODIFY `PRODUCTOS_INGREDIENTES_ID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT per la taula `roles`
+-- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
   MODIFY `ROL_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT per la taula `usuarios`
+-- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `USUARIO_ID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
