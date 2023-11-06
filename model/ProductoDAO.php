@@ -55,4 +55,23 @@ class ProductoDAO
 
     return $producto;
   }
+
+  public static function getPromotedProducts()
+  {
+    $conn = DataBase::connect();
+
+    $stmt = $conn->prepare("SELECT * FROM productos WHERE producto_id IN (1, 2, 3, 6, 7)");
+    $stmt->execute();
+    $result=$stmt->get_result();
+
+    if ($result) 
+    {
+      while($producto = $result->fetch_object('Producto'))
+      {
+        $productos[] = $producto;
+      }
+    }
+
+    return $productos;
+  }
 }

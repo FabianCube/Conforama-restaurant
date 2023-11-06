@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="style/modify-style.css">
 </head>
 <body>
-    <form action="<?=URL?>">
-        <input type="submit" value="volver al inicio">
+    <form action="<?=URL . "?controller=productos"?>">
+        <input type="submit" value="volver artás">
     </form>
 
     <form action=<?=URL."?controller=productos&action=updateProduct"?> method="post">

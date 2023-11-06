@@ -3,8 +3,7 @@ include_once 'model/ProductoDAO.php';
 include_once 'config/parameters.php';
 
 $productos = ProductoDAO::getAllProducts();
-$counter = 0;
-$isRowLimit = false;
+
 ?>
 
 <!DOCTYPE html>
