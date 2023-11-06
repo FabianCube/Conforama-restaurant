@@ -21,10 +21,16 @@
 
 .button-style
 {
-    width: 100%;
-    height: 20px;
+    width: 200px;
+    height: 30px;
     background-color: #fff;
     border: solid 2px red;
     color: red;
     padding: 5px 23px;
+}
+
+.custom-default-description-text
+{
+    color: var(--product-txt-color);
+    font-size: var(--font12pxToRem);
 }
