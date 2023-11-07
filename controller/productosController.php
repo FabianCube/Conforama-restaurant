@@ -7,7 +7,7 @@ class productosController
     {
         include_once('view/nav.php');
         include_once('view/comandPanel.php');
-        include_once('view/footer.php');
+        include_once 'view/footer.php';
     }
 
     public function eliminar()

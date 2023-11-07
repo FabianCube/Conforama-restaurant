@@ -99,4 +99,5 @@ $productos = ProductoDAO::getAllProducts();
         </div>
     </section>
 </body>
+
 </html>
