@@ -53,11 +53,25 @@ $productos = ProductoDAO::getPromotedProducts();
 
     <section class="container">
         <div class="row d-flex justify-content-between">
-            <?php for ($i = 0; $i < 6; $i++) { ?>
-                <div class="col-4 mt-3" style="width: 425px; height: 200px; background-color: yellow;">
-                    
-                </div>
-            <?php } ?>
+            <div class="col-4 custom-image-container">
+                <h2 class="custom-title-category">COFFE</h2>
+                <img src="assets/images/coffe-category.png" alt="Category image" class="custom-image-category">
+            </div>
+            <div class="col-4 custom-image-container">
+                <img src="assets/images/sanwich-category.png" alt="Category image" class="custom-image-category">
+            </div>
+            <div class="col-4 custom-image-container">
+                <img src="assets/images/smoothie-category.png" alt="Category image" class="custom-image-category">
+            </div>
+            <div class="col-4 custom-image-container">
+                <img src="assets/images/muffin-category.png" alt="Category image" class="custom-image-category">
+            </div>
+            <div class="col-4 custom-image-container">
+                <img src="assets/images/milkshake-category.png" alt="Category image" class="custom-image-category">
+            </div>
+            <div class="col-4 custom-image-container">
+                <img src="assets/images/donut-category.png" alt="Category image" class="custom-image-category">
+            </div>
         </div>
     </section>
 </body>

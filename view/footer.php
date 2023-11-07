@@ -6,9 +6,9 @@
     <title>Footer</title>
 </head>
 <body>
-    <footer class="container-fluid">
-        <section class="container bg-primary" style="width: 100%;">
-            hola
+    <footer class=" mt-5">
+        <section class="bg-secondary" style="width: 100%; height: 100px;">
+            <p>FOOTER</p>
         </section>
     </footer>
 </body>

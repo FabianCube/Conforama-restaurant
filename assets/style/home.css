@@ -12,6 +12,12 @@
     --font18pxToRem: 1.125rem;
 }
 
+@font-face 
+{
+    font-family: Tower10;
+    src: url(assets/fonts/Town 10 Display W05 Black.ttf);
+}
+
 .custom-title-section
 {
     font-size: 20px;
@@ -33,4 +39,30 @@
 {
     color: var(--product-txt-color);
     font-size: var(--font12pxToRem);
+}
+
+.custom-image-container
+{
+    width: 440px;
+    height: 200px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    position: relative;
+}
+
+.custom-image-category
+{
+    min-width: 100%;
+    height: auto;
+}
+
+.custom-title-category
+{
+    position: absolute;
+    font-weight: 900;
+    font-size: 2.5rem;
+    color: white;
+    top: 25px;
+    left: 50px;
+    text-shadow: 5px 5px 5px black;
 }

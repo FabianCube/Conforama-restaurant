@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <header class="">
+    <header class="" style="margin-top: 55px;">
         <div class="d-flex justify-content-center" style="background-color: rgba(0, 0, 0, 0.6);">
             <img class="img-fluid" src="assets/images/header.png" alt="" style="width: 100%; height: auto;">
         </div>
