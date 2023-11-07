@@ -20,7 +20,7 @@ $productos = ProductoDAO::getAllProducts();
 </head>
 
 <body class="container">
-    <section class="container row pt-3">
+    <section class="container row pt-3" style="margin-top: 55px;">
         <div class="col-3">
             <div class="p-4 d-flex align-items-center" style="height: 70px;">
                 <p>Categorías</p>

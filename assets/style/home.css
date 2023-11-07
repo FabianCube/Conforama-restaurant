@@ -14,8 +14,8 @@
 
 @font-face 
 {
-    font-family: Tower10;
-    src: url(assets/fonts/Town 10 Display W05 Black.ttf);
+    font-family: "Tower10";
+    src: url(assets/fonts/Town.ttf);
 }
 
 .custom-title-section
@@ -41,6 +41,33 @@
     font-size: var(--font12pxToRem);
 }
 
+.custom-info-banner-container
+{
+    position: relative;
+}
+
+.custom-banner-title
+{
+    position: absolute;
+    font-family: "Tower10", sans-serif;
+    font-weight: 900;
+    font-size: 2.5rem;
+    color: white;
+    top: 50px;
+    left: 100px;
+    text-shadow: 0px 0px 15px black;
+}
+
+.custom-banner-text
+{
+    position: absolute;
+    top: 140px;
+    left: 100px;
+    font-family: var(--tipo-txt-general);
+    font-size: 20px;
+    color: #fff;
+}
+
 .custom-image-container
 {
     width: 440px;
@@ -59,10 +86,27 @@
 .custom-title-category
 {
     position: absolute;
+    font-family: "Tower10", sans-serif;
     font-weight: 900;
     font-size: 2.5rem;
     color: white;
     top: 25px;
     left: 50px;
-    text-shadow: 5px 5px 5px black;
+    text-shadow: 0px 0px 15px black;
+}
+
+.custom-button-category
+{
+    position: absolute;
+    font-family: "Tower10", sans-serif;
+    font-weight: 900;
+    bottom: 25px;
+    left: 50px;
+    font-size: 16px;
+    width: 170px;
+    height: 30px;
+    background-color: var(--price-txt-color);
+    color: white;
+    border: none;
+    text-shadow: 0px 0px 15px black;
 }

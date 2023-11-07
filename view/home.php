@@ -40,9 +40,12 @@ $productos = ProductoDAO::getPromotedProducts();
     </section>
 
     <section class="pt-5">
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center custom-info-banner-container">
+            <h2 class="custom-banner-title">¡NUESTROS LOCALES A LA ÚLTIMA!</h2>
+            <p class="custom-banner-text">Podrás encontrar nuestros locales en numerosas ubicaciones, disponemos de
+                <br> una red de 44 establecimientos en España y una plantilla de más de 2.500 personas.
+            </p>
             <img class="img-fluid" src="assets/images/background-our-locals.png" alt="" style="width: 100%; height: auto;">
-
         </div>
     </section>
 
@@ -55,21 +58,32 @@ $productos = ProductoDAO::getPromotedProducts();
         <div class="row d-flex justify-content-between">
             <div class="col-4 custom-image-container">
                 <h2 class="custom-title-category">COFFE</h2>
+                <button class="custom-button-category" url="<?= URL . "?controller=productos" ?>">VER PRODUCTOS</button>
                 <img src="assets/images/coffe-category.png" alt="Category image" class="custom-image-category">
             </div>
             <div class="col-4 custom-image-container">
+                <h2 class="custom-title-category">BOCADILLOS</h2>
+                <button class="custom-button-category">VER PRODUCTOS</button>
                 <img src="assets/images/sanwich-category.png" alt="Category image" class="custom-image-category">
             </div>
             <div class="col-4 custom-image-container">
+                <h2 class="custom-title-category">SMOOTIES</h2>
+                <button class="custom-button-category">VER PRODUCTOS</button>
                 <img src="assets/images/smoothie-category.png" alt="Category image" class="custom-image-category">
             </div>
             <div class="col-4 custom-image-container">
+                <h2 class="custom-title-category">MUFFINS</h2>
+                <button class="custom-button-category">VER PRODUCTOS</button>
                 <img src="assets/images/muffin-category.png" alt="Category image" class="custom-image-category">
             </div>
             <div class="col-4 custom-image-container">
+                <h2 class="custom-title-category">BATIDOS</h2>
+                <button class="custom-button-category">VER PRODUCTOS</button>
                 <img src="assets/images/milkshake-category.png" alt="Category image" class="custom-image-category">
             </div>
             <div class="col-4 custom-image-container">
+                <h2 class="custom-title-category">DONUTS</h2>
+                <button class="custom-button-category">VER PRODUCTOS</button>
                 <img src="assets/images/donut-category.png" alt="Category image" class="custom-image-category">
             </div>
         </div>
