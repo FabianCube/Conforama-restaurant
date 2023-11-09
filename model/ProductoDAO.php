@@ -74,4 +74,23 @@ class ProductoDAO
 
     return $productos;
   }
+
+  public static function getProductsByCategory($categoryId)
+  {
+    $conn = DataBase::connect();
+
+    $stmt = $conn->prepare("SELECT * FROM productos WHERE categoria_id = $categoryId");
+    $stmt->execute();
+    $result=$stmt->get_result();
+
+    if ($result) 
+    {
+      while($producto = $result->fetch_object('Producto'))
+      {
+        $productos[] = $producto;
+      }
+    }
+
+    return $productos;
+  }
 }
