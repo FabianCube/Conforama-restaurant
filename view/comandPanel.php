@@ -2,7 +2,16 @@
 include_once 'model/ProductoDAO.php';
 include_once 'config/parameters.php';
 
-$productos = ProductoDAO::getAllProducts();
+
+if (!isset($_POST["categoria_id"])) 
+{
+    $productos = ProductoDAO::getAllProducts();
+} 
+else
+{
+    $productos = ProductoDAO::getProductsByCategory($_POST["categoria_id"]);
+}
+
 
 ?>
 
@@ -29,6 +38,10 @@ $productos = ProductoDAO::getAllProducts();
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link active" href="#">Todos</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Cafés</a></li>
+                    <form action=<?= URL . "?controller=productos&action=productosFiltrados" ?> method="post">
+                        <input name="categoria_id" value="0" hidden>
+                        <button type="submit">Cafés</button>
+                    </form>
                     <li class="nav-item"><a class="nav-link" href="#">Smoothies</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Muffins</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Sandwitchs</a></li>
@@ -59,42 +72,81 @@ $productos = ProductoDAO::getAllProducts();
                 </div>
             </div>
             <div class="row">
-                <?php foreach ($productos as $producto) { ?>
-                    <div class="col-4">
-                        <div class="card mb-3" style="width: 18rem; height: 468px;">
-                            <div class="container d-flex justify-content-center p-3" style="width: 200px; height: 180px;">
-                                <img src="assets/images/<?= $producto->getUrl_img() ?>" class="img-fluid" alt="Product image">
-                            </div>
-                            <div class="container d-flex justify-content-center">
-                                <div class="custom-label-recomendado d-flex justify-content-center" style="width: 150px;">
-                                    <p class="custom-txt-recomendado">RECOMENDADO DEL MES</p>
+                <?php if (!$filter) {
+                    foreach ($productos as $producto) { ?>
+                        <div class="col-4">
+                            <div class="card mb-3" style="width: 18rem; height: 468px;">
+                                <div class="container d-flex justify-content-center p-3" style="width: 200px; height: 180px;">
+                                    <img src="assets/images/<?= $producto->getUrl_img() ?>" class="img-fluid" alt="Product image">
                                 </div>
-                            </div>
-                            <div class="card-body d-flex justify-content-between flex-column">
-                                <div class="d-flex flex-row">
-                                    <div class="col-8">
-                                        <h5 class="card-title custom-title-card"><?= $producto->getNombre_producto() ?></h5>
-                                        <p class="card-text custom-description-product"><?= $producto->getDescripcion() ?></p>
-                                        <p class="card-text custom-description-product-2">Vendido por Conforama</p>
-                                    </div>
-                                    <div class="col-4 d-flex justify-content-end">
-                                        <p class="card-text custom-product-price"><?= $producto->getPrecio_producto() ?>€</p>
+                                <div class="container d-flex justify-content-center">
+                                    <div class="custom-label-recomendado d-flex justify-content-center" style="width: 150px;">
+                                        <p class="custom-txt-recomendado">RECOMENDADO DEL MES</p>
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-around">
-                                    <form action=<?= URL . "?controller=productos&action=modificar" ?> method="post">
-                                        <input name="producto_id" value="<?= $producto->getProducto_id() ?>" hidden>
-                                        <button class="btn btn-success" style="width: 7.5rem;" type="submit">Modificar</button>
-                                    </form>
-                                    <form action=<?= URL . "?controller=productos&action=eliminar" ?> method="post">
-                                        <input name="producto_id" value="<?= $producto->getProducto_id() ?>" hidden>
-                                        <button class="btn btn-danger" style="width: 7.5rem;" type="submit">Eliminar</button>
-                                    </form>
+                                <div class="card-body d-flex justify-content-between flex-column">
+                                    <div class="d-flex flex-row">
+                                        <div class="col-8">
+                                            <h5 class="card-title custom-title-card"><?= $producto->getNombre_producto() ?></h5>
+                                            <p class="card-text custom-description-product"><?= $producto->getDescripcion() ?></p>
+                                            <p class="card-text custom-description-product-2">Vendido por Conforama</p>
+                                        </div>
+                                        <div class="col-4 d-flex justify-content-end">
+                                            <p class="card-text custom-product-price"><?= $producto->getPrecio_producto() ?>€</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-around">
+                                        <form action=<?= URL . "?controller=productos&action=modificar" ?> method="post">
+                                            <input name="producto_id" value="<?= $producto->getProducto_id() ?>" hidden>
+                                            <button class="btn btn-success" style="width: 7.5rem;" type="submit">Modificar</button>
+                                        </form>
+                                        <form action=<?= URL . "?controller=productos&action=eliminar" ?> method="post">
+                                            <input name="producto_id" value="<?= $producto->getProducto_id() ?>" hidden>
+                                            <button class="btn btn-danger" style="width: 7.5rem;" type="submit">Eliminar</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                <?php } ?>
+                    <?php } // final de foreach 
+                } else { ?>
+                    <?php foreach ($productosFiltrados as $producto) { ?>
+                        <div class="col-4">
+                            <div class="card mb-3" style="width: 18rem; height: 468px;">
+                                <div class="container d-flex justify-content-center p-3" style="width: 200px; height: 180px;">
+                                    <img src="assets/images/<?= $producto->getUrl_img() ?>" class="img-fluid" alt="Product image">
+                                </div>
+                                <div class="container d-flex justify-content-center">
+                                    <div class="custom-label-recomendado d-flex justify-content-center" style="width: 150px;">
+                                        <p class="custom-txt-recomendado">RECOMENDADO DEL MES</p>
+                                    </div>
+                                </div>
+                                <div class="card-body d-flex justify-content-between flex-column">
+                                    <div class="d-flex flex-row">
+                                        <div class="col-8">
+                                            <h5 class="card-title custom-title-card"><?= $producto->getNombre_producto() ?></h5>
+                                            <p class="card-text custom-description-product"><?= $producto->getDescripcion() ?></p>
+                                            <p class="card-text custom-description-product-2">Vendido por Conforama</p>
+                                        </div>
+                                        <div class="col-4 d-flex justify-content-end">
+                                            <p class="card-text custom-product-price"><?= $producto->getPrecio_producto() ?>€</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-around">
+                                        <form action=<?= URL . "?controller=productos&action=modificar" ?> method="post">
+                                            <input name="producto_id" value="<?= $producto->getProducto_id() ?>" hidden>
+                                            <button class="btn btn-success" style="width: 7.5rem;" type="submit">Modificar</button>
+                                        </form>
+                                        <form action=<?= URL . "?controller=productos&action=eliminar" ?> method="post">
+                                            <input name="producto_id" value="<?= $producto->getProducto_id() ?>" hidden>
+                                            <button class="btn btn-danger" style="width: 7.5rem;" type="submit">Eliminar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                <?php }
+                } ?>
             </div>
         </div>
     </section>
