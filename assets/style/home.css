@@ -30,9 +30,18 @@
     width: 200px;
     height: 30px;
     background-color: #fff;
-    border: solid 2px red;
-    color: red;
+    border: solid 2px #E20613;
+    color: #E20613;
     padding: 5px 23px;
+    text-decoration: none;
+    line-height: 18px;
+}
+
+.button-style:hover
+{
+    color: #fff;
+    background-color: #E20613;
+    transition: ease-in-out .2s;
 }
 
 .custom-default-description-text
@@ -109,4 +118,12 @@
     color: white;
     border: none;
     text-shadow: 0px 0px 15px black;
+}
+
+.custom-card
+{
+    width: 15rem; 
+    height: 21rem; 
+    border: solid 1px #BFBFBF; 
+    border-radius: 4px;
 }

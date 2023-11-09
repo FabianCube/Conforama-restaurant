@@ -27,9 +27,9 @@ $productos = ProductoDAO::getPromotedProducts();
     <section class="container">
         <div class="row d-flex flex-row justify-content-between px-2">
             <?php foreach ($productos as $producto) { ?>
-                <div class="col-3 d-flex flex-column align-items-center justify-content-between" style="width: 15rem; height: 21rem; border: solid 1px black; border-radius: 4px;">
+                <div class="col-3 d-flex flex-column align-items-center justify-content-between custom-card">
                     <div class="p-4 d-flex justify-content-center" style="height: 50%;">
-                        <img src="assets/images/<?= $producto->getUrl_img() ?>" alt="" style="height: 125px; width: auto;">
+                        <img src="assets/images/<?= $producto->getUrl_img() ?>" alt="Imagen de <?= $producto->getNombre_producto() ?>" style="height: 125px; width: auto;">
                     </div>
                     <div class="d-flex flex-column justify-content-between" style="height: 50%;">
                         <div class="d-flex flex-column align-items-center">
@@ -39,29 +39,13 @@ $productos = ProductoDAO::getPromotedProducts();
 
                         </div>
                         <div class="d-flex justify-content-end pb-3">
-                            <a href="#" class="button-style" style="text-decoration: none; line-height: 18px;">AÑADIR AL CARRITO</a>
+                            <a href="#" class="button-style">AÑADIR AL CARRITO</a>
                         </div>
                     </div>
                 </div>
             <?php } ?>
         </div>
     </section>
-
-    <!-- <section class="container d-flex justify-content-between my-5">
-        <?php foreach ($productos as $producto) { ?>
-            <div class="card d-flex justify-content-between align-items-center" style="width: 15rem; height: 21rem;">
-                <div class="card-body" style="width: 10rem;">
-                    <img src="assets/images/<?= $producto->getUrl_img() ?>" class="card-img-top" alt="Imagen del producto" style="width: 100%; height: auto;" class="img-fluid">
-                </div>
-                <div class="card-body d-flex justify-content-end flex-column align-items-center">
-                    <h5 class="card-title custom-title-card"><?= $producto->getNombre_producto() ?></h5>
-                    <p class="card-text custom-default-description-text"><?= $producto->getDescripcion() ?></p>
-                    <p class="card-text custom-product-price"><?= $producto->getPrecio_producto() ?>€</p>
-                    <a href="#" class="button-style">AÑADIR AL CARRITO</a>
-                </div>
-            </div>
-        <?php } ?>
-    </section> -->
 
     <section class="pt-5">
         <div class="d-flex justify-content-center custom-info-banner-container">
