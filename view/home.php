@@ -38,7 +38,11 @@ $productos = ProductoDAO::getPromotedProducts();
                             <p class="card-text custom-product-price"><?= $producto->getPrecio_producto() ?>€</p>
                         </div>
                         <div class="d-flex justify-content-end pb-3">
-                            <a href="#" class="button-style">AÑADIR AL CARRITO</a>
+                            <form action="<?= URL . "?controller=productos&sel" ?>" method="post">
+                                <input type="hidden" name="id" value="<?= $producto->getProducto_id() ?>">
+                                <button type="submit" class="button-style">AÑADIR AL CARRITO</button>
+                            </form>
+                            <!-- <a href="#" class="button-style">AÑADIR AL CARRITO</a> -->
                         </div>
                     </div>
                 </div>

@@ -5,8 +5,26 @@ class productosController
 {
     public function index()
     {
+        session_start();
+
+        if(!isset($_SESSION['items']))
+        {
+            $_SESSION['items'] = array();
+        }else {
+            $pedido = new Carrito(ProductoDAO::getOneProduct($_POST['id']));
+            array_push($_SESSION['items'], $pedido);
+        }
+
         include_once 'view/nav.php';
         include_once 'view/comandPanel.php';
+        include_once 'view/footer.php';
+    }
+
+    public function compra()
+    {
+        session_start();
+        include_once 'view/nav.php';
+        include_once 'view/cart.php';
         include_once 'view/footer.php';
     }
 
@@ -44,5 +62,20 @@ class productosController
         header("Location:" . URL);
 
         return $result;
+    }
+
+    public static function sel()
+    {
+        session_start();
+
+        if(!isset($_SESSION['items']))
+        {
+            $_SESSION['items'] = array();
+        }else {
+            $pedido = new Carrito(ProductoDAO::getOneProduct($_POST['id']));
+            array_push($_SESSION['items'], $pedido);
+        }
+        var_dump($_SESSION['items']);
+
     }
 }
