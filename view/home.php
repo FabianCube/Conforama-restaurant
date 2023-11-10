@@ -36,7 +36,6 @@ $productos = ProductoDAO::getPromotedProducts();
                             <h5 class="card-title custom-title-card"><?= $producto->getNombre_producto() ?></h5>
                             <p class="card-text custom-default-description-text" style="text-align: center;"><?= $producto->getDescripcion() ?></p>
                             <p class="card-text custom-product-price"><?= $producto->getPrecio_producto() ?>€</p>
-
                         </div>
                         <div class="d-flex justify-content-end pb-3">
                             <a href="#" class="button-style">AÑADIR AL CARRITO</a>
