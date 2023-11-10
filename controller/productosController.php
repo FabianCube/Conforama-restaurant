@@ -22,11 +22,6 @@ class productosController
         include_once("view/modifyPanel.php");
     }
 
-    public function productosFiltrados()
-    {
-        header("Location: " . URL . "?controller=productos");
-    }
-
     public static function updateProduct()
     {
         $conn = DataBase::connect();
