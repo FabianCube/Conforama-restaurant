@@ -66,32 +66,50 @@ $productos = ProductoDAO::getPromotedProducts();
         <div class="row d-flex justify-content-between">
             <div class="col-4 custom-image-container">
                 <h2 class="custom-title-category">COFFE</h2>
-                <button class="custom-button-category" url="<?= URL . "?controller=productos" ?>">VER PRODUCTOS</button>
+                <form action="<?= URL . "?controller=productos" ?>" method="post">
+                    <input name="categoria_id" value="0" hidden>
+                    <button class="custom-button-category" type="submit">VER PRODUCTOS</button>
+                </form>
                 <img src="assets/images/coffe-category.png" alt="Category image" class="custom-image-category">
             </div>
             <div class="col-4 custom-image-container">
                 <h2 class="custom-title-category">BOCADILLOS</h2>
-                <button class="custom-button-category">VER PRODUCTOS</button>
+                <form action="<?= URL . "?controller=productos" ?>" method="post">
+                    <input name="categoria_id" value="1" hidden>
+                    <button class="custom-button-category" type="submit">VER PRODUCTOS</button>
+                </form>
                 <img src="assets/images/sanwich-category.png" alt="Category image" class="custom-image-category">
             </div>
             <div class="col-4 custom-image-container">
-                <h2 class="custom-title-category">SMOOTIES</h2>
-                <button class="custom-button-category">VER PRODUCTOS</button>
+                <h2 class="custom-title-category">SMOOTHIES</h2>
+                <form action="<?= URL . "?controller=productos" ?>" method="post">
+                    <input name="categoria_id" value="2" hidden>
+                    <button class="custom-button-category" type="submit">VER PRODUCTOS</button>
+                </form>
                 <img src="assets/images/smoothie-category.png" alt="Category image" class="custom-image-category">
             </div>
             <div class="col-4 custom-image-container">
                 <h2 class="custom-title-category">MUFFINS</h2>
-                <button class="custom-button-category">VER PRODUCTOS</button>
+                <form action="<?= URL . "?controller=productos" ?>" method="post">
+                    <input name="categoria_id" value="3" hidden>
+                    <button class="custom-button-category" type="submit">VER PRODUCTOS</button>
+                </form>
                 <img src="assets/images/muffin-category.png" alt="Category image" class="custom-image-category">
             </div>
             <div class="col-4 custom-image-container">
                 <h2 class="custom-title-category">BATIDOS</h2>
-                <button class="custom-button-category">VER PRODUCTOS</button>
+                <form action="<?= URL . "?controller=productos" ?>" method="post">
+                    <input name="categoria_id" value="4" hidden>
+                    <button class="custom-button-category" type="submit">VER PRODUCTOS</button>
+                </form>
                 <img src="assets/images/milkshake-category.png" alt="Category image" class="custom-image-category">
             </div>
             <div class="col-4 custom-image-container">
                 <h2 class="custom-title-category">DONUTS</h2>
-                <button class="custom-button-category">VER PRODUCTOS</button>
+                <form action="<?= URL . "?controller=productos" ?>" method="post">
+                    <input name="categoria_id" value="5" hidden>
+                    <button class="custom-button-category" type="submit">VER PRODUCTOS</button>
+                </form>
                 <img src="assets/images/donut-category.png" alt="Category image" class="custom-image-category">
             </div>
         </div>

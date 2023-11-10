@@ -34,32 +34,34 @@ else
             </div>
             <div class="container p-4" style="background-color: #F6F6F6;">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" href="#">Todos</a></li>
+                    <form action=<?= URL . "?controller=productos" ?> method="post">
+                        <input name="no_filter" value="0" hidden>
+                        <button type="submit" style="border: none; background-color: rgba(0,0,0,0);">Todos</button>
+                    </form>
                     <form action=<?= URL . "?controller=productos" ?> method="post">
                         <input name="categoria_id" value="0" hidden>
-                        <button type="submit">Cafés</button>
+                        <button type="submit" style="border: none; background-color: rgba(0,0,0,0);">Cafés</button>
                     </form>
                     <form action=<?= URL . "?controller=productos" ?> method="post">
                         <input name="categoria_id" value="2" hidden>
-                        <button type="submit">Smoothies</button>
+                        <button type="submit" style="border: none; background-color: rgba(0,0,0,0);">Smoothies</button>
                     </form>
                     <form action=<?= URL . "?controller=productos" ?> method="post">
                         <input name="categoria_id" value="3" hidden>
-                        <button type="submit">Muffins</button>
+                        <button type="submit" style="border: none; background-color: rgba(0,0,0,0);">Muffins</button>
                     </form>
                     <form action=<?= URL . "?controller=productos" ?> method="post">
                         <input name="categoria_id" value="1" hidden>
-                        <button type="submit">Sandwitchs</button>
+                        <button type="submit" style="border: none; background-color: rgba(0,0,0,0);">Sandwitchs</button>
                     </form>
                     <form action=<?= URL . "?controller=productos" ?> method="post">
                         <input name="categoria_id" value="5" hidden>
-                        <button type="submit">Donuts</button>
+                        <button type="submit" style="border: none; background-color: rgba(0,0,0,0);">Donuts</button>
                     </form>
                     <form action=<?= URL . "?controller=productos" ?> method="post">
                         <input name="categoria_id" value="4" hidden>
-                        <button type="submit">Batidos</button>
+                        <button type="submit" style="border: none; background-color: rgba(0,0,0,0);">Batidos</button>
                     </form>
-
                 </ul>
             </div>
         </div>
