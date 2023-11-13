@@ -17,7 +17,7 @@
             <?php foreach ($_SESSION['items'] as $producto) { ?>
                 <div class="row" style="height: 250px; margin-bottom: 20px; background-color: white;">
                     <div class="col-4">
-                        <img src="<?= image_url . $producto->getProducto_carrito()->getUrl_img()?>" alt="Imagen de <?=$producto->getProducto_carrito()->getNombre_producto()?>">
+                        <img src="<?= image_url . $producto->getProducto_carrito()->getUrl_img() ?>" alt="Imagen de <?= $producto->getProducto_carrito()->getNombre_producto() ?>">
                     </div>
                     <div class="col-7">
                         <h2><?= $producto->getProducto_carrito()->getNombre_producto() ?></h2>
@@ -25,7 +25,8 @@
                         <p>Ref.00<?= $producto->getProducto_carrito()->getProducto_id() ?></p>
                         <p>Vendido y expedido por: Conforama</p>
                         <button>Modificar ingredientes</button><br>
-                        <input type="checkbox"><p>Lo quiero para llevar</p>
+                        <input type="checkbox">
+                        <p>Lo quiero para llevar</p>
                     </div>
                     <div class="col-1">
                         <button>eliminar</button>

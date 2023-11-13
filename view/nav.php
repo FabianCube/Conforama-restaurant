@@ -17,7 +17,7 @@ session_start();
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top shadow">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top" style="box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);">
         <div class="container">
             <a class="navbar-brand" href="#"><img src="<?= image_url ?>Conforama_logo.png" alt="Logo Conforama" style="height: 40px; width: auto;"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +35,7 @@ session_start();
                         <a class="nav-link" href="<?= URL . "?controller=productos&action=compra" ?>">
                             Carrito
                             <span class="translate-middle badge rounded-pill bg-danger">
-                                <?= count($_SESSION['items']) ?>
+                                <?= count($_SESSION['items']); ?>
                             </span>
                         </a>
                     </li>
