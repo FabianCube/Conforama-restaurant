@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -29,7 +32,7 @@
                         <a class="nav-link" href="<?= URL . "?controller=productos" ?>">Productos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= URL . "?controller=productos&action=sel" ?>">Carrito</a>
+                        <a class="nav-link" href="<?= URL . "?controller=productos&action=compra" ?>"><?=count($_SESSION['items'])?> Carrito</a>
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
