@@ -19,7 +19,7 @@ session_start();
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top shadow">
         <div class="container">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="#"><img src="<?= image_url ?>Conforama_logo.png" alt="Logo Conforama" style="height: 40px; width: auto;"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -32,12 +32,17 @@ session_start();
                         <a class="nav-link" href="<?= URL . "?controller=productos" ?>">Productos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= URL . "?controller=productos&action=compra" ?>"><?=count($_SESSION['items'])?> Carrito</a>
+                        <a class="nav-link" href="<?= URL . "?controller=productos&action=compra" ?>">
+                            Carrito
+                            <span class="translate-middle badge rounded-pill bg-danger">
+                                <?= count($_SESSION['items']) ?>
+                            </span>
+                        </a>
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <input class="form-control me-2" type="search" placeholder="Busca y encuentra" aria-label="Search">
+                    <button class="btn btn-outline-danger" type="submit">Buscar</button>
                 </form>
             </div>
         </div>
