@@ -104,12 +104,12 @@ $totalPrice = productosController::getTotalValueOfProductsInCart();
             <?php } ?>
         </div>
         <div class="col-4 p-4" style="max-height: 300px; background-color: white;">
-            <div class="col-12 d-flex align-items-center custom-head">
+            <div class="col-12 pl-2 d-flex align-items-center custom-head-2">
                 <h3>Conforama</h3>
             </div>
 
             <div class="col-12">
-                <div class="col-12 d-flex justify-content-between">
+                <div class="col-12 d-flex justify-content-between" style="height: 20px;">
                     <p>Productos</p>
                     <p><?=$totalPrice?> €</p>
                 </div>
@@ -134,7 +134,7 @@ $totalPrice = productosController::getTotalValueOfProductsInCart();
             <div class="col-12 d-flex justify-content-center align-items-center flex-column" style="height: 150px;">
                 <p>¿Tienes un cupón/bono? ¡Úsalo aquí!</p>
                 <div class="d-flex">
-                    <input type="text" placeholder="Escribe tu código">
+                    <input class="input-text" type="text" placeholder="Escribe tu código">
                     <input class="btn-aplicar" type="button" value="APLICAR">
                 </div>
             </div>
