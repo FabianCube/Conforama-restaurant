@@ -43,13 +43,26 @@
     line-height: normal;
 }
 
-.custom-seller-info
-{
+.custom-seller-info {
     color: #8A8A8A;
 
-font-family: var(--default-typo);
-font-size: 12px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+    font-family: var(--default-typo);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.custom-cesta-title {
+    color: #A1A1A1;
+    font-family: var(--default-typo);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.btn-aplicar
+{
+    background: #8A8A8A;
 }

@@ -14,7 +14,6 @@ class productosController
     public function compra()
     {
         session_start();
-
         include_once 'view/nav.php';
         include_once 'view/cart.php';
         include_once 'view/footer.php';
@@ -67,5 +66,19 @@ class productosController
             array_push($_SESSION['items'], $pedido);
         }
         var_dump($_SESSION['items']);
+    }
+
+    public static function getTotalValueOfProductsInCart()
+    {
+        $totalPrice = 0;
+
+        if(isset($_SESSION['items']))
+        {
+            foreach ($_SESSION['items'] as $value) {
+                $totalPrice += $value->getProducto_carrito()->getPrecio_producto();
+            }
+        }
+
+        return $totalPrice;
     }
 }
