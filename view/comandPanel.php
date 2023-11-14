@@ -27,8 +27,8 @@ else
     <title>Pedidos</title>
 </head>
 
-<body class="container">
-    <section class="container row pt-3" style="margin-top: 55px;">
+<body>
+    <section class="container pt-5 d-flex flex-row" style="margin-top: 55px;">
         <div class="col-3">
             <div class="p-4 d-flex align-items-center" style="height: 70px;">
                 <p>Categorías</p>
