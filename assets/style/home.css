@@ -1,23 +1,3 @@
-:root
-{
-    --title-txt-color: #444444;
-    --title-txt-color-variant: #4D4D4D;
-    --product-txt-color: #8A8A8A;
-    --price-txt-color: #E20613;
-    --bc-orange: #EB7713;
-    --tipo-txt-general: 'Nunito', sans-serif;
-    --font11pxToRem: 0.688rem;
-    --font12pxToRem: 0.75rem;
-    --font14pxToRem: 0.875rem;
-    --font18pxToRem: 1.125rem;
-}
-
-@font-face 
-{
-    font-family: "Tower10";
-    src: url(assets/fonts/Town.ttf);
-}
-
 .custom-title-section
 {
     font-size: 20px;
@@ -29,9 +9,9 @@
 {
     width: 200px;
     height: 30px;
-    background-color: #fff;
-    border: solid 2px #E20613;
-    color: #E20613;
+    background-color: var(--white-color);
+    border: solid 2px var(--red-color);
+    color: var(--red-color);
     padding: 5px 23px;
     text-decoration: none;
     line-height: 18px;
@@ -39,7 +19,7 @@
 
 .button-style:hover
 {
-    color: #fff;
+    color: var(--white-color);
     background-color: #E20613;
     transition: ease-in-out .2s;
 }
@@ -74,7 +54,7 @@
     left: 100px;
     font-family: var(--tipo-txt-general);
     font-size: 20px;
-    color: #fff;
+    color: var(--white-color);
 }
 
 .custom-image-container
@@ -98,7 +78,7 @@
     font-family: "Tower10", sans-serif;
     font-weight: 900;
     font-size: 2.5rem;
-    color: white;
+    color: var(--white-color);
     top: 25px;
     left: 50px;
     text-shadow: 0px 0px 15px black;
@@ -115,7 +95,7 @@
     width: 170px;
     height: 30px;
     background-color: var(--price-txt-color);
-    color: white;
+    color: var(--white-color);
     border: none;
     text-shadow: 0px 0px 15px black;
 }

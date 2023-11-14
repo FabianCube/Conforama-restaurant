@@ -16,6 +16,7 @@ $productos = ProductoDAO::getPromotedProducts();
 
     <link rel="stylesheet" href="assets/style/home.css">
     <link rel="stylesheet" href="assets/style/comandPanel.css">
+    <link rel="stylesheet" href="assets/style/global.css">
 </head>
 
 <body>

@@ -1,16 +1,3 @@
-:root
-{
-    --title-txt-color: #444444;
-    --product-txt-color: #8A8A8A;
-    --price-txt-color: #E20613;
-    --bc-orange: #EB7713;
-    --tipo-txt-general: 'Nunito', sans-serif;
-    --font11pxToRem: 0.688rem;
-    --font12pxToRem: 0.75rem;
-    --font14pxToRem: 0.875rem;
-    --font18pxToRem: 1.125rem;
-}
-
 .custom-title-card
 {
     font-family: var(--tipo-txt-general);
@@ -43,7 +30,7 @@
 {
     width: 150px;
     height: 25px;
-    background-color: var(--bc-orange);
+    background-color: var(--orange-color);
 }
 
 .custom-txt-recomendado
