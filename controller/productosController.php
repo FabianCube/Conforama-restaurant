@@ -72,13 +72,42 @@ class productosController
     {
         $totalPrice = 0;
 
-        if(isset($_SESSION['items']))
-        {
+        if (isset($_SESSION['items'])) {
             foreach ($_SESSION['items'] as $value) {
                 $totalPrice += $value->getProducto_carrito()->getPrecio_producto();
             }
         }
 
         return $totalPrice;
+    }
+
+    public static function getIVAOfProduct()
+    {
+        $totalPrice = 0;
+
+        if (isset($_SESSION['items'])) {
+            foreach ($_SESSION['items'] as $value) {
+                $totalPrice += $value->getProducto_carrito()->getPrecio_producto();
+            }
+        }
+        $iva = $totalPrice * 0.21;
+
+        // truncate = bcdiv()
+        return bcdiv($iva, 1, 2);
+    }
+
+    public static function getPriceWithoutIVA()
+    {
+        $totalPrice = 0;
+
+        if (isset($_SESSION['items'])) {
+            foreach ($_SESSION['items'] as $value) {
+                $totalPrice += $value->getProducto_carrito()->getPrecio_producto();
+            }
+        }
+        $iva = $totalPrice * 0.21;
+
+        $r = $totalPrice - $iva;
+        return bcdiv($r, 1, 2);
     }
 }
