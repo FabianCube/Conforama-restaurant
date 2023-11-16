@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -32,9 +32,9 @@ session_start();
                         <a class="nav-link" href="<?= URL . "?controller=productos" ?>">Productos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= URL . "?controller=productos&action=compra" ?>">
+                        <a class="nav-link" href="<?= URL . "?controller=cart" ?>">
                             Carrito
-                            <span class="translate-middle badge rounded-pill bg-danger">
+                            <span class="translate-middle badge rounded-pill bg-secondary">
                                 <?= count($_SESSION['items']); ?>
                             </span>
                         </a>

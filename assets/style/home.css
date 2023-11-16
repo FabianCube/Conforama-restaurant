@@ -1,7 +1,7 @@
 .custom-title-section
 {
     font-size: 20px;
-    font-family: var(--tipo-txt-general);
+    font-family: var(--default-typo);
     color: var(--title-txt-color-variant);
 }
 
@@ -52,7 +52,7 @@
     position: absolute;
     top: 140px;
     left: 100px;
-    font-family: var(--tipo-txt-general);
+    font-family: var(--default-typo);
     font-size: 20px;
     color: var(--white-color);
 }

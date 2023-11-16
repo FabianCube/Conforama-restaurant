@@ -1,28 +1,28 @@
 .custom-title-card
 {
-    font-family: var(--tipo-txt-general);
+    font-family: var(--default-typo);
     color: var(--title-txt-color);
     font-size: var(--font14pxToRem);
 }
 
 .custom-description-product
 {
-    font-family: var(--tipo-txt-general);
+    font-family: var(--default-typo);
     color: var(--product-txt-color);
     font-size: var(--font12pxToRem);
 }
 
 .custom-description-product-2
 {
-    font-family: var(--tipo-txt-general);
+    font-family: var(--default-typo);
     color: var(--title-txt-color);
     font-size: var(--font12pxToRem);
 }
 
 .custom-product-price
 {
-    font-family: var(--tipo-txt-general);
-    color: var(--price-txt-color);
+    font-family: var(--default-typo);
+    color: var(--red-color);
     font-size: var(--font18pxToRem);
 }
 
@@ -35,7 +35,7 @@
 
 .custom-txt-recomendado
 {
-    font-family: var(--tipo-txt-general);
+    font-family: var(--default-typo);
     color: white;
     font-size: var(--font11pxToRem);
     line-height: 25px;

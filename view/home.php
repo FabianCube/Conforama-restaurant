@@ -17,6 +17,10 @@ $productos = ProductoDAO::getPromotedProducts();
     <link rel="stylesheet" href="assets/style/home.css">
     <link rel="stylesheet" href="assets/style/comandPanel.css">
     <link rel="stylesheet" href="assets/style/global.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>

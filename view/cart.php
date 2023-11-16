@@ -1,7 +1,7 @@
 <?php
-$totalPrice = productosController::getTotalValueOfProductsInCart();
-$ivaProduct = productosController::getIVAOfProduct();
-$withoutIva = productosController::getPriceWithoutIVA();
+$totalPrice = cartController::getTotalValueOfProductsInCart();
+$ivaProduct = cartController::getIVAOfProduct();
+$withoutIva = cartController::getPriceWithoutIVA();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -19,7 +19,7 @@ $withoutIva = productosController::getPriceWithoutIVA();
 
 <body style="background-color: #F7F7F7;">
 
-    <section class="container d-flex justify-content-center" style="margin-top: 55px;">
+    <section class="container d-flex justify-content-center" style="margin-top: 95px;">
         <div>
             <h3 class="custom-price-text" style="width: 200px; text-align: center;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -79,8 +79,17 @@ $withoutIva = productosController::getPriceWithoutIVA();
             <div class="row d-flex align-items-center custom-head">
                 <h3>Conforama</h3>
             </div>
+
+            <?php if (count($_SESSION['items']) == 0) { ?>
+                <div class="container d-flex flex-column align-items-center mt-5" style="width: 100%;">
+                    <h2>Parece que aún no has añadido nada!</h2>
+                    <p>Vuelve a la tienda y añade tu desayuno.</p>
+                </div>
+            <?php } ?>
+
             <?php foreach ($_SESSION['items'] as $producto) { ?>
                 <div class="row d-flex flex-row align-items-center px-4" style="height: 250px; margin-top: 20px; background-color: white; border-radius: 3px;">
+
                     <div class="col-4 d-flex justify-content-center align-items-center" style="border: solid 1px #BFBFBF; width: 200px; height: 176px;">
                         <img style="height: 110px; width: auto;" src="<?= image_url . $producto->getProducto_carrito()->getUrl_img() ?>" alt="Imagen de <?= $producto->getProducto_carrito()->getNombre_producto() ?>">
                     </div>
