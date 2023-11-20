@@ -53,4 +53,19 @@ class cartController
         $r = $totalPrice - $iva;
         return bcdiv($r, 1, 2);
     }
+
+    public static function eliminar()
+    {
+        $producto_id = $_POST["productIdCart"];
+        
+
+        foreach ($$_SESSION['items'] as $value) {
+            if($value->getProducto_carrito()->getProducto_id() == $producto_id)
+            {
+                //$value.unset($this);
+            }
+        }
+
+        header("Location:" . URL);
+    }
 }

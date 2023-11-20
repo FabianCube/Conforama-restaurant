@@ -117,6 +117,11 @@ $withoutIva = cartController::getPriceWithoutIVA();
                         </div>
                     </div>
                     <div class="col-1 d-flex pt-4" style="height: 100%;">
+
+                    <form action="<?= URL . "?controller=cart&action=eliminar" ?>" method="POST">
+                        <input name="productIdCart" value="<?= $producto->getProducto_carrito()->getProducto_id() ?>" hidden>
+                        <input type="submit" value="D">
+                    </form>
                         <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="21" viewBox="0 0 18 21" fill="none">
                                 <path d="M11.657 7.57726L11.3215 16.3463M6.67855 16.3463L6.34303 7.57726M16.009 4.44965C16.3406 4.50031
                             16.6703 4.5539 17 4.61139M16.009 4.44965L14.9733 17.9763C14.9311 18.527 14.6835 19.0414 14.28 19.4166C13.8766 
