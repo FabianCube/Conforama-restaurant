@@ -6,6 +6,9 @@ class cartController
     public function index()
     {
         session_start();
+
+        // aplicar aqui lógica para añadir/eliminar productos del cart
+
         include_once 'view/nav.php';
         include_once 'view/cart.php';
         include_once 'view/footer.php';
