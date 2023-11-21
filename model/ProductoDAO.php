@@ -12,6 +12,7 @@ class ProductoDAO
   /**
    * getAllProducts()
    * @return: Un array de productos disponibles.
+   * @author: Fabian Doizi
    */
   public static function getAllProducts()
   {

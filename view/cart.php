@@ -85,7 +85,8 @@ $withoutIva = cartController::getPriceWithoutIVA();
                     <h2>Parece que aún no has añadido nada!</h2>
                     <p>Vuelve a la tienda y añade tu desayuno.</p>
                 </div>
-            <?php } ?>
+            <?php }
+            $pos = 0; ?>
 
             <?php foreach ($_SESSION['items'] as $producto) { ?>
                 <div class="row d-flex flex-row align-items-center px-4" style="height: 250px; margin-top: 20px; background-color: white; border-radius: 3px;">
@@ -105,8 +106,15 @@ $withoutIva = cartController::getPriceWithoutIVA();
                         <p class="custom-ref">Ref.00<?= $producto->getProducto_carrito()->getProducto_id() ?></p>
                         <p class="custom-seller-info">Vendido y expedido por: Conforama</p>
                         <div class="col-12">
-                            <button class="btn btn-primary">Add more</button>
-                            <button class="btn btn-success">Modificar ingredientes</button><br>
+                            <form action="<?= URL . "?controller=cart" ?>" method="POST">
+                                <button type="submit" name="Del" value="<?= $pos ?>">-</button>
+                                <input type="text" value="<?= $producto->getCantidad() ?>" style="width: 30px;">
+                                <button type="submit" name="Add" value="<?= $pos ?>">+</button>
+                            </form>
+                            <form action="#" method="POST">
+                                <input name="" value="" hidden>
+                                <button class="btn btn-success">Modificar ingredientes</button><br>
+                            </form>
                         </div>
                         <div class="col-12">
                             <hr style="height: 1px; border: solid 1px black;">
@@ -118,23 +126,18 @@ $withoutIva = cartController::getPriceWithoutIVA();
                     </div>
                     <div class="col-1 d-flex pt-4" style="height: 100%;">
 
-                    <form action="<?= URL . "?controller=cart&action=eliminar" ?>" method="POST">
-                        <input name="productIdCart" value="<?= $producto->getProducto_carrito()->getProducto_id() ?>" hidden>
-                        <input type="submit" value="D">
-                    </form>
-                        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="21" viewBox="0 0 18 21" fill="none">
-                                <path d="M11.657 7.57726L11.3215 16.3463M6.67855 16.3463L6.34303 7.57726M16.009 4.44965C16.3406 4.50031
-                            16.6703 4.5539 17 4.61139M16.009 4.44965L14.9733 17.9763C14.9311 18.527 14.6835 19.0414 14.28 19.4166C13.8766 
-                            19.7918 13.3471 20.0002 12.7973 20H5.20267C4.65294 20.0002 4.12342 19.7918 3.71998 19.4166C3.31654 19.0414 
-                            3.06893 18.527 3.02667 17.9763L1.99103 4.44965M16.009 4.44965C14.8898 4.27964 13.7649 4.15062 12.6364 
-                            4.06284M1.99103 4.44965C1.65939 4.49934 1.3297 4.55293 1 4.61041M1.99103 4.44965C3.11019 4.27964 4.23514 
-                            4.15062 5.36364 4.06284M12.6364 4.06284V3.17035C12.6364 2.02063 11.7539 1.06189 10.6097 1.02584C9.53684 
-                            0.991386 8.46316 0.991386 7.3903 1.02584C6.24606 1.06189 5.36364 2.02161 5.36364 3.17035V4.06284M12.6364 
-                            4.06284C10.2157 3.87487 7.78427 3.87487 5.36364 4.06284" stroke="#6D6D6D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg></a>
+                        <form action="<?= URL . "?controller=cart" ?>" method="POST">
+                            <input name="posProductCart" value="<?= $pos ?>" hidden>
+
+                            <button class="custom-delete-button" type="submit" style="border: none; background-color: white;">
+                                <img src="assets/images/delete.svg" alt="delete button">
+                            </button>
+                        </form>
+
                     </div>
                 </div>
-            <?php } ?>
+            <?php $pos++;
+            } ?>
         </div>
         <div class="col-4 p-4" style="max-height: 300px; background-color: white;">
             <div class="col-12 pl-2 d-flex align-items-center custom-head-2">
