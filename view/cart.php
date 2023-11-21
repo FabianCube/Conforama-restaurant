@@ -100,7 +100,7 @@ $withoutIva = cartController::getPriceWithoutIVA();
                                 <h2 class="m-0 custom-title-product"><?= strtoupper($producto->getProducto_carrito()->getNombre_producto()) ?></h2>
                             </div>
                             <div class="m-0 col-6 d-flex justify-content-end">
-                                <h2 class="custom-price-text"><?= $producto->getProducto_carrito()->getPrecio_producto() ?>€</h2>
+                                <h2 class="custom-price-text"><?= $producto->getProducto_carrito()->getPrecio_producto() * $producto->getCantidad() ?>€</h2>
                             </div>
                         </div>
                         <p class="custom-ref">Ref.00<?= $producto->getProducto_carrito()->getProducto_id() ?></p>

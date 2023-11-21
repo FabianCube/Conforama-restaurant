@@ -49,7 +49,7 @@ class cartController
 
         if (isset($_SESSION['items'])) {
             foreach ($_SESSION['items'] as $value) {
-                $totalPrice += $value->getProducto_carrito()->getPrecio_producto();
+                $totalPrice += $value->getProducto_carrito()->getPrecio_producto() * $value->getCantidad();
             }
         }
 
@@ -62,7 +62,7 @@ class cartController
 
         if (isset($_SESSION['items'])) {
             foreach ($_SESSION['items'] as $value) {
-                $totalPrice += $value->getProducto_carrito()->getPrecio_producto();
+                $totalPrice += $value->getProducto_carrito()->getPrecio_producto() * $value->getCantidad();
             }
         }
         $iva = $totalPrice * 0.21;
@@ -77,7 +77,7 @@ class cartController
 
         if (isset($_SESSION['items'])) {
             foreach ($_SESSION['items'] as $value) {
-                $totalPrice += $value->getProducto_carrito()->getPrecio_producto();
+                $totalPrice += $value->getProducto_carrito()->getPrecio_producto() * $value->getCantidad();
             }
         }
         $iva = $totalPrice * 0.21;
