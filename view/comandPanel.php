@@ -111,6 +111,12 @@ else
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-around">
+                                    <form action=<?= URL . "?controller=productos" ?> method="post">
+                                        <input name="producto_id" value="<?= $producto->getProducto_id() ?>" hidden>
+                                        <button class="btn btn-success" style="width: 7.5rem;" type="submit">Add to cart</button>
+                                    </form>
+                                </div>
+                                <!-- <div class="d-flex justify-content-around">
                                     <form action=<?= URL . "?controller=productos&action=modificar" ?> method="post">
                                         <input name="producto_id" value="<?= $producto->getProducto_id() ?>" hidden>
                                         <button class="btn btn-success" style="width: 7.5rem;" type="submit">Modificar</button>
@@ -119,7 +125,7 @@ else
                                         <input name="producto_id" value="<?= $producto->getProducto_id() ?>" hidden>
                                         <button class="btn btn-danger" style="width: 7.5rem;" type="submit">Eliminar</button>
                                     </form>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
