@@ -2,13 +2,14 @@
     background-color: #EEEEEE;
     height: 35px;
 }
-.custom-head-2{
+
+.custom-head-2 {
     background-color: #EEEEEE;
     height: 35px;
     margin-bottom: 10px;
 }
 
-.custom-head-2 > h3 {
+.custom-head-2>h3 {
     font-family: var(--default-typo);
     font-size: var(--font17pxToRem);
     color: var(--title-txt-color);
@@ -18,7 +19,7 @@
     margin-bottom: 0;
 }
 
-.custom-head > h3 {
+.custom-head>h3 {
     font-family: var(--default-typo);
     font-size: var(--font17pxToRem);
     color: var(--title-txt-color);
@@ -95,13 +96,60 @@
     height: 33px;
 }
 
-.custom-delete-button
-{
+.custom-delete-button {
     background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
+
+.add-remove-form {
+    width: 90px;
+    height: 33px;
+    border-radius: 3px;
+    background: #EEE;
+}
+
+.button-add {
+    font-family: var(--default-typo);
+    width: 23px;
+    height: 27px;
+    border-radius: 0px 3px 3px 0px;
+    border: none;
+    background: #FFF;
+}
+
+.button-less {
+    font-family: var(--default-typo);
+    width: 23px;
+    height: 27px;
+    border-radius: 3px 0px 0px 3px;
+    border: none;
+    background: #FFF;
+}
+
+.button-cantidad {
+    font-family: var(--default-typo);
+    width: 44px;
+    height: 27px;
+    background: #FFF;
+    border: none;
+    text-align: center;
+    margin: 0 4px 0 4px;
+
+    color: #404040;
+    font-family: Nunito;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.form-cart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

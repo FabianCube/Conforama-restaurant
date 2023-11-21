@@ -30,17 +30,17 @@ class productosController
         include_once 'view/footer.php';
     }
 
-    public function eliminar()
-    {
-        $producto_id = $_POST["producto_id"];
-        ProductoDAO::deleteProduct($producto_id);
-        header("Location:" . URL);
-    }
-
-    public function modificar()
-    {
-        include_once("view/modifyPanel.php");
-    }
+    // public function eliminar()
+    // {
+    //     $producto_id = $_POST["producto_id"];
+    //     ProductoDAO::deleteProduct($producto_id);
+    //     header("Location:" . URL);
+    // }
+    
+    // public function modificar()
+    // {
+    //     include_once("view/modifyPanel.php");
+    // }
 
     public static function updateProduct()
     {

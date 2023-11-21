@@ -3,12 +3,9 @@ include_once 'model/ProductoDAO.php';
 include_once 'config/parameters.php';
 
 
-if (!isset($_POST["categoria_id"])) 
-{
+if (!isset($_POST["categoria_id"])) {
     $productos = ProductoDAO::getAllProducts();
-} 
-else 
-{
+} else {
     $productos = ProductoDAO::getProductsByCategory($_POST["categoria_id"]);
 }
 ?>
@@ -113,7 +110,9 @@ else
                                 <div class="d-flex justify-content-around">
                                     <form action=<?= URL . "?controller=productos" ?> method="post">
                                         <input name="producto_id" value="<?= $producto->getProducto_id() ?>" hidden>
-                                        <button class="btn btn-success" style="width: 7.5rem;" type="submit">Add to cart</button>
+                                        <button class="btn btn-success" style="width: 7.5rem;" type="submit">
+                                            <img src="assets/images/add-cart.svg" alt="Add to cart">
+                                        </button>
                                     </form>
                                 </div>
                                 <!-- <div class="d-flex justify-content-around">
@@ -129,7 +128,7 @@ else
                             </div>
                         </div>
                     </div>
-                    <?php } ?>
+                <?php } ?>
             </div>
         </div>
     </section>
