@@ -105,7 +105,7 @@
     width: 15rem; 
     height: 21rem; 
     border: solid 1px #BFBFBF; 
-    border-radius: 4px;
+    border-radius: 0px;
     transition: 0.1s ease-in-out;
 }
 

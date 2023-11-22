@@ -72,7 +72,7 @@ $withoutIva = cartController::getPriceWithoutIVA();
 
     </section>
     <section class="container d-flex flex-row justify-content-between" style="margin-top: 55px; min-height: 650px; width: 1170px;">
-        <div class="col-7">
+        <div class="col-8">
             <div class="row custom-title">
                 <h3>Cesta Productos</h3>
             </div>
@@ -158,7 +158,7 @@ $withoutIva = cartController::getPriceWithoutIVA();
             <?php $pos++;
             } ?>
         </div>
-        <div class="col-4 p-4" style="max-height: 300px; background-color: white;">
+        <div class="col-3 p-4" style="max-height: 300px; background-color: white;">
             <div class="col-12 pl-2 d-flex align-items-center custom-head-2">
                 <h3>Conforama</h3>
             </div>
