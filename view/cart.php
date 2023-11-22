@@ -71,7 +71,7 @@ $withoutIva = cartController::getPriceWithoutIVA();
         </div>
 
     </section>
-    <section class="container d-flex flex-row justify-content-between" style="margin-top: 55px; min-height: 650px;">
+    <section class="container d-flex flex-row justify-content-between" style="margin-top: 55px; min-height: 650px; width: 1170px;">
         <div class="col-7">
             <div class="row custom-title">
                 <h3>Cesta Productos</h3>
@@ -174,7 +174,7 @@ $withoutIva = cartController::getPriceWithoutIVA();
                     <p><?= $withoutIva ?> €</p>
                 </div>
                 <div class="col-12 d-flex justify-content-between">
-                    <p>IVA (21%)</p>
+                    <p>IVA (10%)</p>
                     <p><?= $ivaProduct ?> €</p>
                 </div>
                 <div class="col-12 d-flex justify-content-between">

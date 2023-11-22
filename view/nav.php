@@ -18,7 +18,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top" style="box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);">
-        <div class="container">
+        <div class="container" style="width: 1170px;">
             <a class="navbar-brand" href="#"><img src="<?= image_url ?>Conforama_logo.png" alt="Logo Conforama" style="height: 40px; width: auto;"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

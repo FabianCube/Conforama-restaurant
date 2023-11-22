@@ -65,7 +65,7 @@ class cartController
                 $totalPrice += $value->getProducto_carrito()->getPrecio_producto() * $value->getCantidad();
             }
         }
-        $iva = $totalPrice * 0.21;
+        $iva = $totalPrice * 0.10;
 
         // truncate = bcdiv()
         return bcdiv($iva, 1, 2);
@@ -80,7 +80,7 @@ class cartController
                 $totalPrice += $value->getProducto_carrito()->getPrecio_producto() * $value->getCantidad();
             }
         }
-        $iva = $totalPrice * 0.21;
+        $iva = $totalPrice * 0.10;
 
         $r = $totalPrice - $iva;
         return bcdiv($r, 1, 2);
