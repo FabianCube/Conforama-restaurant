@@ -14,10 +14,38 @@ class loginController
 
     public static function login()
     {
-        // get the email and password
+        if(isset($_POST['email'], $_POST['password']))
+        {
+            $email = $_POST['email'];
+            $pwd = $_POST['password'];
 
-        // check if the data exist in the db
+            $users = UsuariosDAO::getAllUsers();
+            foreach ($users as $value) 
+            {
+                if(hash_equals($value->getEmail(), $email))
+                {
+                    if(hash_equals($value->getPassword(), $pwd))
+                    {
+                        session_start();
+                        $_SESSION['current_user'] = $value;
 
-        // redirect to the account
+                        // if($_POST['save_session'] == true)
+                        // {
+                        //     setcookie("keep_session", $_SESSION['current_user'], time()-3600);
+                        // }
+                    }
+                    else
+                    {
+                        echo 'Contraseña incorrecta!';
+                    }
+                }
+                else
+                {
+                    echo 'El correo no existe!';
+                }
+            }
+        }
+
+        header("Location: " . URL);
     }
 }

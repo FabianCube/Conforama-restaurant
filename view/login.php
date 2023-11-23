@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="col-xs-12 forms">
-            <form action="#" method="POST">
+            <form action="?controller=login&action=login" method="POST">
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-4">
                         <div class="form-group">
@@ -58,7 +58,7 @@
                         </div>
                         <div class="row mt-10">
                             <div class="col-xs-12 text-center-xs col-sm-6 col-sm-offset-3 text-center-sm col-md-12 col-md-offset-0 remember-me">
-                                <input type="checkbox">No cerrar sesión.</input>
+                                <input type="checkbox" name="save_session">No cerrar sesión.</input>
                             </div>
                         </div>
 

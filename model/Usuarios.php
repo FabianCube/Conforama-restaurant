@@ -7,7 +7,9 @@ class Usuarios
     private $nombre_usuario;
     private $apellido_usuario;
     private $email;
+    private $password;
     private $telefono;
+    private $direccion;
 
     public function __construct()
     { }
@@ -128,6 +130,46 @@ class Usuarios
     public function setTelefono($telefono)
     {
         $this->telefono = $telefono;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of password
+     */ 
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set the value of password
+     *
+     * @return  self
+     */ 
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of direccion
+     */ 
+    public function getDireccion()
+    {
+        return $this->direccion;
+    }
+
+    /**
+     * Set the value of direccion
+     *
+     * @return  self
+     */ 
+    public function setDireccion($direccion)
+    {
+        $this->direccion = $direccion;
 
         return $this;
     }

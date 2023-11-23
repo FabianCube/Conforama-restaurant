@@ -33,7 +33,13 @@
                         <a class="nav-link" href="<?= URL . "?controller=productos" ?>">Productos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= URL . "?controller=login" ?>">Iniciar sesión</a>
+                        <a class="nav-link" href="<?= URL . "?controller=login" ?>">
+                        <?php if(isset($_SESSION['current_user'])) { ?>
+                            <?=$_SESSION['current_user']->getNombre_usuario()?>
+                        <?php } else { ?>
+                            Iniciar sesión
+                        <?php } ?>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?= URL . "?controller=cart" ?>">

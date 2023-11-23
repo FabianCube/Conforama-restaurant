@@ -2,6 +2,7 @@
 
 include_once 'config/dataBase.php';
 include_once 'Producto.php';
+include_once 'Usuarios.php';
 include_once 'Carrito.php';
 
 class UsuariosDAO
@@ -17,7 +18,7 @@ class UsuariosDAO
         
         $stmt = $conn->prepare("SELECT * FROM usuarios");
         $stmt->execute();
-        $result=$stmt->get_result();
+        $result = $stmt->get_result();
 
         if($result)
         {
