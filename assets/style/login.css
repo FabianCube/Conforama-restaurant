@@ -1,0 +1,70 @@
+*{
+    font-family: var(--default-typo);
+}
+
+a
+{
+    color: #C20A19;
+}
+
+label
+{
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.custom-input::placeholder
+{
+    font-size: 12px;
+    font-style: italic;
+}
+
+.btn-login-custom
+{
+    background-color: var(--red-color);
+    color: white;
+    font-weight: 400;
+}
+.btn-login-custom:hover
+{
+    background-color: var(--red-color);
+    color: white;
+    font-weight: 400;
+}
+
+
+.info-login
+{
+    font-size: 12px;
+    font-weight: 100;
+    font-style: italic;
+}
+
+.req
+{
+    color: var(--red-color);
+}
+
+.title-login
+{
+    padding-top: 15px;
+    font-size: 18px;
+    color: var(--title-txt-color-variant);
+}
+
+.title-login::before
+{
+    content: "";
+    background-color: var(--red-color);
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+    height: 16px;
+    margin-right: 5px;
+    width: 16px;
+}
+
+.text-login
+{
+    font-size: 14px;
+}
