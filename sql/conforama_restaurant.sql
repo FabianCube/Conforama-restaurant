@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Temps de generació: 10-11-2023 a les 16:10:23
+-- Temps de generació: 23-11-2023 a les 19:17:25
 -- Versió del servidor: 10.4.28-MariaDB
 -- Versió de PHP: 8.2.4
 
@@ -204,20 +204,24 @@ INSERT INTO `roles` (`ROL_ID`, `NOMBRE_ROL`) VALUES
 --
 
 CREATE TABLE `usuarios` (
-  `USUARIO_ID` int(4) NOT NULL,
-  `ROL_ID` int(4) NOT NULL,
-  `NOMBRE_USUARIO` varchar(50) NOT NULL,
-  `APELLIDO_USUARIO` varchar(75) NOT NULL,
-  `EMAIL` varchar(150) NOT NULL,
-  `TELEFONO` int(9) NOT NULL
+  `usuario_id` int(4) NOT NULL,
+  `rol_id` int(4) NOT NULL,
+  `nombre_usuario` varchar(50) NOT NULL,
+  `apellido_usuario` varchar(75) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `password` varchar(35) NOT NULL,
+  `telefono` int(9) NOT NULL,
+  `direccion` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
 -- Bolcament de dades per a la taula `usuarios`
 --
 
-INSERT INTO `usuarios` (`USUARIO_ID`, `ROL_ID`, `NOMBRE_USUARIO`, `APELLIDO_USUARIO`, `EMAIL`, `TELEFONO`) VALUES
-(1, 0, 'Fabian', 'Doizi', 'fabiandoizifp@ibf.cat', 789900000);
+INSERT INTO `usuarios` (`usuario_id`, `rol_id`, `nombre_usuario`, `apellido_usuario`, `email`, `password`, `telefono`, `direccion`) VALUES
+(2, 0, 'admin', '', 'admin@gmail.com', 'admin1234-', 999999999, ''),
+(3, 1, 'Fabian', 'Doizi', 'fabian@gmail.com', 'Abc1234-', 678564432, ''),
+(4, 2, 'Cliente', '', 'cliente@gmail.com', 'cliente1234-', 123456789, 'Av. Calle inventada Num.3');
 
 --
 -- Índexs per a les taules bolcades
@@ -275,7 +279,7 @@ ALTER TABLE `roles`
 -- Índexs per a la taula `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`USUARIO_ID`);
+  ADD PRIMARY KEY (`usuario_id`);
 
 --
 -- AUTO_INCREMENT per les taules bolcades
@@ -333,7 +337,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT per la taula `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `USUARIO_ID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `usuario_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
