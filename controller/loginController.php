@@ -8,13 +8,10 @@ class loginController
     {
         session_start();
         include_once 'view/nav.php';
-        
-        if(isset($_SESSION['current_user']))
-        {
+
+        if (isset($_SESSION['current_user'])) {
             include_once 'view/account.php';
-        }
-        else
-        {
+        } else {
             include_once 'view/login.php';
         }
         include_once 'view/footer.php';
@@ -22,18 +19,14 @@ class loginController
 
     public static function login()
     {
-        if(isset($_POST['email'], $_POST['password']))
-        {
+        if (isset($_POST['email'], $_POST['password'])) {
             $email = $_POST['email'];
             $pwd = $_POST['password'];
 
             $users = UsuariosDAO::getAllUsers();
-            foreach ($users as $value) 
-            {
-                if(hash_equals($value->getEmail(), $email))
-                {
-                    if(hash_equals($value->getPassword(), $pwd))
-                    {
+            foreach ($users as $value) {
+                if (hash_equals($value->getEmail(), $email)) {
+                    if (hash_equals($value->getPassword(), $pwd)) {
                         session_start();
                         $_SESSION['current_user'] = $value;
 
@@ -41,18 +34,21 @@ class loginController
                         // {
                         //     setcookie("keep_session", $_SESSION['current_user'], time()-3600);
                         // }
-                    }
-                    else
-                    {
+                    } else {
                         echo 'Contraseña incorrecta!';
                     }
-                }
-                else
-                {
+                } else {
                     echo 'El correo no existe!';
                 }
             }
         }
+        header("Location: " . URL);
+    }
+
+    public static function logout()
+    {
+        session_start();
+        unset($_SESSION['current_user']);
         header("Location: " . URL);
     }
 }

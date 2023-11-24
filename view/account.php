@@ -19,7 +19,7 @@
                 <div class="list-group">
                     <a href="#" class="list-group-item list-group-item-action">Mis datos</a>
                     <a href="#" class="list-group-item list-group-item-action">Información pedidos</a>
-                    <a href="#" class="list-group-item list-group-item-action"><span style="color: red;">Cerrar sesión</span></a>
+                    <a href="<?= URL . "?controller=login&action=logout" ?>" class="list-group-item list-group-item-action"><span style="color: red;">Cerrar sesión</span></a>
                 </div>
             </div>
             <div class="col-8">
