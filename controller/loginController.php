@@ -6,6 +6,7 @@ class loginController
 {
     public function index()
     {
+        $users = UsuariosDAO::getAllUsers();
         session_start();
         include_once 'view/nav.php';
 

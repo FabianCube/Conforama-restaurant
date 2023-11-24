@@ -23,31 +23,66 @@
                 </div>
             </div>
             <div class="col-8">
-                <div class="row p-1">
-                    <h3>Mis datos</h3>
-                </div>
-                <ul class="list-group">
-                    <li class="list-group-item d-flex">
-                        <div style="width: 100px;"><strong>Nombre </strong></div>
-                        <input type="text" value="<?= $_SESSION['current_user']->getNombre_usuario() ?>" disabled>
-                    </li>
-                    <li class="list-group-item d-flex">
-                        <div style="width: 100px;"><strong>Apellidos </strong></div>
-                        <input type="text" value="<?= $_SESSION['current_user']->getApellido_usuario() ?>" disabled>
-                    </li>
-                    <li class="list-group-item d-flex">
-                        <div style="width: 100px;"><strong>Email </strong></div>
-                        <input type="text" value="<?= $_SESSION['current_user']->getEmail() ?>" disabled>
-                    </li>
-                    <li class="list-group-item d-flex">
-                        <div style="width: 100px;"><strong>Direccion </strong></div>
-                        <input type="text" value="<?= $_SESSION['current_user']->getDireccion() ?>" disabled>
-                    </li>
-                    <li class="list-group-item d-flex">
-                        <div style="width: 100px;"><strong>Teléfono </strong></div>
-                        <input type="text" value="<?= $_SESSION['current_user']->getTelefono() ?>" disabled>
-                    </li>
-                </ul>
+                <?php if (!hash_equals($_SESSION['current_user']->getNombre_usuario(), "admin")) { ?>
+                    <div class="row p-1">
+                        <h3>Mis datos</h3>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex">
+                            <div style="width: 100px;"><strong>Nombre </strong></div>
+                            <input type="text" value="<?= $_SESSION['current_user']->getNombre_usuario() ?>" disabled>
+                        </li>
+                        <li class="list-group-item d-flex">
+                            <div style="width: 100px;"><strong>Apellidos </strong></div>
+                            <input type="text" value="<?= $_SESSION['current_user']->getApellido_usuario() ?>" disabled>
+                        </li>
+                        <li class="list-group-item d-flex">
+                            <div style="width: 100px;"><strong>Email </strong></div>
+                            <input type="text" value="<?= $_SESSION['current_user']->getEmail() ?>" disabled>
+                        </li>
+                        <li class="list-group-item d-flex">
+                            <div style="width: 100px;"><strong>Direccion </strong></div>
+                            <input type="text" value="<?= $_SESSION['current_user']->getDireccion() ?>" disabled>
+                        </li>
+                        <li class="list-group-item d-flex">
+                            <div style="width: 100px;"><strong>Teléfono </strong></div>
+                            <input type="text" value="<?= $_SESSION['current_user']->getTelefono() ?>" disabled>
+                        </li>
+                    </ul>
+                <?php } else if (hash_equals($_SESSION['current_user']->getNombre_usuario(), "admin")) {  ?>
+                    <div class="row p-1">
+                        <h3>Admin Panel</h3>
+                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">id</th>
+                                <th scope="col">rol id</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellidos</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Contraseña</th>
+                                <th scope="col">Teléfono</th>
+                                <th scope="col">Direccion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($users as $user) { ?>
+                                <tr>
+                                    <th scope="row"><?=$user->getUsuario_id()?></th>
+                                    <td><?=$user->getRol_id()?></td>
+                                    <td><?=$user->getNombre_usuario()?></td>
+                                    <td><?=$user->getApellido_usuario()?></td>
+                                    <td><?=$user->getEmail()?></td>
+                                    <td><?=$user->getPassword()?></td>
+                                    <td><?=$user->getTelefono()?></td>
+                                    <td><?=$user->getDireccion()?></td>
+                                    
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                <?php } ?>
             </div>
         </div>
     </section>
