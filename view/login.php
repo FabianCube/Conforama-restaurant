@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <section class="container" style="max-width: 1170px; min-height: 480px; margin-top: 95px;">
+    <section class="container" style="max-width: 1170px; min-height: 65vh; margin-top: 95px;">
         <div class="col-xs-12">
             <h2 class="title-login">Clientes registrados</h2>
             <div class="mb-40">
@@ -21,7 +21,7 @@
                     ¡Compra más fácil y rápido con tu cuenta Conforama! Si todavía no tienes una cuenta, puedes
                     <strong>
                         <u>
-                            <a href="">crear una nueva cuenta </a>
+                            <a href="<?= URL . "?controller=login&action=register"?>">crear una nueva cuenta </a>
                         </u>
                     </strong>
                     ahora.

@@ -52,4 +52,15 @@ class UsuariosDAO
         $user = $result->fetch_object('Usuarios');
         return $user;
     }
+
+    public static function registerUserAndStorage($name, $sndName, $email, $pwd, $tel, $dir)
+    {
+        $conn = DataBase::connect();
+        $instruction = $conn->prepare("INSERT INTO usuarios(nombre_usuario, apellido_usuario,
+            email, password, telefono, direccion) VALUES($name, $sndName, $email, $pwd, $tel, $dir)");
+        $instruction->execute();
+        $result=$instruction->get_result();
+
+        return $result;
+    }
 }

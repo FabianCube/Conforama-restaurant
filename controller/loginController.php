@@ -52,4 +52,26 @@ class loginController
         unset($_SESSION['current_user']);
         header("Location: " . URL);
     }
+
+    public static function register()
+    {
+        session_start();
+        include_once 'view/nav.php';
+        include_once 'view/register.php';
+        include_once 'view/footer.php';
+    }
+
+    public static function registerUser()
+    {
+        if(isset($_POST['register-email'], $_POST['register-password'], 
+        $_POST['register-nombre'], $_POST['register-apellidos'], 
+        $_POST['register-telefono'], $_POST['register-direccion']))
+        {
+            UsuariosDAO::registerUserAndStorage($_POST['register-nombre'], $_POST['register-apellidos'],
+                $_POST['register-email'], $_POST['register-password'], $_POST['register-telefono'],
+                $_POST['register-direccion']);
+        }
+
+        header("Location: " . URL . "?controller=login");
+    }
 }
