@@ -35,7 +35,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?= URL . "?controller=login" ?>">
                         <?php if(isset($_SESSION['current_user'])) { ?>
-                            <?=$_SESSION['current_user']->getNombre_usuario()?>
+                            Mi cuenta
                         <?php } else { ?>
                             Iniciar sesión
                         <?php } ?>

@@ -8,7 +8,15 @@ class loginController
     {
         session_start();
         include_once 'view/nav.php';
-        include_once 'view/login.php';
+        
+        if(isset($_SESSION['current_user']))
+        {
+            include_once 'view/account.php';
+        }
+        else
+        {
+            include_once 'view/login.php';
+        }
         include_once 'view/footer.php';
     }
 
@@ -45,7 +53,6 @@ class loginController
                 }
             }
         }
-
         header("Location: " . URL);
     }
 }
