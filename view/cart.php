@@ -182,7 +182,7 @@ $withoutIva = cartController::getPriceWithoutIVA();
                     <p><?= $totalPrice ?> €</p>
                 </div>
                 <div class="col-12">
-                    <button class="btn btn-danger" style="width: 100%;">TRAMITAR PEDIDO</button>
+                    <a href="<?= URL . "?controller=pedido&action=loginOrRegister"?>" class="btn btn-danger" style="width: 100%;">TRAMITAR PEDIDO</a>
                 </div>
             </div>
 
