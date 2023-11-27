@@ -29,7 +29,7 @@
                     <h2>Cliente habitual</h2>
                 </header>
 
-                <form action="#">
+                <form action="#" method="post">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Correo electrónico</label>
                         <input type="email" class="form-control" name="email" placeholder="Correo electrónico">
@@ -47,7 +47,7 @@
                     <h2>Nuevo Cliente</h2>
                 </header>
 
-                <form action="#">
+                <form action="#" method="post">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Correo electrónico</label>
                         <input type="email" class="form-control" name="email" placeholder="Correo electrónico">
