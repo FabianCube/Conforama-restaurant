@@ -38,11 +38,6 @@ class cartController
         include_once 'view/footer.php';
     }
 
-    public function getPrice()
-    {
-    
-    }
-
     public static function getTotalValueOfProductsInCart()
     {
         $totalPrice = 0;

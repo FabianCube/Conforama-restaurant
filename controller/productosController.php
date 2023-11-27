@@ -12,8 +12,21 @@ class productosController
         } else {
             if(isset($_POST['producto_id']))
             {
-                $pedido = new Carrito(ProductoDAO::getOneProduct($_POST['producto_id']));
-                array_push($_SESSION['items'], $pedido);
+                $repetido = false;
+                foreach ($_SESSION['items'] as $key => $value) {
+                    if($_POST['producto_id'] == $value->getProducto_carrito()->getProducto_id())
+                    {
+                        $repetido = true;
+                        $productPos = $_SESSION['items'][$key];
+                        $productPos->setCantidad($productPos->getCantidad()+1);
+                    }
+                }
+
+                if(!$repetido)
+                {
+                    $pedido = new Carrito(ProductoDAO::getOneProduct($_POST['producto_id']));
+                    array_push($_SESSION['items'], $pedido);
+                }
             }
         }
 
@@ -73,8 +86,24 @@ class productosController
         if (!isset($_SESSION['items'])) {
             $_SESSION['items'] = array();
         } else {
-            $pedido = new Carrito(ProductoDAO::getOneProduct($_POST['id']));
-            array_push($_SESSION['items'], $pedido);
+            if(isset($_POST['id']))
+            {
+                $repetido = false;
+                foreach ($_SESSION['items'] as $key => $value) {
+                    if($_POST['id'] == $value->getProducto_carrito()->getProducto_id())
+                    {
+                        $repetido = true;
+                        $productPos = $_SESSION['items'][$key];
+                        $productPos->setCantidad($productPos->getCantidad()+1);
+                    }
+                }
+
+                if(!$repetido)
+                {
+                    $pedido = new Carrito(ProductoDAO::getOneProduct($_POST['id']));
+                    array_push($_SESSION['items'], $pedido);
+                }
+            }
         }
         header("Location: " . URL);
     }
