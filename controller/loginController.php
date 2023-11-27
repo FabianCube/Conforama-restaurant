@@ -71,7 +71,6 @@ class loginController
                 $_POST['register-email'], $_POST['register-password'], (int)$_POST['register-telefono'],
                 $_POST['register-direccion']);
         }
-
         header("Location: " . URL . "?controller=login");
     }
 }
