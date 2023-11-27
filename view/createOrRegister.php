@@ -24,9 +24,9 @@
             <img src="assets/images/Conforama_logo.png" alt="logo conforama" style="width: 243px; height: auto;">
         </div>
         <div class="row d-flex mt-5">
-            <div class="col-6 d-flex justify-content-center flex-column px-5" style="min-height: 500px;">
+            <div class="col-6 d-flex justify-content-start flex-column px-5" style="min-height: 500px;">
                 <header class="d-flex justify-content-center">
-                    <h2>Cliente habitual</h2>
+                    <h2 style="font-size: 17px;">Cliente habitual</h2>
                 </header>
 
                 <form action="#" method="post">
@@ -42,9 +42,9 @@
                 </form>
 
             </div>
-            <div class="col-6 d-flex justify-content-center flex-column px-5" style="min-height: 500px;">
+            <div class="col-6 d-flex justify-content-start flex-column px-5" style="min-height: 500px;">
                 <header class="d-flex justify-content-center">
-                    <h2>Nuevo Cliente</h2>
+                    <h2 style="font-size: 17px;">Nuevo Cliente</h2>
                 </header>
 
                 <form action="#" method="post">
