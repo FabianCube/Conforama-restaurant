@@ -37,7 +37,7 @@
                         <div class="form-group">
                             <label for="input-password">Contraseña<span class="req">*</span></label>
                             <div class="password-container">
-                                <input class="form-control mb-3 custom-input" style="height: 28px;" name="-register-password" placeholder="6 a 25 caracteres y al menos un número" type="password">
+                                <input class="form-control mb-3 custom-input" style="height: 28px;" name="register-password" placeholder="6 a 25 caracteres y al menos un número" type="password">
                             </div>
                         </div>
                     </div>

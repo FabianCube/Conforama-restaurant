@@ -68,7 +68,7 @@ class loginController
         $_POST['register-telefono'], $_POST['register-direccion']))
         {
             UsuariosDAO::registerUserAndStorage($_POST['register-nombre'], $_POST['register-apellidos'],
-                $_POST['register-email'], $_POST['register-password'], $_POST['register-telefono'],
+                $_POST['register-email'], $_POST['register-password'], (int)$_POST['register-telefono'],
                 $_POST['register-direccion']);
         }
 

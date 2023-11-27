@@ -15,15 +15,13 @@ class UsuariosDAO
     public static function getAllUsers()
     {
         $conn = DataBase::connect();
-        
+
         $stmt = $conn->prepare("SELECT * FROM usuarios");
         $stmt->execute();
         $result = $stmt->get_result();
 
-        if($result)
-        {
-            while($user = $result->fetch_object('Usuarios'))
-            {
+        if ($result) {
+            while ($user = $result->fetch_object('Usuarios')) {
                 $users[] = $user;
             }
         }
@@ -33,10 +31,10 @@ class UsuariosDAO
     public static function deleteUserById($id)
     {
         $conn = DataBase::connect();
-        
+
         $stmt = $conn->prepare("DELETE FROM usuarios WHERE usuario_id = $id");
         $stmt->execute();
-        $result=$stmt->get_result();
+        $result = $stmt->get_result();
 
         return $result;
     }
@@ -44,11 +42,11 @@ class UsuariosDAO
     public static function getOneUserById($id)
     {
         $conn = DataBase::connect();
-        
+
         $stmt = $conn->prepare("SELECT * FROM usuarios WHERE usuario_id = $id");
         $stmt->execute();
-        $result=$stmt->get_result();
-        
+        $result = $stmt->get_result();
+
         $user = $result->fetch_object('Usuarios');
         return $user;
     }
@@ -56,11 +54,14 @@ class UsuariosDAO
     public static function registerUserAndStorage($name, $sndName, $email, $pwd, $tel, $dir)
     {
         $conn = DataBase::connect();
-        $instruction = $conn->prepare("INSERT INTO usuarios(nombre_usuario, apellido_usuario,
-            email, password, telefono, direccion) VALUES($name, $sndName, $email, $pwd, $tel, $dir)");
-        $instruction->execute();
-        $result=$instruction->get_result();
+        $sql = $conn->prepare(" INSERT INTO usuarios (nombre_usuario, apellido_usuario,
+            email, password, telefono, direccion) VALUES ('$name', '$sndName', '$email', '$pwd', $tel, '$dir') ");
 
-        return $result;
+        if(!$sql->execute())
+        {
+            echo 'error';
+        }
+
+        mysqli_close($conn);
     }
 }
