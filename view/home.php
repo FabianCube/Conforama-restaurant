@@ -45,7 +45,7 @@ $productos = ProductoDAO::getPromotedProducts();
                         <div class="d-flex justify-content-end pb-3">
                             <form action="<?= URL . "?controller=productos&action=sel" ?>" method="post">
                                 <input type="hidden" name="id" value="<?= $producto->getProducto_id() ?>">
-                                <button type="submit" class="button-style">AÑADIR AL CARRITO</button>
+                                <button type="submit" class="button-style" style="font-size: 14px;">AÑADIR AL CARRITO</button>
                             </form>
                         </div>
                     </div>
