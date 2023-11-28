@@ -1,5 +1,9 @@
 <?php
 
+include_once 'model/PedidosDAO.php';
+include_once 'model/Pedido_Producto.php';
+include_once 'model/Pedido_ProductoDAO.php';
+
 class pedidoController
 {
     public function index()
@@ -31,5 +35,20 @@ class pedidoController
         $pedido_id = PedidosDAO::getPedidoByUserId($user_id);
 
         $_SESSION['pedido_usuario'] = new Pedido_Productos($pedido_id, $productos);
+
+        if(isset($_SESSION['pedido_usuario']))
+        {
+            foreach ($_SESSION['items'] as $value) {
+                Pedido_ProductoDAO::setPedidoProductos($pedido_id->getPedido_id(), $value->getProducto_carrito()->getProducto_id());
+            }
+            echo 'El pedido se ha procesado correctamente!';
+            unset($_SESSION['items']);
+        }
+        else
+        {
+            echo 'No se ha podido crear el pedido.';
+        }
+        
+        header("Location: " . URL);
     }
 }
