@@ -43,7 +43,15 @@ class loginController
                 }
             }
         }
-        header("Location: " . URL);
+        if($_SERVER['HTTP_REFERER'] == URL . "?controller=login")
+        {
+            header("Location: " . URL);
+        }
+        else 
+        {
+            // modificar URL cuando procesar pedido esté listo.
+            header("Location: " . URL . "?controller=productos");
+        }
     }
 
     public static function logout()

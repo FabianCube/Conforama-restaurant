@@ -29,7 +29,7 @@
                     <h2 style="font-size: 17px;">Cliente habitual</h2>
                 </header>
 
-                <form action="#" method="post" class="d-flex flex-column justify-content-between" style="height: 100%;">
+                <form action="?controller=login&action=login" method="post" class="d-flex flex-column justify-content-between" style="height: 100%;">
                     <div>
                         <div class="form-group mb-3">
                             <label for="exampleInputEmail1">Correo electrónico</label>
