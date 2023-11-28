@@ -50,7 +50,7 @@ class loginController
         else 
         {
             // modificar URL cuando procesar pedido esté listo.
-            header("Location: " . URL . "?controller=productos");
+            header("Location: " . URL . "?controller=cart&action=pagar");
         }
     }
 
@@ -88,7 +88,7 @@ class loginController
         else 
         {
             // modificar URL cuando procesar pedido esté listo.
-            header("Location: " . URL . "?controller=productos");
+            header("Location: " . URL . "?controller=cart&action=pagar");
         }
     }
 }

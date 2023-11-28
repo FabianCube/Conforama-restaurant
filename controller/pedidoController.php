@@ -3,15 +3,23 @@
 class pedidoController
 {
     public function index()
-    {
-
-    }
+    { }
 
     public function loginOrRegister()
     {
         session_start();
-        //include_once 'view/nav.php';
-        include_once 'view/createOrRegister.php';
-        //include_once 'view/footer.php';
+        if(!isset($_SESSION['current_user']))
+        {
+            include_once 'view/createOrRegister.php';
+        }
+        else
+        {
+            header("Location: " . URL . "?controller=cart&action=pagar");
+        }
+    }
+
+    public static function realizarPedido()
+    {
+
     }
 }

@@ -38,6 +38,14 @@ class cartController
         include_once 'view/footer.php';
     }
 
+    public function pagar()
+    {
+        session_start();
+        include_once 'view/nav.php';
+        include_once 'view/pagar.php';
+        include_once 'view/footer.php';
+    }
+
     public static function getTotalValueOfProductsInCart()
     {
         $totalPrice = 0;
