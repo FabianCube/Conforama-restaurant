@@ -20,6 +20,8 @@ class pedidoController
 
     public static function realizarPedido()
     {
-
+        session_start();
+        $user = $_SESSION['current_user'];
+        $productos = $_SESSION['items'];
     }
 }
