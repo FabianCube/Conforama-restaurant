@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="col-8">
-                <?php if (!hash_equals($_SESSION['current_user']->getNombre_usuario(), "admin")) { ?>
+                <?php if ($_SESSION['current_user']->getRol_id() != 0) { ?>
                     <div class="row p-1">
                         <h3>Mis datos</h3>
                     </div>
@@ -49,7 +49,7 @@
                             <input type="text" value="<?= $_SESSION['current_user']->getTelefono() ?>" disabled>
                         </li>
                     </ul>
-                <?php } else if (hash_equals($_SESSION['current_user']->getNombre_usuario(), "admin")) {  ?>
+                <?php } else if ($_SESSION['current_user']->getRol_id == 0) {  ?>
                     <div class="row p-1">
                         <h3>Admin Panel</h3>
                     </div>
@@ -77,7 +77,6 @@
                                     <td><?=$user->getPassword()?></td>
                                     <td><?=$user->getTelefono()?></td>
                                     <td><?=$user->getDireccion()?></td>
-                                    
                                 </tr>
                             <?php } ?>
                         </tbody>
