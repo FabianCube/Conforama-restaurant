@@ -21,7 +21,15 @@ class pedidoController
     public static function realizarPedido()
     {
         session_start();
-        $user = $_SESSION['current_user'];
+        $user_id = $_SESSION['current_user']->getUsuario_id();
         $productos = $_SESSION['items'];
+        $date = date('d/m/Y h:i:s a', time());
+        $estado = "Realizado";
+
+        PedidosDAO::registrarPedido($user_id, $estado, $date);
+
+        $pedido_id = PedidosDAO::getPedidoByUserId($user_id);
+
+        $_SESSION['pedido_usuario'] = new Pedido_Productos($pedido_id, $productos);
     }
 }
