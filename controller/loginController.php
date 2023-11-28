@@ -71,6 +71,10 @@ class loginController
 
     public static function registerUser()
     {
+        //!
+        //TODO poner default el rol_id = 2, (sin permisos)..
+        //!
+
         if(isset($_POST['register-email'], $_POST['register-password'], 
         $_POST['register-nombre'], $_POST['register-apellidos'], 
         $_POST['register-telefono'], $_POST['register-direccion']))
