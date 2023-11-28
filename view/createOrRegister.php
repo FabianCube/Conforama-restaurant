@@ -29,50 +29,53 @@
                     <h2 style="font-size: 17px;">Cliente habitual</h2>
                 </header>
 
-                <form action="#" method="post">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Correo electrónico</label>
-                        <input type="email" class="form-control" name="email" placeholder="Correo electrónico">
+                <form action="#" method="post" class="d-flex flex-column justify-content-between" style="height: 100%;">
+                    <div>
+                        <div class="form-group mb-3">
+                            <label for="exampleInputEmail1">Correo electrónico</label>
+                            <input type="email" class="form-control" name="email" placeholder="Correo electrónico">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="password">Contraseña</label>
+                            <input type="password" name="password" class="form-control" placeholder="Contraseña">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="password">Contraseña</label>
-                        <input type="password" name="password" class="form-control" placeholder="Contraseña">
-                    </div>
-                    <button type="submit" class="btn btn-danger">INICIAR SESIÓN AHORA</button>
+
+                    <button type="submit" class="btn btn-danger" style="width: 100%;">INICIAR SESIÓN AHORA</button>
                 </form>
 
             </div>
-            <div class="col-6 d-flex justify-content-start flex-column px-5" style="min-height: 500px;">
+            <div class="col-6 d-flex justify-content-start flex-column px-5" style="min-height: 500px; border-left: solid 1px black;">
                 <header class="d-flex justify-content-center">
                     <h2 style="font-size: 17px;">Nuevo Cliente</h2>
                 </header>
 
                 <form action="#" method="post">
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label for="exampleInputEmail1">Correo electrónico</label>
                         <input type="email" class="form-control" name="email" placeholder="Correo electrónico">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label for="register-name">Nombre</label>
                         <input type="text" name="register-name" class="form-control" placeholder="Nombre">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label for="apellidos">Apellidos</label>
                         <input type="text" class="form-control" name="apellidos" placeholder="Apellidos">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label for="tel">Número de teléfono</label>
                         <input type="text" name="tel" class="form-control" placeholder="Tel.">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label for="dir">Dirección de envío</label>
                         <input type="text" class="form-control" name="dir" placeholder="Dirección de envío">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label for="password">Contraseña</label>
                         <input type="password" name="password" class="form-control" placeholder="Contraseña">
                     </div>
-                    <button type="submit" class="btn btn-danger">CONTINUAR</button>
+                    <button type="submit" class="btn btn-danger" style="width: 100%;">CONTINUAR</button>
                 </form>
             </div>
         </div>
