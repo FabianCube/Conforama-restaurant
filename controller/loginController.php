@@ -79,6 +79,16 @@ class loginController
                 $_POST['register-email'], $_POST['register-password'], (int)$_POST['register-telefono'],
                 $_POST['register-direccion']);
         }
-        header("Location: " . URL . "?controller=login");
+        
+
+        if($_SERVER['HTTP_REFERER'] == URL . "?controller=login")
+        {
+            header("Location: " . URL . "?controller=login");
+        }
+        else 
+        {
+            // modificar URL cuando procesar pedido esté listo.
+            header("Location: " . URL . "?controller=productos");
+        }
     }
 }

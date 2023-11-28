@@ -50,30 +50,30 @@
                     <h2 style="font-size: 17px;">Nuevo Cliente</h2>
                 </header>
 
-                <form action="#" method="post">
+                <form action="<?=URL . "?controller=login&action=registerUser"?>" method="post">
                     <div class="form-group mb-3">
                         <label for="exampleInputEmail1">Correo electrónico</label>
-                        <input type="email" class="form-control" name="email" placeholder="Correo electrónico">
+                        <input type="email" class="form-control" name="register-email" placeholder="Correo electrónico">
                     </div>
                     <div class="form-group mb-3">
                         <label for="register-name">Nombre</label>
-                        <input type="text" name="register-name" class="form-control" placeholder="Nombre">
+                        <input type="text" name="register-nombre" class="form-control" placeholder="Nombre">
                     </div>
                     <div class="form-group mb-3">
                         <label for="apellidos">Apellidos</label>
-                        <input type="text" class="form-control" name="apellidos" placeholder="Apellidos">
+                        <input type="text" class="form-control" name="register-apellidos" placeholder="Apellidos">
                     </div>
                     <div class="form-group mb-3">
                         <label for="tel">Número de teléfono</label>
-                        <input type="text" name="tel" class="form-control" placeholder="Tel.">
+                        <input type="text" name="register-telefono" class="form-control" placeholder="Tel.">
                     </div>
                     <div class="form-group mb-3">
                         <label for="dir">Dirección de envío</label>
-                        <input type="text" class="form-control" name="dir" placeholder="Dirección de envío">
+                        <input type="text" class="form-control" name="register-direccion" placeholder="Dirección de envío">
                     </div>
                     <div class="form-group mb-3">
                         <label for="password">Contraseña</label>
-                        <input type="password" name="password" class="form-control" placeholder="Contraseña">
+                        <input type="password" name="register-password" class="form-control" placeholder="Contraseña">
                     </div>
                     <button type="submit" class="btn btn-danger" style="width: 100%;">CONTINUAR</button>
                 </form>
