@@ -43,12 +43,9 @@ class loginController
                 }
             }
         }
-        if($_SERVER['HTTP_REFERER'] == URL . "?controller=login")
-        {
+        if ($_SERVER['HTTP_REFERER'] == URL . "?controller=login") {
             header("Location: " . URL);
-        }
-        else 
-        {
+        } else {
             // modificar URL cuando procesar pedido esté listo.
             header("Location: " . URL . "?controller=cart&action=pagar");
         }
@@ -71,27 +68,51 @@ class loginController
 
     public static function registerUser()
     {
-        //!
-        //TODO poner default el rol_id = 2, (sin permisos)..
-        //!
-
-        if(isset($_POST['register-email'], $_POST['register-password'], 
-        $_POST['register-nombre'], $_POST['register-apellidos'], 
-        $_POST['register-telefono'], $_POST['register-direccion']))
-        {
-            UsuariosDAO::registerUserAndStorage($_POST['register-nombre'], $_POST['register-apellidos'],
-                $_POST['register-email'], $_POST['register-password'], (int)$_POST['register-telefono'],
-                $_POST['register-direccion']);
+        if (isset(
+            $_POST['register-email'],
+            $_POST['register-password'],
+            $_POST['register-nombre'],
+            $_POST['register-apellidos'],
+            $_POST['register-telefono'],
+            $_POST['register-direccion']
+        )) {
+            UsuariosDAO::registerUserAndStorage(
+                $_POST['register-nombre'],
+                $_POST['register-apellidos'],
+                $_POST['register-email'],
+                $_POST['register-password'],
+                (int)$_POST['register-telefono'],
+                $_POST['register-direccion']
+            );
         }
-        
 
-        if($_SERVER['HTTP_REFERER'] == URL . "?controller=login")
+
+        if ($_SERVER['HTTP_REFERER'] == URL . "?controller=login&action=register") 
         {
             header("Location: " . URL . "?controller=login");
-        }
+        } 
         else 
         {
-            // modificar URL cuando procesar pedido esté listo.
+            $_POST['email'] = $_POST['register-email'];
+            $_POST['password'] = $_POST['register-password'];
+
+            $email = $_POST['email'];
+            $pwd = $_POST['password'];
+
+            $users = UsuariosDAO::getAllUsers();
+            foreach ($users as $value) {
+                if (hash_equals($value->getEmail(), $email)) {
+                    if (hash_equals($value->getPassword(), $pwd)) {
+                        session_start();
+                        $_SESSION['current_user'] = $value;
+                    } else {
+                        echo 'Contraseña incorrecta!';
+                    }
+                } else {
+                    echo 'El correo no existe!';
+                }
+            }
+
             header("Location: " . URL . "?controller=cart&action=pagar");
         }
     }
