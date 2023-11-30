@@ -7,6 +7,7 @@ class loginController
     public function index()
     {
         $users = UsuariosDAO::getAllUsers();
+        setcookie("error_login", "false", time()+60);
         session_start();
         include_once 'view/nav.php';
 
@@ -20,6 +21,7 @@ class loginController
 
     public static function login()
     {
+        $error = false;
         if (isset($_POST['email'], $_POST['password'])) {
             $email = $_POST['email'];
             $pwd = $_POST['password'];
@@ -27,7 +29,7 @@ class loginController
             $users = UsuariosDAO::getAllUsers();
             foreach ($users as $value) {
                 if (hash_equals($value->getEmail(), $email)) {
-                    if (hash_equals($value->getPassword(), $pwd)) {
+                    if (password_verify($pwd, $value->getPassword())) {
                         session_start();
                         $_SESSION['current_user'] = $value;
 
@@ -36,18 +38,27 @@ class loginController
                         //     setcookie("keep_session", $_SESSION['current_user'], time()-3600);
                         // }
                     } else {
+                        $error = true;
                         echo 'Contraseña incorrecta!';
                     }
                 } else {
+                    $error = true;
                     echo 'El correo no existe!';
                 }
             }
         }
-        if ($_SERVER['HTTP_REFERER'] == URL . "?controller=login") {
-            header("Location: " . URL);
-        } else {
-            // modificar URL cuando procesar pedido esté listo.
-            header("Location: " . URL . "?controller=cart&action=pagar");
+
+        if ($error == false) {
+            if ($_SERVER['HTTP_REFERER'] == URL . "?controller=login") {
+                header("Location: " . URL);
+            } else {
+                // modificar URL cuando procesar pedido esté listo.
+                header("Location: " . URL . "?controller=cart&action=pagar");
+            }
+        }
+        else
+        {
+            header("Location: " . URL . "?controller=login");
         }
     }
 
@@ -76,23 +87,23 @@ class loginController
             $_POST['register-telefono'],
             $_POST['register-direccion']
         )) {
+
+            $pwd = password_hash($_POST['register-password'], PASSWORD_DEFAULT);
+
             UsuariosDAO::registerUserAndStorage(
                 $_POST['register-nombre'],
                 $_POST['register-apellidos'],
                 $_POST['register-email'],
-                $_POST['register-password'],
+                $pwd,
                 (int)$_POST['register-telefono'],
                 $_POST['register-direccion']
             );
         }
 
 
-        if ($_SERVER['HTTP_REFERER'] == URL . "?controller=login&action=register") 
-        {
+        if ($_SERVER['HTTP_REFERER'] == URL . "?controller=login&action=register") {
             header("Location: " . URL . "?controller=login");
-        } 
-        else 
-        {
+        } else {
             $_POST['email'] = $_POST['register-email'];
             $_POST['password'] = $_POST['register-password'];
 
@@ -102,7 +113,7 @@ class loginController
             $users = UsuariosDAO::getAllUsers();
             foreach ($users as $value) {
                 if (hash_equals($value->getEmail(), $email)) {
-                    if (hash_equals($value->getPassword(), $pwd)) {
+                    if (password_verify($pwd, $value->getPassword())) {
                         session_start();
                         $_SESSION['current_user'] = $value;
                     } else {

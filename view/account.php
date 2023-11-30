@@ -49,7 +49,7 @@
                             <input type="text" value="<?= $_SESSION['current_user']->getTelefono() ?>" disabled>
                         </li>
                     </ul>
-                <?php } else if ($_SESSION['current_user']->getRol_id == 0) {  ?>
+                <?php } else if ($_SESSION['current_user']->getRol_id() == 0) { ?>
                     <div class="row p-1">
                         <h3>Admin Panel</h3>
                     </div>
@@ -61,7 +61,6 @@
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Apellidos</th>
                                 <th scope="col">Email</th>
-                                <th scope="col">Contraseña</th>
                                 <th scope="col">Teléfono</th>
                                 <th scope="col">Direccion</th>
                             </tr>
@@ -74,7 +73,6 @@
                                     <td><?=$user->getNombre_usuario()?></td>
                                     <td><?=$user->getApellido_usuario()?></td>
                                     <td><?=$user->getEmail()?></td>
-                                    <td><?=$user->getPassword()?></td>
                                     <td><?=$user->getTelefono()?></td>
                                     <td><?=$user->getDireccion()?></td>
                                 </tr>
