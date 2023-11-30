@@ -54,8 +54,8 @@ class UsuariosDAO
     public static function registerUserAndStorage($name, $sndName, $email, $pwd, $tel, $dir)
     {
         $conn = DataBase::connect();
-        $sql = $conn->prepare(" INSERT INTO usuarios (nombre_usuario, apellido_usuario,
-            email, password, telefono, direccion) VALUES ('$name', '$sndName', '$email', '$pwd', $tel, '$dir') ");
+        $sql = $conn->prepare(" INSERT INTO usuarios (rol_id, nombre_usuario, apellido_usuario,
+            email, password, telefono, direccion) VALUES (2, '$name', '$sndName', '$email', '$pwd', $tel, '$dir') ");
 
         if(!$sql->execute())
         {
