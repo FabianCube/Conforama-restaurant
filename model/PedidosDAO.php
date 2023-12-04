@@ -32,4 +32,5 @@ class PedidosDAO
         $user = $result->fetch_object('Pedidos');
         return $user;
     }
+
 }

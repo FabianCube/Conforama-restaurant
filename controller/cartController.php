@@ -9,7 +9,7 @@ class cartController
 
         if (isset($_POST['posProductCart'])) 
         {
-            // obtengo la posicion el el SESSION del producto que hay que eliminar
+            // obtengo la posicion en el SESSION del producto que hay que eliminar
             $pos = $_POST["posProductCart"];
             // elimino el producto
             unset($_SESSION['items'][$pos]);

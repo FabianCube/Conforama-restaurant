@@ -27,19 +27,22 @@ class pedidoController
         session_start();
         $user_id = $_SESSION['current_user']->getUsuario_id();
         $productos = $_SESSION['items'];
-        $date = date('d/m/Y h:i:s a', time());
+        $date = date('Y-m-d H:i:s');
         $estado = "Realizado";
 
+        // Guardo la informacion del pedido en la base de datos..
         PedidosDAO::registrarPedido($user_id, $estado, $date);
 
-        $pedido_id = PedidosDAO::getPedidoByUserId($user_id);
+        // Obtengo el usuario que está haciendo el pedido.
+        $pedido = PedidosDAO::getPedidoByUserId($user_id);
 
-        $_SESSION['pedido_usuario'] = new Pedido_Productos($pedido_id, $productos);
+        
+        $_SESSION['pedido_usuario'] = new Pedido_Productos($pedido, $productos);
 
         if(isset($_SESSION['pedido_usuario']))
         {
             foreach ($_SESSION['items'] as $value) {
-                Pedido_ProductoDAO::setPedidoProductos($pedido_id->getPedido_id(), $value->getProducto_carrito()->getProducto_id());
+                Pedido_ProductoDAO::setPedidoProductos($pedido->getPedido_id(), $value->getProducto_carrito()->getProducto_id());
             }
             echo 'El pedido se ha procesado correctamente!';
             unset($_SESSION['items']);

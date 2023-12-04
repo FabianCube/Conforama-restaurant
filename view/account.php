@@ -23,6 +23,23 @@
                 </div>
             </div>
             <div class="col-8">
+                <?php
+
+                if (PedidosDAO::getPedidoByUserId($_SESSION['current_user']->getUsuario_id()) != null)
+                {
+                    echo 'Este usuario tiene pedidos!';
+                    // mostrar datos del pedido.
+                    $pedido = PedidosDAO::getPedidoByUserId($_SESSION['current_user']->getUsuario_id());
+                    foreach ($pedido as $value) 
+                    {
+                        echo "Hora: " . $value->getHora_pedido();
+                    }
+                } 
+                else 
+                {
+                    echo 'Este usuario no tiene pedidos!';
+                }
+                ?>
                 <?php if ($_SESSION['current_user']->getRol_id() != 0) { ?>
                     <div class="row p-1">
                         <h3>Mis datos</h3>
@@ -68,17 +85,18 @@
                         <tbody>
                             <?php foreach ($users as $user) { ?>
                                 <tr>
-                                    <th scope="row"><?=$user->getUsuario_id()?></th>
-                                    <td><?=$user->getRol_id()?></td>
-                                    <td><?=$user->getNombre_usuario()?></td>
-                                    <td><?=$user->getApellido_usuario()?></td>
-                                    <td><?=$user->getEmail()?></td>
-                                    <td><?=$user->getTelefono()?></td>
-                                    <td><?=$user->getDireccion()?></td>
+                                    <th scope="row"><?= $user->getUsuario_id() ?></th>
+                                    <td><?= $user->getRol_id() ?></td>
+                                    <td><?= $user->getNombre_usuario() ?></td>
+                                    <td><?= $user->getApellido_usuario() ?></td>
+                                    <td><?= $user->getEmail() ?></td>
+                                    <td><?= $user->getTelefono() ?></td>
+                                    <td><?= $user->getDireccion() ?></td>
                                 </tr>
                             <?php } ?>
                         </tbody>
                     </table>
+
                 <?php } ?>
             </div>
         </div>

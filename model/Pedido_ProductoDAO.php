@@ -32,4 +32,16 @@ class Pedido_ProductoDAO
 
         mysqli_close($conn);
     }
+
+    public static function getInfoProductosEnPedidoByPedidoId($pedido_id)
+    {
+        $conn = DataBase::connect();
+        $sql = $conn->prepare("SELECT nombre_producto, precio_producto, descripcion FROM productos WHERE producto_id in 
+            (SELECT producto_id FROM pedido_producto WHERE pedido_id = $pedido_id)");
+        $sql->execute();
+        $result = $sql->get_result();
+
+        $info = $result->fetch_object('InfoPedido');
+        return $info;
+    }
 }
