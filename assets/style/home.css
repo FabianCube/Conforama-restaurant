@@ -1,7 +1,7 @@
 .custom-title-section
 {
     font-size: 20px;
-    font-family: var(--tipo-txt-general);
+    font-family: var(--default-typo);
     color: var(--title-txt-color-variant);
 }
 
@@ -52,7 +52,7 @@
     position: absolute;
     top: 140px;
     left: 100px;
-    font-family: var(--tipo-txt-general);
+    font-family: var(--default-typo);
     font-size: 20px;
     color: var(--white-color);
 }
@@ -105,5 +105,17 @@
     width: 15rem; 
     height: 21rem; 
     border: solid 1px #BFBFBF; 
-    border-radius: 4px;
+    border-radius: 0px;
+    transition: 0.1s ease-in-out;
+}
+
+.custom-card:hover
+{
+    border: solid 1px var(--red-color);
+}
+
+.custom-card:hover .custom-title-card-hover
+{
+    color: var(--red-color);
+    text-decoration: underline;
 }

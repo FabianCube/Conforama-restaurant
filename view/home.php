@@ -17,6 +17,10 @@ $productos = ProductoDAO::getPromotedProducts();
     <link rel="stylesheet" href="assets/style/home.css">
     <link rel="stylesheet" href="assets/style/comandPanel.css">
     <link rel="stylesheet" href="assets/style/global.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -34,14 +38,14 @@ $productos = ProductoDAO::getPromotedProducts();
                     </div>
                     <div class="d-flex flex-column justify-content-between" style="height: 50%;">
                         <div class="d-flex flex-column align-items-center">
-                            <h5 class="card-title custom-title-card"><?= $producto->getNombre_producto() ?></h5>
+                            <h5 class="card-title custom-title-card custom-title-card-hover"><?= $producto->getNombre_producto() ?></h5>
                             <p class="card-text custom-default-description-text" style="text-align: center;"><?= $producto->getDescripcion() ?></p>
                             <p class="card-text custom-product-price"><?= $producto->getPrecio_producto() ?>€</p>
                         </div>
                         <div class="d-flex justify-content-end pb-3">
                             <form action="<?= URL . "?controller=productos&action=sel" ?>" method="post">
                                 <input type="hidden" name="id" value="<?= $producto->getProducto_id() ?>">
-                                <button type="submit" class="button-style">AÑADIR AL CARRITO</button>
+                                <button type="submit" class="button-style" style="font-size: 14px;">AÑADIR AL CARRITO</button>
                             </form>
                         </div>
                     </div>

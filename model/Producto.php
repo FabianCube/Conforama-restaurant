@@ -12,7 +12,6 @@ class Producto
     public function __construct()
     { }
 
-
     /**
      * Get the value of producto_id
      */ 

@@ -3,12 +3,9 @@ include_once 'model/ProductoDAO.php';
 include_once 'config/parameters.php';
 
 
-if (!isset($_POST["categoria_id"])) 
-{
+if (!isset($_POST["categoria_id"])) {
     $productos = ProductoDAO::getAllProducts();
-} 
-else 
-{
+} else {
     $productos = ProductoDAO::getProductsByCategory($_POST["categoria_id"]);
 }
 ?>
@@ -19,6 +16,7 @@ else
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="assets/style/comandPanel.css">
     <link rel="stylesheet" href="assets/style/global.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,41 +26,55 @@ else
 </head>
 
 <body>
-    <section class="container pt-5 d-flex flex-row" style="margin-top: 55px;">
-        <div class="col-3">
+    <section class="container pt-5 d-flex flex-row justify-content-between" style="margin-top: 55px; width: 1140px;">
+        <div class="col-3 me-5" style="width: 270px;">
             <div class="p-4 d-flex align-items-center" style="height: 70px;">
                 <p>Categorías</p>
             </div>
-            <div class="container p-4" style="background-color: #F6F6F6;">
+            <div class="container p-4 custom-container-filter">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <form action=<?= URL . "?controller=productos" ?> method="post">
-                        <input name="no_filter" value="0" hidden>
-                        <button type="submit" style="border: none; background-color: rgba(0,0,0,0);">Todos</button>
-                    </form>
-                    <form action=<?= URL . "?controller=productos" ?> method="post">
-                        <input name="categoria_id" value="0" hidden>
-                        <button type="submit" style="border: none; background-color: rgba(0,0,0,0);">Cafés</button>
-                    </form>
-                    <form action=<?= URL . "?controller=productos" ?> method="post">
-                        <input name="categoria_id" value="2" hidden>
-                        <button type="submit" style="border: none; background-color: rgba(0,0,0,0);">Smoothies</button>
-                    </form>
-                    <form action=<?= URL . "?controller=productos" ?> method="post">
-                        <input name="categoria_id" value="3" hidden>
-                        <button type="submit" style="border: none; background-color: rgba(0,0,0,0);">Muffins</button>
-                    </form>
-                    <form action=<?= URL . "?controller=productos" ?> method="post">
-                        <input name="categoria_id" value="1" hidden>
-                        <button type="submit" style="border: none; background-color: rgba(0,0,0,0);">Sandwitchs</button>
-                    </form>
-                    <form action=<?= URL . "?controller=productos" ?> method="post">
-                        <input name="categoria_id" value="5" hidden>
-                        <button type="submit" style="border: none; background-color: rgba(0,0,0,0);">Donuts</button>
-                    </form>
-                    <form action=<?= URL . "?controller=productos" ?> method="post">
-                        <input name="categoria_id" value="4" hidden>
-                        <button type="submit" style="border: none; background-color: rgba(0,0,0,0);">Batidos</button>
-                    </form>
+                    <div class="filter-container">
+                        <form action=<?= URL . "?controller=productos" ?> method="post">
+                            <input name="no_filter" value="0" hidden>
+                            <button type="submit" class="filter-text">Todos</button>
+                        </form>
+                    </div>
+                    <div class="filter-container">
+                        <form action=<?= URL . "?controller=productos" ?> method="post">
+                            <input name="categoria_id" value="0" hidden>
+                            <button type="submit" class="filter-text">Cafés</button>
+                        </form>
+                    </div>
+                    <div class="filter-container">
+                        <form action=<?= URL . "?controller=productos" ?> method="post">
+                            <input name="categoria_id" value="2" hidden>
+                            <button type="submit" class="filter-text">Smoothies</button>
+                        </form>
+                    </div>
+                    <div class="filter-container">
+                        <form action=<?= URL . "?controller=productos" ?> method="post">
+                            <input name="categoria_id" value="3" hidden>
+                            <button type="submit" class="filter-text">Muffins</button>
+                        </form>
+                    </div>
+                    <div class="filter-container">
+                        <form action=<?= URL . "?controller=productos" ?> method="post">
+                            <input name="categoria_id" value="1" hidden>
+                            <button type="submit" class="filter-text">Sandwitchs</button>
+                        </form>
+                    </div>
+                    <div class="filter-container">
+                        <form action=<?= URL . "?controller=productos" ?> method="post">
+                            <input name="categoria_id" value="5" hidden>
+                            <button type="submit" class="filter-text">Donuts</button>
+                        </form>
+                    </div>
+                    <div class="filter-container">
+                        <form action=<?= URL . "?controller=productos" ?> method="post">
+                            <input name="categoria_id" value="4" hidden>
+                            <button type="submit" class="filter-text">Batidos</button>
+                        </form>
+                    </div>
                 </ul>
             </div>
         </div>
@@ -74,7 +86,7 @@ else
                             <p>Carta</p>
                         </div>
                         <div class="col-10 d-flex flex-row justify-content-end">
-                            <p>1 - 20 productos</p>
+                            <p style="font-size:12px;">1 - 20 productos</p>
                             <select class="form-select ms-3" aria-label="Small select example" style="height: 30px; width: 200px; font-size: .8rem;">
                                 <option selected>Recomendados</option>
                                 <option value="1">Más baratos primero</option>
@@ -90,7 +102,7 @@ else
             <div class="row">
                 <?php foreach ($productos as $producto) { ?>
                     <div class="col-4">
-                        <div class="card mb-3" style="width: 18rem; height: 468px;">
+                        <div class="card mb-4 custom-card-hover" style="width: 256px; height: 468px;">
                             <div class="container d-flex justify-content-center p-3" style="width: 200px; height: 180px;">
                                 <img src="assets/images/<?= $producto->getUrl_img() ?>" class="img-fluid" alt="Product image">
                             </div>
@@ -110,7 +122,16 @@ else
                                         <p class="card-text custom-product-price"><?= $producto->getPrecio_producto() ?>€</p>
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-around">
+                                <div class="d-flex justify-content-end">
+                                    <form action=<?= URL . "?controller=productos" ?> method="post">
+                                        <input name="producto_id" value="<?= $producto->getProducto_id() ?>" hidden>
+                                        <button class="btn btn-danger d-flex align-items-center justify-content-center custom-btn-add-cart" style="width: 55px; height: 55px; border-radius: 50px;" type="submit">
+                                            <span class="material-symbols-outlined icon-cart" style="font-size: 36px;">add_shopping_cart</span>
+                                            <!-- <img src="assets/images/add-cart.svg" alt="Add to cart" style="color: #fff;"> -->
+                                        </button>
+                                    </form>
+                                </div>
+                                <!-- <div class="d-flex justify-content-around">
                                     <form action=<?= URL . "?controller=productos&action=modificar" ?> method="post">
                                         <input name="producto_id" value="<?= $producto->getProducto_id() ?>" hidden>
                                         <button class="btn btn-success" style="width: 7.5rem;" type="submit">Modificar</button>
@@ -119,11 +140,11 @@ else
                                         <input name="producto_id" value="<?= $producto->getProducto_id() ?>" hidden>
                                         <button class="btn btn-danger" style="width: 7.5rem;" type="submit">Eliminar</button>
                                     </form>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
-                    <?php } ?>
+                <?php } ?>
             </div>
         </div>
     </section>

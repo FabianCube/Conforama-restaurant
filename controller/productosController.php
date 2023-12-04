@@ -5,6 +5,30 @@ class productosController
 {
     public function index()
     {
+        session_start();
+
+        if (!isset($_SESSION['items'])) {
+            $_SESSION['items'] = array();
+        } else {
+            if(isset($_POST['producto_id']))
+            {
+                $repetido = false;
+                foreach ($_SESSION['items'] as $key => $value) {
+                    if($_POST['producto_id'] == $value->getProducto_carrito()->getProducto_id())
+                    {
+                        $repetido = true;
+                        $productPos = $_SESSION['items'][$key];
+                        $productPos->setCantidad($productPos->getCantidad()+1);
+                    }
+                }
+
+                if(!$repetido)
+                {
+                    $pedido = new Carrito(ProductoDAO::getOneProduct($_POST['producto_id']));
+                    array_push($_SESSION['items'], $pedido);
+                }
+            }
+        }
 
         include_once 'view/nav.php';
         include_once 'view/comandPanel.php';
@@ -19,17 +43,17 @@ class productosController
         include_once 'view/footer.php';
     }
 
-    public function eliminar()
-    {
-        $producto_id = $_POST["producto_id"];
-        ProductoDAO::deleteProduct($producto_id);
-        header("Location:" . URL);
-    }
-
-    public function modificar()
-    {
-        include_once("view/modifyPanel.php");
-    }
+    // public function eliminar()
+    // {
+    //     $producto_id = $_POST["producto_id"];
+    //     ProductoDAO::deleteProduct($producto_id);
+    //     header("Location:" . URL);
+    // }
+    
+    // public function modificar()
+    // {
+    //     include_once("view/modifyPanel.php");
+    // }
 
     public static function updateProduct()
     {
@@ -62,52 +86,25 @@ class productosController
         if (!isset($_SESSION['items'])) {
             $_SESSION['items'] = array();
         } else {
-            $pedido = new Carrito(ProductoDAO::getOneProduct($_POST['id']));
-            array_push($_SESSION['items'], $pedido);
-        }
-        var_dump($_SESSION['items']);
-    }
+            if(isset($_POST['id']))
+            {
+                $repetido = false;
+                foreach ($_SESSION['items'] as $key => $value) {
+                    if($_POST['id'] == $value->getProducto_carrito()->getProducto_id())
+                    {
+                        $repetido = true;
+                        $productPos = $_SESSION['items'][$key];
+                        $productPos->setCantidad($productPos->getCantidad()+1);
+                    }
+                }
 
-    public static function getTotalValueOfProductsInCart()
-    {
-        $totalPrice = 0;
-
-        if (isset($_SESSION['items'])) {
-            foreach ($_SESSION['items'] as $value) {
-                $totalPrice += $value->getProducto_carrito()->getPrecio_producto();
+                if(!$repetido)
+                {
+                    $pedido = new Carrito(ProductoDAO::getOneProduct($_POST['id']));
+                    array_push($_SESSION['items'], $pedido);
+                }
             }
         }
-
-        return $totalPrice;
-    }
-
-    public static function getIVAOfProduct()
-    {
-        $totalPrice = 0;
-
-        if (isset($_SESSION['items'])) {
-            foreach ($_SESSION['items'] as $value) {
-                $totalPrice += $value->getProducto_carrito()->getPrecio_producto();
-            }
-        }
-        $iva = $totalPrice * 0.21;
-
-        // truncate = bcdiv()
-        return bcdiv($iva, 1, 2);
-    }
-
-    public static function getPriceWithoutIVA()
-    {
-        $totalPrice = 0;
-
-        if (isset($_SESSION['items'])) {
-            foreach ($_SESSION['items'] as $value) {
-                $totalPrice += $value->getProducto_carrito()->getPrecio_producto();
-            }
-        }
-        $iva = $totalPrice * 0.21;
-
-        $r = $totalPrice - $iva;
-        return bcdiv($r, 1, 2);
+        header("Location: " . URL);
     }
 }

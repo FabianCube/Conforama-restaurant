@@ -1,42 +1,88 @@
-.custom-title-card
-{
-    font-family: var(--tipo-txt-general);
+.custom-title-card {
+    font-family: var(--default-typo);
     color: var(--title-txt-color);
     font-size: var(--font14pxToRem);
 }
 
-.custom-description-product
-{
-    font-family: var(--tipo-txt-general);
+.custom-description-product {
+    font-family: var(--default-typo);
     color: var(--product-txt-color);
     font-size: var(--font12pxToRem);
 }
 
-.custom-description-product-2
-{
-    font-family: var(--tipo-txt-general);
+.custom-description-product-2 {
+    font-family: var(--default-typo);
     color: var(--title-txt-color);
     font-size: var(--font12pxToRem);
 }
 
-.custom-product-price
-{
-    font-family: var(--tipo-txt-general);
-    color: var(--price-txt-color);
+.custom-product-price {
+    font-family: var(--default-typo);
+    color: var(--red-color);
     font-size: var(--font18pxToRem);
 }
 
-.custom-label-recomendado
-{
+.custom-label-recomendado {
     width: 150px;
     height: 25px;
     background-color: var(--orange-color);
 }
 
-.custom-txt-recomendado
-{
-    font-family: var(--tipo-txt-general);
+.custom-txt-recomendado {
+    font-family: var(--default-typo);
     color: white;
     font-size: var(--font11pxToRem);
     line-height: 25px;
+}
+
+.custom-container-filter
+{
+    background-color: #F6F6F6;
+}
+
+.filter-container
+{
+    height: 73px; 
+    border-bottom: 1px solid black;
+    display: flex;
+    align-items: center;
+}
+
+.filter-text {
+    color: #666;
+    font-family: var(--default-typo);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    border: none;
+    background-color: rgba(0,0,0,0);
+}
+
+.custom-card-hover
+{
+    transition: .15s ease-in-out;
+    border-radius: 2px;
+}
+
+.custom-card-hover:hover
+{
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+    border: solid 2px grey;
+}
+
+.custom-btn-add-cart
+{
+    transition: .15s ease-in-out;
+}
+.custom-btn-add-cart:hover
+{
+    border: solid 2px red;
+    background-color: #fff;
+}
+
+.custom-btn-add-cart:hover .icon-cart
+{
+    color: red;
 }
