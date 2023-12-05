@@ -17,29 +17,15 @@
         <div class="row">
             <div class="col-4">
                 <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action">Mis datos</a>
-                    <a href="#" class="list-group-item list-group-item-action">Información pedidos</a>
-                    <a href="<?= URL . "?controller=login&action=logout" ?>" class="list-group-item list-group-item-action"><span style="color: red;">Cerrar sesión</span></a>
+                    <a href="<?= URL . "?controller=account" ?>" class="list-group-item list-group-item-action">Mis datos</a>
+                    <a href="<?= URL . "?controller=account&action=infoPedidos" ?>" class="list-group-item list-group-item-action">Información pedidos</a>
+                    <a href="<?= URL . "?controller=login&action=logout" ?>" class="list-group-item list-group-item-action">
+                        <span style="color: red;">Cerrar sesión</span>
+                    </a>
                 </div>
             </div>
             <div class="col-8">
-                <?php
 
-                if (PedidosDAO::getPedidoByUserId($_SESSION['current_user']->getUsuario_id()) != null)
-                {
-                    echo 'Este usuario tiene pedidos!';
-                    // mostrar datos del pedido.
-                    $pedido = PedidosDAO::getPedidoByUserId($_SESSION['current_user']->getUsuario_id());
-                    foreach ($pedido as $value) 
-                    {
-                        echo "Hora: " . $value->getHora_pedido();
-                    }
-                } 
-                else 
-                {
-                    echo 'Este usuario no tiene pedidos!';
-                }
-                ?>
                 <?php if ($_SESSION['current_user']->getRol_id() != 0) { ?>
                     <div class="row p-1">
                         <h3>Mis datos</h3>

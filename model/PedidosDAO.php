@@ -22,6 +22,17 @@ class PedidosDAO
         mysqli_close($conn);
     }
 
+    public static function getPedidoByID($ped_id)
+    {
+        $conn = DataBase::connect();
+        $sql = $conn->prepare("SELECT * FROM pedidos WHERE pedido_id = $ped_id");
+        $sql->execute();
+        $result = $sql->get_result();
+
+        $ped = $result->fetch_object('Pedidos');
+        return $ped;
+    }
+
     public static function getPedidoByUserId($user_id)
     {
         $conn = DataBase::connect();

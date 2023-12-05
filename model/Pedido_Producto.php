@@ -1,10 +1,12 @@
 <?php
 
-class Pedido_Productos
+class Pedido_Producto
 {
+    private $articulo_id;
     private $pedido_id;
     private $producto_id;
-    // private $modificacion_id;
+    private $modificacion_id;
+    private $cantidad;
 
     public function __construct()
     { }

@@ -4,7 +4,15 @@ include_once 'controller/homeController.php';
 include_once 'controller/cartController.php';
 include_once 'controller/loginController.php';
 include_once 'controller/pedidoController.php';
+include_once 'controller/accountController.php';
 include_once 'config/parameters.php';
+
+// Si el usuario ha querido mantener sesión iniciada se ceará la sesion al entrar autmáticamente
+if(isset($_COOKIE['mantener_sesion_iniciada']))
+{
+    $user_id = $_COOKIE['mantener_sesion_iniciada'];
+    $_SESSION['current_user'] = UsuariosDAO::getOneUserById($user_id);
+}
 
 if(!isset($_GET['controller']))
 {

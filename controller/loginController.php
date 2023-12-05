@@ -12,7 +12,7 @@ class loginController
         include_once 'view/nav.php';
 
         if (isset($_SESSION['current_user'])) {
-            include_once 'view/account.php';
+            header("Location: " . URL . "?controller=account");
         } else {
             include_once 'view/login.php';
         }
@@ -22,37 +22,48 @@ class loginController
     public static function login()
     {
         $error = false;
-        if (isset($_POST['email'], $_POST['password'])) {
+        if (isset($_POST['email'], $_POST['password'])) 
+        {
             $email = $_POST['email'];
             $pwd = $_POST['password'];
 
             $users = UsuariosDAO::getAllUsers();
-            foreach ($users as $value) {
-                if (hash_equals($value->getEmail(), $email)) {
-                    if (password_verify($pwd, $value->getPassword())) {
+            foreach ($users as $value) 
+            {
+                if (hash_equals($value->getEmail(), $email)) 
+                {
+                    if (password_verify($pwd, $value->getPassword())) 
+                    {
                         session_start();
                         $_SESSION['current_user'] = $value;
 
-                        // if($_POST['save_session'] == true)
-                        // {
-                        //     setcookie("keep_session", $_SESSION['current_user'], time()-3600);
-                        // }
-                    } else {
+                        if($_POST['save_session'] == true)
+                        {
+                            setcookie("mantener_sesion_iniciada", $_SESSION['current_user']->getUsuario_id(), time() + 3600);
+                        }
+                    }
+                    else 
+                    {
                         $error = true;
                         echo 'Contraseña incorrecta!';
                     }
-                } else {
+                } 
+                else 
+                {
                     $error = true;
                     echo 'El correo no existe!';
                 }
             }
         }
 
-        if ($error == false) {
-            if ($_SERVER['HTTP_REFERER'] == URL . "?controller=login") {
+        if ($error == false) 
+        {
+            if ($_SERVER['HTTP_REFERER'] == URL . "?controller=login") 
+            {
                 header("Location: " . URL);
-            } else {
-                // modificar URL cuando procesar pedido esté listo.
+            } 
+            else 
+            {
                 header("Location: " . URL . "?controller=cart&action=pagar");
             }
         }
@@ -65,7 +76,11 @@ class loginController
     public static function logout()
     {
         session_start();
+        // Eliminamos la sesion
         unset($_SESSION['current_user']);
+        // Eliminamos el mantener sesion iniciada
+        setcookie("mantener_sesion_iniciada", '', time() - 3600);
+        // Redirigir a main page
         header("Location: " . URL);
     }
 

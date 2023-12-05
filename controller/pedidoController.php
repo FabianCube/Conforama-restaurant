@@ -37,7 +37,7 @@ class pedidoController
         $pedido = PedidosDAO::getPedidoByUserId($user_id);
 
         
-        $_SESSION['pedido_usuario'] = new Pedido_Productos($pedido, $productos);
+        $_SESSION['pedido_usuario'] = new Pedido_Producto($pedido, $productos);
 
         if(isset($_SESSION['pedido_usuario']))
         {
