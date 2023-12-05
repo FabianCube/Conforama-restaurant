@@ -25,28 +25,31 @@
                 </div>
             </div>
             <div class="col-8">
-                <?php
+                <div class="row p-1">
+                    <h3>Información pedidos</h3>
+                </div>
+                <?php if (Pedido_ProductoDAO::pedidoExistsWithUserID($userID)) { ?>
 
-                if (PedidosDAO::getPedidoByUserId($_SESSION['current_user']->getUsuario_id()) != null)
-                {
-                    $userID = $_SESSION['current_user']->getUsuario_id();
-
-                    $infoPedido = Pedido_ProductoDAO::getAllPedidos_productosByUserID($userID);
-                    
-                    foreach ($infoPedido as $value) {
-                        echo "Pedido ID -> " . $value->getPedido_id() . " ";
-                        echo "Producto id -> " . $value->getProducto_id() . "<br>";
-                        echo "Nombre producto -> " . ProductoDAO::getOneProduct($value->getProducto_id())->getNombre_producto() . "<br>";
-                        echo "------------<br>";
+                    <table class="table">
+                        <tr>
+                            <th>PEDIDO #</th>
+                            <th>FECHA</th>
+                            <th>TOTAL DEL PEDIDO</th>
+                            <th>ESTADO</th>
+                        </tr>
+                    <?php foreach ($infoPedido as $value) { ?>
+                        <tr>
+                            <td>0000<?=$value->getPedido_id()?></td>
+                            <td><?=PedidosDAO::getPedidoByID($value->getPedido_id())->getHora_pedido() ?></td>
+                            <td><?=ProductoDAO::getOneProduct($value->getProducto_id())->getPrecio_producto() ?>€</td>
+                            <td><?=PedidosDAO::getPedidoByID($value->getPedido_id())->getEstado() ?></td>
+                        </tr>
+                    <?php }
+                    } else {
+                        echo 'Este usuario no tiene pedidos!';
                     }
-                    
-                } 
-                else 
-                {
-                    echo 'Este usuario no tiene pedidos!';
-                }
-                ?>
-                <p>ALGO</p>
+                    ?>
+                    </table>
             </div>
         </div>
     </section>

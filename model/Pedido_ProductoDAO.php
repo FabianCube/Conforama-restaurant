@@ -37,7 +37,7 @@ class Pedido_ProductoDAO
     {
         $conn = DataBase::connect();
 
-        $stmt = $conn->prepare("SELECT * FROM pedido_producto WHERE pedido_id = 
+        $stmt = $conn->prepare("SELECT * FROM pedido_producto WHERE pedido_id in 
             (SELECT pedido_id FROM pedidos WHERE usuario_id = $user_id)");
         $stmt->execute();
         $result = $stmt->get_result();
@@ -51,16 +51,19 @@ class Pedido_ProductoDAO
         return $ped_productos;
     }
 
-    public static function getPedidoProductosByUserID($user_id)
+    public static function pedidoExistsWithUserID($user_id)
     {
         $conn = DataBase::connect();
-        $sql = $conn->prepare("SELECT * FROM pedido_producto WHERE pedido_id = 
-            (SELECT pedido_id FROM pedidos WHERE usuario_id = $user_id)");
+        $total = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM pedido_producto WHERE pedido_id in 
+            (SELECT pedido_id FROM pedidos WHERE usuario_id = $user_id)"));
 
-        $sql->execute();
-        $result = $sql->get_result();
-
-        $pedProduct = $result->fetch_object('Pedido_Producto');
-        return $pedProduct;
+        if($total != 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

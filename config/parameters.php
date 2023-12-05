@@ -9,9 +9,9 @@ define("DEVELOPER_ROL_ID", 1);
 define("DEFAULT_ROL_ID", 2);
 
 // pedidos
-define("PROCESANDO_ESTADO_PEDIDO", "En proceso");
-define("EN_REPARTO_ESTADO_PEDIDO", "En reparto");
+define("EN_CURSO_ESTADO_PEDIDO", "En curso");
 define("ENTREGADO_ESTADO_PEDIDO", "Entregado");
+define("CANCELADO_ESTADO_PEDIDO", "Cancelado");
 
 // categorias
 define("COFFE_CATEGORY_ID", 0);
