@@ -57,13 +57,27 @@ class Pedido_ProductoDAO
         $total = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM pedido_producto WHERE pedido_id in 
             (SELECT pedido_id FROM pedidos WHERE usuario_id = $user_id)"));
 
-        if($total != 0)
-        {
+        if ($total != 0) {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
+    }
+
+    public static function calculateTotalValueOfPedido($ped_id)
+    {
+        $conn = DataBase::connect();
+        $result = mysqli_query($conn, "SELECT ped.pedido_id, ped.hora_pedido, SUM(prod.precio_producto) FROM 
+                pedidos ped, 
+                productos prod 
+                WHERE ped.pedido_id = $ped_id AND prod.producto_id in 
+                    (SELECT producto_id FROM pedido_producto WHERE pedido_id = $ped_id)
+                GROUP BY ped.pedido_id;");
+
+        if (!$result) {
+            echo 'No se pudo ejecutar la consulta';
+            exit;
+        }
+        return $result;
     }
 }

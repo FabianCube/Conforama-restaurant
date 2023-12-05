@@ -37,13 +37,14 @@
                             <th>TOTAL DEL PEDIDO</th>
                             <th>ESTADO</th>
                         </tr>
-                    <?php foreach ($infoPedido as $value) { ?>
-                        <tr>
-                            <td>0000<?=$value->getPedido_id()?></td>
-                            <td><?=PedidosDAO::getPedidoByID($value->getPedido_id())->getHora_pedido() ?></td>
-                            <td><?=ProductoDAO::getOneProduct($value->getProducto_id())->getPrecio_producto() ?>€</td>
-                            <td><?=PedidosDAO::getPedidoByID($value->getPedido_id())->getEstado() ?></td>
-                        </tr>
+                        <?php foreach ($infoPedido as $value) { ?>
+                            <tr>
+                                <td>0000<?= $value->getPedido_id() ?></td>
+                                <td><?= PedidosDAO::getPedidoByID($value->getPedido_id())->getHora_pedido() ?></td>
+                                <td><?= ProductoDAO::getOneProduct($value->getProducto_id())->getPrecio_producto() ?>€</td>
+                                <td><?= PedidosDAO::getPedidoByID($value->getPedido_id())->getEstado() ?></td>
+                                <td><?= $cantidadTotal ?>€</td>
+                            </tr>
                     <?php }
                     } else {
                         echo 'Este usuario no tiene pedidos!';
