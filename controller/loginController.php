@@ -101,9 +101,12 @@ class loginController
         }
 
 
-        if ($_SERVER['HTTP_REFERER'] == URL . "?controller=login&action=register") {
+        if ($_SERVER['HTTP_REFERER'] == URL . "?controller=login&action=register") 
+        {
             header("Location: " . URL . "?controller=login");
-        } else {
+        } 
+        else if($_SERVER['HTTP_REFERER'] == URL . "?controller=pedido&action=loginOrRegister") 
+        {
             $_POST['email'] = $_POST['register-email'];
             $_POST['password'] = $_POST['register-password'];
 
@@ -111,7 +114,8 @@ class loginController
             $pwd = $_POST['password'];
 
             $users = UsuariosDAO::getAllUsers();
-            foreach ($users as $value) {
+            foreach ($users as $value) 
+            {
                 if (hash_equals($value->getEmail(), $email)) {
                     if (password_verify($pwd, $value->getPassword())) {
                         session_start();
