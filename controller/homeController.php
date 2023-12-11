@@ -1,4 +1,6 @@
 <?php
+include_once 'model/ProductoDAO.php';
+include_once 'config/parameters.php';
 
 class homeController
 {
@@ -28,6 +30,8 @@ class homeController
                 }
             }
         }
+
+        $productos = ProductoDAO::getPromotedProducts();
 
         include_once 'view/nav.php';
         include_once 'view/header.php';

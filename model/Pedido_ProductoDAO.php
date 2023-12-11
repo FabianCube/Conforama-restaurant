@@ -20,11 +20,11 @@ class Pedido_ProductoDAO
         return $user;
     }
 
-    public static function setPedidoProductos($pedido_id, $producto_id)
+    public static function setPedidoProductos($pedido_id, $producto_id, $cantidad)
     {
         $conn = DataBase::connect();
-        $sql = $conn->prepare("INSERT INTO pedido_producto (pedido_id, producto_id) 
-            VALUES ($pedido_id, $producto_id)");
+        $sql = $conn->prepare("INSERT INTO pedido_producto (pedido_id, producto_id, cantidad) 
+            VALUES ($pedido_id, $producto_id, $cantidad)");
 
         if (!$sql->execute()) {
             echo 'error';

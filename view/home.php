@@ -1,8 +1,4 @@
 <?php
-include_once 'model/ProductoDAO.php';
-include_once 'config/parameters.php';
-
-$productos = ProductoDAO::getPromotedProducts();
 
 ?>
 

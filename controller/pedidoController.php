@@ -32,7 +32,8 @@ class pedidoController
         $pedido = PedidosDAO::getLastPedidoByUserId($user_id);
 
         foreach ($_SESSION['items'] as $value) {
-            Pedido_ProductoDAO::setPedidoProductos($pedido->getPedido_id(), $value->getProducto_carrito()->getProducto_id());
+            // agregar cantidad de producto al constructor, default 1.
+            Pedido_ProductoDAO::setPedidoProductos($pedido->getPedido_id(), $value->getProducto_carrito()->getProducto_id(), 1);
         }
         echo 'El pedido se ha procesado correctamente!';
         unset($_SESSION['items']);
