@@ -3,6 +3,9 @@ include_once 'model/ProductoDAO.php';
 
 class productosController
 {
+    /**
+     * Página default para mostrar los productos.
+     */
     public function index()
     {
         if (!isset($_SESSION['items'])) {
