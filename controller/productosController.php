@@ -5,8 +5,6 @@ class productosController
 {
     public function index()
     {
-        session_start();
-
         if (!isset($_SESSION['items'])) {
             $_SESSION['items'] = array();
         } else {
@@ -35,9 +33,11 @@ class productosController
         include_once 'view/footer.php';
     }
 
+    /**
+     * Página de carrito de la compra
+     */
     public function compra()
     {
-        session_start();
         include_once 'view/nav.php';
         include_once 'view/cart.php';
         include_once 'view/footer.php';
@@ -55,6 +55,10 @@ class productosController
     //     include_once("view/modifyPanel.php");
     // }
 
+
+    /**
+     * Función que modifica un producto de la base de datos.
+     */
     public static function updateProduct()
     {
         $conn = DataBase::connect();

@@ -13,7 +13,6 @@ class pedidoController
 
     public function loginOrRegister()
     {
-        session_start();
         if (!isset($_SESSION['current_user'])) {
             include_once 'view/createOrRegister.php';
         } else {
@@ -23,7 +22,6 @@ class pedidoController
 
     public static function realizarPedido()
     {
-        session_start();
         $user_id = $_SESSION['current_user']->getUsuario_id();
         $date = date('Y-m-d H:i:s');
         $precio_total = calculadora::calcularPrecioTotal($_SESSION['items']);

@@ -5,8 +5,6 @@ class cartController
 {
     public function index()
     {
-        session_start();
-
         if (isset($_POST['posProductCart'])) 
         {
             // obtengo la posicion en el SESSION del producto que hay que eliminar
@@ -40,7 +38,6 @@ class cartController
 
     public function pagar()
     {
-        session_start();
         include_once 'view/nav.php';
         include_once 'view/pagar.php';
         include_once 'view/footer.php';

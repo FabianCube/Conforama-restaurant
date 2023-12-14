@@ -34,7 +34,6 @@ class loginController
                 {
                     if (password_verify($pwd, $value->getPassword())) 
                     {
-                        session_start();
                         $_SESSION['current_user'] = $value;
 
                         if($_POST['save_session'] == true)
