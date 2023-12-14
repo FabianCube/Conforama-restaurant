@@ -11,6 +11,12 @@ class pedidoController
     public function index()
     { }
 
+    /**
+     * Página para registrarse o loggearse antes de poder realizar el pedido.
+     * 
+     * En el caso de que no haya una sesión iniciada, te mandará a la página para poder
+     * registrarte o loggearte.
+     */
     public function loginOrRegister()
     {
         if (!isset($_SESSION['current_user'])) {
@@ -20,6 +26,10 @@ class pedidoController
         }
     }
 
+    /**
+     * Método que gestiona un pedido, lo guardará en la BBDD y borrará la sesión con los 
+     * productos del carrito.
+     */
     public static function realizarPedido()
     {
         $user_id = $_SESSION['current_user']->getUsuario_id();
@@ -35,7 +45,6 @@ class pedidoController
             // agregar cantidad de producto al constructor, default 1.
             Pedido_ProductoDAO::setPedidoProductos($pedido->getPedido_id(), $value->getProducto_carrito()->getProducto_id(), 1);
         }
-        echo 'El pedido se ha procesado correctamente!';
         unset($_SESSION['items']);
 
         header("Location: " . URL);
