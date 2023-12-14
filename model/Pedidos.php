@@ -6,6 +6,7 @@ class Pedidos
     private $usuario_id;
     private $estado;
     private $hora_pedido;
+    private $precio_total;
 
     public function __construct()
     { }
