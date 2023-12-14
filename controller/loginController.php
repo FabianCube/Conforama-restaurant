@@ -4,11 +4,17 @@ include_once 'model/UsuariosDAO.php';
 
 class loginController
 {
+    /**
+     * Página default para iniciar sesión/registrarse en la web o acceder a la información 
+     * del usuario.
+     * 
+     * En el caso de que esté la sesión iniciada se mandará al usuario a la página de su cuenta,
+     * si el usuario no ha iniciado sesión, se mostrará la posibilidad de crear o acceder a una cuenta.
+     */
     public function index()
     {
         $users = UsuariosDAO::getAllUsers();
         setcookie("error_login", "false", time()+60);
-        session_start();
         include_once 'view/nav.php';
 
         if (isset($_SESSION['current_user'])) {
@@ -19,9 +25,14 @@ class loginController
         include_once 'view/footer.php';
     }
 
+    /**
+     * Página de login.
+     */
     public static function login()
     {
+        // preparo el error.
         $error = false;
+
         if (isset($_POST['email'], $_POST['password'])) 
         {
             $email = $_POST['email'];
@@ -32,14 +43,18 @@ class loginController
             {
                 if (hash_equals($value->getEmail(), $email)) 
                 {
+                    // uso el password_verify para desencriptar la contraseña.
                     if (password_verify($pwd, $value->getPassword())) 
                     {
                         $_SESSION['current_user'] = $value;
 
+                        // si el ususario a marcado la casilla de mantener sesión iniciada, se guarda en una cookie el id
+                        // del usuario para iniciar sesión automáticamente cuando vuelva a entrar.
                         if($_POST['save_session'] == true)
                         {
                             setcookie("mantener_sesion_iniciada", $_SESSION['current_user']->getUsuario_id(), time() + 3600);
                         }
+                        $error = false;
                     }
                     else 
                     {
@@ -72,9 +87,11 @@ class loginController
         }
     }
 
+    /**
+     * Método de cierre se sesión.
+     */
     public static function logout()
     {
-        session_start();
         // Eliminamos la sesion
         unset($_SESSION['current_user']);
         // Eliminamos el mantener sesion iniciada
@@ -83,9 +100,11 @@ class loginController
         header("Location: " . URL);
     }
 
+    /**
+     * Página de registro.
+     */
     public static function register()
     {
-        session_start();
         include_once 'view/nav.php';
         include_once 'view/register.php';
         include_once 'view/footer.php';
