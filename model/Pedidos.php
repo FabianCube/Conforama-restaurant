@@ -54,4 +54,24 @@ class Pedidos
     {
         return $this->hora_pedido;
     }
+
+    /**
+     * Get the value of precio_total
+     */ 
+    public function getPrecio_total()
+    {
+        return $this->precio_total;
+    }
+
+    /**
+     * Set the value of precio_total
+     *
+     * @return  self
+     */ 
+    public function setPrecio_total($precio_total)
+    {
+        $this->precio_total = $precio_total;
+
+        return $this;
+    }
 }

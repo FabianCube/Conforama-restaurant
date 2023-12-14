@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-12-2023 a las 15:26:22
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Temps de generació: 14-12-2023 a les 17:15:09
+-- Versió del servidor: 10.4.28-MariaDB
+-- Versió de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `conforama_restaurant`
+-- Base de dades: `conforama_restaurant`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `categorias`
+-- Estructura de la taula `categorias`
 --
 
 CREATE TABLE `categorias` (
@@ -33,7 +33,7 @@ CREATE TABLE `categorias` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
--- Volcado de datos para la tabla `categorias`
+-- Bolcament de dades per a la taula `categorias`
 --
 
 INSERT INTO `categorias` (`CATEGORIA_ID`, `NOMBRE_CATEGORIA`) VALUES
@@ -47,7 +47,7 @@ INSERT INTO `categorias` (`CATEGORIA_ID`, `NOMBRE_CATEGORIA`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ingredientes`
+-- Estructura de la taula `ingredientes`
 --
 
 CREATE TABLE `ingredientes` (
@@ -57,7 +57,7 @@ CREATE TABLE `ingredientes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
--- Volcado de datos para la tabla `ingredientes`
+-- Bolcament de dades per a la taula `ingredientes`
 --
 
 INSERT INTO `ingredientes` (`ingrediente_id`, `nombre_ingrediente`, `precio_ingrediente`) VALUES
@@ -78,7 +78,7 @@ INSERT INTO `ingredientes` (`ingrediente_id`, `nombre_ingrediente`, `precio_ingr
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `modificacion`
+-- Estructura de la taula `modificacion`
 --
 
 CREATE TABLE `modificacion` (
@@ -91,34 +91,78 @@ CREATE TABLE `modificacion` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pedidos`
+-- Estructura de la taula `pedidos`
 --
 
 CREATE TABLE `pedidos` (
   `pedido_id` int(4) NOT NULL,
   `usuario_id` int(4) NOT NULL,
   `estado` varchar(25) NOT NULL,
-  `hora_pedido` datetime NOT NULL
+  `hora_pedido` datetime NOT NULL,
+  `precio_total` decimal(5,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+--
+-- Bolcament de dades per a la taula `pedidos`
+--
+
+INSERT INTO `pedidos` (`pedido_id`, `usuario_id`, `estado`, `hora_pedido`, `precio_total`) VALUES
+(24, 15, 'Realizado', '2023-12-04 17:57:46', 0.00),
+(25, 15, 'Realizado', '2023-12-04 18:33:48', 0.00),
+(26, 15, 'Realizado', '2023-12-04 19:14:56', 0.00),
+(27, 12, 'Realizado', '2023-12-04 20:05:37', 0.00),
+(28, 15, 'Realizado', '2023-12-04 20:08:03', 0.00),
+(29, 15, 'En curso', '2023-12-14 16:59:31', 1.99),
+(30, 15, 'En curso', '2023-12-14 17:00:08', 13.96);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pedido_producto`
+-- Estructura de la taula `pedido_producto`
 --
 
 CREATE TABLE `pedido_producto` (
-  `ARTICULO_ID` int(4) NOT NULL,
-  `PEDIDO_ID` int(4) NOT NULL,
-  `PRODUCTO_ID` int(4) NOT NULL,
-  `MODIFICACION_ID` int(4) NOT NULL,
-  `CANTIDAD` int(4) NOT NULL
+  `articulo_id` int(4) NOT NULL,
+  `pedido_id` int(4) NOT NULL,
+  `producto_id` int(4) NOT NULL,
+  `modificacion_id` int(4) NOT NULL,
+  `cantidad` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+--
+-- Bolcament de dades per a la taula `pedido_producto`
+--
+
+INSERT INTO `pedido_producto` (`articulo_id`, `pedido_id`, `producto_id`, `modificacion_id`, `cantidad`) VALUES
+(1, 1, 6, 0, 0),
+(2, 1, 6, 0, 0),
+(3, 1, 1, 0, 0),
+(4, 1, 2, 0, 0),
+(5, 1, 1, 0, 0),
+(6, 18, 3, 0, 0),
+(7, 19, 1, 0, 0),
+(8, 20, 1, 0, 0),
+(9, 20, 1, 0, 0),
+(10, 22, 1, 0, 0),
+(11, 22, 2, 0, 0),
+(12, 22, 1, 0, 0),
+(13, 24, 1, 0, 0),
+(14, 24, 1, 0, 0),
+(15, 24, 2, 0, 0),
+(16, 24, 3, 0, 0),
+(17, 24, 4, 0, 0),
+(18, 27, 1, 0, 0),
+(19, 27, 2, 0, 0),
+(20, 24, 1, 0, 0),
+(21, 29, 1, 0, 1),
+(22, 30, 1, 0, 1),
+(23, 30, 2, 0, 1),
+(24, 30, 3, 0, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `productos`
+-- Estructura de la taula `productos`
 --
 
 CREATE TABLE `productos` (
@@ -131,7 +175,7 @@ CREATE TABLE `productos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
--- Volcado de datos para la tabla `productos`
+-- Bolcament de dades per a la taula `productos`
 --
 
 INSERT INTO `productos` (`producto_id`, `nombre_producto`, `descripcion`, `precio_producto`, `url_img`, `categoria_id`) VALUES
@@ -151,7 +195,7 @@ INSERT INTO `productos` (`producto_id`, `nombre_producto`, `descripcion`, `preci
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `productos_ingredientes`
+-- Estructura de la taula `productos_ingredientes`
 --
 
 CREATE TABLE `productos_ingredientes` (
@@ -162,7 +206,7 @@ CREATE TABLE `productos_ingredientes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
--- Volcado de datos para la tabla `productos_ingredientes`
+-- Bolcament de dades per a la taula `productos_ingredientes`
 --
 
 INSERT INTO `productos_ingredientes` (`PRODUCTOS_INGREDIENTES_ID`, `PRODUCTO_ID`, `INGREDIENTE_ID`, `CANTIDAD`) VALUES
@@ -180,7 +224,7 @@ INSERT INTO `productos_ingredientes` (`PRODUCTOS_INGREDIENTES_ID`, `PRODUCTO_ID`
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `roles`
+-- Estructura de la taula `roles`
 --
 
 CREATE TABLE `roles` (
@@ -189,7 +233,7 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
--- Volcado de datos para la tabla `roles`
+-- Bolcament de dades per a la taula `roles`
 --
 
 INSERT INTO `roles` (`ROL_ID`, `NOMBRE_ROL`) VALUES
@@ -200,7 +244,7 @@ INSERT INTO `roles` (`ROL_ID`, `NOMBRE_ROL`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuarios`
+-- Estructura de la taula `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -215,131 +259,131 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
--- Volcado de datos para la tabla `usuarios`
+-- Bolcament de dades per a la taula `usuarios`
 --
 
 INSERT INTO `usuarios` (`usuario_id`, `rol_id`, `nombre_usuario`, `apellido_usuario`, `email`, `password`, `telefono`, `direccion`) VALUES
-(5, 2, 'admin', 'admin', 'admin@gmail.com', '$2y$10$A/3j0yQLaXgOztyGacemoejaH7U/', 4444, 'admin'),
-(6, 2, 'Fabian', 'Doizi', 'fabian@gmail.com', '$2y$10$Z8CmPVG.MLB5uzU3D4Rcq.bNZ6Dg', 456984485, 'Av. envio num.3'),
-(7, 2, 'jhg', 'jhg', 'jhg@gmail.com', '$2y$10$AbaobeTLUnuPDbTIBQu2He4Pdaoz', 876, 'jhg'),
-(12, 2, 'qwe', 'qwe', 'qwe@gmail.c', '$2y$10$Qkbv5N4nRwJ.i6wmvh/X0eFugqCQ', 123, 'qwe'),
-(13, 2, 'asd', 'asd', 'asd@gmail.com', '$2y$10$VVNMbLaUTYrP4Uh/1M/YOuyyVBKH/l/zPTsO0KZ0Vwh5ojfLn5zQe', 123, 'asd');
+(11, 2, 'HASH', 'HASH', 'pruebahash@gmail.com', '$2y$10$B91Zt7HOw2XsK77Fe5HOC.7hdIpwv6iMtU3BbXbvmk5BS./PIGemK', 454, 'ooo'),
+(12, 2, 'algo', 'algo', 'algo@gmail.com', '$2y$10$KvU1b/xMTFDZulZD76DN0.owVS7HFvw84U.tGm0lWHuvYRjSLFiOq', 1234, 'algo'),
+(13, 0, 'admin', 'admin', 'admin@gmail.com', '$2y$10$EqpFsdK9pu4KHbALHgUcJORKnp8fjaveucRYy/yZmWJlyeEAURYw.', 666666666, 'Direccion del admin'),
+(14, 2, 'Juan', 'Algo', 'juan@gmail.com', '$2y$10$qb1PthdjYueIuerHbAm4LOHoYYV5p7VuqsbKYiBcMBaDKSadCj5dG', 123232323, 'Calle de Juan, 1234'),
+(15, 2, 'Fabian', 'Doizi', 'fabian@gmail.com', '$2y$10$Bnp7JCHmEMXAajOS5h4NCOiZN5rXzSKxlFJ7mEbt6xg/TneYybv0S', 657890085, 'Av. calle de envio 2');
 
 --
--- Índices para tablas volcadas
+-- Índexs per a les taules bolcades
 --
 
 --
--- Indices de la tabla `categorias`
+-- Índexs per a la taula `categorias`
 --
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`CATEGORIA_ID`);
 
 --
--- Indices de la tabla `ingredientes`
+-- Índexs per a la taula `ingredientes`
 --
 ALTER TABLE `ingredientes`
   ADD PRIMARY KEY (`ingrediente_id`);
 
 --
--- Indices de la tabla `modificacion`
+-- Índexs per a la taula `modificacion`
 --
 ALTER TABLE `modificacion`
   ADD PRIMARY KEY (`MODIFICACION_ID`);
 
 --
--- Indices de la tabla `pedidos`
+-- Índexs per a la taula `pedidos`
 --
 ALTER TABLE `pedidos`
   ADD PRIMARY KEY (`pedido_id`);
 
 --
--- Indices de la tabla `pedido_producto`
+-- Índexs per a la taula `pedido_producto`
 --
 ALTER TABLE `pedido_producto`
-  ADD PRIMARY KEY (`ARTICULO_ID`);
+  ADD PRIMARY KEY (`articulo_id`);
 
 --
--- Indices de la tabla `productos`
+-- Índexs per a la taula `productos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`producto_id`);
 
 --
--- Indices de la tabla `productos_ingredientes`
+-- Índexs per a la taula `productos_ingredientes`
 --
 ALTER TABLE `productos_ingredientes`
   ADD PRIMARY KEY (`PRODUCTOS_INGREDIENTES_ID`);
 
 --
--- Indices de la tabla `roles`
+-- Índexs per a la taula `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`ROL_ID`);
 
 --
--- Indices de la tabla `usuarios`
+-- Índexs per a la taula `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`usuario_id`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT per les taules bolcades
 --
 
 --
--- AUTO_INCREMENT de la tabla `categorias`
+-- AUTO_INCREMENT per la taula `categorias`
 --
 ALTER TABLE `categorias`
   MODIFY `CATEGORIA_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT de la tabla `ingredientes`
+-- AUTO_INCREMENT per la taula `ingredientes`
 --
 ALTER TABLE `ingredientes`
   MODIFY `ingrediente_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT de la tabla `modificacion`
+-- AUTO_INCREMENT per la taula `modificacion`
 --
 ALTER TABLE `modificacion`
   MODIFY `MODIFICACION_ID` int(4) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `pedidos`
+-- AUTO_INCREMENT per la taula `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `pedido_id` int(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `pedido_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
--- AUTO_INCREMENT de la tabla `pedido_producto`
+-- AUTO_INCREMENT per la taula `pedido_producto`
 --
 ALTER TABLE `pedido_producto`
-  MODIFY `ARTICULO_ID` int(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `articulo_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT de la tabla `productos`
+-- AUTO_INCREMENT per la taula `productos`
 --
 ALTER TABLE `productos`
   MODIFY `producto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT de la tabla `productos_ingredientes`
+-- AUTO_INCREMENT per la taula `productos_ingredientes`
 --
 ALTER TABLE `productos_ingredientes`
   MODIFY `PRODUCTOS_INGREDIENTES_ID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT de la tabla `roles`
+-- AUTO_INCREMENT per la taula `roles`
 --
 ALTER TABLE `roles`
   MODIFY `ROL_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de la tabla `usuarios`
+-- AUTO_INCREMENT per la taula `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `usuario_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `usuario_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

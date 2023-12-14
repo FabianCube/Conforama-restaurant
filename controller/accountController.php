@@ -1,6 +1,7 @@
 <?php
 
 include_once 'model/Pedido_ProductoDAO.php';
+include_once 'model/Pedido_Producto.php';
 
 class accountController
 {
@@ -16,11 +17,12 @@ class accountController
     {
         session_start();
         $userID = $_SESSION['current_user']->getUsuario_id();
-        $infoPedido = Pedido_ProductoDAO::getAllPedidos_productosByUserID($userID);
-        $cantidadTotal = 0;
-        foreach ($infoPedido as $value) {
-            $cantidadTotal += ProductoDAO::getOneProduct($value->getProducto_id())->getPrecio_producto();
-        }
+        //$infoPedido = Pedido_ProductoDAO::getAllPedidos_productosByUserID($userID);
+        $infoPedido = PedidosDAO::getPedidoByUserId($userID);
+
+        // foreach ($infoPedido as $value) {
+        //     $cantidadTotal = PedidosDAO::getPedidoByID($value->getPedido_id())->getPrecio_total();
+        // }
 
         include_once 'view/nav.php';
         include_once 'view/infoPedidos.php';

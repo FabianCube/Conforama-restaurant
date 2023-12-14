@@ -1,0 +1,10 @@
+.ver_pedido
+{
+    background-color: var(--red-color);
+    border-radius: 3px;
+    border: none;
+    color: white;
+    height: 30px;
+    font-size: 12px;
+    font-weight: 600;
+}

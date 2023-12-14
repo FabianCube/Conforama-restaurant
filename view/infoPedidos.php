@@ -10,6 +10,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/style/global.css">
+    <link rel="stylesheet" href="assets/style/infoPedidos.css">
 </head>
 
 <body>
@@ -26,7 +29,7 @@
             </div>
             <div class="col-8">
                 <div class="row p-1">
-                    <h3>Información pedidos</h3>
+                    <h3>PEDIDOS RECIENTES</h3>
                 </div>
                 <?php if (Pedido_ProductoDAO::pedidoExistsWithUserID($userID)) { ?>
 
@@ -36,14 +39,19 @@
                             <th>FECHA</th>
                             <th>TOTAL DEL PEDIDO</th>
                             <th>ESTADO</th>
+                            <th></th>
                         </tr>
                         <?php foreach ($infoPedido as $value) { ?>
                             <tr>
-                                <td>0000<?= $value->getPedido_id() ?></td>
+                                <td>000<?= $value->getPedido_id() ?></td>
                                 <td><?= PedidosDAO::getPedidoByID($value->getPedido_id())->getHora_pedido() ?></td>
-                                <td><?= ProductoDAO::getOneProduct($value->getProducto_id())->getPrecio_producto() ?>€</td>
+                                <td><?= PedidosDAO::getPedidoByID($value->getPedido_id())->getPrecio_total() ?>€</td>
                                 <td><?= PedidosDAO::getPedidoByID($value->getPedido_id())->getEstado() ?></td>
-                                <td><?= $cantidadTotal ?>€</td>
+                                <td>
+                                    <form action="#" method="post">
+                                        <input class="ver_pedido" type="submit" value="VER PEDIDO">
+                                    </form>
+                                </td>
                             </tr>
                     <?php }
                     } else {

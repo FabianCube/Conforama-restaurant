@@ -8,14 +8,13 @@ include_once 'Pedidos.php';
 
 class PedidosDAO
 {
-    public static function registrarPedido($user_id, $estado, $hora)
+    public static function registrarPedido($user_id, $estado, $hora, $precio_total)
     {
         $conn = DataBase::connect();
-        $sql = $conn->prepare("INSERT INTO pedidos (usuario_id, estado, hora_pedido) 
-            VALUES ($user_id, '$estado', '$hora')");
+        $sql = $conn->prepare("INSERT INTO pedidos (usuario_id, estado, hora_pedido, precio_total) 
+            VALUES ($user_id, '$estado', '$hora', $precio_total)");
 
-        if(!$sql->execute())
-        {
+        if (!$sql->execute()) {
             echo 'error';
         }
 
@@ -40,8 +39,15 @@ class PedidosDAO
         $sql->execute();
         $result = $sql->get_result();
 
-        $user = $result->fetch_object('Pedidos');
-        return $user;
+        if ($result) 
+        {
+            while ($pedido = $result->fetch_object('Pedidos')) 
+            {
+                $pedidos[] = $pedido;
+            }
+        }
+
+        return $pedidos;
     }
 
     public static function getLastPedidoByUserId($user_id)
@@ -54,5 +60,4 @@ class PedidosDAO
         $user = $result->fetch_object('Pedidos');
         return $user;
     }
-
 }
