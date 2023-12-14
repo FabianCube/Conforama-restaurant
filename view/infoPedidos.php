@@ -28,9 +28,10 @@
                 </div>
             </div>
             <div class="col-8">
-                <div class="row p-1">
-                    <h3>PEDIDOS RECIENTES</h3>
+                <div class="row">
+                    <h3 class="title">PEDIDOS RECIENTES</h3>
                 </div>
+                <hr style="margin-top: 0;">
                 <?php if (Pedido_ProductoDAO::pedidoExistsWithUserID($userID)) { ?>
 
                     <table class="table">
@@ -47,7 +48,7 @@
                                 <td><?= PedidosDAO::getPedidoByID($value->getPedido_id())->getHora_pedido() ?></td>
                                 <td><?= PedidosDAO::getPedidoByID($value->getPedido_id())->getPrecio_total() ?>€</td>
                                 <td><?= PedidosDAO::getPedidoByID($value->getPedido_id())->getEstado() ?></td>
-                                <td>
+                                <td class="button-ver-pedido">
                                     <form action="#" method="post">
                                         <input class="ver_pedido" type="submit" value="VER PEDIDO">
                                     </form>

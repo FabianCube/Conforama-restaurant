@@ -7,6 +7,9 @@ include_once 'controller/pedidoController.php';
 include_once 'controller/accountController.php';
 include_once 'config/parameters.php';
 
+
+session_start();
+
 // Si el usuario ha querido mantener sesión iniciada se ceará la sesion al entrar autmáticamente
 if(isset($_COOKIE['mantener_sesion_iniciada']))
 {

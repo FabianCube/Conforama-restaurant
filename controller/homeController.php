@@ -6,8 +6,6 @@ class homeController
 {
     public function index()
     {
-        session_start();
-
         if (!isset($_SESSION['items'])) {
             $_SESSION['items'] = array();
         } else {

@@ -28,4 +28,9 @@ class accountController
         include_once 'view/infoPedidos.php';
         include_once 'view/footer.php';
     }
+
+    public static function detallesPedido()
+    {
+        
+    }
 }
