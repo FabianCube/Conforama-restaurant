@@ -35,7 +35,7 @@ class PedidosDAO
     public static function getPedidoByUserId($user_id)
     {
         $conn = DataBase::connect();
-        $sql = $conn->prepare("SELECT * FROM pedidos WHERE usuario_id = $user_id");
+        $sql = $conn->prepare("SELECT * FROM pedidos WHERE usuario_id = $user_id ORDER BY hora_pedido DESC");
         $sql->execute();
         $result = $sql->get_result();
 
