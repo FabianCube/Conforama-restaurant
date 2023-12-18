@@ -133,7 +133,6 @@ class loginController
             );
         }
 
-
         if ($_SERVER['HTTP_REFERER'] == URL . "?controller=login&action=register") 
         {
             header("Location: " . URL . "?controller=login");
