@@ -43,7 +43,7 @@ class pedidoController
 
         foreach ($_SESSION['items'] as $value) {
             // agregar cantidad de producto al constructor, default 1.
-            Pedido_ProductoDAO::setPedidoProductos($pedido->getPedido_id(), $value->getProducto_carrito()->getProducto_id(), 1);
+            Pedido_ProductoDAO::setPedidoProductos($pedido->getPedido_id(), $value->getProducto_carrito()->getProducto_id(), $value->getCantidad());
         }
         unset($_SESSION['items']);
 
