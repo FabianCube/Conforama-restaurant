@@ -16,8 +16,12 @@ class Pedido_ProductoDAO
         $sql->execute();
         $result = $sql->get_result();
 
-        $user = $result->fetch_object('Pedido_Producto');
-        return $user;
+        if ($result) {
+            while ($ped = $result->fetch_object('Pedido_Producto')) {
+                $ped_productos[] = $ped;
+            }
+        }
+        return $ped_productos;
     }
 
     public static function setPedidoProductos($pedido_id, $producto_id, $cantidad)

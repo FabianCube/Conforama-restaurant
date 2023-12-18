@@ -15,12 +15,7 @@ class accountController
     public static function infoPedidos()
     {
         $userID = $_SESSION['current_user']->getUsuario_id();
-        //$infoPedido = Pedido_ProductoDAO::getAllPedidos_productosByUserID($userID);
         $infoPedido = PedidosDAO::getPedidoByUserId($userID);
-
-        // foreach ($infoPedido as $value) {
-        //     $cantidadTotal = PedidosDAO::getPedidoByID($value->getPedido_id())->getPrecio_total();
-        // }
 
         include_once 'view/nav.php';
         include_once 'view/infoPedidos.php';
@@ -29,6 +24,14 @@ class accountController
 
     public static function detallesPedido()
     {
-        
+        // Obtengo el pedido_id que quiero mostrar.
+        $pedido_id = $_POST['pedidoId-detallesPedido'];
+
+        // uso el pedido_id para obtener los productos del pedido.
+        $pedido_producto = Pedido_ProductoDAO::getPedidoProductosById($pedido_id);
+
+        include_once 'view/nav.php';
+        include_once 'view/detallesPedido.php';
+        include_once 'view/footer.php';
     }
 }

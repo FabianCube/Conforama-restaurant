@@ -49,7 +49,8 @@
                                 <td><?= PedidosDAO::getPedidoByID($value->getPedido_id())->getPrecio_total() ?>€</td>
                                 <td><?= PedidosDAO::getPedidoByID($value->getPedido_id())->getEstado() ?></td>
                                 <td class="button-ver-pedido">
-                                    <form action="#" method="post">
+                                    <form action="<?= URL . "?controller=account&action=detallesPedido"?>" method="post">
+                                        <input type="text" name="pedidoId-detallesPedido" value="<?=$value->getPedido_id()?>" hidden>
                                         <input class="ver_pedido" type="submit" value="VER PEDIDO">
                                     </form>
                                 </td>
