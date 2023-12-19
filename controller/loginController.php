@@ -102,6 +102,9 @@ class loginController
         include_once 'view/footer.php';
     }
 
+    /**
+     * Registrar usuario en la base de datos.
+     */
     public static function registerUser()
     {
         if (isset(
@@ -125,6 +128,8 @@ class loginController
             );
         }
 
+        // Si el usuario se está creando desde el proceso de compra en el carrito de la compra
+        // la sesión del usuario se iniciará automáticamente al completar el registro.
         if ($_SERVER['HTTP_REFERER'] == URL . "?controller=login&action=register") {
             header("Location: " . URL . "?controller=login");
         } else if ($_SERVER['HTTP_REFERER'] == URL . "?controller=pedido&action=loginOrRegister") {
