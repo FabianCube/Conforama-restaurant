@@ -5,6 +5,7 @@
  */
 
 include_once 'model/ProductoDAO.php';
+include_once 'config/parameters.php';
 
 class productosController
 {
@@ -50,45 +51,40 @@ class productosController
         include_once 'view/cart.php';
         include_once 'view/footer.php';
     }
-
-    // public function eliminar()
-    // {
-    //     $producto_id = $_POST["producto_id"];
-    //     ProductoDAO::deleteProduct($producto_id);
-    //     header("Location:" . URL);
-    // }
     
-    // public function modificar()
-    // {
-    //     include_once("view/modifyPanel.php");
-    // }
+    public function modificar()
+    {
+        $producto_id = $_POST['id_producto_admin_panel'];
+        $producto = ProductoDAO::getOneProduct($producto_id);
 
+        include_once 'view/nav.php';
+        include_once 'view/modifyPanel.php';
+        include_once 'view/footer.php';
+    }
 
     /**
      * Función que modifica un producto de la base de datos.
      */
     public static function updateProduct()
     {
-        $conn = DataBase::connect();
+        // compruebo si el administrador quiere eliminar o modificar el producto.
+        if(isset($_POST['modificar-producto']))
+        {
+            $producto_id = $_POST['producto_id'];
+            $nombre_nuevo = $_POST['nombre_producto'];
+            $descripcion_nueva = $_POST['descripcion'];
+            $precio_nuevo = $_POST['precio_producto'];
+            $categoria_id = $_POST['categoria_id'];
+    
+            ProductoDAO::modifyProduct($producto_id, $nombre_nuevo, $descripcion_nueva, $precio_nuevo, $categoria_id);
+        }
+        else if(isset($_POST['eliminar-producto']))
+        {
+            $producto_id = $_POST["producto_id"];
+            ProductoDAO::deleteProduct($producto_id);
+        }
 
-        $producto_id = $_POST['producto_id'];
-        $nombre_nuevo = $_POST['nombre_producto'];
-        $decripcion_nueva = $_POST['descripcion'];
-        $precio_nuevo = $_POST['precio_producto'];
-        $categoria_id = $_POST['categoria_id'];
-
-        $stmt = $conn->prepare("UPDATE productos SET
-        nombre_producto='" . $nombre_nuevo . "', 
-        descripcion='" . $decripcion_nueva . "',
-        precio_producto=" . $precio_nuevo . ",
-        categoria_id=" . $categoria_id . " where producto_id = $producto_id");
-
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        header("Location:" . URL);
-
-        return $result;
+        header("Location:" . URL . "?controller=account&action=productosAdmin");
     }
 
     public static function sel()

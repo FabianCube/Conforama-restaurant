@@ -51,8 +51,8 @@
                                 <td><?= $producto->getUrl_img() ?></td>
                                 <td><?= $producto->getCategoria_id() ?></td>
                                 <td>
-                                    <form action="#" method="post">
-                                        <input type="text" name="id_producto_admin_panel" hidden>
+                                    <form action="<?= URL . "?controller=productos&action=modificar" ?>" method="post">
+                                        <input type="text" name="id_producto_admin_panel" value="<?= $producto->getProducto_id() ?>" hidden>
                                         <input type="submit" value="Modificar">
                                     </form>
                                 </td>

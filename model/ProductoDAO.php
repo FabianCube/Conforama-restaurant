@@ -38,6 +38,22 @@ class ProductoDAO
     return $productos;
   }
 
+  public static function modifyProduct($producto_id, $nombre_nuevo, $descripcion_nueva, $precio_nuevo, $categoria_id)
+  {
+    $conn = DataBase::connect();
+
+    $stmt = $conn->prepare("UPDATE productos SET 
+        nombre_producto='" . $nombre_nuevo . "', 
+        descripcion='" . $descripcion_nueva . "',
+        precio_producto=" . $precio_nuevo . ",
+        categoria_id=" . $categoria_id . " WHERE producto_id = $producto_id");
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result;
+  }
+
   public static function deleteProduct($id)
   {
     // logica para eliminar un producto
