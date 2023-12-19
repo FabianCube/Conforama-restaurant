@@ -70,6 +70,13 @@ class accountController
         include_once 'view/footer.php';
     }
 
+    public static function addNewProductAdmin()
+    {
+        include_once 'view/nav.php';
+        include_once 'view/createProduct.php';
+        include_once 'view/footer.php';
+    }
+
     /**
      * Panel administrador para gestión de pedidos.
      */

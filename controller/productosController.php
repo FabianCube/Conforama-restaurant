@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Conforama-restaurant
  * @author Fabian Doizi
@@ -17,20 +18,17 @@ class productosController
         if (!isset($_SESSION['items'])) {
             $_SESSION['items'] = array();
         } else {
-            if(isset($_POST['producto_id']))
-            {
+            if (isset($_POST['producto_id'])) {
                 $repetido = false;
                 foreach ($_SESSION['items'] as $key => $value) {
-                    if($_POST['producto_id'] == $value->getProducto_carrito()->getProducto_id())
-                    {
+                    if ($_POST['producto_id'] == $value->getProducto_carrito()->getProducto_id()) {
                         $repetido = true;
                         $productPos = $_SESSION['items'][$key];
-                        $productPos->setCantidad($productPos->getCantidad()+1);
+                        $productPos->setCantidad($productPos->getCantidad() + 1);
                     }
                 }
 
-                if(!$repetido)
-                {
+                if (!$repetido) {
                     $pedido = new Carrito(ProductoDAO::getOneProduct($_POST['producto_id']));
                     array_push($_SESSION['items'], $pedido);
                 }
@@ -51,7 +49,23 @@ class productosController
         include_once 'view/cart.php';
         include_once 'view/footer.php';
     }
-    
+
+    public static function createProduct()
+    {
+        $nombre = $_POST['nombre_producto'];
+        $descripcion = $_POST['descripcion'];
+        $precio = $_POST['precio_producto'];
+        $url_img = $_POST['url_img'];
+        $categoria_id = $_POST['categoria_id'];
+
+        ProductoDAO::addNewProduct($nombre, $descripcion, $precio, $url_img, $categoria_id);
+
+        header("Location:" . URL . "?controller=account&action=productosAdmin");
+    }
+
+    /**
+     * Método para obtener el producto a modificar y mostrarlo.
+     */
     public function modificar()
     {
         $producto_id = $_POST['id_producto_admin_panel'];
@@ -68,22 +82,20 @@ class productosController
     public static function updateProduct()
     {
         // compruebo si el administrador quiere eliminar o modificar el producto.
-        if(isset($_POST['modificar-producto']))
-        {
+        if (isset($_POST['modificar-producto'])) {
             $producto_id = $_POST['producto_id'];
             $nombre_nuevo = $_POST['nombre_producto'];
             $descripcion_nueva = $_POST['descripcion'];
             $precio_nuevo = $_POST['precio_producto'];
             $categoria_id = $_POST['categoria_id'];
-    
+
             ProductoDAO::modifyProduct($producto_id, $nombre_nuevo, $descripcion_nueva, $precio_nuevo, $categoria_id);
-        }
-        else if(isset($_POST['eliminar-producto']))
-        {
+        } else if (isset($_POST['eliminar-producto'])) {
             $producto_id = $_POST["producto_id"];
             ProductoDAO::deleteProduct($producto_id);
         }
 
+        // devuelvo al panel de control del administrador de productos.
         header("Location:" . URL . "?controller=account&action=productosAdmin");
     }
 
@@ -94,20 +106,17 @@ class productosController
         if (!isset($_SESSION['items'])) {
             $_SESSION['items'] = array();
         } else {
-            if(isset($_POST['id']))
-            {
+            if (isset($_POST['id'])) {
                 $repetido = false;
                 foreach ($_SESSION['items'] as $key => $value) {
-                    if($_POST['id'] == $value->getProducto_carrito()->getProducto_id())
-                    {
+                    if ($_POST['id'] == $value->getProducto_carrito()->getProducto_id()) {
                         $repetido = true;
                         $productPos = $_SESSION['items'][$key];
-                        $productPos->setCantidad($productPos->getCantidad()+1);
+                        $productPos->setCantidad($productPos->getCantidad() + 1);
                     }
                 }
 
-                if(!$repetido)
-                {
+                if (!$repetido) {
                     $pedido = new Carrito(ProductoDAO::getOneProduct($_POST['id']));
                     array_push($_SESSION['items'], $pedido);
                 }

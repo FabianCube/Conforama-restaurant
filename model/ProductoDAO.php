@@ -38,6 +38,15 @@ class ProductoDAO
     return $productos;
   }
 
+  public static function addNewProduct( $nombre, $descripcion, $precio, $url_img, $categoria_id)
+  {
+    $conn = DataBase::connect();
+    $sql = $conn->prepare("INSERT INTO productos(nombre_producto, descripcion, precio_producto, url_img, categoria_id) 
+        VALUES('$nombre', '$descripcion', $precio, '$url_img', $categoria_id)");
+
+    $sql->execute();
+  }
+
   public static function modifyProduct($producto_id, $nombre_nuevo, $descripcion_nueva, $precio_nuevo, $categoria_id)
   {
     $conn = DataBase::connect();

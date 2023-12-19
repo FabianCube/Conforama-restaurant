@@ -26,8 +26,11 @@
                 </div>
             </div>
             <div class="col-8">
-                <div class="row p-1">
-                    <h3>Admin Panel</h3>
+                <div class="row p-1" style="display:flex; justify-content: space-between;">
+                    <h3 style="width: 200px;">Admin Panel</h3>
+                    <div style="width: auto;">
+                        <a type="button" href="<?= URL . "?controller=account&action=addNewProductAdmin"?>">Añadir producto</a>
+                    </div>
                 </div>
                 <table class="table table-bordered">
                     <thead>
