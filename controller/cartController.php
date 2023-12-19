@@ -1,4 +1,9 @@
 <?php
+/**
+ * Conforama-restaurant
+ * @author Fabian Doizi
+ */
+
 include_once 'model/ProductoDAO.php';
 
 class cartController
