@@ -19,7 +19,7 @@
                 <div class="list-group">
                     <a href="<?= URL . "?controller=account" ?>" class="list-group-item list-group-item-action">Administrar Usuarios</a>
                     <a href="<?= URL . "?controller=account&action=productosAdmin" ?>" class="list-group-item list-group-item-action">Administrar Productos</a>
-                    <a href="#" class="list-group-item list-group-item-action">Administrar Pedidos</a>
+                    <a href="<?= URL . "?controller=account&action=pedidosAdmin" ?>" class="list-group-item list-group-item-action">Administrar Pedidos</a>
                     <a href="<?= URL . "?controller=login&action=logout" ?>" class="list-group-item list-group-item-action">
                         <span style="color: red;">Cerrar sesión</span>
                     </a>
@@ -32,12 +32,12 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col">id</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">descripcion</th>
-                            <th scope="col">precio producto</th>
-                            <th scope="col">url img</th>
-                            <th scope="col">categoria id</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">NOMBRE</th>
+                            <th scope="col">DESCRIPCION</th>
+                            <th scope="col">PRECIO</th>
+                            <th scope="col">IMG</th>
+                            <th scope="col">CATEGORIA</th>
                             <th></th>
                         </tr>
                     </thead>

@@ -33,28 +33,24 @@
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">ROL_ID</th>
-                            <th scope="col">NOMBRE</th>
-                            <th scope="col">APELLIDO</th>
-                            <th scope="col">E-MAIL</th>
-                            <th scope="col">TELEFONO</th>
-                            <th scope="col">DIRECCION</th>
+                            <th scope="col">USUARIO_ID</th>
+                            <th scope="col">ESTADO</th>
+                            <th scope="col">FECHA</th>
+                            <th scope="col">PRECIO</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($users as $user) { ?>
+                        <?php foreach ($pedidos as $pedido) { ?>
                             <tr>
-                                <th scope="row"><?= $user->getUsuario_id() ?></th>
-                                <td><?= $user->getRol_id() ?></td>
-                                <td><?= $user->getNombre_usuario() ?></td>
-                                <td><?= $user->getApellido_usuario() ?></td>
-                                <td><?= $user->getEmail() ?></td>
-                                <td><?= $user->getTelefono() ?></td>
-                                <td><?= $user->getDireccion() ?></td>
+                                <td><?= $pedido->getPedido_id() ?></td>
+                                <td><?= $pedido->getUsuario_id() ?></td>
+                                <td><?= $pedido->getEstado() ?></td>
+                                <td><?= $pedido->getHora_pedido() ?>€</td>
+                                <td><?= $pedido->getPrecio_total() ?></td>
                                 <td>
                                     <form action="#" method="post">
-                                        <input type="text" name="id_usuario_admin_panel" hidden>
+                                        <input type="text" name="id_pedido_admin_panel" hidden>
                                         <input type="submit" value="Modificar">
                                     </form>
                                 </td>
