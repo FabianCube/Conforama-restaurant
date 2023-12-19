@@ -1,4 +1,8 @@
 <?php
+/**
+ * Conforama-restaurant
+ * @author Fabian Doizi
+ */
 
 include_once 'config/dataBase.php';
 include_once 'Producto.php';
