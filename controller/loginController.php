@@ -13,15 +13,18 @@ class loginController
      */
     public function index()
     {
-        $users = UsuariosDAO::getAllUsers();
-        setcookie("error_login", "false", time()+60);
+        setcookie("error_login", "false", time() + 60);
         include_once 'view/nav.php';
 
-        if (isset($_SESSION['current_user'])) {
+        if (isset($_SESSION['current_user'])) 
+        {
             header("Location: " . URL . "?controller=account");
-        } else {
+        } 
+        else 
+        {
             include_once 'view/login.php';
         }
+
         include_once 'view/footer.php';
     }
 
@@ -33,56 +36,41 @@ class loginController
         // preparo el error.
         $error = false;
 
-        if (isset($_POST['email'], $_POST['password'])) 
-        {
+        if (isset($_POST['email'], $_POST['password'])) {
             $email = $_POST['email'];
             $pwd = $_POST['password'];
 
             $users = UsuariosDAO::getAllUsers();
-            foreach ($users as $value) 
-            {
-                if (hash_equals($value->getEmail(), $email)) 
-                {
+            foreach ($users as $value) {
+                if (hash_equals($value->getEmail(), $email)) {
                     // uso el password_verify para desencriptar la contraseña.
-                    if (password_verify($pwd, $value->getPassword())) 
-                    {
+                    if (password_verify($pwd, $value->getPassword())) {
                         $_SESSION['current_user'] = $value;
 
                         // si el ususario a marcado la casilla de mantener sesión iniciada, se guarda en una cookie el id
                         // del usuario para iniciar sesión automáticamente cuando vuelva a entrar.
-                        if($_POST['save_session'] == true)
-                        {
+                        if ($_POST['save_session'] == true) {
                             setcookie("mantener_sesion_iniciada", $_SESSION['current_user']->getUsuario_id(), time() + 3600);
                         }
                         $error = false;
-                    }
-                    else 
-                    {
+                    } else {
                         $error = true;
                         echo 'Contraseña incorrecta!';
                     }
-                } 
-                else 
-                {
+                } else {
                     $error = true;
                     echo 'El correo no existe!';
                 }
             }
         }
 
-        if ($error == false) 
-        {
-            if ($_SERVER['HTTP_REFERER'] == URL . "?controller=login") 
-            {
+        if ($error == false) {
+            if ($_SERVER['HTTP_REFERER'] == URL . "?controller=login") {
                 header("Location: " . URL);
-            } 
-            else 
-            {
+            } else {
                 header("Location: " . URL . "?controller=cart&action=pagar");
             }
-        }
-        else
-        {
+        } else {
             header("Location: " . URL . "?controller=login");
         }
     }
@@ -133,12 +121,9 @@ class loginController
             );
         }
 
-        if ($_SERVER['HTTP_REFERER'] == URL . "?controller=login&action=register") 
-        {
+        if ($_SERVER['HTTP_REFERER'] == URL . "?controller=login&action=register") {
             header("Location: " . URL . "?controller=login");
-        } 
-        else if($_SERVER['HTTP_REFERER'] == URL . "?controller=pedido&action=loginOrRegister") 
-        {
+        } else if ($_SERVER['HTTP_REFERER'] == URL . "?controller=pedido&action=loginOrRegister") {
             $_POST['email'] = $_POST['register-email'];
             $_POST['password'] = $_POST['register-password'];
 
@@ -146,8 +131,7 @@ class loginController
             $pwd = $_POST['password'];
 
             $users = UsuariosDAO::getAllUsers();
-            foreach ($users as $value) 
-            {
+            foreach ($users as $value) {
                 if (hash_equals($value->getEmail(), $email)) {
                     if (password_verify($pwd, $value->getPassword())) {
                         session_start();

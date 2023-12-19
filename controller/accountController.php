@@ -8,7 +8,17 @@ class accountController
     public static function index()
     {
         include_once 'view/nav.php';
-        include_once 'view/account.php';
+
+        // compruebo si el usuario es admin.
+        if($_SESSION['current_user']->getRol_id() != 0)
+        {
+            include_once 'view/account.php';
+        }
+        else
+        {
+            $users = UsuariosDAO::getAllUsers();
+            include_once 'view/accountAdmin.php';
+        }
         include_once 'view/footer.php';
     }
 
@@ -32,6 +42,15 @@ class accountController
 
         include_once 'view/nav.php';
         include_once 'view/detallesPedido.php';
+        include_once 'view/footer.php';
+    }
+
+    public static function productosAdmin()
+    {
+        $productos= ProductoDAO::getAllProducts();
+        
+        include_once 'view/nav.php';
+        include_once 'view/accountAdminProductos.php';
         include_once 'view/footer.php';
     }
 }
