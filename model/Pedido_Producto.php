@@ -1,4 +1,8 @@
 <?php
+/**
+ * Conforama-restaurant
+ * @author Fabian Doizi
+ */
 
 class Pedido_Producto
 {

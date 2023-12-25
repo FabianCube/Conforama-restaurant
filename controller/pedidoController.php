@@ -1,4 +1,8 @@
 <?php
+/**
+ * Conforama-restaurant
+ * @author Fabian Doizi
+ */
 
 include_once 'config/parameters.php';
 include_once 'model/PedidosDAO.php';

@@ -1,4 +1,8 @@
 <?php
+/**
+ * Conforama-restaurant
+ * @author Fabian Doizi
+ */
 
 include_once 'config/dataBase.php';
 include_once 'Producto.php';
@@ -8,6 +12,24 @@ include_once 'Pedidos.php';
 
 class PedidosDAO
 {
+    public static function getAllPedidos()
+    {
+        $conn = DataBase::connect();
+        $sql = $conn->prepare("SELECT * FROM pedidos");
+        $sql->execute();
+        $result = $sql->get_result();
+
+        if ($result) 
+        {
+            while ($pedido = $result->fetch_object('Pedidos')) 
+            {
+                $pedidos[] = $pedido;
+            }
+        }
+
+        return $pedidos;
+    }
+
     public static function registrarPedido($user_id, $estado, $hora, $precio_total)
     {
         $conn = DataBase::connect();
@@ -39,10 +61,8 @@ class PedidosDAO
         $sql->execute();
         $result = $sql->get_result();
 
-        if ($result) 
-        {
-            while ($pedido = $result->fetch_object('Pedidos')) 
-            {
+        if ($result) {
+            while ($pedido = $result->fetch_object('Pedidos')) {
                 $pedidos[] = $pedido;
             }
         }

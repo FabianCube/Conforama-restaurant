@@ -1,4 +1,9 @@
 <?php
+/**
+ * Conforama-restaurant
+ * @author Fabian Doizi
+ */
+
 include_once 'controller/productosController.php';
 include_once 'controller/homeController.php';
 include_once 'controller/cartController.php';

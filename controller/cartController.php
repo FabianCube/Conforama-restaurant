@@ -1,4 +1,9 @@
 <?php
+/**
+ * Conforama-restaurant
+ * @author Fabian Doizi
+ */
+
 include_once 'model/ProductoDAO.php';
 
 class cartController
@@ -36,6 +41,9 @@ class cartController
         include_once 'view/footer.php';
     }
 
+    /**
+     * Página para pagar los productos.
+     */
     public function pagar()
     {
         include_once 'view/nav.php';
@@ -43,6 +51,9 @@ class cartController
         include_once 'view/footer.php';
     }
 
+    /**
+     * Método para obtener el precio total de los productos en el carrito.
+     */
     public static function getTotalValueOfProductsInCart()
     {
         $totalPrice = 0;

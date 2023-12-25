@@ -30,37 +30,36 @@
             </div>
             <div class="col-8">
                 <div class="row d-flex flex-row w-100">
-                    <h3 class="title">MODIFICAR PRODUCTO</h3>
+                    <h3 class="title">CREAR PRODUCTO</h3>
                     <a href="<?= URL . "?controller=account&action=productosAdmin" ?>">< Volver atrás</a>
                 </div>
                 <hr style="margin-top: 0;">
 
-                <form action=<?= URL . "?controller=productos&action=updateProduct" ?> method="post">                    
+                <form action=<?= URL . "?controller=productos&action=createProduct" ?> method="post">                    
                     <ul class="list-group">
                         <li class="list-group-item d-flex">
-                            <div style="width: 100px;"><strong>Producto ID </strong></div>
-                            <input type="text" name="producto_id" value="<?= $producto->getProducto_id() ?>">
-                        </li>
-                        <li class="list-group-item d-flex">
                             <div style="width: 100px;"><strong>Nombre </strong></div>
-                            <input type="text" name="nombre_producto" value="<?= $producto->getNombre_producto() ?>">
+                            <input type="text" name="nombre_producto">
                         </li>
                         <li class="list-group-item d-flex">
                             <div style="width: 100px;"><strong>Descripcion </strong></div>
-                            <textarea name="descripcion" cols="30" rows="6"><?= $producto->getDescripcion() ?></textarea>
+                            <textarea name="descripcion" cols="30" rows="6"></textarea>
                         </li>
                         <li class="list-group-item d-flex">
                             <div style="width: 100px;"><strong>Precio </strong></div>
-                            <input type="text" name="precio_producto" value="<?= $producto->getPrecio_producto() ?>">
+                            <input type="text" name="precio_producto">
+                        </li>
+                        <li class="list-group-item d-flex">
+                            <div style="width: 100px;"><strong>url_img </strong></div>
+                            <input type="text" name="url_img">
                         </li>
                         <li class="list-group-item d-flex">
                             <div style="width: 100px;"><strong>Categoria ID </strong></div>
-                            <input type="text" name="categoria_id" value="<?= $producto->getCategoria_id() ?>">
+                            <input type="text" name="categoria_id">
                         </li>
 
                         <div>
-                            <input type="submit" name="modificar-producto" value="Modificar">
-                            <input type="submit" name="eliminar-producto" value="Eliminar producto" style="background-color: red;">
+                            <input type="submit" name="create-product" value="Añadir producto">
                         </div>
                     </ul>
                 </form>
