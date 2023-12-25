@@ -2,6 +2,12 @@
     font-family: var(--default-typo);
 }
 
+.active
+{
+    color: #C20A19!important;
+    font-weight: 700;
+}
+
 a
 {
     color: #C20A19;
@@ -67,4 +73,43 @@ label
 .text-login
 {
     font-size: 14px;
+}
+
+.title-account
+{
+    height: 40px; 
+    background-color: #E5E5E5;
+}
+
+.link-account-container
+{
+    display: flex;
+    flex-flow: row;
+    margin: 15px 0 25px 0;
+}
+
+.link-account-container>a
+{
+    text-decoration: none;
+    color: #3e4143;
+}
+
+.link-account
+{
+    list-style: none;
+}
+
+.icon-account
+{
+    display: flex;
+    position: relative;
+    height: 26px;
+    width: 30px;
+}
+
+img.menu-icon-account
+{
+    width: 80%;
+    height: auto;
+    background-repeat: initial;
 }

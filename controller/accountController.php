@@ -7,6 +7,9 @@ class accountController
 {
     public static function index()
     {
+        // Current user.
+        $user = $_SESSION['current_user'];
+        
         include_once 'view/nav.php';
         include_once 'view/account.php';
         include_once 'view/footer.php';
