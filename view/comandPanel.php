@@ -28,7 +28,7 @@ if (!isset($_POST["categoria_id"])) {
 <body>
     <section class="container pt-5 d-flex flex-row justify-content-between" style="margin-top: 55px; width: 1140px;">
         <div class="col-3 me-5" style="width: 270px;">
-            <div class="p-4 d-flex align-items-center" style="height: 70px;">
+            <div class="p-4 d-flex align-items-center header-category-filter" style="height: 70px;">
                 <p>Categorías</p>
             </div>
             <div class="container p-4 custom-container-filter">

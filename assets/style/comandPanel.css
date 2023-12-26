@@ -42,21 +42,24 @@
 
 .filter-container
 {
-    height: 73px; 
-    border-bottom: 1px solid black;
+    height: 35px; 
     display: flex;
     align-items: center;
 }
 
 .filter-text {
-    color: #666;
+    color: #444444;
     font-family: var(--default-typo);
     font-size: 14px;
     font-style: normal;
-    font-weight: 700;
     line-height: normal;
     border: none;
     background-color: rgba(0,0,0,0);
+}
+
+.filter-text:hover
+{
+    color: var(--red-color);
 }
 
 .custom-card-hover
@@ -85,4 +88,22 @@
 .custom-btn-add-cart:hover .icon-cart
 {
     color: red;
+}
+
+.header-category-filter
+{
+    height: 270px;
+    padding: 0!important;
+    display: flex;
+    align-items: center;
+    background-color: #F6F6F6;
+    border-bottom: 0.5px solid rgba(0, 0, 0, .3);
+}
+
+.header-category-filter>p
+{
+    margin: 0 0 0 1.5rem;
+    padding: 0;
+    font-size: 14px;
+    color: #666666;
 }
