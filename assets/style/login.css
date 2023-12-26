@@ -134,3 +134,15 @@ img.menu-icon-account
     box-shadow: 1px 1px 4px #66666626;
 }
 
+.submit-account-form
+{
+    width: 350px;
+    height: 45px;
+    background-color: var(--red-color);
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 17px;
+    border: none;
+    border-radius: 4px;
+}

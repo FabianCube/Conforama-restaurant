@@ -55,33 +55,40 @@
             </div>
             <div class="col-9">
 
-                <?php if ($_SESSION['current_user']->getRol_id() != 0) { ?>
-                    <div class="row p-1">
-                        <h3>Mis datos</h3>
+                <?php if ($user->getRol_id() != 0) { ?>
+                    <div class="row p-1 d-flex align-items-center mb-3" style="height: 60px;">
+                        <p class="m-0" style="font-size: 18px;"><?= $user->getEmail() ?></p>
+                        <div class="m-0">
+                            <hr style="width: 200px; margin: 0; opacity:1; ">
+                            <hr class="m-0">
+                        </div>
                     </div>
                     <ul class="list-group">
-                        <li class="list-group-item d-flex">
-                            <div style="width: 100px;"><strong>Nombre </strong></div>
-                            <input type="text" value="<?= $_SESSION['current_user']->getNombre_usuario() ?>" disabled>
-                        </li>
-                        <li class="list-group-item d-flex">
-                            <div style="width: 100px;"><strong>Apellidos </strong></div>
-                            <input type="text" value="<?= $_SESSION['current_user']->getApellido_usuario() ?>" disabled>
-                        </li>
-                        <li class="list-group-item d-flex">
-                            <div style="width: 100px;"><strong>Email </strong></div>
-                            <input type="text" value="<?= $_SESSION['current_user']->getEmail() ?>" disabled>
-                        </li>
-                        <li class="list-group-item d-flex">
-                            <div style="width: 100px;"><strong>Direccion </strong></div>
-                            <input type="text" value="<?= $_SESSION['current_user']->getDireccion() ?>" disabled>
-                        </li>
-                        <li class="list-group-item d-flex">
-                            <div style="width: 100px;"><strong>Teléfono </strong></div>
-                            <input type="text" value="<?= $_SESSION['current_user']->getTelefono() ?>" disabled>
-                        </li>
+                        <form action="<?= URL . "?controller=account&action=updateUser" ?>" method="post">
+                            <li class="list-group-item d-flex">
+                                <div style="width: 100px;"><strong>Nombre </strong></div>
+                                <input type="text" name="account-update-nombre" value="<?= $user->getNombre_usuario() ?>">
+                            </li>
+                            <li class="list-group-item d-flex">
+                                <div style="width: 100px;"><strong>Apellidos </strong></div>
+                                <input type="text" name="account-update-apellido" value="<?= $user->getApellido_usuario() ?>">
+                            </li>
+                            <li class="list-group-item d-flex">
+                                <div style="width: 100px;"><strong>Email </strong></div>
+                                <input type="text" name="account-update-email" value="<?= $user->getEmail() ?>">
+                            </li>
+                            <li class="list-group-item d-flex">
+                                <div style="width: 100px;"><strong>Teléfono </strong></div>
+                                <input type="text" name="account-update-tel" value="<?= $user->getTelefono() ?>">
+                            </li>
+                            <li class="list-group-item d-flex">
+                                <div style="width: 100px;"><strong>Direccion </strong></div>
+                                <input type="text" name="account-update-direccion" value="<?= $user->getDireccion() ?>">
+                            </li>
+                            <input class="submit-account-form" type="submit" value="CONFIRMAR AHORA">
+                        </form>
                     </ul>
-                <?php } else if ($_SESSION['current_user']->getRol_id() == 0) { ?>
+                <?php } else if ($user->getRol_id() == 0) { ?>
                     <div class="row p-1">
                         <h3>Admin Panel</h3>
                     </div>
