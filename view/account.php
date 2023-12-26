@@ -67,23 +67,23 @@
                         <form action="<?= URL . "?controller=account&action=updateUser" ?>" method="post">
                             <li class="list-group-item d-flex">
                                 <div style="width: 100px;"><strong>Nombre </strong></div>
-                                <input type="text" name="account-update-nombre" value="<?= $user->getNombre_usuario() ?>">
+                                <input class="text-placeholder" type="text" name="account-update-nombre" value="<?= $user->getNombre_usuario() ?>">
                             </li>
                             <li class="list-group-item d-flex">
                                 <div style="width: 100px;"><strong>Apellidos </strong></div>
-                                <input type="text" name="account-update-apellido" value="<?= $user->getApellido_usuario() ?>">
+                                <input class="text-placeholder" type="text" name="account-update-apellido" value="<?= $user->getApellido_usuario() ?>">
                             </li>
                             <li class="list-group-item d-flex">
                                 <div style="width: 100px;"><strong>Email </strong></div>
-                                <input type="text" name="account-update-email" value="<?= $user->getEmail() ?>">
+                                <input class="text-placeholder" type="text" name="account-update-email" value="<?= $user->getEmail() ?>">
                             </li>
                             <li class="list-group-item d-flex">
                                 <div style="width: 100px;"><strong>Teléfono </strong></div>
-                                <input type="text" name="account-update-tel" value="<?= $user->getTelefono() ?>">
+                                <input class="text-placeholder" type="text" name="account-update-tel" value="<?= $user->getTelefono() ?>">
                             </li>
                             <li class="list-group-item d-flex">
                                 <div style="width: 100px;"><strong>Direccion </strong></div>
-                                <input type="text" name="account-update-direccion" value="<?= $user->getDireccion() ?>">
+                                <input class="text-placeholder" type="text" name="account-update-direccion" value="<?= $user->getDireccion() ?>">
                             </li>
                             <input class="submit-account-form" type="submit" value="CONFIRMAR AHORA">
                         </form>
