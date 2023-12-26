@@ -127,20 +127,9 @@ if (!isset($_POST["categoria_id"])) {
                                         <input name="producto_id" value="<?= $producto->getProducto_id() ?>" hidden>
                                         <button class="btn btn-danger d-flex align-items-center justify-content-center custom-btn-add-cart" style="width: 55px; height: 55px; border-radius: 50px;" type="submit">
                                             <span class="material-symbols-outlined icon-cart" style="font-size: 36px;">add_shopping_cart</span>
-                                            <!-- <img src="assets/images/add-cart.svg" alt="Add to cart" style="color: #fff;"> -->
                                         </button>
                                     </form>
                                 </div>
-                                <!-- <div class="d-flex justify-content-around">
-                                    <form action=<?= URL . "?controller=productos&action=modificar" ?> method="post">
-                                        <input name="producto_id" value="<?= $producto->getProducto_id() ?>" hidden>
-                                        <button class="btn btn-success" style="width: 7.5rem;" type="submit">Modificar</button>
-                                    </form>
-                                    <form action=<?= URL . "?controller=productos&action=eliminar" ?> method="post">
-                                        <input name="producto_id" value="<?= $producto->getProducto_id() ?>" hidden>
-                                        <button class="btn btn-danger" style="width: 7.5rem;" type="submit">Eliminar</button>
-                                    </form>
-                                </div> -->
                             </div>
                         </div>
                     </div>

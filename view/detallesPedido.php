@@ -29,7 +29,7 @@
                         <li class="link-account">
                             <div class="link-account-container">
                                 <div class="icon-account me-1">
-                                    <img class="menu-icon-account" src="<?= image_url ?>orderhistory.svg">
+                                    <img class="menu-icon-account" src="<?= image_url ?>orderhistory.svg" alt="icon account pedidos">
                                 </div>
                                 <a class="active" href="<?= URL . "?controller=account&action=infoPedidos" ?>">Mis pedidos</a>
                             </div>
@@ -37,7 +37,7 @@
                         <li class="link-account">
                             <div class="link-account-container">
                                 <div class="icon-account me-1">
-                                    <img class="menu-icon-account" src="<?= image_url ?>accountedit.svg">
+                                    <img class="menu-icon-account" src="<?= image_url ?>accountedit.svg" alt="user account">
                                 </div>
                                 <a class="" href="<?= URL . "?controller=account" ?>">Información cuenta</a>
                             </div>

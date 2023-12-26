@@ -1,7 +1,3 @@
-<?php
-
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -30,7 +26,7 @@
             <?php foreach ($productos as $producto) { ?>
                 <div class="col-3 d-flex flex-column align-items-center justify-content-between custom-card">
                     <div class="p-4 d-flex justify-content-center" style="height: 50%;">
-                        <img src="assets/images/<?= $producto->getUrl_img() ?>" alt="Imagen de <?= $producto->getNombre_producto() ?>" style="height: 125px; width: auto;">
+                        <img src="<?= image_url . $producto->getUrl_img() ?>" alt="Imagen de <?= $producto->getNombre_producto() ?>" style="height: 125px; width: auto;">
                     </div>
                     <div class="d-flex flex-column justify-content-between" style="height: 50%;">
                         <div class="d-flex flex-column align-items-center">
@@ -56,7 +52,7 @@
             <p class="custom-banner-text">Podrás encontrar nuestros locales en numerosas ubicaciones, disponemos de
                 <br> una red de 44 establecimientos en España y una plantilla de más de 2.500 personas.
             </p>
-            <img class="img-fluid" src="assets/images/background-our-locals.png" alt="" style="width: 100%; height: auto;">
+            <img class="img-fluid" src="<?= image_url ?>background-our-locals.png" alt="imagen local conforama-restaurant" style="width: 100%; height: auto;">
         </div>
     </section>
 
@@ -73,7 +69,7 @@
                     <input name="categoria_id" value="0" hidden>
                     <button class="custom-button-category" type="submit">VER PRODUCTOS</button>
                 </form>
-                <img src="assets/images/coffe-category.png" alt="Category image" class="custom-image-category">
+                <img src="<?= image_url ?>coffe-category.png" alt="Category image" class="custom-image-category">
             </div>
             <div class="col-4 custom-image-container">
                 <h2 class="custom-title-category">BOCADILLOS</h2>
@@ -81,7 +77,7 @@
                     <input name="categoria_id" value="1" hidden>
                     <button class="custom-button-category" type="submit">VER PRODUCTOS</button>
                 </form>
-                <img src="assets/images/sanwich-category.png" alt="Category image" class="custom-image-category">
+                <img src="<?= image_url ?>sanwich-category.png" alt="Category image" class="custom-image-category">
             </div>
             <div class="col-4 custom-image-container">
                 <h2 class="custom-title-category">SMOOTHIES</h2>
@@ -89,7 +85,7 @@
                     <input name="categoria_id" value="2" hidden>
                     <button class="custom-button-category" type="submit">VER PRODUCTOS</button>
                 </form>
-                <img src="assets/images/smoothie-category.png" alt="Category image" class="custom-image-category">
+                <img src="<?= image_url ?>smoothie-category.png" alt="Category image" class="custom-image-category">
             </div>
             <div class="col-4 custom-image-container">
                 <h2 class="custom-title-category">MUFFINS</h2>
@@ -97,7 +93,7 @@
                     <input name="categoria_id" value="3" hidden>
                     <button class="custom-button-category" type="submit">VER PRODUCTOS</button>
                 </form>
-                <img src="assets/images/muffin-category.png" alt="Category image" class="custom-image-category">
+                <img src="<?= image_url ?>muffin-category.png" alt="Category image" class="custom-image-category">
             </div>
             <div class="col-4 custom-image-container">
                 <h2 class="custom-title-category">BATIDOS</h2>
@@ -105,7 +101,7 @@
                     <input name="categoria_id" value="4" hidden>
                     <button class="custom-button-category" type="submit">VER PRODUCTOS</button>
                 </form>
-                <img src="assets/images/milkshake-category.png" alt="Category image" class="custom-image-category">
+                <img src="<?= image_url ?>milkshake-category.png" alt="Category image" class="custom-image-category">
             </div>
             <div class="col-4 custom-image-container">
                 <h2 class="custom-title-category">DONUTS</h2>
@@ -113,7 +109,7 @@
                     <input name="categoria_id" value="5" hidden>
                     <button class="custom-button-category" type="submit">VER PRODUCTOS</button>
                 </form>
-                <img src="assets/images/donut-category.png" alt="Category image" class="custom-image-category">
+                <img src="<?= image_url ?>donut-category.png" alt="Category image" class="custom-image-category">
             </div>
         </div>
     </section>
