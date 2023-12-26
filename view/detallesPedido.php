@@ -56,9 +56,9 @@
                 </div>
             </div>
             <div class="col-8">
-                <div class="row d-flex flex-row w-100">
-                    <h3 class="title">DETALLES PEDIDO #<?= $pedido_id ?></h3>
-                    <a href="<?= URL . "?controller=account&action=infoPedidos" ?>">< Volver a Mis pedidos</a>
+                <div class="d-flex flex-row justify-content-between w-100 my-4">
+                    <h3 class="title m-0">DETALLES PEDIDO #<?= $pedido_id ?></h3>
+                    <a class="go-back" href="<?= URL . "?controller=account&action=infoPedidos" ?>">< Volver a Mis pedidos</a>
                 </div>
                 <hr style="margin-top: 0;">
 
@@ -68,7 +68,7 @@
                         <th>PRODUCTO</th>
                         <th>CANTIDAD</th>
                         <th>PRECIO</th>
-                        <th></th>
+                        
                     </tr>
                     <?php foreach ($pedido_producto as $value) { ?>
                         <tr>
@@ -76,7 +76,7 @@
                             <td><?= ProductoDAO::getOneProduct($value->getProducto_id())->getNombre_producto() ?></td>
                             <td><?= $value->getCantidad() ?></td>
                             <td><?= ProductoDAO::getOneProduct($value->getProducto_id())->getPrecio_producto() ?>€</td>
-                            <td></td>
+                            
                         </tr>
                     <?php } ?>
                 </table>

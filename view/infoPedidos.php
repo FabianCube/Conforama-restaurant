@@ -58,10 +58,13 @@
             </div>
 
             <div class="col-8">
-                <div class="row">
-                    <h3 class="title">PEDIDOS RECIENTES</h3>
+                <div class="row p-1 d-flex align-items-center mb-3" style="height: 60px;">
+                    <p class="m-0" style="font-size: 18px;"><?= $user->getEmail() ?></p>
+                    <div class="m-0">
+                        <hr style="width: 200px; margin: 0; opacity:1; ">
+                        <hr class="m-0">
+                    </div>
                 </div>
-                <hr style="margin-top: 0;">
                 <?php if (Pedido_ProductoDAO::pedidoExistsWithUserID($userID)) { ?>
 
                     <table class="table">
