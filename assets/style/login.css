@@ -78,7 +78,14 @@ label
 .title-account
 {
     height: 40px; 
+    font-size: 14px;
     background-color: #E5E5E5;
+    color: #444444;
+}
+
+.account-name{
+    margin: 0;
+    font-weight: bold;
 }
 
 .link-account-container
@@ -113,3 +120,17 @@ img.menu-icon-account
     height: auto;
     background-repeat: initial;
 }
+
+.close-account-link{
+    text-decoration: underline!important;
+    color: #3e4143!important;
+    font-weight: bold;
+    font-size: 14px;
+    font-family: var(--default-typo);
+}
+
+.content-side-menu
+{
+    box-shadow: 1px 1px 4px #66666626;
+}
+

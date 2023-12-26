@@ -37,6 +37,9 @@ class accountController
      */
     public static function infoPedidos()
     {
+        // Current user.
+        $user = $_SESSION['current_user'];
+
         $userID = $_SESSION['current_user']->getUsuario_id();
         $infoPedido = PedidosDAO::getPedidoByUserId($userID);
 
@@ -50,6 +53,9 @@ class accountController
      */
     public static function detallesPedido()
     {
+        // Current user.
+        $user = $_SESSION['current_user'];
+        
         // Obtengo el pedido_id que quiero mostrar.
         $pedido_id = $_POST['pedidoId-detallesPedido'];
 
