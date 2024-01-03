@@ -42,8 +42,4 @@ class homeController
         include_once 'view/footer.php';
     }
 
-    public function compra()
-    {
-        echo 'Pagina de compra';
-    }
 }
