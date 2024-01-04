@@ -126,4 +126,22 @@ class accountController
         // Direccion -> "Información cuenta".
         header("Location: " . URL . "?controller=account");
     }
+
+    public static function recuperarPedidoUsuario()
+    {
+        // elimino la anterior cesta en caso de existir.
+        unset($_SESSION['items']);
+        
+        $_SESSION['items'] = array();
+        $pedido_id = $_POST['recuperar_pedido_id'];
+
+        $pedido_producto = Pedido_ProductoDAO::getPedidoProductosById($pedido_id);
+
+        foreach ($pedido_producto as $value) {
+            $producto = new Carrito(ProductoDAO::getOneProduct($value->getProducto_id()));
+            array_push($_SESSION['items'], $producto);
+        }
+        
+        header("Location: " . URL . "?controller=cart");
+    }
 }

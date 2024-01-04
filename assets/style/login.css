@@ -49,6 +49,14 @@ label
     font-weight: 400;
 }
 
+.volver-pedir
+{
+    border: none;
+    border-radius: 3px;
+    width: 200px; 
+    height: 40px;
+}
+
 .info-login
 {
     font-size: 12px;

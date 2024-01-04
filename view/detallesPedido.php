@@ -18,7 +18,7 @@
 <body>
     <section class="container pt-3" style="margin-top: 90px; max-width: 1170px; min-height: 65vh;">
         <div class="row">
-        <div class="col-12">
+            <div class="col-12">
                 <div class="d-flex align-items-center px-4 title-account">
                     <p class="account-name">Nombre: <?= $user->getNombre_usuario() . " " . $user->getApellido_usuario() ?></p>
                 </div>
@@ -58,7 +58,8 @@
             <div class="col-8">
                 <div class="d-flex flex-row justify-content-between w-100 my-4">
                     <h3 class="title m-0">DETALLES PEDIDO #<?= $pedido_id ?></h3>
-                    <a class="go-back" href="<?= URL . "?controller=account&action=infoPedidos" ?>">< Volver a Mis pedidos</a>
+                    <a class="go-back" href="<?= URL . "?controller=account&action=infoPedidos" ?>">
+                        < Volver a Mis pedidos</a>
                 </div>
                 <hr style="margin-top: 0;">
 
@@ -68,7 +69,7 @@
                         <th>PRODUCTO</th>
                         <th>CANTIDAD</th>
                         <th>PRECIO</th>
-                        
+
                     </tr>
                     <?php foreach ($pedido_producto as $value) { ?>
                         <tr>
@@ -76,10 +77,14 @@
                             <td><?= ProductoDAO::getOneProduct($value->getProducto_id())->getNombre_producto() ?></td>
                             <td><?= $value->getCantidad() ?></td>
                             <td><?= ProductoDAO::getOneProduct($value->getProducto_id())->getPrecio_producto() ?>€</td>
-                            
+
                         </tr>
                     <?php } ?>
                 </table>
+                <form action="<?= URL . "?controller=account&action=recuperarPedidoUsuario" ?>" method="post" style="height: auto;">
+                    <input type="text" name="recuperar_pedido_id" value="<?= $pedido_id ?>" hidden>
+                    <input class="btn-login-custom volver-pedir" type="submit" value="Volver a pedir">
+                </form>
             </div>
         </div>
     </section>
