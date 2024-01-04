@@ -15,6 +15,7 @@ class accountController
      */
     public static function index()
     {
+        setcookie('ultimo-pedido', '', time() - 3600);
         // Current user.
         $user = $_SESSION['current_user'];
 
@@ -29,6 +30,9 @@ class accountController
             include_once 'view/accountAdmin.php';
         }
         include_once 'view/footer.php';
+
+        
+
     }
 
     /**

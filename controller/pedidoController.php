@@ -49,6 +49,7 @@ class pedidoController
             // agregar cantidad de producto al constructor, default 1.
             Pedido_ProductoDAO::setPedidoProductos($pedido->getPedido_id(), $value->getProducto_carrito()->getProducto_id(), $value->getCantidad());
         }
+        setcookie('ultimo-pedido', $pedido->getPrecio_total(), time() + 3600);
         unset($_SESSION['items']);
 
         header("Location: " . URL);

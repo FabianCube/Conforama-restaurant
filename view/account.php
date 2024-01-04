@@ -55,7 +55,7 @@
             </div>
             <div class="col-9">
 
-                <?php if ($user->getRol_id() != 0) { ?>
+                <?php if ($user instanceof Cliente) { ?>
                     <div class="row p-1 d-flex align-items-center mb-3" style="height: 60px;">
                         <p class="m-0" style="font-size: 18px;"><?= $user->getEmail() ?></p>
                         <div class="m-0">
@@ -63,6 +63,13 @@
                             <hr class="m-0">
                         </div>
                     </div>
+
+                    <?php if (isset($_COOKIE['ultimo-pedido'])) { ?>
+                        <div class="row">
+                            <p>Último pedido realizado con un valor de <?=$_COOKIE['ultimo-pedido']?>€</p>
+                        </div>
+                    <?php } ?>
+
                     <ul class="list-group">
                         <form action="<?= URL . "?controller=account&action=updateUser" ?>" method="post">
                             <li class="list-group-item d-flex">
@@ -88,7 +95,7 @@
                             <input class="submit-account-form" type="submit" value="CONFIRMAR AHORA">
                         </form>
                     </ul>
-                <?php } else if ($user->getRol_id() == 0) { ?>
+                <?php } else if ($user instanceof Admin) { ?>
                     <div class="row p-1">
                         <h3>Admin Panel</h3>
                     </div>
