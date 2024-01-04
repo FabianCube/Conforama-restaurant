@@ -46,9 +46,13 @@ class loginController
 
             $users = UsuariosDAO::getAllUsers();
             foreach ($users as $value) {
-                if (hash_equals($value->getEmail(), $email)) {
+                // Evitar null parameters
+                $currentEmail = $value->getEmail();
+                if ($currentEmail!== null && hash_equals($value->getEmail(), $email)) {
+                    // Evitar null parameters
+                    $currentPassword = $value->getPassword();
                     // uso el password_verify para desencriptar la contraseña.
-                    if (password_verify($pwd, $value->getPassword())) {
+                    if ($currentPassword !== null && password_verify($pwd, $value->getPassword())) {
                         $_SESSION['current_user'] = $value;
 
                         // si el ususario a marcado la casilla de mantener sesión iniciada, se guarda en una cookie el id
