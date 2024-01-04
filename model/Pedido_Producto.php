@@ -1,18 +1,19 @@
 <?php
+/**
+ * Conforama-restaurant
+ * @author Fabian Doizi
+ */
 
-
-
-class Pedido_Productos
+class Pedido_Producto
 {
+    private $articulo_id;
     private $pedido_id;
-    private $productos;
-    // private $modificacion_id;
+    private $producto_id;
+    private $modificacion_id;
+    private $cantidad;
 
-    public function __construct($pedido_id, $productos)
-    {
-        $this->pedido_id = $pedido_id;
-        $this->productos = $productos;
-    }
+    public function __construct()
+    { }
 
     /**
      * Get the value of pedido_id
@@ -37,9 +38,9 @@ class Pedido_Productos
     /**
      * Get the value of productos
      */ 
-    public function getProductos()
+    public function getProducto_id()
     {
-        return $this->productos;
+        return $this->producto_id;
     }
 
     /**
@@ -47,9 +48,29 @@ class Pedido_Productos
      *
      * @return  self
      */ 
-    public function setProductos($productos)
+    public function setProductos($producto_id)
     {
-        $this->productos = $productos;
+        $this->producto_id = $producto_id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of cantidad
+     */ 
+    public function getCantidad()
+    {
+        return $this->cantidad;
+    }
+
+    /**
+     * Set the value of cantidad
+     *
+     * @return  self
+     */ 
+    public function setCantidad($cantidad)
+    {
+        $this->cantidad = $cantidad;
 
         return $this;
     }

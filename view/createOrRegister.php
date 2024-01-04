@@ -21,7 +21,7 @@
 <body>
     <section class="container" style="max-width: 1170px; margin-top: 55px;">
         <div class="row d-flex justify-content-center">
-            <img src="assets/images/Conforama_logo.png" alt="logo conforama" style="width: 243px; height: auto;">
+            <img src="<?= image_url ?>logo-conforama.svg" alt="logo conforama" style="width: 243px; height: auto;">
         </div>
         <div class="row d-flex mt-5">
             <div class="col-6 d-flex justify-content-start flex-column px-5" style="min-height: 500px;">
@@ -50,7 +50,7 @@
                     <h2 style="font-size: 17px;">Nuevo Cliente</h2>
                 </header>
 
-                <form action="<?=URL . "?controller=login&action=registerUser"?>" method="post">
+                <form action="<?= URL . "?controller=login&action=registerUser" ?>" method="post">
                     <div class="form-group mb-3">
                         <label for="exampleInputEmail1">Correo electrónico</label>
                         <input type="email" class="form-control" name="register-email" placeholder="Correo electrónico">

@@ -1,4 +1,8 @@
 <?php
+/**
+ * Conforama-restaurant
+ * @author Fabian Doizi
+ */
 
 class Pedidos
 {
@@ -6,6 +10,7 @@ class Pedidos
     private $usuario_id;
     private $estado;
     private $hora_pedido;
+    private $precio_total;
 
     public function __construct()
     { }
@@ -52,5 +57,25 @@ class Pedidos
     public function getHora_pedido()
     {
         return $this->hora_pedido;
+    }
+
+    /**
+     * Get the value of precio_total
+     */ 
+    public function getPrecio_total()
+    {
+        return $this->precio_total;
+    }
+
+    /**
+     * Set the value of precio_total
+     *
+     * @return  self
+     */ 
+    public function setPrecio_total($precio_total)
+    {
+        $this->precio_total = $precio_total;
+
+        return $this;
     }
 }

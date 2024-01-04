@@ -1,27 +1,45 @@
 <?php
+/**
+ * Conforama-restaurant
+ * @author Fabian Doizi
+ */
 
 include_once 'model/UsuariosDAO.php';
 
 class loginController
 {
+    /**
+     * Página default para iniciar sesión/registrarse en la web o acceder a la información 
+     * del usuario.
+     * 
+     * En el caso de que esté la sesión iniciada se mandará al usuario a la página de su cuenta,
+     * si el usuario no ha iniciado sesión, se mostrará la posibilidad de crear o acceder a una cuenta.
+     */
     public function index()
     {
-        $users = UsuariosDAO::getAllUsers();
-        setcookie("error_login", "false", time()+60);
-        session_start();
+        setcookie("error_login", "false", time() + 60);
         include_once 'view/nav.php';
 
-        if (isset($_SESSION['current_user'])) {
-            include_once 'view/account.php';
-        } else {
+        if (isset($_SESSION['current_user'])) 
+        {
+            header("Location: " . URL . "?controller=account");
+        } 
+        else 
+        {
             include_once 'view/login.php';
         }
+
         include_once 'view/footer.php';
     }
 
+    /**
+     * Página de login.
+     */
     public static function login()
     {
+        // preparo el error.
         $error = false;
+
         if (isset($_POST['email'], $_POST['password'])) {
             $email = $_POST['email'];
             $pwd = $_POST['password'];
@@ -29,14 +47,16 @@ class loginController
             $users = UsuariosDAO::getAllUsers();
             foreach ($users as $value) {
                 if (hash_equals($value->getEmail(), $email)) {
+                    // uso el password_verify para desencriptar la contraseña.
                     if (password_verify($pwd, $value->getPassword())) {
-                        session_start();
                         $_SESSION['current_user'] = $value;
 
-                        // if($_POST['save_session'] == true)
-                        // {
-                        //     setcookie("keep_session", $_SESSION['current_user'], time()-3600);
-                        // }
+                        // si el ususario a marcado la casilla de mantener sesión iniciada, se guarda en una cookie el id
+                        // del usuario para iniciar sesión automáticamente cuando vuelva a entrar.
+                        if ($_POST['save_session'] == true) {
+                            setcookie("mantener_sesion_iniciada", $_SESSION['current_user']->getUsuario_id(), time() + 3600);
+                        }
+                        $error = false;
                     } else {
                         $error = true;
                         echo 'Contraseña incorrecta!';
@@ -52,31 +72,39 @@ class loginController
             if ($_SERVER['HTTP_REFERER'] == URL . "?controller=login") {
                 header("Location: " . URL);
             } else {
-                // modificar URL cuando procesar pedido esté listo.
                 header("Location: " . URL . "?controller=cart&action=pagar");
             }
-        }
-        else
-        {
+        } else {
             header("Location: " . URL . "?controller=login");
         }
     }
 
+    /**
+     * Método de cierre se sesión.
+     */
     public static function logout()
     {
-        session_start();
+        // Eliminamos la sesion
         unset($_SESSION['current_user']);
+        // Eliminamos el mantener sesion iniciada
+        setcookie("mantener_sesion_iniciada", '', time() - 3600);
+        // Redirigir a main page
         header("Location: " . URL);
     }
 
+    /**
+     * Página de registro.
+     */
     public static function register()
     {
-        session_start();
         include_once 'view/nav.php';
         include_once 'view/register.php';
         include_once 'view/footer.php';
     }
 
+    /**
+     * Registrar usuario en la base de datos.
+     */
     public static function registerUser()
     {
         if (isset(
@@ -100,10 +128,11 @@ class loginController
             );
         }
 
-
+        // Si el usuario se está creando desde el proceso de compra en el carrito de la compra
+        // la sesión del usuario se iniciará automáticamente al completar el registro.
         if ($_SERVER['HTTP_REFERER'] == URL . "?controller=login&action=register") {
             header("Location: " . URL . "?controller=login");
-        } else {
+        } else if ($_SERVER['HTTP_REFERER'] == URL . "?controller=pedido&action=loginOrRegister") {
             $_POST['email'] = $_POST['register-email'];
             $_POST['password'] = $_POST['register-password'];
 

@@ -4,44 +4,26 @@
     box-sizing: border-box;
 }
 
-.parent-content
+.search-bar-custom
+{
+    width: 380px;
+    height: 35px;
+    background-color: #EEEEEE!important;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    padding: 0 15px 0 15px;
+    margin-left: 20px;
+    background: url(../images/search-icon.svg) center right 10px no-repeat;
+    background-size: 25px 25px;
+}
+
+.search-bar-custom::placeholder
+{
+    font-size: 12px;
+}
+
+.btn-search>img
 {
     width: 100%;
-    height: auto;
-    margin-bottom: 0;
-    display: flex;
-    flex-flow: column;
-    justify-content: space-around;
-    /* position: fixed;
-    top: 0;
-    left: 0; */
-}
-
-.main-nav
-{
-    width: 100%;
-    height: 76px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .25);
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-}
-
-.content-nav
-{
-    width: 100vw;
-}
-
-.sub-nav
-{
-    width: 100%;
-    height: 50px;
-    background-color: #EEEEEE;
-}
-
-.conforama-logo
-{
-    width: 274px;
     height: auto;
 }

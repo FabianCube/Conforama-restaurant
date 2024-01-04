@@ -1,0 +1,38 @@
+.ver_pedido
+{
+    background-color: var(--red-color);
+    border-radius: 3px;
+    border: none;
+    color: white;
+    height: 40px;
+    width: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: normal!important;
+}
+
+.title
+{
+    font-size: 18px;
+    font-weight: bold;
+    max-width: 260px!important;
+}
+
+.go-back
+{
+    max-width: 200px!important;
+}
+
+td
+{
+    line-height: 80px;
+    height: 80px;
+}
+
+
+form
+{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}

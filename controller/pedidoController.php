@@ -1,54 +1,56 @@
 <?php
+/**
+ * Conforama-restaurant
+ * @author Fabian Doizi
+ */
 
+include_once 'config/parameters.php';
 include_once 'model/PedidosDAO.php';
 include_once 'model/Pedido_Producto.php';
 include_once 'model/Pedido_ProductoDAO.php';
+include_once 'utils/calculadora.php';
 
 class pedidoController
 {
     public function index()
     { }
 
+    /**
+     * Página para registrarse o loggearse antes de poder realizar el pedido.
+     * 
+     * En el caso de que no haya una sesión iniciada, te mandará a la página para poder
+     * registrarte o loggearte.
+     */
     public function loginOrRegister()
     {
-        session_start();
-        if(!isset($_SESSION['current_user']))
-        {
+        if (!isset($_SESSION['current_user'])) {
             include_once 'view/createOrRegister.php';
-        }
-        else
-        {
+        } else {
             header("Location: " . URL . "?controller=cart&action=pagar");
         }
     }
 
+    /**
+     * Método que gestiona un pedido, lo guardará en la BBDD y borrará la sesión con los 
+     * productos del carrito.
+     */
     public static function realizarPedido()
     {
-        session_start();
         $user_id = $_SESSION['current_user']->getUsuario_id();
-        $productos = $_SESSION['items'];
-        $date = date('d/m/Y h:i:s a', time());
-        $estado = "Realizado";
+        $date = date('Y-m-d H:i:s');
+        $precio_total = calculadora::calcularPrecioTotal($_SESSION['items']);
 
-        PedidosDAO::registrarPedido($user_id, $estado, $date);
-
-        $pedido_id = PedidosDAO::getPedidoByUserId($user_id);
-
-        $_SESSION['pedido_usuario'] = new Pedido_Productos($pedido_id, $productos);
-
-        if(isset($_SESSION['pedido_usuario']))
-        {
-            foreach ($_SESSION['items'] as $value) {
-                Pedido_ProductoDAO::setPedidoProductos($pedido_id->getPedido_id(), $value->getProducto_carrito()->getProducto_id());
-            }
-            echo 'El pedido se ha procesado correctamente!';
-            unset($_SESSION['items']);
-        }
-        else
-        {
-            echo 'No se ha podido crear el pedido.';
-        }
         
+        // Guardo la informacion del pedido en la base de datos..
+        PedidosDAO::registrarPedido($user_id, EN_CURSO_ESTADO_PEDIDO, $date, $precio_total);
+        $pedido = PedidosDAO::getLastPedidoByUserId($user_id);
+
+        foreach ($_SESSION['items'] as $value) {
+            // agregar cantidad de producto al constructor, default 1.
+            Pedido_ProductoDAO::setPedidoProductos($pedido->getPedido_id(), $value->getProducto_carrito()->getProducto_id(), $value->getCantidad());
+        }
+        unset($_SESSION['items']);
+
         header("Location: " . URL);
     }
 }

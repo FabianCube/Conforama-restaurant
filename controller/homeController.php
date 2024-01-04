@@ -1,11 +1,16 @@
 <?php
+/**
+ * Conforama-restaurant
+ * @author Fabian Doizi
+ */
+
+include_once 'model/ProductoDAO.php';
+include_once 'config/parameters.php';
 
 class homeController
 {
     public function index()
     {
-        session_start();
-
         if (!isset($_SESSION['items'])) {
             $_SESSION['items'] = array();
         } else {
@@ -29,14 +34,12 @@ class homeController
             }
         }
 
+        $productos = ProductoDAO::getPromotedProducts();
+
         include_once 'view/nav.php';
         include_once 'view/header.php';
         include_once 'view/home.php';
         include_once 'view/footer.php';
     }
 
-    public function compra()
-    {
-        echo 'Pagina de compra';
-    }
 }

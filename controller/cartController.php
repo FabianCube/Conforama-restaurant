@@ -1,15 +1,18 @@
 <?php
+/**
+ * Conforama-restaurant
+ * @author Fabian Doizi
+ */
+
 include_once 'model/ProductoDAO.php';
 
 class cartController
 {
     public function index()
     {
-        session_start();
-
         if (isset($_POST['posProductCart'])) 
         {
-            // obtengo la posicion el el SESSION del producto que hay que eliminar
+            // obtengo la posicion en el SESSION del producto que hay que eliminar
             $pos = $_POST["posProductCart"];
             // elimino el producto
             unset($_SESSION['items'][$pos]);
@@ -38,14 +41,19 @@ class cartController
         include_once 'view/footer.php';
     }
 
+    /**
+     * Página para pagar los productos.
+     */
     public function pagar()
     {
-        session_start();
         include_once 'view/nav.php';
         include_once 'view/pagar.php';
         include_once 'view/footer.php';
     }
 
+    /**
+     * Método para obtener el precio total de los productos en el carrito.
+     */
     public static function getTotalValueOfProductsInCart()
     {
         $totalPrice = 0;

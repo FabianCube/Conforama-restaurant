@@ -154,7 +154,7 @@ $withoutIva = cartController::getPriceWithoutIVA();
                 <div class="col-12 d-flex justify-content-center align-items-center flex-column mt-3" style="height: 150px; background-color: #EEEEEE;">
                 <p>Pago 100% seguro</p>
                 <div class="d-flex">
-                    <img src="assets/images/methodPay.png" alt="">
+                    <img src="assets/images/methodPay.png" alt="método de pago">
                 </div>
             </div>
             </div>

@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Conforama-restaurant
+ * @author Fabian Doizi
+ */
+
 include_once 'config/dataBase.php';
 include_once 'Producto.php';
 include_once 'Usuarios.php';
@@ -57,9 +62,21 @@ class UsuariosDAO
         $sql = $conn->prepare(" INSERT INTO usuarios (rol_id, nombre_usuario, apellido_usuario,
             email, password, telefono, direccion) VALUES (2, '$name', '$sndName', '$email', '$pwd', $tel, '$dir') ");
 
-        if(!$sql->execute())
-        {
+        if (!$sql->execute()) {
             echo 'error';
+        }
+
+        mysqli_close($conn);
+    }
+
+    public static function updateUserData($user_id, $name, $sndName, $email, $tel, $dir)
+    {
+        $conn = DataBase::connect();
+        $sql = $conn->prepare("UPDATE usuarios SET nombre_usuario = '$name', apellido_usuario = '$sndName',
+            email = '$email', telefono = $tel, direccion = '$dir' WHERE usuario_id = $user_id");
+
+        if (!$sql->execute()) {
+            return false;
         }
 
         mysqli_close($conn);

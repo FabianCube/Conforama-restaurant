@@ -28,7 +28,7 @@ if (!isset($_POST["categoria_id"])) {
 <body>
     <section class="container pt-5 d-flex flex-row justify-content-between" style="margin-top: 55px; width: 1140px;">
         <div class="col-3 me-5" style="width: 270px;">
-            <div class="p-4 d-flex align-items-center" style="height: 70px;">
+            <div class="p-4 d-flex align-items-center header-category-filter" style="height: 70px;">
                 <p>Categorías</p>
             </div>
             <div class="container p-4 custom-container-filter">
@@ -127,20 +127,9 @@ if (!isset($_POST["categoria_id"])) {
                                         <input name="producto_id" value="<?= $producto->getProducto_id() ?>" hidden>
                                         <button class="btn btn-danger d-flex align-items-center justify-content-center custom-btn-add-cart" style="width: 55px; height: 55px; border-radius: 50px;" type="submit">
                                             <span class="material-symbols-outlined icon-cart" style="font-size: 36px;">add_shopping_cart</span>
-                                            <!-- <img src="assets/images/add-cart.svg" alt="Add to cart" style="color: #fff;"> -->
                                         </button>
                                     </form>
                                 </div>
-                                <!-- <div class="d-flex justify-content-around">
-                                    <form action=<?= URL . "?controller=productos&action=modificar" ?> method="post">
-                                        <input name="producto_id" value="<?= $producto->getProducto_id() ?>" hidden>
-                                        <button class="btn btn-success" style="width: 7.5rem;" type="submit">Modificar</button>
-                                    </form>
-                                    <form action=<?= URL . "?controller=productos&action=eliminar" ?> method="post">
-                                        <input name="producto_id" value="<?= $producto->getProducto_id() ?>" hidden>
-                                        <button class="btn btn-danger" style="width: 7.5rem;" type="submit">Eliminar</button>
-                                    </form>
-                                </div> -->
                             </div>
                         </div>
                     </div>

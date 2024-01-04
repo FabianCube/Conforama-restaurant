@@ -1,4 +1,9 @@
 <?php
+/**
+ * Conforama-restaurant
+ * @author Fabian Doizi
+ */
+
 include_once 'config/dataBase.php';
 include_once 'Producto.php';
 include_once 'Carrito.php';
@@ -31,6 +36,31 @@ class ProductoDAO
     }
 
     return $productos;
+  }
+
+  public static function addNewProduct( $nombre, $descripcion, $precio, $url_img, $categoria_id)
+  {
+    $conn = DataBase::connect();
+    $sql = $conn->prepare("INSERT INTO productos(nombre_producto, descripcion, precio_producto, url_img, categoria_id) 
+        VALUES('$nombre', '$descripcion', $precio, '$url_img', $categoria_id)");
+
+    $sql->execute();
+  }
+
+  public static function modifyProduct($producto_id, $nombre_nuevo, $descripcion_nueva, $precio_nuevo, $categoria_id)
+  {
+    $conn = DataBase::connect();
+
+    $stmt = $conn->prepare("UPDATE productos SET 
+        nombre_producto='" . $nombre_nuevo . "', 
+        descripcion='" . $descripcion_nueva . "',
+        precio_producto=" . $precio_nuevo . ",
+        categoria_id=" . $categoria_id . " WHERE producto_id = $producto_id");
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result;
   }
 
   public static function deleteProduct($id)
