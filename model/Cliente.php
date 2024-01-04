@@ -2,10 +2,12 @@
 
 class Cliente extends Usuarios
 {
-    private $nivel;
+    protected $nivel;
 
     public function __construct()
-    { }
+    { 
+        parent::__construct();
+    }
 
     /**
      * Get the value of nivel

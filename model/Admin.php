@@ -1,11 +1,13 @@
 <?php
 
-class Cliente extends Usuarios
+class Admin extends Usuarios
 {
-    private $nivel_acceso;
+    protected $nivel_acceso;
 
     public function __construct()
-    { }
+    { 
+        parent::__construct();
+    }
 
     /**
      * Get the value of nivel

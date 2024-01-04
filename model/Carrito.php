@@ -14,8 +14,6 @@ class Carrito
         $this->producto_carrito = $producto_carrito;
     }
 
-
-
     /**
      * Get the value of producto_carrito
      */ 
