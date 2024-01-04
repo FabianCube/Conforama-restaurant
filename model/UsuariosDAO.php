@@ -8,6 +8,8 @@
 include_once 'config/dataBase.php';
 include_once 'Producto.php';
 include_once 'Usuarios.php';
+include_once 'Cliente.php';
+include_once 'Admin.php';
 include_once 'Carrito.php';
 
 class UsuariosDAO
@@ -21,15 +23,29 @@ class UsuariosDAO
     {
         $conn = DataBase::connect();
 
-        $stmt = $conn->prepare("SELECT * FROM usuarios");
+        //! -------------------------------
+        //! HOT FIX for herence implemented.
+
+        $stmt = $conn->prepare("SELECT * FROM usuarios WHERE rol_id = 2");
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($result) {
-            while ($user = $result->fetch_object('Usuarios')) {
+            while ($user = $result->fetch_object('Cliente')) {
                 $users[] = $user;
             }
         }
+
+        $stmt2 = $conn->prepare("SELECT * FROM usuarios WHERE rol_id = 0");
+        $stmt2->execute();
+        $result2 = $stmt2->get_result();
+
+        if ($result2) {
+            while ($user2 = $result2->fetch_object('Admin')) {
+                $users[] = $user2;
+            }
+        }
+
         return $users;
     }
 

@@ -6,14 +6,14 @@
 
 class Usuarios
 {
-    private $usuario_id;
-    private $rol_id;
-    private $nombre_usuario;
-    private $apellido_usuario;
-    private $email;
-    private $password;
-    private $telefono;
-    private $direccion;
+    protected $usuario_id;
+    protected $rol_id;
+    protected $nombre_usuario;
+    protected $apellido_usuario;
+    protected $email;
+    protected $password;
+    protected $telefono;
+    protected $direccion;
 
     public function __construct()
     { }

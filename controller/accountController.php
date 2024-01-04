@@ -20,10 +20,11 @@ class accountController
 
         include_once 'view/nav.php';
 
-        // compruebo si el usuario es admin.
-        if ($_SESSION['current_user']->getRol_id() != 0) {
+        // compruebo si el usuario es cliente o admin.
+        if ($_SESSION['current_user'] instanceof Cliente) {
             include_once 'view/account.php';
-        } else {
+        } 
+        else if ($_SESSION['current_user'] instanceof Admin) {
             $users = UsuariosDAO::getAllUsers();
             include_once 'view/accountAdmin.php';
         }
