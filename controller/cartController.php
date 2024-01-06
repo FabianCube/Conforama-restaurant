@@ -68,7 +68,7 @@ class cartController
         
         // ingredientes que pueden ser modificados según el producto.
         foreach ($ingredientes as $value) {
-            $ingredientes_producto = IngredientesDAO::getIngredientById($value->getIngrediente_id());
+            $ingredientes_producto[] = IngredientesDAO::getIngredientById($value->getIngrediente_id());
         }
 
         $_SESSION['ingredientes-valor-extra'] = 10;
