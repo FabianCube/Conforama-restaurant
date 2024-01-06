@@ -6,7 +6,7 @@
  */
 
 include_once 'config/dataBase.php';
-include_once 'Productos_IngredientesDAO.php';
+include_once 'Productos_Ingredientes.php';
 
 /**
  * Clase Productos_IngredientesDAO

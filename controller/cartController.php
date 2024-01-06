@@ -5,6 +5,9 @@
  */
 
 include_once 'model/ProductoDAO.php';
+include_once 'model/IngredientesDAO.php';
+include_once 'model/Productos_IngredientesDAO.php';
+include_once 'config/parameters.php';
 
 class cartController
 {
@@ -49,6 +52,14 @@ class cartController
         include_once 'view/nav.php';
         include_once 'view/pagar.php';
         include_once 'view/footer.php';
+    }
+
+    public static function modificarIngredientes()
+    {
+        $producto_id = $_POST['modificar-producto-id'];
+        $ingredientes = Productos_IngredientesDAO::getProductoIngredienteByProductoId($producto_id);
+
+        include_once 'view/modificarIngredientes.php';
     }
 
     /**
@@ -96,4 +107,5 @@ class cartController
         $r = $totalPrice - $iva;
         return bcdiv($r, 1, 2);
     }
+
 }

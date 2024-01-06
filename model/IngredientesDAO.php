@@ -34,4 +34,15 @@ class IngredientesDAO
 
         return $ingredientes;
     }
+
+    public static function getIngredientById($id)
+    {
+        $conn = DataBase::connect();
+        $sql = $conn->prepare("SELECT * FROM ingredientes WHERE ingrediente_id = $id");
+        $sql->execute();
+
+        $result = $sql->get_result();
+
+        return $result;
+    }
 }

@@ -114,9 +114,9 @@ $withoutIva = cartController::getPriceWithoutIVA();
                                 </form>
                             </div>
 
-                            <form action="#" method="POST">
-                                <input name="" value="" hidden>
-                                <button class="btn" style="margin-bottom: 5px;">
+                            <form action="<?= URL . "?controller=cart&action=modificarIngredientes"?>" method="POST">
+                                <input type="text" name="modificar-producto-id" value="<?= $producto->getProducto_carrito()->getProducto_id() ?>" hidden>
+                                <button type="submit" class="btn" style="margin-bottom: 5px;">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" viewBox="0 0 512 512">
                                         <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com 
                                         License - https://fontawesome.com/license (Commercial License) Copyright 
