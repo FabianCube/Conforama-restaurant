@@ -2,7 +2,7 @@
 
 class Cliente extends Usuarios
 {
-    protected $nivel;
+    protected $nivel_cliente;
 
     public function __construct()
     { 
@@ -10,21 +10,21 @@ class Cliente extends Usuarios
     }
 
     /**
-     * Get the value of nivel
+     * Get the value of nivel_cliente
      */ 
-    public function getNivel()
+    public function getNivel_cliente()
     {
-        return $this->nivel;
+        return $this->nivel_cliente;
     }
 
     /**
-     * Set the value of nivel
+     * Set the value of nivel_cliente
      *
      * @return  self
      */ 
-    public function setNivel($nivel)
+    public function setNivel_cliente($nivel_cliente)
     {
-        $this->nivel = $nivel;
+        $this->nivel_cliente = $nivel_cliente;
 
         return $this;
     }

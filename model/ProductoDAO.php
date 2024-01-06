@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Conforama-restaurant
  * @author Fabian Doizi
@@ -17,7 +18,6 @@ class ProductoDAO
   /**
    * getAllProducts()
    * @return: Un array de productos disponibles.
-   * @author: Fabian Doizi
    */
   public static function getAllProducts()
   {
@@ -25,12 +25,10 @@ class ProductoDAO
 
     $stmt = $conn->prepare("SELECT * FROM productos");
     $stmt->execute();
-    $result=$stmt->get_result();
+    $result = $stmt->get_result();
 
-    if ($result) 
-    {
-      while($producto = $result->fetch_object('Producto'))
-      {
+    if ($result) {
+      while ($producto = $result->fetch_object('Producto')) {
         $productos[] = $producto;
       }
     }
@@ -38,7 +36,7 @@ class ProductoDAO
     return $productos;
   }
 
-  public static function addNewProduct( $nombre, $descripcion, $precio, $url_img, $categoria_id)
+  public static function addNewProduct($nombre, $descripcion, $precio, $url_img, $categoria_id)
   {
     $conn = DataBase::connect();
     $sql = $conn->prepare("INSERT INTO productos(nombre_producto, descripcion, precio_producto, url_img, categoria_id) 
@@ -57,10 +55,10 @@ class ProductoDAO
         precio_producto=" . $precio_nuevo . ",
         categoria_id=" . $categoria_id . " WHERE producto_id = $producto_id");
 
-        $stmt->execute();
-        $result = $stmt->get_result();
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-        return $result;
+    return $result;
   }
 
   public static function deleteProduct($id)
@@ -94,12 +92,10 @@ class ProductoDAO
 
     $stmt = $conn->prepare("SELECT * FROM productos WHERE producto_id IN (1, 2, 3, 6, 7)");
     $stmt->execute();
-    $result=$stmt->get_result();
+    $result = $stmt->get_result();
 
-    if ($result) 
-    {
-      while($producto = $result->fetch_object('Producto'))
-      {
+    if ($result) {
+      while ($producto = $result->fetch_object('Producto')) {
         $productos[] = $producto;
       }
     }
@@ -113,12 +109,10 @@ class ProductoDAO
 
     $stmt = $conn->prepare("SELECT * FROM productos WHERE categoria_id = $categoryId");
     $stmt->execute();
-    $result=$stmt->get_result();
+    $result = $stmt->get_result();
 
-    if ($result) 
-    {
-      while($producto = $result->fetch_object('Producto'))
-      {
+    if ($result) {
+      while ($producto = $result->fetch_object('Producto')) {
         $productos[] = $producto;
       }
     }

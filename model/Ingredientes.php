@@ -1,5 +1,13 @@
 <?php
+/**
+ * Conforama-restaurant
+ * @author Fabian Doizi
+ */
 
+/**
+ * Clase Ingredientes
+ * - Gestiona la informacón de los ingredientes.
+ */
 class Ingredientes
 {
     private $ingrediente_id;
