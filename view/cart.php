@@ -114,7 +114,7 @@ $withoutIva = cartController::getPriceWithoutIVA();
                                 </form>
                             </div>
 
-                            <form action="<?= URL . "?controller=cart&action=modificarIngredientes"?>" method="POST">
+                            <form action="<?= URL . "?controller=cart&action=modificarIngredientes" ?>" method="POST">
                                 <input type="text" name="modificar-producto-id" value="<?= $producto->getProducto_carrito()->getProducto_id() ?>" hidden>
                                 <button type="submit" class="btn" style="margin-bottom: 5px;">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" viewBox="0 0 512 512">
@@ -177,10 +177,20 @@ $withoutIva = cartController::getPriceWithoutIVA();
                     <p class="text-bill-cart">IVA (10%)</p>
                     <p class="text-bill-cart"><?= $ivaProduct ?> €</p>
                 </div>
+
+                <!-- Mostrar valor ingredientes en caso de ser modificados -->
+                <?php if(isset($_SESSION['ingredientes-valor-extra'])) { ?>
+                    <div class="col-12 d-flex justify-content-between mb-3">
+                        <p class="text-bill-cart" style="color: red;">Ingredientes</p>
+                        <p class="text-bill-cart" style="color: red;"><?= $extraValue ?> €</p>
+                    </div>
+                <?php } ?>
+
                 <div class="col-12 d-flex justify-content-between mb-3">
                     <p class="text-bill-cart">Total (IVA inc.)</p>
                     <p class="text-bill-cart"><?= $totalPrice ?> €</p>
                 </div>
+
                 <div class="col-12">
                     <a type="button" href="<?= URL . "?controller=pedido&action=loginOrRegister"?>" class="custom-btn-tramitar">TRAMITAR PEDIDO</a>
                 </div>

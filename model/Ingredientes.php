@@ -12,7 +12,7 @@ class Ingredientes
 {
     private $ingrediente_id;
     private $nombre_ingrediente;
-    private $precio_ongrediente;
+    private $precio_ingrediente;
 
     public function __construct()
     { }
@@ -59,11 +59,11 @@ class Ingredientes
     }
 
     /**
-     * Get the value of precio_ongrediente
+     * Get the value of precio_ingrediente
      */ 
-    public function getPrecio_ongrediente()
+    public function getPrecio_ingrediente()
     {
-        return $this->precio_ongrediente;
+        return $this->precio_ingrediente;
     }
 
     /**
@@ -71,9 +71,9 @@ class Ingredientes
      *
      * @return  self
      */ 
-    public function setPrecio_ongrediente($precio_ongrediente)
+    public function setPrecio_ongrediente($precio_ingrediente)
     {
-        $this->precio_ongrediente = $precio_ongrediente;
+        $this->precio_ingrediente = $precio_ingrediente;
 
         return $this;
     }

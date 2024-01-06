@@ -31,7 +31,7 @@ class Productos_IngredientesDAO
                 $productos_ingredientes[] = $producto_ingrediente;
             }
         }
-
+        
         return $productos_ingredientes;
     }
 }

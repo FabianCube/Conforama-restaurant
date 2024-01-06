@@ -43,6 +43,8 @@ class IngredientesDAO
 
         $result = $sql->get_result();
 
-        return $result;
+        $ingrediente = $result->fetch_object('Ingredientes');
+
+        return $ingrediente;
     }
 }

@@ -8,11 +8,22 @@
 </head>
 
 <body>
-    <p>Producto_id -> <?= $producto_id ?></p>
+    <h3>Ingredientes</h3>
 
-    <?php foreach ($ingredientes as $value) { ?>
-        <p>Ingrediente <?= $value->getProducto_id() ?></p>
-    <?php } ?>
+    <form action="#" method="post">
+
+        <?php foreach ($ingredientes_producto as $value) { ?>
+            <label style="font-weight: bold;"><?= $value->getNombre_ingrediente() ?></label><br>
+            <input type="text" name="precio_ingrediente" value="<?=$value->getPrecio_ingrediente()?>" hidden>
+            <label>Suplemento: <?= $value->getPrecio_ingrediente() ?>€</label><br>
+            <label>Cantidad: </label>
+            <input type="number" min="0" max="3" name="cantidad_ingrediente" value="0"><br><br>
+        <?php } ?>
+
+        <input type="submit" value="Modificar">
+    </form>
+
+    <a type="button" href="<?= URL . "?controller=cart" ?>">volver</a>
 </body>
 
 </html>
