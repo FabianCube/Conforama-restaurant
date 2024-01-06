@@ -8,6 +8,7 @@
     <title>Tienda online | Restaurante Conforama</title>
     
     <link rel="stylesheet" href="assets/style/nav-style.css">
+    <link rel="stylesheet" href="assets/style/global.css">
     <link href="assets/style/bootstrap.min.css" rel="stylesheet">
 
 </head>
