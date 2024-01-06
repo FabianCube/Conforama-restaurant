@@ -74,7 +74,7 @@ $withoutIva = cartController::getPriceWithoutIVA();
     <section class="container d-flex flex-row justify-content-between" style="margin-top: 55px; min-height: 650px; width: 1170px;">
         <div class="col-8">
             <div class="row custom-title">
-                <h3>Cesta Productos</h3>
+                <h3 style="font-size: 19px; font-weight: bold; padding: 0;">Cesta Productos</h3>
             </div>
             <div class="row d-flex align-items-center custom-head">
                 <h3>Conforama</h3>
@@ -89,7 +89,7 @@ $withoutIva = cartController::getPriceWithoutIVA();
             $pos = 0; ?>
 
             <?php foreach ($_SESSION['items'] as $producto) { ?>
-                <div class="row d-flex flex-row align-items-center px-4" style="height: 250px; margin-top: 20px; background-color: white; border-radius: 3px;">
+                <div class="row d-flex flex-row align-items-center justify-content-between px-4" style="height: 250px; margin-top: 20px; background-color: white; border-radius: 3px;">
 
                     <div class="col-4 d-flex justify-content-center align-items-center" style="border: solid 1px #BFBFBF; width: 200px; height: 176px;">
                         <img style="height: 110px; width: auto;" src="<?= image_url . $producto->getProducto_carrito()->getUrl_img() ?>" alt="Imagen de <?= $producto->getProducto_carrito()->getNombre_producto() ?>">
@@ -136,14 +136,14 @@ $withoutIva = cartController::getPriceWithoutIVA();
                             </form>
                         </div>
                         <div class="col-12">
-                            <hr style="height: 1px; border: solid 1px black;">
+                            <hr style="height: 1px; border: solid 1px black; margin: 14px 0 2px 0;">
                         </div>
                         <div class="col-12 d-flex" style="height: 30px;">
                             <input type="checkbox" style="margin-right: 10px;">
-                            <p>Lo quiero para llevar</p>
+                            <p class="text-bill-cart mb-0" style="line-height: 30px;">Lo quiero para llevar</p>
                         </div>
                     </div>
-                    <div class="col-1 d-flex pt-4" style="height: 100%;">
+                    <div class="col-1 d-flex pt-4 ml-5" style="height: 100%;">
 
                         <form action="<?= URL . "?controller=cart" ?>" method="POST">
                             <input name="posProductCart" value="<?= $pos ?>" hidden>
@@ -158,43 +158,43 @@ $withoutIva = cartController::getPriceWithoutIVA();
             <?php $pos++;
             } ?>
         </div>
-        <div class="col-3 p-4" style="max-height: 300px; background-color: white;">
+        <div class="col-3 p-3 mt-5" style="max-height: 300px; background-color: white;">
             <div class="col-12 pl-2 d-flex align-items-center custom-head-2">
-                <h3>Conforama</h3>
+                <h3 style="font-size: 15px;">Conforama</h3>
             </div>
 
             <div class="col-12">
                 <div class="col-12 d-flex justify-content-between" style="height: 20px;">
-                    <p>Productos</p>
-                    <p><?= $totalPrice ?> €</p>
+                    <p class="text-bill-cart">Productos</p>
+                    <p class="text-bill-cart"><?= $totalPrice ?> €</p>
                 </div>
                 <hr style="height: 1px; border: solid 1px black;">
                 <div class="col-12 d-flex justify-content-between">
-                    <p>Total (IVA exc.)</p>
-                    <p><?= $withoutIva ?> €</p>
+                    <p class="text-bill-cart">Total (IVA exc.)</p>
+                    <p class="text-bill-cart"><?= $withoutIva ?> €</p>
                 </div>
                 <div class="col-12 d-flex justify-content-between">
-                    <p>IVA (10%)</p>
-                    <p><?= $ivaProduct ?> €</p>
+                    <p class="text-bill-cart">IVA (10%)</p>
+                    <p class="text-bill-cart"><?= $ivaProduct ?> €</p>
                 </div>
-                <div class="col-12 d-flex justify-content-between">
-                    <p>Total (IVA inc.)</p>
-                    <p><?= $totalPrice ?> €</p>
+                <div class="col-12 d-flex justify-content-between mb-3">
+                    <p class="text-bill-cart">Total (IVA inc.)</p>
+                    <p class="text-bill-cart"><?= $totalPrice ?> €</p>
                 </div>
                 <div class="col-12">
-                    <a href="<?= URL . "?controller=pedido&action=loginOrRegister"?>" class="btn btn-danger" style="width: 100%;">TRAMITAR PEDIDO</a>
+                    <a type="button" href="<?= URL . "?controller=pedido&action=loginOrRegister"?>" class="custom-btn-tramitar">TRAMITAR PEDIDO</a>
                 </div>
             </div>
 
             <div class="col-12 d-flex justify-content-center align-items-center flex-column" style="height: 150px;">
-                <p>¿Tienes un cupón/bono? ¡Úsalo aquí!</p>
+                <p class="mt-3" style="font-size: 14px;">¿Tienes un cupón/bono? ¡Úsalo aquí!</p>
                 <div class="d-flex">
                     <input class="input-text" type="text" placeholder="Escribe tu código">
                     <input class="btn-aplicar" type="button" value="APLICAR">
                 </div>
             </div>
-            <div class="col-12 d-flex justify-content-center align-items-center flex-column" style="height: 150px; background-color: #EEEEEE;">
-                <p>Pago 100% seguro</p>
+            <div class="col-12 d-flex justify-content-center align-items-center flex-column w-100 m-0 p-0" style="height: 150px; background-color: #EEEEEE;">
+                <p class="text-bill-cart">Pago 100% seguro</p>
                 <div class="d-flex">
                     <img src="assets/images/methodPay.png" alt="metodos de pago">
                 </div>
