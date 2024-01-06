@@ -1,3 +1,7 @@
+*{
+    font-family: var(--default-typo);
+}
+
 .custom-head {
     background-color: #EEEEEE;
     height: 35px;
@@ -10,7 +14,6 @@
 }
 
 .custom-head-2>h3 {
-    font-family: var(--default-typo);
     font-size: var(--font17pxToRem);
     color: var(--title-txt-color);
     line-height: 35px;
@@ -20,7 +23,6 @@
 }
 
 .custom-head>h3 {
-    font-family: var(--default-typo);
     font-size: var(--font17pxToRem);
     color: var(--title-txt-color);
     line-height: 35px;
@@ -28,14 +30,12 @@
 }
 
 .custom-title {
-    font-family: var(--default-typo);
     font-size: var(--font18pxToRem);
     font-weight: bold;
 }
 
 .custom-title-product {
     color: #444;
-    font-family: var(--default-typo);
     font-size: 15px;
     font-style: normal;
     font-weight: 700;
@@ -44,7 +44,6 @@
 
 .custom-price-text {
     color: #444;
-    font-family: var(--default-typo);
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
@@ -53,7 +52,6 @@
 
 .custom-ref {
     color: #BBB;
-    font-family: var(--default-typo);
     font-size: 10px;
     font-style: normal;
     font-weight: 400;
@@ -62,8 +60,6 @@
 
 .custom-seller-info {
     color: #8A8A8A;
-
-    font-family: var(--default-typo);
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -72,7 +68,6 @@
 
 .custom-cesta-title {
     color: #A1A1A1;
-    font-family: var(--default-typo);
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
@@ -83,6 +78,8 @@
     border-radius: 0px 4px 4px 0px;
     background: #8A8A8A;
     color: white;
+    font-size: 14px;
+    font-weight: bold;
     border: none;
     width: 86px;
     height: 33px;
@@ -94,6 +91,12 @@
     background: #FFF;
     width: 158px;
     height: 33px;
+}
+
+.input-text::placeholder
+{
+    font-size: 12px;
+    padding-left: 10px;
 }
 
 .custom-delete-button {
@@ -114,7 +117,6 @@
 }
 
 .button-add {
-    font-family: var(--default-typo);
     width: 23px;
     height: 27px;
     border-radius: 0px 3px 3px 0px;
@@ -123,7 +125,6 @@
 }
 
 .button-less {
-    font-family: var(--default-typo);
     width: 23px;
     height: 27px;
     border-radius: 3px 0px 0px 3px;
@@ -132,7 +133,6 @@
 }
 
 .button-cantidad {
-    font-family: var(--default-typo);
     width: 44px;
     height: 27px;
     background: #FFF;
@@ -152,4 +152,25 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.text-bill-cart
+{
+    font-size: 12px;
+}
+
+/* Botón tramitar */
+
+.custom-btn-tramitar
+{
+    text-align: center;
+    line-height: 33px;
+    width: 100%;
+    height: 33px;
+    border-radius: 2px;
+    background-color: var(--red-color);
+    color: #FFF;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
 }
