@@ -182,7 +182,7 @@ $withoutIva = cartController::getPriceWithoutIVA();
                     <p class="text-bill-cart"><?= $totalPrice ?> €</p>
                 </div>
                 <div class="col-12">
-                    <a type="button" href="<?= URL . "?controller=pedido&action=loginOrRegister"?>" class="custom-btn-tramitar">TRAMITAR PEDIDO</a>
+                    <a type="button" href="<?= URL . "?controller=pedido&action=loginOrRegister"?>" class="custom-btn-tramitar">TRAMITAR PEDIDO <span><ion-icon name="arrow-dropright"></ion-icon></span></a>
                 </div>
             </div>
 
@@ -201,6 +201,10 @@ $withoutIva = cartController::getPriceWithoutIVA();
             </div>
         </div>
     </section>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+
 </body>
 
 </html>

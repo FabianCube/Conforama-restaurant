@@ -37,7 +37,7 @@
                         <div class="d-flex justify-content-end pb-3">
                             <form action="<?= URL . "?controller=productos&action=sel" ?>" method="post">
                                 <input type="hidden" name="id" value="<?= $producto->getProducto_id() ?>">
-                                <button type="submit" class="button-style" style="font-size: 14px;">AÑADIR AL CARRITO</button>
+                                <button type="submit" class="button-style">AÑADIR AL CARRITO <span><ion-icon name="cart"></ion-icon></span></button>
                             </form>
                         </div>
                     </div>
@@ -113,6 +113,10 @@
             </div>
         </div>
     </section>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+
 </body>
 
 </html>
