@@ -27,7 +27,7 @@ if (!isset($_POST["categoria_id"])) {
 
 <body>
     <section class="container pt-5 d-flex flex-row justify-content-between" style="margin-top: 55px; width: 1140px;">
-        <div class="col-3 me-5" style="width: 270px;">
+        <div class="col-xl-3 col-lg-4 me-5" style="width: 270px;">
             <div class="p-4 d-flex align-items-center header-category-filter" style="height: 70px;">
                 <p>Categorías</p>
             </div>
@@ -101,7 +101,7 @@ if (!isset($_POST["categoria_id"])) {
             </div>
             <div class="row">
                 <?php foreach ($productos as $producto) { ?>
-                    <div class="col-4">
+                    <div class="col-xl-4 col-lg-6">
                         <div class="card mb-4 custom-card-hover" style="width: 256px; height: 468px;">
                             <div class="container d-flex justify-content-center p-3" style="width: 200px; height: 180px;">
                                 <img src="assets/images/<?= $producto->getUrl_img() ?>" class="img-fluid" alt="Product image">
