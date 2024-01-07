@@ -10,7 +10,6 @@
     width: 200px;
     height: 30px;
     background-color: var(--white-color);
-    border: solid 2px var(--red-color);
     color: var(--red-color);
     padding: 5px 23px;
     text-decoration: none;
