@@ -29,7 +29,7 @@
                                 <div class="icon-account me-1">
                                     <img class="menu-icon-account" src="<?= image_url ?>orderhistory.svg" alt="Logo icon pedidos">
                                 </div>
-                                <a class="" href="<?= URL . "?controller=account&action=infoPedidos" ?>">Mis pedidos</a>
+                                <a class="txt-link-account" href="<?= URL . "?controller=account&action=infoPedidos" ?>">Mis pedidos</a>
                             </div>
                         </li>
                         <li class="link-account">
@@ -37,7 +37,7 @@
                                 <div class="icon-account me-1">
                                     <img class="menu-icon-account" src="<?= image_url ?>accountedit.svg" alt="Logo account">
                                 </div>
-                                <a class="active" href="<?= URL . "?controller=account" ?>">Información cuenta</a>
+                                <a class="txt-link-account active" href="<?= URL . "?controller=account" ?>">Información cuenta</a>
                             </div>
                         </li>
 
@@ -92,7 +92,7 @@
                                 <div style="width: 100px;"><strong>Direccion </strong></div>
                                 <input class="text-placeholder" type="text" name="account-update-direccion" value="<?= $user->getDireccion() ?>">
                             </li>
-                            <input class="submit-account-form" type="submit" value="CONFIRMAR AHORA">
+                            <button class="submit-account-form" type="submit">CONFIRMAR AHORA <span><ion-icon name="arrow-dropright"></ion-icon></span></button>
                         </form>
                     </ul>
                 <?php } else if ($user instanceof Admin) { ?>
@@ -130,7 +130,9 @@
             </div>
         </div>
     </section>
-
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 </body>
 
 </html>
