@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-01-2024 a las 18:17:51
+-- Tiempo de generación: 18-12-2023 a las 17:35:46
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -82,22 +82,11 @@ INSERT INTO `ingredientes` (`ingrediente_id`, `nombre_ingrediente`, `precio_ingr
 --
 
 CREATE TABLE `modificacion` (
-  `modificacion_id` int(4) NOT NULL,
-  `ingrediente_id` int(4) NOT NULL,
-  `accion` tinyint(1) NOT NULL,
-  `cantidad_ingrediente` int(4) NOT NULL,
-  `precio_suplemento` decimal(3,2) NOT NULL
+  `MODIFICACION_ID` int(4) NOT NULL,
+  `INGREDIENTE_ID` int(4) NOT NULL,
+  `ACCION` tinyint(1) NOT NULL,
+  `CANTIDAD_INGREDIENTE` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
-
---
--- Volcado de datos para la tabla `modificacion`
---
-
-INSERT INTO `modificacion` (`modificacion_id`, `ingrediente_id`, `accion`, `cantidad_ingrediente`, `precio_suplemento`) VALUES
-(1, 5, 1, 1, 1.00),
-(2, 5, 1, 1, 0.55),
-(3, 5, 1, 1, 0.55),
-(4, 5, 1, 3, 0.55);
 
 -- --------------------------------------------------------
 
@@ -123,10 +112,7 @@ INSERT INTO `pedidos` (`pedido_id`, `usuario_id`, `estado`, `hora_pedido`, `prec
 (31, 15, 'En curso', '2023-12-18 17:20:43', 7.97),
 (32, 15, 'En curso', '2023-12-18 17:28:23', 14.97),
 (33, 15, 'En curso', '2023-12-18 17:33:48', 35.82),
-(34, 15, 'En curso', '2023-12-18 17:34:26', 13.96),
-(35, 15, 'En curso', '2024-01-06 19:35:27', 6.98),
-(36, 15, 'En curso', '2024-01-07 16:21:55', 3.98),
-(37, 15, 'En curso', '2024-01-07 18:03:26', 1.99);
+(34, 15, 'En curso', '2023-12-18 17:34:26', 13.96);
 
 -- --------------------------------------------------------
 
@@ -176,11 +162,7 @@ INSERT INTO `pedido_producto` (`articulo_id`, `pedido_id`, `producto_id`, `modif
 (27, 32, 2, 0, 3),
 (28, 33, 6, 0, 18),
 (29, 34, 3, 0, 2),
-(30, 34, 1, 0, 2),
-(31, 35, 3, 0, 1),
-(32, 35, 1, 0, 1),
-(33, 36, 1, 0, 2),
-(34, 37, 1, 0, 1);
+(30, 34, 1, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -222,17 +204,17 @@ INSERT INTO `productos` (`producto_id`, `nombre_producto`, `descripcion`, `preci
 --
 
 CREATE TABLE `productos_ingredientes` (
-  `productos_ingredientes_id` int(4) NOT NULL,
-  `producto_id` int(4) NOT NULL,
-  `ingrediente_id` int(4) NOT NULL,
-  `cantidad` int(11) NOT NULL
+  `PRODUCTOS_INGREDIENTES_ID` int(4) NOT NULL,
+  `PRODUCTO_ID` int(4) NOT NULL,
+  `INGREDIENTE_ID` int(4) NOT NULL,
+  `CANTIDAD` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `productos_ingredientes`
 --
 
-INSERT INTO `productos_ingredientes` (`productos_ingredientes_id`, `producto_id`, `ingrediente_id`, `cantidad`) VALUES
+INSERT INTO `productos_ingredientes` (`PRODUCTOS_INGREDIENTES_ID`, `PRODUCTO_ID`, `INGREDIENTE_ID`, `CANTIDAD`) VALUES
 (1, 2, 7, 2),
 (2, 2, 8, 1),
 (3, 2, 9, 2),
@@ -242,11 +224,7 @@ INSERT INTO `productos_ingredientes` (`productos_ingredientes_id`, `producto_id`
 (7, 5, 12, 1),
 (8, 4, 12, 1),
 (9, 8, 13, 1),
-(10, 9, 13, 1),
-(11, 1, 1, 0),
-(12, 1, 2, 0),
-(13, 1, 3, 0),
-(14, 1, 5, 0);
+(10, 9, 13, 1);
 
 -- --------------------------------------------------------
 
@@ -282,21 +260,19 @@ CREATE TABLE `usuarios` (
   `email` varchar(150) NOT NULL,
   `password` varchar(255) NOT NULL,
   `telefono` int(9) NOT NULL,
-  `direccion` varchar(50) NOT NULL,
-  `nivel_cliente` int(11) NOT NULL,
-  `nivel_acceso` int(11) NOT NULL
+  `direccion` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`usuario_id`, `rol_id`, `nombre_usuario`, `apellido_usuario`, `email`, `password`, `telefono`, `direccion`, `nivel_cliente`, `nivel_acceso`) VALUES
-(11, 2, 'HASH', 'HASH', 'pruebahash@gmail.com', '$2y$10$B91Zt7HOw2XsK77Fe5HOC.7hdIpwv6iMtU3BbXbvmk5BS./PIGemK', 454, 'ooo', 0, 0),
-(12, 2, 'algo', 'algo', 'algo@gmail.com', '$2y$10$KvU1b/xMTFDZulZD76DN0.owVS7HFvw84U.tGm0lWHuvYRjSLFiOq', 1234, 'algo', 0, 0),
-(13, 0, 'admin', 'admin', 'admin@gmail.com', '$2y$10$EqpFsdK9pu4KHbALHgUcJORKnp8fjaveucRYy/yZmWJlyeEAURYw.', 666666666, 'Direccion del admin', 0, 0),
-(14, 2, 'Juan', 'Algo', 'juan@gmail.com', '$2y$10$qb1PthdjYueIuerHbAm4LOHoYYV5p7VuqsbKYiBcMBaDKSadCj5dG', 123232323, 'Calle de Juan, 1234', 0, 0),
-(15, 2, 'Fabian', 'Doizi', 'fabian@gmail.com', '$2y$10$Bnp7JCHmEMXAajOS5h4NCOiZN5rXzSKxlFJ7mEbt6xg/TneYybv0S', 657890085, 'Av. calle de envio 2', 0, 0);
+INSERT INTO `usuarios` (`usuario_id`, `rol_id`, `nombre_usuario`, `apellido_usuario`, `email`, `password`, `telefono`, `direccion`) VALUES
+(11, 2, 'HASH', 'HASH', 'pruebahash@gmail.com', '$2y$10$B91Zt7HOw2XsK77Fe5HOC.7hdIpwv6iMtU3BbXbvmk5BS./PIGemK', 454, 'ooo'),
+(12, 2, 'algo', 'algo', 'algo@gmail.com', '$2y$10$KvU1b/xMTFDZulZD76DN0.owVS7HFvw84U.tGm0lWHuvYRjSLFiOq', 1234, 'algo'),
+(13, 0, 'admin', 'admin', 'admin@gmail.com', '$2y$10$EqpFsdK9pu4KHbALHgUcJORKnp8fjaveucRYy/yZmWJlyeEAURYw.', 666666666, 'Direccion del admin'),
+(14, 2, 'Juan', 'Algo', 'juan@gmail.com', '$2y$10$qb1PthdjYueIuerHbAm4LOHoYYV5p7VuqsbKYiBcMBaDKSadCj5dG', 123232323, 'Calle de Juan, 1234'),
+(15, 2, 'Fabian', 'Doizi', 'fabian@gmail.com', '$2y$10$Bnp7JCHmEMXAajOS5h4NCOiZN5rXzSKxlFJ7mEbt6xg/TneYybv0S', 657890085, 'Av. calle de envio 2');
 
 --
 -- Índices para tablas volcadas
@@ -318,7 +294,7 @@ ALTER TABLE `ingredientes`
 -- Indices de la tabla `modificacion`
 --
 ALTER TABLE `modificacion`
-  ADD PRIMARY KEY (`modificacion_id`);
+  ADD PRIMARY KEY (`MODIFICACION_ID`);
 
 --
 -- Indices de la tabla `pedidos`
@@ -342,7 +318,7 @@ ALTER TABLE `productos`
 -- Indices de la tabla `productos_ingredientes`
 --
 ALTER TABLE `productos_ingredientes`
-  ADD PRIMARY KEY (`productos_ingredientes_id`);
+  ADD PRIMARY KEY (`PRODUCTOS_INGREDIENTES_ID`);
 
 --
 -- Indices de la tabla `roles`
@@ -376,19 +352,19 @@ ALTER TABLE `ingredientes`
 -- AUTO_INCREMENT de la tabla `modificacion`
 --
 ALTER TABLE `modificacion`
-  MODIFY `modificacion_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `MODIFICACION_ID` int(4) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `pedido_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `pedido_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido_producto`
 --
 ALTER TABLE `pedido_producto`
-  MODIFY `articulo_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `articulo_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
@@ -400,7 +376,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `productos_ingredientes`
 --
 ALTER TABLE `productos_ingredientes`
-  MODIFY `productos_ingredientes_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `PRODUCTOS_INGREDIENTES_ID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
