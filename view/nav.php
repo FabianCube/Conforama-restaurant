@@ -43,6 +43,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="<?= URL . "?controller=opiniones" ?>">Opiniones</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="<?= URL . "?controller=cart" ?>">
                             Mi carrito
                             <span class="translate-middle badge rounded-pill bg-secondary">
