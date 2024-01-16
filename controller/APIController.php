@@ -1,5 +1,7 @@
 <?php
 
+include_once 'model/Opiniones.php';
+
 class APIController
 {
     public function index()
@@ -7,8 +9,15 @@ class APIController
         $conn = DataBase::connect();
         $sql = $conn->prepare("SELECT * FROM opiniones");
         $sql->execute();
+        $result = $sql->get_result();
 
-        echo json_encode($sql, JSON_UNESCAPED_UNICODE);
+        if ($result) {
+            while ($opinion = $result->fetch_object('Opiniones')) {
+                $opiniones[] = $opinion;
+            }
+        }
+
+        echo json_encode($opiniones, JSON_UNESCAPED_UNICODE);
         return;
     }
 }
