@@ -11,7 +11,7 @@
     <section style="margin-top: 90px;">
         <div>
             <p>Hola</p>
-            <a href="<?= URL . "?controller=APIController&action=api" ?>">link</a>
+            <a href="<?= URL . "?controller=API&action=api" ?>">link</a>
         </div>
     </section>
 </body>
