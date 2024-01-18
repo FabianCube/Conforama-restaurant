@@ -4,19 +4,23 @@ include_once 'model/Opiniones.php';
 
 class APIController
 {
-    public function index()
+    public function api()
     {
-        $conn = DataBase::connect();
-        $sql = $conn->prepare("SELECT * FROM opiniones");
-        $sql->execute();
-        $result = $sql->get_result();
+        $allOpiniones = OpinionesDAO::getAllOpiniones();
 
-        if ($result) {
-            while ($opinion = $result->fetch_object('Opiniones')) {
-                $opiniones[] = $opinion;
-            }
+        foreach ($allOpiniones as $opinion) 
+        {
+            // Preparo el array para codificarlo para json
+            $opiniones = [
+                "opinion_id"    => $opinion->getOpinion_id(),
+                "usuario_id"    => $opinion->getUsuario_id(),
+                "opinion"       => $opinion->getOpinion(),
+                "puntuacion"    => $opinion->getPuntuacion(),
+                "fecha_opinion" => $opinion->getFecha_opinion()
+            ];
         }
 
+        // codifico las opiniones en formato json.
         echo json_encode($opiniones, JSON_UNESCAPED_UNICODE);
         return;
     }
