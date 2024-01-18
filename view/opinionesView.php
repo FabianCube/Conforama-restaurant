@@ -9,24 +9,39 @@
 
 <body onload="cargarOpiniones()">
     <section style="margin-top: 90px;">
-        <div>
-            <p>Hola</p>
-            <a href="<?= URL . "?controller=API&action=api" ?>">link</a>
+        <div id="contenido-opiniones">
+            
         </div>
     </section>
 </body>
 <script>
     function cargarOpiniones() 
     {
-        let resultado = fetch("http://localhost/conforama-restaurant/?controller=APIController&action=api", {
+        let resultado = fetch("http://localhost/conforama-restaurant/?controller=API&action=api", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
-            })
-            .then(data => data.json())
-            .then(resultado => console.log(resultado));
+            }).then(data => data.json()).then(opiniones => mostrarOpiniones(opiniones))
+            .catch(error => console.error("ERROR al cargar las opiniones.", error));
     }
+    function mostrarOpiniones(opiniones) {
+            // Obtener el contenedor donde se mostrarán las opiniones
+            const contenedorOpiniones = document.getElementById('contenido-opiniones');
+            contenedorOpiniones.innerHTML = '';
+
+            // Iterar sobre las propiedades del objeto y mostrarlas
+            for (const key in opiniones) {
+                if (opiniones.hasOwnProperty(key)) {
+                    const opinionElement = document.createElement('div');
+                    opinionElement.innerHTML = `
+                        <p>${key}: ${opiniones[key]}</p>
+                        <hr>
+                    `;
+                    contenedorOpiniones.appendChild(opinionElement);
+                }
+            }
+        }
 </script>
 
 </html>
