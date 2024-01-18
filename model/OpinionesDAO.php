@@ -1,5 +1,7 @@
 <?php
 
+include_once 'model/Opiniones.php';
+
 class OpinionesDAO
 {
     public static function getAllOpiniones()

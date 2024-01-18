@@ -13,5 +13,6 @@ class opinionesController
         include_once 'view/nav.php';
         include_once 'view/opinionesView.php';
         include_once 'view/footer.php';
+        
     }
 }

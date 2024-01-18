@@ -7,7 +7,7 @@
     <title>Opiniones</title>
 </head>
 
-<body>
+<body onload="cargarOpiniones()">
     <section style="margin-top: 90px;">
         <div>
             <p>Hola</p>
@@ -16,9 +16,17 @@
     </section>
 </body>
 <script>
-    let resultado = fetch("http://localhost/conforama-restaurant/?controller=APIController")
-    .then( data => data.json())
-    .then( resultado => console.log(resultado));
+    function cargarOpiniones() 
+    {
+        let resultado = fetch("http://localhost/conforama-restaurant/?controller=APIController&action=api", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
+            .then(data => data.json())
+            .then(resultado => console.log(resultado));
+    }
 </script>
 
 </html>
