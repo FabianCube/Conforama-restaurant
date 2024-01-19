@@ -17,12 +17,13 @@ class APIController
                 "usuario_id"    => $opinion->getUsuario_id(),
                 "opinion"       => $opinion->getOpinion(),
                 "puntuacion"    => $opinion->getPuntuacion(),
-                "fecha_opinion" => $opinion->getFecha_opinion()
+                "fecha_opinion" => $opinion->getFecha_opinion(),
             ];
+            $result_opiniones[] = $opiniones;
         }
 
         // codifico las opiniones en formato json.
-        echo json_encode($opiniones, JSON_UNESCAPED_UNICODE);
+        echo json_encode($result_opiniones, JSON_UNESCAPED_UNICODE);
         return;
     }
 }

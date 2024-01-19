@@ -13,8 +13,8 @@
             
         </div>
     </section>
-</body>
-<script>
+    
+    <script>
     function cargarOpiniones() 
     {
         let resultado = fetch("http://localhost/conforama-restaurant/?controller=API&action=api", {
@@ -25,12 +25,12 @@
             }).then(data => data.json()).then(opiniones => mostrarOpiniones(opiniones))
             .catch(error => console.error("ERROR al cargar las opiniones.", error));
     }
+    
     function mostrarOpiniones(opiniones) {
             // Obtener el contenedor donde se mostrarán las opiniones
             const contenedorOpiniones = document.getElementById('contenido-opiniones');
             contenedorOpiniones.innerHTML = '';
 
-            // Iterar sobre las propiedades del objeto y mostrarlas
             for (const key in opiniones) {
                 if (opiniones.hasOwnProperty(key)) {
                     const opinionElement = document.createElement('div');
@@ -43,5 +43,7 @@
             }
         }
 </script>
+</body>
+
 
 </html>
