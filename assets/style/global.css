@@ -23,3 +23,21 @@
     font-family: "Tower10";
     src: url(assets/fonts/Town.ttf);
 }
+
+.btn-default
+{
+    width: 210px;
+    height: 35px;
+    border: none;
+    border-radius: 2px;
+    background-color: var(--red-color);
+    color: #FFF;
+    font-size: 14px;
+    transition: .2s ease-in-out;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-weight: bold;
+}
