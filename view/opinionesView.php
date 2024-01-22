@@ -71,12 +71,13 @@
 
         <div class="d-flex flex-row justify-content-between my-4" style="background-color: #fff; height: 60px; padding: 20px;">
             <div>
-                <a style="color: var(--red-color);" href="#">Todos los comentarios</a>
+                <a style="color: var(--red-color);" href="#" onclick="cargarOpiniones()">Todos los comentarios</a>
             </div>
             <div class="d-flex flex-row">
                 <div class="d-flex flex-row">
                     <p>Filtrar por puntuación: </p>
                     <select name="filtroEstrellas" id="filtroEstrellas">
+                        <option disabled selected value> -- seleccionar filtro -- </option>
                         <option value="5">5 estrellas</option>
                         <option value="4">4 estrellas</option>
                         <option value="3">3 estrellas</option>
@@ -86,8 +87,10 @@
                 </div>
                 <div class="d-flex flex-row mx-3">
                     <p>Ordenar de: </p>
-                    <select name="" id="">
-                        <option value="5">Mayor a menor</option>
+                    <select name="OrderOpiniones" id="orderOpiniones">
+                        <option disabled selected value> -- seleccionar filtro -- </option>
+                        <option value="ascendent">Más recientes primero</option>
+                        <option value="descendent">Más antiguas primero</option>
                     </select>
                 </div>
             </div>
@@ -164,8 +167,7 @@
         }
 
         // filtrar opiniones por estrellas.
-        document.getElementById("filtroEstrellas").addEventListener('change', (e) => 
-        {
+        document.getElementById("filtroEstrellas").addEventListener('change', (e) => {
             let resultado = fetch("http://localhost/conforama-restaurant/?controller=API&action=api", {
                     method: "POST",
                     headers: {
@@ -175,11 +177,9 @@
                 .catch(error => console.error("ERROR al cargar las opiniones.", error));
         });
 
-        function filtrarOpiniones(opiniones, puntuacion) 
-        {    
-            let opinionesFiltradas = opiniones.filter( (e) => {
-                if(e.puntuacion == puntuacion)
-                {
+        function filtrarOpiniones(opiniones, puntuacion) {
+            let opinionesFiltradas = opiniones.filter((e) => {
+                if (e.puntuacion == puntuacion) {
                     console.log(e);
                     return e;
                 }
