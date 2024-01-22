@@ -113,7 +113,6 @@
             const contenedorOpiniones = document.getElementById('contenido-opiniones');
             contenedorOpiniones.innerHTML = '';
 
-
             opiniones.forEach(opinion => {
                 const opinionElemento = document.createElement('div');
                 opinionElemento.classList.add('opinion-styled');
@@ -180,14 +179,12 @@
         function filtrarOpiniones(opiniones, puntuacion) {
             let opinionesFiltradas = opiniones.filter((e) => {
                 if (e.puntuacion == puntuacion) {
-                    console.log(e);
                     return e;
                 }
             });
 
             mostrarOpiniones(opinionesFiltradas);
         }
-
 
         document.getElementById('btn-add-opinion').addEventListener('click', () => {
             const bc = document.getElementById('crear-opinion');
@@ -204,6 +201,4 @@
     </script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
 </body>
-
-
 </html>
