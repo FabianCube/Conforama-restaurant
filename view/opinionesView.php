@@ -76,8 +76,12 @@
             <div class="d-flex flex-row">
                 <div class="d-flex flex-row">
                     <p>Filtrar por puntuación: </p>
-                    <select name="" id="">
+                    <select name="filtroEstrellas" id="filtroEstrellas">
                         <option value="5">5 estrellas</option>
+                        <option value="4">4 estrellas</option>
+                        <option value="3">3 estrellas</option>
+                        <option value="2">2 estrellas</option>
+                        <option value="1">1 estrellas</option>
                     </select>
                 </div>
                 <div class="d-flex flex-row mx-3">
@@ -106,9 +110,9 @@
             const contenedorOpiniones = document.getElementById('contenido-opiniones');
             contenedorOpiniones.innerHTML = '';
 
+
             opiniones.forEach(opinion => {
                 const opinionElemento = document.createElement('div');
-
                 opinionElemento.classList.add('opinion-styled');
 
                 opinionElemento.innerHTML = `
@@ -134,13 +138,12 @@
 
                 contenedorOpiniones.append(opinionElemento);
             });
+
         }
 
-        function obtenerEstrellas(puntuacion)
-        {
+        function obtenerEstrellas(puntuacion) {
             let html = '';
-            switch(puntuacion)
-            {
+            switch (puntuacion) {
                 case 1:
                     html = '<img src="__DIR__ /../assets/images/1_estrella.svg"></img>';
                     break;
@@ -159,6 +162,32 @@
             }
             return html;
         }
+
+        // filtrar opiniones por estrellas.
+        document.getElementById("filtroEstrellas").addEventListener('change', (e) => 
+        {
+            let resultado = fetch("http://localhost/conforama-restaurant/?controller=API&action=api", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }).then(data => data.json()).then(opiniones => filtrarOpiniones(opiniones, e.target.value))
+                .catch(error => console.error("ERROR al cargar las opiniones.", error));
+        });
+
+        function filtrarOpiniones(opiniones, puntuacion) 
+        {    
+            let opinionesFiltradas = opiniones.filter( (e) => {
+                if(e.puntuacion == puntuacion)
+                {
+                    console.log(e);
+                    return e;
+                }
+            });
+
+            mostrarOpiniones(opinionesFiltradas);
+        }
+
 
         document.getElementById('btn-add-opinion').addEventListener('click', () => {
             const bc = document.getElementById('crear-opinion');
