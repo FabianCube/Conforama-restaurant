@@ -4,6 +4,7 @@ class Opiniones
 {
     private $opinion_id;
     private $usuario_id;
+    private $titulo;
     private $opinion;
     private $puntuacion;
     private $fecha_opinion;
@@ -107,6 +108,26 @@ class Opiniones
     public function setFecha_opinion($fecha_opinion)
     {
         $this->fecha_opinion = $fecha_opinion;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of titulo
+     */ 
+    public function getTitulo()
+    {
+        return $this->titulo;
+    }
+
+    /**
+     * Set the value of titulo
+     *
+     * @return  self
+     */ 
+    public function setTitulo($titulo)
+    {
+        $this->titulo = $titulo;
 
         return $this;
     }

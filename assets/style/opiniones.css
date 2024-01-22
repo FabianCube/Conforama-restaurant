@@ -4,9 +4,27 @@
     font-weight: bold;
 }
 
-.titulo
+.titulo,.titulo-principal
 {
     font-size: 20px;
+    position: relative;
+}
+
+.titulo-principal
+{
+    margin: 0 0 30px 30px;
+}
+
+.titulo-principal::before
+{
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: var(--red-color);
+    top: 0;
+    left: -30px;
 }
 
 .custom-resumen-opiniones {
@@ -17,7 +35,7 @@
 
 .base {
     height: 15px;
-    width: 100px;
+    width: 200px;
     background-color: #D9D9D9;
     border-radius: 3px;
     margin: 0 8px 0 0;
@@ -72,4 +90,9 @@
     align-items: center;
     margin: 0 8px 0 0;
     font-size: 12px;
+}
+
+.text-important
+{
+    font-weight: bold;
 }

@@ -1,6 +1,7 @@
 <?php
 
 include_once __DIR__ . '/../model/OpinionesDAO.php';
+include_once __DIR__ . '/../model/UsuariosDAO.php';
 
 class APIController
 {
@@ -11,10 +12,14 @@ class APIController
 
         foreach ($allOpiniones as $opinion) 
         {
+            $user = UsuariosDAO::getOneUserById($opinion->getUsuario_id());
             // Preparo el array para codificarlo para json
             $opiniones = [
                 "opinion_id"    => $opinion->getOpinion_id(),
                 "usuario_id"    => $opinion->getUsuario_id(),
+                "username"      => $user->getNombre_usuario(),
+                "lastname"      => $user->getApellido_usuario(),
+                "titulo"        => $opinion->getTitulo(),
                 "opinion"       => $opinion->getOpinion(),
                 "puntuacion"    => $opinion->getPuntuacion(),
                 "fecha_opinion" => $opinion->getFecha_opinion(),
