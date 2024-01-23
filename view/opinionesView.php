@@ -229,7 +229,16 @@
                 puntuacion_opinion: puntuacion_opinion
             }
 
-            let data = new URLSearchParams("accion=add_review&titulo_opinion=me gusta");
+            // esto mas o menos chuta
+            // let data = new URLSearchParams("accion=add_review&titulo_opinion=me gusta");
+
+
+
+            let data = new URLSearchParams({ 
+                accion: "add_review",
+                titulo_opinion: titulo_opinion
+            });
+
 
             let resultado = fetch("http://localhost/conforama-restaurant/?controller=API&action=api", {
                     method: "POST",
@@ -238,17 +247,7 @@
                     },
                     body: data
                 })
-                .then(function(response) {
-                    if (response.ok) {
-                        return response.text()
-                    } else {
-                        throw "Error en la llamada Ajax";
-                    }
-
-                })
-                .then(function(texto) {
-                    console.log(texto);
-                })
+                .then(response => response.text())
                 .catch(function(err) {
                     console.log(err);
                 });
@@ -257,4 +256,4 @@
     <script src="assets/js/bootstrap.bundle.min.js"></script>
 </body>
 
-</html>
+</html
