@@ -104,7 +104,8 @@
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
-                    }
+                    },
+                    body: "accion=buscar_pedido"
                 }).then(data => data.json()).then(opiniones => mostrarOpiniones(opiniones))
                 .catch(error => console.error("ERROR al cargar las opiniones.", error));
         }
@@ -195,10 +196,65 @@
                 containerAddOpinion.style.height = "300px";
             }, 1);
 
-            containerAddOpinion.innerHTML = `<p>Opinion</p><br><input type='text'><button>Publicar</button>`;
+            containerAddOpinion.innerHTML = `
+                <form>
+                    <p>Titulo</p><input type="text" id="titulo_opinion" name="titulo_opinion"></input>
+                    <p>Reseña</p><input type="text" id="opinion_usuario" name="texto_opinion"></input>
+                    <p>Puntuación</p>
+                    <select name="puntuacionUsuario" id="puntuacionUsuario" name="puntuacion_opinion">
+                        <option disabled selected value> -- seleccionar -- </option>
+                        <option value="5">5 estrellas</option>
+                        <option value="4">4 estrellas</option>
+                        <option value="3">3 estrellas</option>
+                        <option value="2">2 estrellas</option>
+                        <option value="1">1 estrellas</option>
+                    </select>
+                </form>
+                <button onclick="uploadOpinion()">Publicar</button>
+                
+                `;
             bc.append(containerAddOpinion);
         });
+
+        function uploadOpinion() {
+            const titulo_opinion = document.getElementById("titulo_opinion").value;
+            const texto_opinion = document.getElementById("opinion_usuario").value;
+            const puntuacion_opinion = document.getElementById("puntuacionUsuario").value;
+            const form = document.querySelector("form");
+
+            let dataBody = {
+                accion: "add_review",
+                titulo_opinion: titulo_opinion,
+                texto_opinion: texto_opinion,
+                puntuacion_opinion: puntuacion_opinion
+            }
+
+            let data = new URLSearchParams("accion=add_review&titulo_opinion=me gusta");
+
+            let resultado = fetch("http://localhost/conforama-restaurant/?controller=API&action=api", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: data
+                })
+                .then(function(response) {
+                    if (response.ok) {
+                        return response.text()
+                    } else {
+                        throw "Error en la llamada Ajax";
+                    }
+
+                })
+                .then(function(texto) {
+                    console.log(texto);
+                })
+                .catch(function(err) {
+                    console.log(err);
+                });
+        }
     </script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
