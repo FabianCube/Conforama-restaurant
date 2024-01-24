@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Temps de generació: 16-01-2024 a les 19:11:12
+-- Temps de generació: 24-01-2024 a les 17:28:34
 -- Versió del servidor: 10.4.28-MariaDB
 -- Versió de PHP: 8.2.4
 
@@ -108,6 +108,7 @@ INSERT INTO `modificacion` (`modificacion_id`, `ingrediente_id`, `accion`, `cant
 CREATE TABLE `opiniones` (
   `opinion_id` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL,
+  `titulo` text NOT NULL,
   `opinion` varchar(999) NOT NULL,
   `puntuacion` int(1) NOT NULL,
   `fecha_opinion` date NOT NULL
@@ -117,8 +118,17 @@ CREATE TABLE `opiniones` (
 -- Bolcament de dades per a la taula `opiniones`
 --
 
-INSERT INTO `opiniones` (`opinion_id`, `usuario_id`, `opinion`, `puntuacion`, `fecha_opinion`) VALUES
-(1, 15, 'Mu wapo mucha grasia', 5, '2024-01-09');
+INSERT INTO `opiniones` (`opinion_id`, `usuario_id`, `titulo`, `opinion`, `puntuacion`, `fecha_opinion`) VALUES
+(1, 15, 'Me ha gustado', 'Mu wapo mucha grasia', 5, '2024-01-09'),
+(2, 14, 'Bastante bien', 'La verdad es que bla bla bla', 4, '2024-01-18'),
+(3, 15, 'NO RECOMIENDO!!', 'Es un timo porque dasdalsd y sajndjasda asique no caigáis en el timo...', 1, '2024-01-22'),
+(4, 15, 'PRUEBA RESEÑA', 'Esto es una prueba snskndasndlansdlansldnalksndlkasndlkanslkdnas', 3, '0000-00-00'),
+(5, 15, 'PRUEBA 2', 'Pruebasdjkansd ad ams dma smd asmd asmd as', 2, '0000-00-00'),
+(6, 15, 'PRUEBA 3', 'Esto es una priebasdakjsnda sdknas dkas', 4, '0000-00-00'),
+(7, 15, '', '', 3, '0000-00-00'),
+(8, 15, 'ABEMARIOA', 'HOLASD asdamsdasdASD', 2, '2024-01-24'),
+(9, 15, 'COMPRA', 'Compra compra compra', 5, '2024-01-24'),
+(10, 12, 'Soy otro user', 'es ersdfknsnflasnf ljas fa sdn as', 4, '2024-01-24');
 
 -- --------------------------------------------------------
 
@@ -414,7 +424,7 @@ ALTER TABLE `modificacion`
 -- AUTO_INCREMENT per la taula `opiniones`
 --
 ALTER TABLE `opiniones`
-  MODIFY `opinion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `opinion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT per la taula `pedidos`
