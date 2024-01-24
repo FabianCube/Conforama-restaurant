@@ -41,19 +41,20 @@ class APIController
         else if ($accion == 'add_review') 
         {
             header('Content-Type: application/json');
-
-
-            $usuario_id = $_SESSION['current_user']->getUsuario_id();
-            $titulo_opinion = $_POST['titulo_opinion'];
-            $texto_opinion = $_POST['texto_opinion'];
-            $puntuacion_opinion = $_POST['puntuacion_opinion'];
-            $fecha_opinion = $_POST['fecha_opinion'];
-
-            $result = OpinionesDAO::insertOpinion($usuario_id, $titulo_opinion, $texto_opinion, $puntuacion_opinion, $fecha_opinion);
             
-            if($result)
+            if($_SESSION['current_user'] != null)
             {
-                echo 'Insertado correctamente!';
+                $usuario_id = $_SESSION['current_user']->getUsuario_id();
+                $titulo_opinion = $_POST['titulo_opinion'];
+                $texto_opinion = $_POST['texto_opinion'];
+                $puntuacion_opinion = $_POST['puntuacion_opinion'];
+                $fecha_opinion = $_POST['fecha_opinion'];
+    
+                $result = OpinionesDAO::insertOpinion($usuario_id, $titulo_opinion, $texto_opinion, $puntuacion_opinion, $fecha_opinion);    
+            }
+            else
+            {
+                echo 'No hay una sesion iniciada para publicar una review';
             }
 
             return;

@@ -218,15 +218,13 @@
         });
 
         function uploadOpinion() {
-            
+
             const titulo_opinion = document.getElementById("titulo_opinion").value;
             const texto_opinion = document.getElementById("opinion_usuario").value;
             const puntuacion_opinion = document.getElementById("puntuacionUsuario").value;
 
             let date = new Date();
             const fecha_opinion = date.toISOString();
-
-            //! necesito el usuario_id
 
             console.log(fecha_opinion);
             // Preparo los parametros que quiero pasarle a la api para guardarlos en DB.
@@ -250,6 +248,8 @@
                 .catch(function(err) {
                     console.log(err);
                 });
+            
+            cargarOpiniones();
         }
     </script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
