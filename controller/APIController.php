@@ -2,6 +2,7 @@
 
 include_once __DIR__ . '/../model/OpinionesDAO.php';
 include_once __DIR__ . '/../model/UsuariosDAO.php';
+include_once __DIR__ . '/../model/Usuarios.php';
 
 class APIController
 {
@@ -40,9 +41,21 @@ class APIController
         else if ($accion == 'add_review') 
         {
             header('Content-Type: application/json');
-            $opinion = $_POST['titulo_opinion'];
 
-            echo $opinion;
+
+            $usuario_id = $_SESSION['current_user']->getUsuario_id();
+            $titulo_opinion = $_POST['titulo_opinion'];
+            $texto_opinion = $_POST['texto_opinion'];
+            $puntuacion_opinion = $_POST['puntuacion_opinion'];
+            $fecha_opinion = $_POST['fecha_opinion'];
+
+            $result = OpinionesDAO::insertOpinion($usuario_id, $titulo_opinion, $texto_opinion, $puntuacion_opinion, $fecha_opinion);
+            
+            if($result)
+            {
+                echo 'Insertado correctamente!';
+            }
+
             return;
         }
     }

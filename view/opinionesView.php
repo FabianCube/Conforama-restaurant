@@ -172,7 +172,8 @@
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
-                    }
+                    },
+                    body: "accion=buscar_pedido"
                 }).then(data => data.json()).then(opiniones => filtrarOpiniones(opiniones, e.target.value))
                 .catch(error => console.error("ERROR al cargar las opiniones.", error));
         });
@@ -217,29 +218,27 @@
         });
 
         function uploadOpinion() {
+            
             const titulo_opinion = document.getElementById("titulo_opinion").value;
             const texto_opinion = document.getElementById("opinion_usuario").value;
             const puntuacion_opinion = document.getElementById("puntuacionUsuario").value;
-            const form = document.querySelector("form");
 
-            let dataBody = {
+            let date = new Date();
+            const fecha_opinion = date.toISOString();
+
+            //! necesito el usuario_id
+
+            console.log(fecha_opinion);
+            // Preparo los parametros que quiero pasarle a la api para guardarlos en DB.
+            let data = new URLSearchParams({ 
                 accion: "add_review",
                 titulo_opinion: titulo_opinion,
                 texto_opinion: texto_opinion,
-                puntuacion_opinion: puntuacion_opinion
-            }
-
-            // esto mas o menos chuta
-            // let data = new URLSearchParams("accion=add_review&titulo_opinion=me gusta");
-
-
-
-            let data = new URLSearchParams({ 
-                accion: "add_review",
-                titulo_opinion: titulo_opinion
+                puntuacion_opinion: puntuacion_opinion,
+                fecha_opinion: fecha_opinion
             });
 
-
+            // Le paso los parametros por "body", mediante POST.
             let resultado = fetch("http://localhost/conforama-restaurant/?controller=API&action=api", {
                     method: "POST",
                     headers: {
@@ -247,7 +246,7 @@
                     },
                     body: data
                 })
-                .then(response => response.text())
+                .then(response => response.json())
                 .catch(function(err) {
                     console.log(err);
                 });

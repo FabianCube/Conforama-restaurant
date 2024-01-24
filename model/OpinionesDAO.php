@@ -21,4 +21,13 @@ class OpinionesDAO
 
         return $opiniones;
     }
+
+    public static function insertOpinion($usr_id, $titulo, $opinion, $puntuacion, $fecha_opinion)
+    {
+        $conn = DataBase::connect();
+        $sql = $conn->prepare("INSERT INTO opiniones(usuario_id, titulo, opinion, puntuacion, fecha_opinion) 
+            VALUES($usr_id, '$titulo', '$opinion', $puntuacion, '$fecha_opinion')");
+        
+        $sql->execute();
+    }
 }
