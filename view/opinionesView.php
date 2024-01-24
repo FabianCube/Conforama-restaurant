@@ -114,6 +114,8 @@
             const contenedorOpiniones = document.getElementById('contenido-opiniones');
             contenedorOpiniones.innerHTML = '';
 
+            // muestro las reseñas más recientes primero.
+            opiniones.reverse();
             opiniones.forEach(opinion => {
                 const opinionElemento = document.createElement('div');
                 opinionElemento.classList.add('opinion-styled');
