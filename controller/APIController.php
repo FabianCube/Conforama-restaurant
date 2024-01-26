@@ -8,9 +8,11 @@ class APIController
 {
     public function api()
     {
+        // comprobar si el metodo accion se ha pasado correctamente.
         if ($_SERVER['REQUEST_METHOD'] === 'POST') 
         {
             $accion = isset($_POST['accion']) ? $_POST['accion'] : null;
+            
         }
 
         if ($accion == 'buscar_pedido')
@@ -56,8 +58,28 @@ class APIController
             {
                 echo 'No hay una sesion iniciada para publicar una review';
             }
-
             return;
+        }
+        else if($accion == 'isLogged')
+        {
+            if(isset($_SESSION['current_user']))
+            {
+                $usuario_id = $_SESSION['current_user']->getUsuario_id();
+                $user = UsuariosDAO::getOneUserById( $usuario_id );
+
+                $output = [
+                    "usuario_id"      => $user->getUsuario_id(),
+                    "rol_id"          => $user->getRol_id(),
+                    "nombre_usuario"  => $user->getNombre_usuario(),
+                    "apellido_usuairo"=> $user->getApellido_usuario(),
+                    "email"           => $user->getEmail(),
+                    "telefono"        => $user->getTelefono(),
+                    "direccion"       => $user->getDireccion()
+                ];
+
+                echo json_encode($output, JSON_UNESCAPED_UNICODE);
+                return;
+            }
         }
     }
 }

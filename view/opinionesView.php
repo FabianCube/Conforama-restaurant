@@ -11,6 +11,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
 </head>
 
 <body onload="cargarOpiniones()" style="background-color: #F7F7F7;">
@@ -71,7 +73,7 @@
 
         <div class="d-flex flex-row justify-content-between my-4" style="background-color: #fff; height: 60px; padding: 20px;">
             <div>
-                <a style="color: var(--red-color);" href="#" onclick="cargarOpiniones()">Todos los comentarios</a>
+                <a style="color: var(--red-color); cursor: pointer; text-decoration: underline;" onclick="cargarOpiniones()">Todos los comentarios</a>
             </div>
             <div class="d-flex flex-row">
                 <div class="d-flex flex-row">
@@ -143,7 +145,9 @@
 
                 contenedorOpiniones.append(opinionElemento);
             });
-
+            notie.alert({
+                text: 'Opiniones cargadas correctamente!'
+            })
         }
 
         function obtenerEstrellas(puntuacion) {
@@ -191,15 +195,17 @@
         }
 
         document.getElementById('btn-add-opinion').addEventListener('click', () => {
-            const bc = document.getElementById('crear-opinion');
-            const containerAddOpinion = document.createElement('div');
-            containerAddOpinion.classList.add('container-new-review');
 
-            setTimeout(() => {
-                containerAddOpinion.style.height = "300px";
-            }, 1);
+            if (sessionStorage.getItem("isLogged") == true) {
+                const bc = document.getElementById('crear-opinion');
+                const containerAddOpinion = document.createElement('div');
+                containerAddOpinion.classList.add('container-new-review');
 
-            containerAddOpinion.innerHTML = `
+                setTimeout(() => {
+                    containerAddOpinion.style.height = "300px";
+                }, 1);
+
+                containerAddOpinion.innerHTML = `
                 <form>
                     <p>Titulo</p><input type="text" id="titulo_opinion" name="titulo_opinion"></input>
                     <p>Reseña</p><input type="text" id="opinion_usuario" name="texto_opinion"></input>
@@ -214,10 +220,33 @@
                     </select>
                 </form>
                 <button onclick="uploadOpinion()">Publicar</button>
+                <button onclick="cerrarFormulario(this)">Cancelar</button>
                 
                 `;
-            bc.append(containerAddOpinion);
+                bc.append(containerAddOpinion);
+            } else {
+                // notie.force({
+                //     type: 3,
+                //     text: "Tienes que iniciar sesión para poder realizar una reseña.",
+                //     buttonText: "Iniciar Sesión",
+                //     callBack: () => this.location.href = 'http://localhost/conforama-restaurant/?controller=login' //! CUIDADO CON RUTA RELATIVA
+                // });
+
+                notie.confirm({
+                    text: 'No loggeado. ¿Quieres iniciar sesión?',
+                    submitText: "Ir al login",
+                    cancelText: "Cancelar",
+                    cancelCallback: () => this.location.href = 'http://localhost/conforama-restaurant/?controller=login',
+                    submitCallback: () => this.location.href = 'http://localhost/conforama-restaurant/?controller=login'
+                })
+            }
+
         });
+
+        function cerrarFormulario(element) {
+            const container = element.parentNode;
+            container.parentNode.removeChild(container);
+        }
 
         function uploadOpinion() {
 
@@ -230,7 +259,7 @@
 
             console.log(fecha_opinion);
             // Preparo los parametros que quiero pasarle a la api para guardarlos en DB.
-            let data = new URLSearchParams({ 
+            let data = new URLSearchParams({
                 accion: "add_review",
                 titulo_opinion: titulo_opinion,
                 texto_opinion: texto_opinion,
@@ -250,11 +279,36 @@
                 .catch(function(err) {
                     console.log(err);
                 });
-            
+
+            // vuelvo a cargar las opiniones.
             cargarOpiniones();
+        }
+
+        function getUserData() {
+            let resultado = fetch("http://localhost/conforama-restaurant/?controller=API&action=api", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: "accion=isLogged"
+                }).then(data => data.json()).then(user => checkUserLogged(user))
+                .catch(function(err) {
+                    console.log(err)
+                });
+        }
+
+        function checkUserLogged(user) {
+            let logged = true;
+
+            if (user.usuario_id == null) {
+                logged = false;
+            }
+
+            sessionStorage.setItem("isLogged", logged);
         }
     </script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/notie"></script>
 </body>
 
 </html
