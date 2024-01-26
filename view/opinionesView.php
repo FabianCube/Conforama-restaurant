@@ -225,19 +225,13 @@
                 `;
                 bc.append(containerAddOpinion);
             } else {
-                // notie.force({
-                //     type: 3,
-                //     text: "Tienes que iniciar sesión para poder realizar una reseña.",
-                //     buttonText: "Iniciar Sesión",
-                //     callBack: () => this.location.href = 'http://localhost/conforama-restaurant/?controller=login' //! CUIDADO CON RUTA RELATIVA
-                // });
 
                 notie.confirm({
-                    text: 'No loggeado. ¿Quieres iniciar sesión?',
+                    text: 'Necesitas disponer de cuenta <br> ¿Ir a iniciar sesión?',
                     submitText: "Ir al login",
                     cancelText: "Cancelar",
-                    cancelCallback: () => this.location.href = 'http://localhost/conforama-restaurant/?controller=login',
-                    submitCallback: () => this.location.href = 'http://localhost/conforama-restaurant/?controller=login'
+                    cancelCallback: () => notie.alert( {text: 'Cancelado'} ),
+                    submitCallback: () => this.location.href = 'http://localhost/conforama-restaurant/?controller=login',
                 })
             }
 
