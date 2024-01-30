@@ -91,8 +91,8 @@
                     <p>Ordenar de: </p>
                     <select name="OrderOpiniones" id="orderOpiniones">
                         <option disabled selected value> -- seleccionar filtro -- </option>
-                        <option value="ascendent">Más recientes primero</option>
-                        <option value="descendent">Más antiguas primero</option>
+                        <option value="0">Más recientes primero</option>
+                        <option value="1">Más antiguas primero</option>
                     </select>
                 </div>
             </div>
@@ -101,8 +101,7 @@
     </section>
 
     <script>
-        function cargarOpiniones() 
-        {
+        function cargarOpiniones() {
             let resultado = fetch("http://localhost/conforama-restaurant/?controller=API&action=api", {
                     method: "POST",
                     headers: {
@@ -111,9 +110,8 @@
                     body: "accion=buscar_pedido"
                 }).then(data => data.json()).then(opiniones => mostrarOpiniones(opiniones))
                 .catch(error => console.error("ERROR al cargar las opiniones.", error));
-            
-            if(resultado)
-            {
+
+            if (resultado) {
                 console.log("[INFO] cargarOpiniones: Opiniones cargadas correctamente.");
             }
         }
@@ -123,7 +121,10 @@
             contenedorOpiniones.innerHTML = '';
 
             // muestro las reseñas más recientes primero.
-            opiniones.reverse();
+            // if (order == 0) {
+            //     opiniones.reverse();
+            // }
+
             opiniones.forEach(opinion => {
                 const opinionElemento = document.createElement('div');
                 opinionElemento.classList.add('opinion-styled');
@@ -180,33 +181,88 @@
             return html;
         }
 
-        // filtrar opiniones por estrellas.
+        //! ==========================================================================
+
         document.getElementById("filtroEstrellas").addEventListener('change', (e) => {
-            let resultado = fetch("http://localhost/conforama-restaurant/?controller=API&action=api", {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: "accion=buscar_pedido"
-                }).then(data => data.json()).then(opiniones => filtrarOpiniones(opiniones, e.target.value))
-                .catch(error => console.error("ERROR al cargar las opiniones.", error));
+            filtrarYOrdenarOpiniones(e.target.value, document.getElementById("orderOpiniones").value);
         });
 
-        function filtrarOpiniones(opiniones, puntuacion) {
-            let opinionesFiltradas = opiniones.filter((e) => {
-                if (e.puntuacion == puntuacion) {
-                    return e;
-                }
-            });
+        document.getElementById("orderOpiniones").addEventListener('change', (e) => {
+            filtrarYOrdenarOpiniones(document.getElementById("filtroEstrellas").value, e.target.value);
+        });
 
-            console.log("[INFO] filtrarOpiniones: Mostrando reseñas filtradas por puntuación de " + puntuacion + " estrellas.");
-            mostrarOpiniones(opinionesFiltradas);
+        function filtrarYOrdenarOpiniones(filtro, order) {
+            let resultado = fetch("http://localhost/conforama-restaurant/?controller=API&action=api", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: "accion=buscar_pedido"
+            }).then(data => data.json()).then(opiniones => {
+                // Filtrar opiniones por puntuación
+                let opinionesFiltradas = opiniones.filter((e) => {
+                    return e.puntuacion == filtro;
+                });
+
+                // Ordenar opiniones
+                if (order === "0") {
+                    opinionesFiltradas.reverse();
+                }
+
+                console.log("[INFO] filtrarYOrdenarOpiniones: Mostrando reseñas filtradas y ordenadas.");
+                mostrarOpiniones(opinionesFiltradas);
+            }).catch(error => console.error("ERROR al cargar las opiniones.", error));
         }
+
+
+        //! ===========================================================================
+        // filtrar opiniones por estrellas.
+        // document.getElementById("filtroEstrellas").addEventListener('change', (e) => {
+        //     let resultado = fetch("http://localhost/conforama-restaurant/?controller=API&action=api", {
+        //             method: "POST",
+        //             headers: {
+        //                 'Content-Type': 'application/x-www-form-urlencoded'
+        //             },
+        //             body: "accion=buscar_pedido"
+        //         }).then(data => data.json()).then(opiniones => filtrarOpiniones(opiniones, e.target.value))
+        //         .catch(error => console.error("ERROR al cargar las opiniones.", error));
+        // });
+
+        // function filtrarOpiniones(opiniones, puntuacion) {
+        //     let opinionesFiltradas = opiniones.filter((e) => {
+        //         if (e.puntuacion == puntuacion) {
+        //             return e;
+        //         }
+        //     });
+
+        //     console.log("[INFO] filtrarOpiniones: Mostrando reseñas filtradas por puntuación de " + puntuacion + " estrellas.");
+        //     mostrarOpiniones(opinionesFiltradas);
+        // }
+
+        // // ordenar opiniones.
+        // document.getElementById("orderOpiniones").addEventListener('change', (e) => {
+        //     changeOrder(e.target.value);
+        // });
+
+        // function changeOrder(order) {
+        //     let resultado = fetch("http://localhost/conforama-restaurant/?controller=API&action=api", {
+        //             method: "POST",
+        //             headers: {
+        //                 'Content-Type': 'application/x-www-form-urlencoded'
+        //             },
+        //             body: "accion=buscar_pedido"
+        //         }).then(data => data.json()).then(opiniones => mostrarOpiniones(opiniones, parseInt(order)))
+        //         .catch(error => console.error("ERROR al cargar las opiniones.", error));
+
+        //     if (resultado) {
+        //         let orden = parseInt(order) == 0 ? "ascendiente" : "descendiente";
+        //         console.log("[INFO] cargarOpiniones: Opiniones con " + orden + " cargadas correctamente.");
+        //     }
+        // }
 
         document.getElementById('btn-add-opinion').addEventListener('click', () => {
 
-            if (sessionStorage.getItem("isLogged") == "true") 
-            {
+            if (sessionStorage.getItem("isLogged") == "true") {
 
                 console.log("[INFO] eventListener('btn-add-opinion'): El usuario tiene sesión. Abriendo modal para inserción de reseña.");
 
@@ -288,12 +344,9 @@
                     console.log(err);
                 });
 
-            if(resultado)
-            {
+            if (resultado) {
                 console.log("[INFO] uploadOpinion/fetch: Opinion guardada correctamente.");
-            }
-            else
-            {
+            } else {
                 console.log("[FAIL] uploadOpinion/fetch: Error al guardar la opinion.");
             }
 
@@ -323,9 +376,7 @@
             if (user.usuario_id != null) {
                 console.log("[INFO] checkUserLogged: Sesión iniciada con usuario_id -> " + user.usuario_id + ".")
                 logged = true;
-            }
-            else
-            {
+            } else {
                 console.log("[INFO] checkUserLogged: No hay ningúna sesión iniciada.");
             }
 
