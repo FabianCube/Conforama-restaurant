@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
 </head>
 
-<body onload="cargarOpiniones()" style="background-color: #F7F7F7;">
+<body onload="cargarOpiniones();getUserData()" style="background-color: #F7F7F7;">
     <section class="container d-flex flex-column justify-content-center custom-container" style="margin-top: 110px;">
         <h1 class="titulo-principal">Reseñas de clientes</h1>
         <div id="resumen-opiniones" class="w-100 d-flex flex-row custom-resumen-opiniones ">
@@ -196,7 +196,7 @@
 
         document.getElementById('btn-add-opinion').addEventListener('click', () => {
 
-            if (sessionStorage.getItem("isLogged") == true) {
+            if (sessionStorage.getItem("isLogged") == "true") {
                 const bc = document.getElementById('crear-opinion');
                 const containerAddOpinion = document.createElement('div');
                 containerAddOpinion.classList.add('container-new-review');
@@ -230,7 +230,9 @@
                     text: 'Necesitas disponer de cuenta <br> ¿Ir a iniciar sesión?',
                     submitText: "Ir al login",
                     cancelText: "Cancelar",
-                    cancelCallback: () => notie.alert( {text: 'Cancelado'} ),
+                    cancelCallback: () => notie.alert({
+                        text: 'Cancelado'
+                    }),
                     submitCallback: () => this.location.href = 'http://localhost/conforama-restaurant/?controller=login',
                 })
             }
@@ -285,22 +287,27 @@
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
                     body: "accion=isLogged"
-                }).then(data => data.json()).then(user => checkUserLogged(user))
+                }).then(data => data.json())
+                .then(user => checkUserLogged(user))
                 .catch(function(err) {
-                    console.log(err)
+                    console.log(err);
+                    console.log("Error response:", err.response);
                 });
         }
 
         function checkUserLogged(user) {
-            let logged = true;
+            let logged = false;
 
-            if (user.usuario_id == null) {
-                logged = false;
+            if (user.usuario_id != null) {
+                console.log("El usuario con id " + user.usuario_id + " ha iniciado sesión correctamente.")
+                logged = true;
             }
 
-            sessionStorage.setItem("isLogged", logged);
+            sessionStorage.setItem("isLogged", logged.toString());
         }
     </script>
+
+
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/notie"></script>
 </body>

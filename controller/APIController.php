@@ -62,10 +62,12 @@ class APIController
         }
         else if($accion == 'isLogged')
         {
+            header('Content-Type: application/json');
+
             if(isset($_SESSION['current_user']))
             {
                 $usuario_id = $_SESSION['current_user']->getUsuario_id();
-                $user = UsuariosDAO::getOneUserById( $usuario_id );
+                $user = UsuariosDAO::getOneUserById($usuario_id);
 
                 $output = [
                     "usuario_id"      => $user->getUsuario_id(),
@@ -75,6 +77,21 @@ class APIController
                     "email"           => $user->getEmail(),
                     "telefono"        => $user->getTelefono(),
                     "direccion"       => $user->getDireccion()
+                ];
+
+                echo json_encode($output, JSON_UNESCAPED_UNICODE);
+                return;
+            }
+            else
+            {
+                $output = [
+                    "usuario_id"      => null,
+                    "rol_id"          => null,
+                    "nombre_usuario"  => null,
+                    "apellido_usuairo"=> null,
+                    "email"           => null,
+                    "telefono"        => null,
+                    "direccion"       => null
                 ];
 
                 echo json_encode($output, JSON_UNESCAPED_UNICODE);
