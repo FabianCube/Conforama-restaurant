@@ -101,7 +101,8 @@
     </section>
 
     <script>
-        function cargarOpiniones() {
+        function cargarOpiniones() 
+        {
             let resultado = fetch("http://localhost/conforama-restaurant/?controller=API&action=api", {
                     method: "POST",
                     headers: {
@@ -111,7 +112,10 @@
                 }).then(data => data.json()).then(opiniones => mostrarOpiniones(opiniones))
                 .catch(error => console.error("ERROR al cargar las opiniones.", error));
             
+            if(resultado)
+            {
                 console.log("[INFO] cargarOpiniones: Opiniones cargadas correctamente.");
+            }
         }
 
         function mostrarOpiniones(opiniones) {
