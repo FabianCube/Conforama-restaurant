@@ -110,6 +110,8 @@
                     body: "accion=buscar_pedido"
                 }).then(data => data.json()).then(opiniones => mostrarOpiniones(opiniones))
                 .catch(error => console.error("ERROR al cargar las opiniones.", error));
+            
+                console.log("[INFO] cargarOpiniones: Opiniones cargadas correctamente.");
         }
 
         function mostrarOpiniones(opiniones) {
@@ -145,9 +147,11 @@
 
                 contenedorOpiniones.append(opinionElemento);
             });
-            notie.alert({
-                text: 'Opiniones cargadas correctamente!'
-            })
+            // notie.alert({
+            //     text: 'Opiniones cargadas correctamente!'
+            // })
+
+            console.log("[INFO] mostrarOpiniones: Mostrando opiniones correctamente.");
         }
 
         function obtenerEstrellas(puntuacion) {
@@ -191,12 +195,17 @@
                 }
             });
 
+            console.log("[INFO] filtrarOpiniones: Mostrando reseñas filtradas por puntuación de " + puntuacion + " estrellas.");
             mostrarOpiniones(opinionesFiltradas);
         }
 
         document.getElementById('btn-add-opinion').addEventListener('click', () => {
 
-            if (sessionStorage.getItem("isLogged") == "true") {
+            if (sessionStorage.getItem("isLogged") == "true") 
+            {
+
+                console.log("[INFO] eventListener('btn-add-opinion'): El usuario tiene sesión. Abriendo modal para inserción de reseña.");
+
                 const bc = document.getElementById('crear-opinion');
                 const containerAddOpinion = document.createElement('div');
                 containerAddOpinion.classList.add('container-new-review');
@@ -225,7 +234,7 @@
                 `;
                 bc.append(containerAddOpinion);
             } else {
-
+                console.log("[INFO] eventListener('btn-add-opinion'): El usuario no tiene sesión iniciada. No puede publicar reseña.");
                 notie.confirm({
                     text: 'Necesitas disponer de cuenta <br> ¿Ir a iniciar sesión?',
                     submitText: "Ir al login",
@@ -253,7 +262,6 @@
             let date = new Date();
             const fecha_opinion = date.toISOString();
 
-            console.log(fecha_opinion);
             // Preparo los parametros que quiero pasarle a la api para guardarlos en DB.
             let data = new URLSearchParams({
                 accion: "add_review",
@@ -276,7 +284,17 @@
                     console.log(err);
                 });
 
-            // vuelvo a cargar las opiniones.
+            if(resultado)
+            {
+                console.log("[INFO] uploadOpinion/fetch: Opinion guardada correctamente.");
+            }
+            else
+            {
+                console.log("[FAIL] uploadOpinion/fetch: Error al guardar la opinion.");
+            }
+
+
+            console.log("[INFO] uploadOpinion: Lanzando cargarOpiniones()");
             cargarOpiniones();
         }
 
@@ -299,8 +317,12 @@
             let logged = false;
 
             if (user.usuario_id != null) {
-                console.log("El usuario con id " + user.usuario_id + " ha iniciado sesión correctamente.")
+                console.log("[INFO] checkUserLogged: Sesión iniciada con usuario_id -> " + user.usuario_id + ".")
                 logged = true;
+            }
+            else
+            {
+                console.log("[INFO] checkUserLogged: No hay ningúna sesión iniciada.");
             }
 
             sessionStorage.setItem("isLogged", logged.toString());
