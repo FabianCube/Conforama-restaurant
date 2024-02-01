@@ -79,7 +79,7 @@
                 <div class="d-flex flex-row">
                     <p>Filtrar por puntuación: </p>
                     <select name="filtroEstrellas" id="filtroEstrellas">
-                        <option disabled selected value> -- seleccionar filtro -- </option>
+                        <option disabled selected value="0"> -- seleccionar filtro -- </option>
                         <option value="5">5 estrellas</option>
                         <option value="4">4 estrellas</option>
                         <option value="3">3 estrellas</option>
@@ -121,9 +121,7 @@
             contenedorOpiniones.innerHTML = '';
 
             // muestro las reseñas más recientes primero.
-            // if (order == 0) {
-            //     opiniones.reverse();
-            // }
+            opiniones.reverse();
 
             opiniones.forEach(opinion => {
                 const opinionElemento = document.createElement('div');
@@ -181,8 +179,6 @@
             return html;
         }
 
-        //! ==========================================================================
-
         document.getElementById("filtroEstrellas").addEventListener('change', (e) => {
             filtrarYOrdenarOpiniones(e.target.value, document.getElementById("orderOpiniones").value);
         });
@@ -199,66 +195,34 @@
                 },
                 body: "accion=buscar_pedido"
             }).then(data => data.json()).then(opiniones => {
-                // Filtrar opiniones por puntuación
-                let opinionesFiltradas = opiniones.filter((e) => {
-                    return e.puntuacion == filtro;
-                });
+                
+                let opinionesFiltradas = opiniones;
 
-                // Ordenar opiniones
-                if (order === "0") {
-                    opinionesFiltradas.reverse();
+                // FILTRO
+                if(filtro != "0")
+                {
+                    console.log("Reseñas con puntuacion.");
+                    let filtrado = opinionesFiltradas.filter((e) => {
+                        return e.puntuacion == filtro;
+                    });
+
+                    console.log("[INFO] Filtrando opiniones por puntuación.");
+                    opinionesFiltradas = filtrado;
                 }
 
-                console.log("[INFO] filtrarYOrdenarOpiniones: Mostrando reseñas filtradas y ordenadas.");
+                // ORDENADO
+                if (order === "0") {
+                    console.log("[INFO] ordenando reseñas en orden descendente.");
+                    opinionesFiltradas.reverse();
+                }
+                else
+                {
+                    console.log("[INFO] ordenando reseñas en orden ascendente.");
+                }
+
                 mostrarOpiniones(opinionesFiltradas);
             }).catch(error => console.error("ERROR al cargar las opiniones.", error));
         }
-
-
-        //! ===========================================================================
-        // filtrar opiniones por estrellas.
-        // document.getElementById("filtroEstrellas").addEventListener('change', (e) => {
-        //     let resultado = fetch("http://localhost/conforama-restaurant/?controller=API&action=api", {
-        //             method: "POST",
-        //             headers: {
-        //                 'Content-Type': 'application/x-www-form-urlencoded'
-        //             },
-        //             body: "accion=buscar_pedido"
-        //         }).then(data => data.json()).then(opiniones => filtrarOpiniones(opiniones, e.target.value))
-        //         .catch(error => console.error("ERROR al cargar las opiniones.", error));
-        // });
-
-        // function filtrarOpiniones(opiniones, puntuacion) {
-        //     let opinionesFiltradas = opiniones.filter((e) => {
-        //         if (e.puntuacion == puntuacion) {
-        //             return e;
-        //         }
-        //     });
-
-        //     console.log("[INFO] filtrarOpiniones: Mostrando reseñas filtradas por puntuación de " + puntuacion + " estrellas.");
-        //     mostrarOpiniones(opinionesFiltradas);
-        // }
-
-        // // ordenar opiniones.
-        // document.getElementById("orderOpiniones").addEventListener('change', (e) => {
-        //     changeOrder(e.target.value);
-        // });
-
-        // function changeOrder(order) {
-        //     let resultado = fetch("http://localhost/conforama-restaurant/?controller=API&action=api", {
-        //             method: "POST",
-        //             headers: {
-        //                 'Content-Type': 'application/x-www-form-urlencoded'
-        //             },
-        //             body: "accion=buscar_pedido"
-        //         }).then(data => data.json()).then(opiniones => mostrarOpiniones(opiniones, parseInt(order)))
-        //         .catch(error => console.error("ERROR al cargar las opiniones.", error));
-
-        //     if (resultado) {
-        //         let orden = parseInt(order) == 0 ? "ascendiente" : "descendiente";
-        //         console.log("[INFO] cargarOpiniones: Opiniones con " + orden + " cargadas correctamente.");
-        //     }
-        // }
 
         document.getElementById('btn-add-opinion').addEventListener('click', () => {
 
