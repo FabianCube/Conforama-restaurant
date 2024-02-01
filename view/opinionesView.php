@@ -243,13 +243,17 @@
                     <p>Titulo</p><input type="text" id="titulo_opinion" name="titulo_opinion"></input>
                     <p>Reseña</p><input type="text" id="opinion_usuario" name="texto_opinion"></input>
                     <p>Puntuación</p>
-                    <select name="puntuacionUsuario" id="puntuacionUsuario" name="puntuacion_opinion">
+                    <select id="puntuacionUsuario" name="puntuacion_opinion">
                         <option disabled selected value> -- seleccionar -- </option>
                         <option value="5">5 estrellas</option>
                         <option value="4">4 estrellas</option>
                         <option value="3">3 estrellas</option>
                         <option value="2">2 estrellas</option>
                         <option value="1">1 estrellas</option>
+                    </select>
+                    <p>Selecionar reseña</p>
+                    <select name="pedidosUsuario" id="pedidosUsuario">
+                        ${showPedidosAvailables()}
                     </select>
                 </form>
                 <button onclick="uploadOpinion()">Publicar</button>
@@ -271,6 +275,38 @@
             }
 
         });
+
+        function isPedidoIDAvailable(newID)
+        {
+            let availableIDs = JSON.parse(localStorage.getItem("availablePedidos")) || [];
+            let index = availableIDs.indexOf(newID);
+
+            if(index !== -1) // -1 -> no existe
+            {
+                console.log("[INFO] isPedidoIDAvailable: Pedido existente, pasando a no disponible.");
+                availableIDs.splice(index, 1);
+                localStorage.setItem("availablePedidos", availableIDs);
+                return true;
+            }
+            else
+            {
+                console.log("[INFO] isPedidoIDAvailable: Pedido no disponible");
+                return false;
+            }
+        }
+
+        function showPedidosAvailables()
+        {
+            let result = ``;
+            let pedidos = JSON.parse(localStorage.getItem("availablePedidos")) || [];
+            
+            for(let i = 0; i < pedidos.lenght; i++)
+            {
+                result = `<option value="${pedido[i]}">Pedido ID: ${pedido[i]}</option>`;
+            }
+
+            return result;
+        }
 
         function cerrarFormulario(element) {
             const container = element.parentNode;
@@ -334,13 +370,21 @@
                 });
         }
 
-        function checkUserLogged(user) {
+        function checkUserLogged(user)
+        {
             let logged = false;
 
             if (user.usuario_id != null) {
                 console.log("[INFO] checkUserLogged: Sesión iniciada con usuario_id -> " + user.usuario_id + ".")
+
+                let pedidos = user.id_pedidos;
+
+                localStorage.setItem("availablePedidos", pedidos);
+
                 logged = true;
-            } else {
+            } 
+            else
+            {
                 console.log("[INFO] checkUserLogged: No hay ningúna sesión iniciada.");
             }
 
