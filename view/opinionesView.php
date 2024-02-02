@@ -289,11 +289,12 @@
             let result = ``;
 
             let pedidos = JSON.parse(localStorage.getItem("availablePedidos"));
+            console.log(pedidos);
 
-            for(let i = 0; i < pedidos.length; i++)
-            {
-                result = result + `<option value="${pedidos[i]}">Pedido ID: ${pedidos[i]}</option>`;
-            }
+            // for(let i = 0; i < pedidos.length; i++)
+            // {
+            //     result = result + `<option value="${pedidos[i]}">Pedido ID: ${pedidos[i]}</option>`;
+            // }
             
             return result;
         }
@@ -325,24 +326,19 @@
             // Le paso los parametros por "body", mediante POST.
             let resultado = fetch("http://localhost/conforama-restaurant/?controller=API&action=api", {
                 method: "POST",
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                 body: data
-            })
-            .then(response => response.json())
-            .catch(function(err) {
-                console.log(err);
-            });
+            }).then(response => response.json())
+            .catch(function(err) { console.log(err) });
 
-            if (resultado) {
-            console.log("[SUCCESS] uploadOpinion/fetch: Opinion guardada correctamente.");
+            if (resultado) 
+            {
+                console.log("[SUCCESS] uploadOpinion/fetch: Opinion enviada correctamente.");
             }
             else 
             {
-            console.log("[FAILED] uploadOpinion/fetch: Error al guardar la opinion.");
+                console.log("[FAILED] uploadOpinion/fetch: Error al enviar la opinion.");
             }
-
 
             console.log("[INFO] uploadOpinion: Lanzando cargarOpiniones()");
             cargarOpiniones();
@@ -384,17 +380,17 @@
 
         function loadUserData(user)
         {
+            let logged = false;
+
             if (user.usuario_id != null) 
             {
                 console.log("[INFO] loadUserData: Sesión iniciada con usuario_id -> " + user.usuario_id + ".")
 
-                let logged = true;
+                logged = true;
             } 
             else
             {
                 console.log("[INFO] loadUserData: No hay ningúna sesión iniciada.");
-
-                let logged = false;
             }
 
             sessionStorage.setItem("isLogged", logged.toString());
