@@ -97,3 +97,13 @@
     font-weight: bold;
 }
 
+.btn-review
+{
+    background-color: var(--red-color); 
+    color: white; 
+    border: none; 
+    border-radius: 3px;
+    width: 80px;
+    height: 30px;
+}
+

@@ -239,25 +239,33 @@
                 }, 1);
 
                 containerAddOpinion.innerHTML = `
-                <form>
-                    <p>Titulo</p><input type="text" id="titulo_opinion" name="titulo_opinion"></input>
-                    <p>Reseña</p><input type="text" id="opinion_usuario" name="texto_opinion"></input>
-                    <p>Puntuación</p>
-                    <select id="puntuacionUsuario" name="puntuacion_opinion">
-                        <option disabled selected value> -- seleccionar -- </option>
-                        <option value="5">5 estrellas</option>
-                        <option value="4">4 estrellas</option>
-                        <option value="3">3 estrellas</option>
-                        <option value="2">2 estrellas</option>
-                        <option value="1">1 estrellas</option>
-                    </select>
-                    <p>Selecionar reseña</p>
-                    <select name="pedidosUsuario" id="pedidosUsuario">
-                        ${showPedidosAvailables()}
-                    </select>
-                </form>
-                <button onclick="uploadOpinion()">Publicar</button>
-                <button onclick="cerrarFormulario(this)">Cancelar</button>
+                <div style="display:flex; padding: 30px;">
+                    <div style="width: 300px; margin-right: 30px;">
+                        <p>Titulo</p><input type="text" id="titulo_opinion" name="titulo_opinion" style="width: 100%;">
+                        <p>Reseña</p><input type="text" id="opinion_usuario" name="texto_opinion" style="height: 100px;width: 100%;">
+                    </div>
+
+                    <div style="width: 200px;">
+                        <p>Puntuación</p>
+                        <select id="puntuacionUsuario" name="puntuacion_opinion">
+                            <option disabled selected value> -- seleccionar -- </option>
+                            <option value="5">5 estrellas</option>
+                            <option value="4">4 estrellas</option>
+                            <option value="3">3 estrellas</option>
+                            <option value="2">2 estrellas</option>
+                            <option value="1">1 estrellas</option>
+                        </select>
+                        <p>Selecionar reseña</p>
+                        <select name="pedidosUsuario" id="pedidosUsuario">
+                            ${showPedidosAvailables()}
+                        </select>
+                        <div style="margin-top: 15px;">
+                            <button onclick="uploadOpinion()" class="btn-review">Publicar</button>
+                            <button onclick="cerrarFormulario(this)" class="btn-review">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+                
                 
                 `;
                 bc.append(containerAddOpinion);
@@ -276,35 +284,17 @@
 
         });
 
-        function isPedidoIDAvailable(newID)
-        {
-            let availableIDs = JSON.parse(localStorage.getItem("availablePedidos")) || [];
-            let index = availableIDs.indexOf(newID);
-
-            if(index !== -1) // -1 -> no existe
-            {
-                console.log("[INFO] isPedidoIDAvailable: Pedido existente, pasando a no disponible.");
-                availableIDs.splice(index, 1);
-                localStorage.setItem("availablePedidos", availableIDs);
-                return true;
-            }
-            else
-            {
-                console.log("[INFO] isPedidoIDAvailable: Pedido no disponible");
-                return false;
-            }
-        }
-
         function showPedidosAvailables()
         {
             let result = ``;
-            let pedidos = JSON.parse(localStorage.getItem("availablePedidos")) || [];
-            
-            for(let i = 0; i < pedidos.lenght; i++)
-            {
-                result = `<option value="${pedido[i]}">Pedido ID: ${pedido[i]}</option>`;
-            }
 
+            let pedidos = JSON.parse(localStorage.getItem("availablePedidos"));
+
+            for(let i = 0; i < pedidos.length; i++)
+            {
+                result = result + `<option value="${pedidos[i]}">Pedido ID: ${pedidos[i]}</option>`;
+            }
+            
             return result;
         }
 
@@ -318,6 +308,7 @@
             const titulo_opinion = document.getElementById("titulo_opinion").value;
             const texto_opinion = document.getElementById("opinion_usuario").value;
             const puntuacion_opinion = document.getElementById("puntuacionUsuario").value;
+            const pedidoID = document.getElementById("pedidosUsuario").value;
 
             let date = new Date();
             const fecha_opinion = date.toISOString();
@@ -333,21 +324,23 @@
 
             // Le paso los parametros por "body", mediante POST.
             let resultado = fetch("http://localhost/conforama-restaurant/?controller=API&action=api", {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: data
-                })
-                .then(response => response.json())
-                .catch(function(err) {
-                    console.log(err);
-                });
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: data
+            })
+            .then(response => response.json())
+            .catch(function(err) {
+                console.log(err);
+            });
 
             if (resultado) {
-                console.log("[INFO] uploadOpinion/fetch: Opinion guardada correctamente.");
-            } else {
-                console.log("[FAIL] uploadOpinion/fetch: Error al guardar la opinion.");
+            console.log("[SUCCESS] uploadOpinion/fetch: Opinion guardada correctamente.");
+            }
+            else 
+            {
+            console.log("[FAILED] uploadOpinion/fetch: Error al guardar la opinion.");
             }
 
 
@@ -355,41 +348,58 @@
             cargarOpiniones();
         }
 
-        function getUserData() {
-            let resultado = fetch("http://localhost/conforama-restaurant/?controller=API&action=api", {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: "accion=isLogged"
-                }).then(data => data.json())
-                .then(user => checkUserLogged(user))
-                .catch(function(err) {
-                    console.log(err);
-                    console.log("Error response:", err.response);
-                });
+        function getUserData() 
+        {
+            fetch("http://localhost/conforama-restaurant/?controller=API&action=api", {
+                method: "POST",
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: "accion=isLogged"
+            }).then(data => data.json()).then(user => loadUserData(user)).then( getAvailablePedidos() )
+            .catch(function(err) { console.log(err) });
         }
 
-        function checkUserLogged(user)
+        function getAvailablePedidos()
         {
-            let logged = false;
+            fetch("http://localhost/conforama-restaurant/?controller=API&action=api", {
+                method: "POST",
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: "accion=avalablePedidos"
+            }).then(response => response.json()).then(pedidos => loadAvailablePedidos(pedidos))
+            .catch(function(err){ console.log(err) })
+        }
 
-            if (user.usuario_id != null) {
-                console.log("[INFO] checkUserLogged: Sesión iniciada con usuario_id -> " + user.usuario_id + ".")
+        function loadAvailablePedidos(pedidos)
+        {
+            if(pedidos != null)
+            {
+                console.log("[SUCCESS] loadAvailablePedidos: Cargando los pedidos disponibles.");
 
-                let pedidos = user.id_pedidos;
+                localStorage.setItem("availablePedidos", json_decode(pedidos));
+            }
+            else
+            {
+                console.log("[FAILED] loadAvailablePedidos: No se han podido cargar los pedidos disponibles.");
+            }
+        }
 
-                localStorage.setItem("availablePedidos", pedidos);
+        function loadUserData(user)
+        {
+            if (user.usuario_id != null) 
+            {
+                console.log("[INFO] loadUserData: Sesión iniciada con usuario_id -> " + user.usuario_id + ".")
 
-                logged = true;
+                let logged = true;
             } 
             else
             {
-                console.log("[INFO] checkUserLogged: No hay ningúna sesión iniciada.");
+                console.log("[INFO] loadUserData: No hay ningúna sesión iniciada.");
+
+                let logged = false;
             }
 
             sessionStorage.setItem("isLogged", logged.toString());
         }
+
     </script>
 
 

@@ -11,6 +11,7 @@ class Pedidos
     private $estado;
     private $hora_pedido;
     private $precio_total;
+    private $review;
 
     public function __construct()
     { }
@@ -75,6 +76,26 @@ class Pedidos
     public function setPrecio_total($precio_total)
     {
         $this->precio_total = $precio_total;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of review
+     */ 
+    public function getReview()
+    {
+        return $this->precio_total;
+    }
+
+    /**
+     * Set the value of review
+     *
+     * @return  self
+     */ 
+    public function setReview($review)
+    {
+        $this->review = $review;
 
         return $this;
     }

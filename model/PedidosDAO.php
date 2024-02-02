@@ -80,4 +80,20 @@ class PedidosDAO
         $user = $result->fetch_object('Pedidos');
         return $user;
     }
+
+    public static function getPedidosSinOpinionByUserId($user_id)
+    {
+        $conn = DataBase::connect();
+        $sql = $conn->prepare("SELECT pedido_id FROM pedidos WHERE usuario_id = $user_id AND review = 0");
+        $sql->execute();
+        $result = $sql->get_result();
+
+        // if ($result) {
+        //     while ($pedido = $result->fetch_object('Pedidos')) {
+        //         $pedidos[] = $pedido;
+        //     }
+        // }
+
+        return $result;
+    }
 }
