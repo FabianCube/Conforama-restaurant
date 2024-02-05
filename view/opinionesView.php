@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
 </head>
 
-<body onload="cargarOpiniones();getUserData()" style="background-color: #F7F7F7;">
+<body onload="cargarOpiniones();getUserData();setDefaults()" style="background-color: #F7F7F7;">
     <section class="container d-flex flex-column justify-content-center custom-container" style="margin-top: 110px;">
         <h1 class="titulo-principal">Reseñas de clientes</h1>
         <div id="resumen-opiniones" class="w-100 d-flex flex-row custom-resumen-opiniones ">
@@ -101,7 +101,7 @@
     </section>
 
     <script>
-        function cargarOpiniones() {
+        async function cargarOpiniones() {
             let resultado = fetch("http://localhost/conforama-restaurant/?controller=API&action=api", {
                     method: "POST",
                     headers: {
@@ -224,14 +224,16 @@
             }).catch(error => console.error("ERROR al cargar las opiniones.", error));
         }
 
+        let containerAddOpinion;
+
         document.getElementById('btn-add-opinion').addEventListener('click', () => {
 
-            if (sessionStorage.getItem("isLogged") == "true") {
-
+            if (sessionStorage.getItem("isLogged") == "true" && sessionStorage.getItem("modalOpen") == "false") 
+            {
                 console.log("[INFO] eventListener('btn-add-opinion'): El usuario tiene sesión. Abriendo modal para inserción de reseña.");
 
                 const bc = document.getElementById('crear-opinion');
-                const containerAddOpinion = document.createElement('div');
+                containerAddOpinion = document.createElement('div');
                 containerAddOpinion.classList.add('container-new-review');
 
                 setTimeout(() => {
@@ -261,15 +263,16 @@
                         </select>
                         <div style="margin-top: 15px;">
                             <button onclick="uploadOpinion()" class="btn-review">Publicar</button>
-                            <button onclick="cerrarFormulario(this)" class="btn-review">Cancelar</button>
+                            <button onclick="cerrarFormulario()" class="btn-review">Cancelar</button>
                         </div>
                     </div>
-                </div>
-                
-                
-                `;
+                </div>`;
+
+                sessionStorage.setItem("modalOpen", true)
                 bc.append(containerAddOpinion);
-            } else {
+            } 
+            else if(sessionStorage.getItem("isLogged") == "false")
+            {
                 console.log("[INFO] eventListener('btn-add-opinion'): El usuario no tiene sesión iniciada. No puede publicar reseña.");
                 notie.confirm({
                     text: 'Necesitas disponer de cuenta <br> ¿Ir a iniciar sesión?',
@@ -281,15 +284,35 @@
                     submitCallback: () => this.location.href = 'http://localhost/conforama-restaurant/?controller=login',
                 })
             }
+            else
+            {
+                console.log("[INFO] btn-add-opinion: Modal ya está abrierto.")
+            }
 
         });
+
+        function cerrarFormulario()
+        {
+            console.log("[INFO] cerrarFormulario: Cerrando formulario.")
+            containerAddOpinion.remove()
+
+            sessionStorage.setItem("modalOpen", false)
+        }
 
         function showPedidosAvailables()
         {
             let result = ``;
 
             let pedidos = JSON.parse(localStorage.getItem("availablePedidos"));
-            console.log(pedidos);
+
+            if(pedidos === null)
+            {
+                console.log("[INFO] showPedidosAvailables: No hay pedidos disponibles.");
+            }
+            else
+            {
+                console.log("[INFO] showPedidosAvailables: Pedidos disponibles -> " + pedidos);
+            }
 
             // for(let i = 0; i < pedidos.length; i++)
             // {
@@ -297,11 +320,6 @@
             // }
             
             return result;
-        }
-
-        function cerrarFormulario(element) {
-            const container = element.parentNode;
-            container.parentNode.removeChild(container);
         }
 
         function uploadOpinion() {
@@ -320,7 +338,7 @@
                 titulo_opinion: titulo_opinion,
                 texto_opinion: texto_opinion,
                 puntuacion_opinion: puntuacion_opinion,
-                fecha_opinion: fecha_opinion
+                fecha_opinion: fecha_opinion,
             });
 
             // Le paso los parametros por "body", mediante POST.
@@ -334,10 +352,19 @@
             if (resultado) 
             {
                 console.log("[SUCCESS] uploadOpinion/fetch: Opinion enviada correctamente.");
+                cerrarFormulario()
+
+                notie.alert({
+                        text: '¡Reseña subida correctamente!'
+                })
             }
             else 
             {
                 console.log("[FAILED] uploadOpinion/fetch: Error al enviar la opinion.");
+
+                notie.alert({
+                    text: '¡Error al subir la reseña!'
+                })
             }
 
             console.log("[INFO] uploadOpinion: Lanzando cargarOpiniones()");
@@ -394,6 +421,12 @@
             }
 
             sessionStorage.setItem("isLogged", logged.toString());
+        }
+
+        function setDefaults()
+        {
+            sessionStorage.setItem("modalOpen", false)
+            console.log("modalOpen = " + sessionStorage.getItem("modalOpen"))
         }
 
     </script>

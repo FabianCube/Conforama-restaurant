@@ -8,6 +8,8 @@ class APIController
 {
     public function api()
     {
+        $accion = null;
+
         // comprobar si el metodo accion se ha pasado correctamente.
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $accion = isset($_POST['accion']) ? $_POST['accion'] : null;
@@ -41,16 +43,31 @@ class APIController
             case 'add_review':
                 header('Content-Type: application/json');
 
-                if ($_SESSION['current_user'] != null) {
+                if ($_SESSION['current_user'] != null) 
+                {
                     $usuario_id = $_SESSION['current_user']->getUsuario_id();
                     $titulo_opinion = $_POST['titulo_opinion'];
                     $texto_opinion = $_POST['texto_opinion'];
                     $puntuacion_opinion = $_POST['puntuacion_opinion'];
                     $fecha_opinion = $_POST['fecha_opinion'];
+
                     $result = OpinionesDAO::insertOpinion($usuario_id, $titulo_opinion, $texto_opinion, $puntuacion_opinion, $fecha_opinion);
-                } else {
+
+                    $opinion = [
+                        "usuario_id" => $usuario_id,
+                        "titulo_opinion" => $titulo_opinion,
+                        "texto_opinion" => $texto_opinion,
+                        "puntuacion_opinion" => $puntuacion_opinion,
+                        "fecha_opinion" => $fecha_opinion
+                    ];
+
+                    echo json_encode($opinion);
+                }
+                else 
+                {
                     echo 'No hay una sesion iniciada para publicar una review';
                 }
+
                 break;
             case 'isLogged':
                 header('Content-Type: application/json');
@@ -107,7 +124,7 @@ class APIController
 
                 break;
             default:
-                echo 'Parámetro POST no válido.';
+                echo 'Parámetro POST ['. $accion .'] no válido.';
         }
     }
 }
