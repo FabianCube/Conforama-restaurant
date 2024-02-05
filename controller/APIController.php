@@ -123,6 +123,12 @@ class APIController
                 header('Content-Type: application/json');
 
                 break;
+            case 'getPoints':
+                header('Content-Type: application/json');
+
+                // obtener los puntos del usuario.
+
+                break;
             default:
                 echo 'Parámetro POST ['. $accion .'] no válido.';
         }
