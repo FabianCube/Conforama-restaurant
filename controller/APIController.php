@@ -119,27 +119,40 @@ class APIController
                 echo json_encode(PedidosDAO::getPedidosSinOpinionByUserId($user_id));
 
                 break;
+
             case 'updateAvailablePedidos':
                 header('Content-Type: application/json');
 
                 break;
+
             case 'getPoints':
                 header('Content-Type: application/json');
 
-                if(isset($_POST['current_user']))
+                if(isset($_SESSION['current_user']))
                 {
                     $uid = $_SESSION['current_user']->getUsuario_id();
                 }
-                // obtener los puntos del usuario.
-                $data = UsuariosDAO::getUserPoints($uid);
+                else
+                {
+                    $uid = null;
+                }
 
-                return $result = ['success' => true, 'data' => $data];
+                $data = UsuariosDAO::getOneUserById($uid);
 
-                //return json_encode($data, JSON_UNESCAPED_UNICODE);
-
+                if($data instanceof Cliente)
+                {
+                    $return = [
+                        "uid" => $data->getUsuario_id(),
+                        "puntos" => (int) $data->getPuntos()
+                    ];
+    
+                    echo json_encode($return, JSON_UNESCAPED_UNICODE);
+                }
+                
                 break;
+
             default:
-                echo 'Parámetro POST ['. $accion .'] no válido.';
+                echo 'Parámetro POST [ \''. $accion .' \'] no válido.';
         }
     }
 }

@@ -17,7 +17,7 @@ $withoutIva = cartController::getPriceWithoutIVA();
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
-<body style="background-color: #F7F7F7;">
+<body onload="getUserPoints()" style="background-color: #F7F7F7;">
 
     <section class="container d-flex justify-content-center" style="margin-top: 95px;">
         <div>
