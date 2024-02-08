@@ -97,4 +97,15 @@ class UsuariosDAO
 
         mysqli_close($conn);
     }
+
+    public static function getUserPoints($uid)
+    {
+        $conn = DataBase::connect();
+
+        $stmt = $conn->prepare("SELECT puntos FROM usuarios WHERE usuario_id = $uid");
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result;
+    }
 }

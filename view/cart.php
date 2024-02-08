@@ -167,21 +167,21 @@ $withoutIva = cartController::getPriceWithoutIVA();
             <div class="content-modal">
                 <p class="title-modal">Aplicar descuento</p>
                 <div class="info-puntos">
-                    <h2>Puntos disponibles: 0</h2>
+                    <h2>Puntos disponibles: <span id="modalPoints">0</span></h2>
                     <p>Puntos a usar:</p>
                     <input class="input-puntos" type="number" value="0">
                     <p class="descuento">Descuento total: <span>0</span>€</p>
                 </div>
                 <div class="control-puntos">
                     <button class="btn-control-puntos">Aplicar</button>
-                    <button class="btn-control-puntos">Cancelar</button>
+                    <button class="btn-control-puntos" onclick="closeModal()">Cancelar</button>
                 </div>
             </div>
         </div>
 
         <div class="col-3 p-3 mt-5" style="max-height: 320px; background-color: white;">
             <div id="container-puntos">
-                <p class="puntos">Tus puntos: <span id="puntos">0</span></p>
+                <p class="puntos">Tus puntos: <span id="points">0</span></p>
                 <button class="btn-puntos" onclick="openModal()">Usar puntos</button>
             </div>
 
@@ -228,7 +228,7 @@ $withoutIva = cartController::getPriceWithoutIVA();
         </div>
     </section>
 
-    <script src="assets/js/cart.js"></script>
+    <script src="assets/js/cart/cart.js"></script>
     <!-- Icons -->
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 

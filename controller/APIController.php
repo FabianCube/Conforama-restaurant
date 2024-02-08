@@ -111,11 +111,11 @@ class APIController
                     echo json_encode($output, JSON_UNESCAPED_UNICODE);
                 }
                 break;
-            case 'avalablePedidos':
+            case 'availablePedidos':
 
                 header('Content-Type: application/json');
 
-                $user_id = $_POST['current_user']->getUsuario_id();
+                $user_id = $_SESSION['current_user']->getUsuario_id();
                 echo json_encode(PedidosDAO::getPedidosSinOpinionByUserId($user_id));
 
                 break;
@@ -126,7 +126,16 @@ class APIController
             case 'getPoints':
                 header('Content-Type: application/json');
 
+                if(isset($_POST['current_user']))
+                {
+                    $uid = $_SESSION['current_user']->getUsuario_id();
+                }
                 // obtener los puntos del usuario.
+                $data = UsuariosDAO::getUserPoints($uid);
+
+                return $result = ['success' => true, 'data' => $data];
+
+                //return json_encode($data, JSON_UNESCAPED_UNICODE);
 
                 break;
             default:

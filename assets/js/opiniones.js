@@ -284,7 +284,7 @@ function getAvailablePedidos()
     fetch("http://localhost/conforama-restaurant/?controller=API&action=api", {
         method: "POST",
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: "accion=avalablePedidos"
+        body: "accion=availablePedidos"
     }).then(response => response.json()).then(pedidos => loadAvailablePedidos(pedidos))
     .catch(function(err){ console.log(err) })
 }
