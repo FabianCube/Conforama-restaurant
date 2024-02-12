@@ -15,9 +15,10 @@ $withoutIva = cartController::getPriceWithoutIVA();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
 </head>
 
-<body onload="getUserPoints()" style="background-color: #F7F7F7;">
+<body onload="getUserPoints();setUp()" style="background-color: #F7F7F7;">
 
     <section class="container d-flex justify-content-center" style="margin-top: 95px;">
         <div>
@@ -216,7 +217,7 @@ $withoutIva = cartController::getPriceWithoutIVA();
                 <p class="mt-3" style="font-size: 14px;">¿Tienes un cupón/bono? ¡Úsalo aquí!</p>
                 <div class="d-flex">
                     <input class="input-text" type="text" placeholder="Escribe tu código">
-                    <input class="btn-aplicar" type="button" value="APLICAR">
+                    <input class="btn-aplicar" type="button" value="APLICAR" onclick="updateUserPoints(1, 100)">
                 </div>
             </div>
             <div class="col-12 d-flex justify-content-center align-items-center flex-column w-100 m-0 p-0" style="height: 150px; background-color: #EEEEEE;">
@@ -232,6 +233,8 @@ $withoutIva = cartController::getPriceWithoutIVA();
     <!-- Icons -->
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 
+    
+    <script src="https://unpkg.com/notie"></script>
 </body>
 
 </html>

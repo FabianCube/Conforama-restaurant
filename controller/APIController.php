@@ -142,15 +142,63 @@ class APIController
                 if($data instanceof Cliente)
                 {
                     $return = [
+                        "success" => "true",
                         "uid" => $data->getUsuario_id(),
                         "puntos" => (int) $data->getPuntos()
                     ];
     
                     echo json_encode($return, JSON_UNESCAPED_UNICODE);
                 }
+                else
+                {
+                    $return = [
+                        "success" => "false",
+                        "uid" => "",
+                        "puntos" => ""
+                    ];
+
+                    echo json_encode($return, JSON_UNESCAPED_UNICODE);
+                }
                 
                 break;
 
+            case 'addPoints':
+                $uid = $_SESSION['current_user']->getUsuario_id();
+                $points = $_POST['pts'];
+                $current_points = UsuariosDAO::getOneUserById($uid)->getPuntos();
+                $new_value = $current_points + $points;
+
+                UsuariosDAO::updateUserPoints($new_value, $uid);
+
+                $return = [
+                    "success" => "true",
+                    "new_balance" => UsuariosDAO::getOneUserById($uid)->getPuntos()
+                ];
+
+                echo json_encode($return, JSON_UNESCAPED_UNICODE);
+
+                break;
+            case 'removePoints':
+                $uid = $_SESSION['current_user']->getUsuario_id();
+                $points = $_POST['pts'];
+                $current_points = UsuariosDAO::getOneUserById($uid)->getPuntos();
+                $new_value = $current_points - $points;
+
+                if($new_value < 0)
+                {
+                    $new_value = 0;
+                }
+
+                UsuariosDAO::updateUserPoints($new_value, $uid);
+
+                $return = [
+                    "success" => "true",
+                    "new_balance" => UsuariosDAO::getOneUserById($uid)->getPuntos()
+                ];
+
+                echo json_encode($return, JSON_UNESCAPED_UNICODE);
+                
+                break;
             default:
                 echo 'Parámetro POST [ \''. $accion .' \'] no válido.';
         }
