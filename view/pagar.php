@@ -17,7 +17,7 @@ $withoutIva = cartController::getPriceWithoutIVA();
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
-<body style="background-color: #F7F7F7;">
+<body style="background-color: #F7F7F7;" onload="setUp()">
 
     <section class="container d-flex justify-content-center" style="margin-top: 95px;">
         <div>
@@ -148,8 +148,14 @@ $withoutIva = cartController::getPriceWithoutIVA();
                     <p style="font-size: 12px;">Total (IVA inc.)</p>
                     <p style="font-size: 12px;"><?= $totalPrice ?> €</p>
                 </div>
+
+                <div id="discount-section" class="col-12 d-flex justify-content-between mb-3 discount-hidden">
+                    <p class="text-bill-cart">Discount (pts.)</p>
+                    <p class="text-bill-cart">-<span id="total-discount"></span> pts.</p>
+                </div>
+
                 <div class="col-12">
-                    <a href="<?= URL . "?controller=pedido&action=realizarPedido"?>" class="custom-btn-tramitar">TRAMITAR PEDIDO <span><ion-icon name="arrow-dropright"></ion-icon></span></a>
+                    <a id="finish-order" href="<?= URL . "?controller=pedido&action=realizarPedido"?>" class="custom-btn-tramitar">TRAMITAR PEDIDO <span><ion-icon name="arrow-dropright"></ion-icon></span></a>
                 </div>
                 <div class="col-12 d-flex justify-content-center align-items-center flex-column mt-3" style="height: 150px; background-color: #EEEEEE;">
                 <p>Pago 100% seguro</p>
@@ -163,9 +169,10 @@ $withoutIva = cartController::getPriceWithoutIVA();
         </div>
     </section>
 
+    <script src="assets/js/cart/cart.js"></script>
+    <script src="assets/js/cart/pagar.js"></script>
     <!-- Icons -->
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
-
 </body>
 
 </html>

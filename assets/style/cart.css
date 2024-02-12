@@ -306,3 +306,13 @@
     width: 100px;
     padding-left: 8px;
 }
+
+#discount-section
+{
+    color: var(--red-color);
+}
+
+.discount-hidden
+{
+    display: none!important;
+}

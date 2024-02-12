@@ -3,6 +3,7 @@
 include_once __DIR__ . '/../model/OpinionesDAO.php';
 include_once __DIR__ . '/../model/UsuariosDAO.php';
 include_once __DIR__ . '/../model/PedidosDAO.php';
+include_once __DIR__ . '/../utils/conversor_puntos.php';
 
 class APIController
 {
@@ -198,6 +199,22 @@ class APIController
 
                 echo json_encode($return, JSON_UNESCAPED_UNICODE);
                 
+                break;
+            case 'moneySpent':
+                header('Content-Type: application/json');
+
+                $uid = $_SESSION['current_user']->getUsuario_id();
+                $spent = PedidosDAO::getLastPedidoByUserId($uid)->getPrecio_total();
+
+                $pts = conversor_puntos::exchangeMoneyToPoints($spent);
+
+                $output = [
+                    "success" => "true",
+                    "spent" => $pts
+                ];
+
+                echo json_encode($output, JSON_UNESCAPED_UNICODE);
+
                 break;
             default:
                 echo 'Parámetro POST [ \''. $accion .' \'] no válido.';

@@ -168,13 +168,13 @@ $withoutIva = cartController::getPriceWithoutIVA();
             <div class="content-modal">
                 <p class="title-modal">Aplicar descuento</p>
                 <div class="info-puntos">
-                    <h2>Puntos disponibles: <span id="modalPoints">0</span></h2>
+                    <h2>Puntos disponibles: <span id="modal-points">0</span></h2>
                     <p>Puntos a usar:</p>
-                    <input class="input-puntos" type="number" value="0">
+                    <input id="input-puntos" type="number" value="0" max="getUserPoints()">
                     <p class="descuento">Descuento total: <span>0</span>€</p>
                 </div>
                 <div class="control-puntos">
-                    <button class="btn-control-puntos">Aplicar</button>
+                    <button class="btn-control-puntos" id="trigger-discount">Aplicar</button>
                     <button class="btn-control-puntos" onclick="closeModal()">Cancelar</button>
                 </div>
             </div>
@@ -208,8 +208,12 @@ $withoutIva = cartController::getPriceWithoutIVA();
                     <p class="text-bill-cart">Total (IVA inc.)</p>
                     <p class="text-bill-cart"><?= $totalPrice ?> €</p>
                 </div>
+                <div id="discount-section" class="col-12 d-flex justify-content-between mb-3 discount-hidden">
+                    <p class="text-bill-cart">Discount (pts.)</p>
+                    <p class="text-bill-cart">-<span id="total-discount"></span> pts.</p>
+                </div>
                 <div class="col-12">
-                    <a type="button" href="<?= URL . "?controller=pedido&action=loginOrRegister" ?>" class="custom-btn-tramitar">TRAMITAR PEDIDO <span><ion-icon name="arrow-dropright"></ion-icon></span></a>
+                    <a id="proceed-comand" type="button" href="<?= URL . "?controller=pedido&action=loginOrRegister" ?>" class="custom-btn-tramitar">TRAMITAR PEDIDO <span><ion-icon name="arrow-dropright"></ion-icon></span></a>
                 </div>
             </div>
 
@@ -217,7 +221,7 @@ $withoutIva = cartController::getPriceWithoutIVA();
                 <p class="mt-3" style="font-size: 14px;">¿Tienes un cupón/bono? ¡Úsalo aquí!</p>
                 <div class="d-flex">
                     <input class="input-text" type="text" placeholder="Escribe tu código">
-                    <input class="btn-aplicar" type="button" value="APLICAR" onclick="updateUserPoints(1, 100)">
+                    <input class="btn-aplicar" type="button" value="APLICAR" onclick="updateUserPoints(1, 200)">
                 </div>
             </div>
             <div class="col-12 d-flex justify-content-center align-items-center flex-column w-100 m-0 p-0" style="height: 150px; background-color: #EEEEEE;">
