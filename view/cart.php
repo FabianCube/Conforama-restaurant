@@ -180,7 +180,7 @@ $withoutIva = cartController::getPriceWithoutIVA();
             </div>
         </div>
 
-        <div class="col-3 p-3 mt-5" style="max-height: 320px; background-color: white;">
+        <div class="col-3 p-3 mt-5" style="height: auto; background-color: white;">
             <div id="container-puntos">
                 <p class="puntos">Tus puntos: <span id="points">0</span></p>
                 <button class="btn-puntos" onclick="openModal()">Usar puntos</button>
@@ -208,10 +208,20 @@ $withoutIva = cartController::getPriceWithoutIVA();
                     <p class="text-bill-cart">Total (IVA inc.)</p>
                     <p class="text-bill-cart"><?= $totalPrice ?> €</p>
                 </div>
-                <div id="discount-section" class="col-12 d-flex justify-content-between mb-3 discount-hidden">
+                <div id="discount-section" class="col-12 d-flex justify-content-between discount-hidden">
                     <p class="text-bill-cart">Discount (pts.)</p>
                     <p class="text-bill-cart">-<span id="total-discount"></span> pts.</p>
                 </div>
+
+                <div id="discount-section-money" class="col-12 d-flex justify-content-between discount-hidden">
+                    <p class="text-bill-cart">Discount (EUR)</p>
+                    <p class="text-bill-cart">-<span id="total-discount-money"></span> €</p>
+                </div>
+                <div id="discount-section-money-total" class="col-12 d-flex justify-content-between mb-3 discount-hidden">
+                    <p class="text-bill-cart">Total (Discount applied)</p>
+                    <p class="text-bill-cart">-<span id="total-discount-money-applied"></span> €</p>
+                </div>
+
                 <div class="col-12">
                     <a id="proceed-comand" type="button" href="<?= URL . "?controller=pedido&action=loginOrRegister" ?>" class="custom-btn-tramitar">TRAMITAR PEDIDO <span><ion-icon name="arrow-dropright"></ion-icon></span></a>
                 </div>

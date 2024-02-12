@@ -216,6 +216,21 @@ class APIController
                 echo json_encode($output, JSON_UNESCAPED_UNICODE);
 
                 break;
+            case 'pointsSpent':
+                header('Content-Type: application/json');
+
+                $uid = $_SESSION['current_user']->getUsuario_id();
+                $pts = $_POST['points'];
+
+                $eur = conversor_puntos::exchangePointsToDiscount($pts);
+
+                $output = [
+                    "success" => "true",
+                    "money" => $eur
+                ];
+
+                echo json_encode($output, JSON_UNESCAPED_UNICODE);
+                break;
             default:
                 echo 'Parámetro POST [ \''. $accion .' \'] no válido.';
         }

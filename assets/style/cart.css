@@ -307,9 +307,14 @@
     padding-left: 8px;
 }
 
-#discount-section
+#discount-section, #discount-section-money
 {
     color: var(--red-color);
+}
+
+#discount-section-money-total
+{
+    font-weight: bold;
 }
 
 .discount-hidden

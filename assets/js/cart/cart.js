@@ -4,6 +4,9 @@ const points = document.getElementById('points');
 const modal_points = document.getElementById('modal-points');
 const triggerDiscount = document.getElementById('trigger-discount');
 const proceedButton = document.getElementById('proceed-comand');
+const discountPts = document.getElementById('discount-section');
+const discountEur = document.getElementById('discount-section-money');
+const discountEurTotal = document.getElementById('discount-section-money-total');
 
 function openModal()
 {
@@ -81,23 +84,38 @@ async function updateUserPoints(action, pts)
 triggerDiscount.addEventListener("click", async () => {
     let pointusUsed = document.getElementById('input-puntos').value
 
-    // 0 for remove points
-    // updateUserPoints(0, pointusUsed).then(() => { 
-    //     document.getElementById('discount-section').classList.remove('discount-hidden');
-    //     closeModal()
-    // });
-
-    document.getElementById('discount-section').classList.remove('discount-hidden');
+    discountPts.classList.remove('discount-hidden');
+    discountEur.classList.remove('discount-hidden');
+    discountEurTotal.classList.remove('discount-hidden');
     closeModal()
 
     sessionStorage.setItem("usedPoints", pointusUsed)
     document.getElementById('total-discount').textContent = pointusUsed
 
+    exchangePoints(pointusUsed)
+        .then(discount => {
+            console.log(discount)
+            document.getElementById('total-discount-money').textContent = discount
+        });
+    
     notie.alert({
         text: "¡Descuento aplicado!"
     })
 });
 
-proceedButton.addEventListener("click", () => {
-    // 
-});
+async function exchangePoints(pts)
+{
+    let data = new URLSearchParams({
+        accion: "pointsSpent",
+        points: pts
+    });
+
+    let response = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: data
+    });
+
+    let dataFetch =  await response.json()
+    return dataFetch.money
+}
