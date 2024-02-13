@@ -4,6 +4,7 @@ include_once __DIR__ . '/../model/OpinionesDAO.php';
 include_once __DIR__ . '/../model/UsuariosDAO.php';
 include_once __DIR__ . '/../model/PedidosDAO.php';
 include_once __DIR__ . '/../utils/conversor_puntos.php';
+include_once __DIR__ . '/../controller/cartController.php';
 
 class APIController
 {
@@ -230,6 +231,26 @@ class APIController
                 ];
 
                 echo json_encode($output, JSON_UNESCAPED_UNICODE);
+                break;
+            case 'totalPriceNoDiscount':
+                header('Content-Type: application/json');
+
+                $uid = $_SESSION['current_user']->getUsuario_id();
+                $total = cartController::getTotalValueOfProductsInCart();
+
+                $output = [
+                    "success" => "true",
+                    "price" => $total
+                ];
+
+                echo json_encode($output, JSON_UNESCAPED_UNICODE);
+
+                break;
+            case 'updateCartPrice':
+                
+                $value = $_POST['finalPrice'];
+                $_SESSION['discount-applied'] = $value;
+
                 break;
             default:
                 echo 'Parámetro POST [ \''. $accion .' \'] no válido.';

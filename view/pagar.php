@@ -149,9 +149,13 @@ $withoutIva = cartController::getPriceWithoutIVA();
                     <p style="font-size: 12px;"><?= $totalPrice ?> €</p>
                 </div>
 
-                <div id="discount-section" class="col-12 d-flex justify-content-between mb-3 discount-hidden">
+                <div id="discount-section" class="col-12 d-flex justify-content-between discount-hidden">
                     <p class="text-bill-cart">Discount (pts.)</p>
                     <p class="text-bill-cart">-<span id="total-discount"></span> pts.</p>
+                </div>
+                <div id="discount-section-money-total" class="col-12 d-flex justify-content-between mb-3 discount-hidden">
+                    <p class="text-bill-cart">Total (Discount applied)</p>
+                    <p class="text-bill-cart">-<span id="total-discount-money-applied"></span> €</p>
                 </div>
 
                 <div class="col-12">

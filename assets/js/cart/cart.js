@@ -83,6 +83,8 @@ async function updateUserPoints(action, pts)
 
 triggerDiscount.addEventListener("click", async () => {
     let pointusUsed = document.getElementById('input-puntos').value
+    let totalDiscount;
+    let totalPrice;
 
     discountPts.classList.remove('discount-hidden');
     discountEur.classList.remove('discount-hidden');
@@ -92,12 +94,26 @@ triggerDiscount.addEventListener("click", async () => {
     sessionStorage.setItem("usedPoints", pointusUsed)
     document.getElementById('total-discount').textContent = pointusUsed
 
+    // al depender de un resultado para conseguir el siguiente hay 
+    // que preparar la lógica para que sea asyncrona.
     exchangePoints(pointusUsed)
         .then(discount => {
-            console.log(discount)
+            console.log("descuento a aplicar: " + discount)
             document.getElementById('total-discount-money').textContent = discount
+            totalDiscount = discount;
+        })
+        .then(() => getTotalPriceWithoutDiscount()
+            .then(total => {
+                console.log("valor total sin descuentos: " + total);
+                totalPrice = total;
+            }))
+        .then(() => {
+            let value = (totalPrice - totalDiscount).toFixed(2)
+
+            document.getElementById('total-discount-money-applied').textContent = value
+            sessionStorage.setItem("finalPrice", value) //! NO SE ACTUALIZA BIEN.
         });
-    
+
     notie.alert({
         text: "¡Descuento aplicado!"
     })
@@ -118,4 +134,22 @@ async function exchangePoints(pts)
 
     let dataFetch =  await response.json()
     return dataFetch.money
+}
+
+function calculateTotalPrice()
+{
+    let total = getTotalPriceWithoutDiscount();
+    console.log(total);
+}   
+
+async function getTotalPriceWithoutDiscount()
+{
+    let response = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'accion=totalPriceNoDiscount'
+    });
+
+    let data = await response.json();
+    return await data.price;
 }
