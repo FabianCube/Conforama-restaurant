@@ -1,16 +1,55 @@
-function getProductos() {
+
+function getProductos() 
+{
     fetch('http://localhost/conforama-restaurant/?controller=API&action=api', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: 'accion=getProductos'
     })
-    .then(response => response.json())
-    .then(data => showProductos(data))
-    .catch(err => console.log(err));
+        .then(response => response.json())
+        .then(data => showProductos(data))
+        .catch(err => console.log(err));
 }
 
-function showProductos(productos) {
+function filtrarProductos() 
+{
+    console.log("entrando en filtrarProductos");
+
+    fetch('http://localhost/conforama-restaurant/?controller=API&action=api', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'accion=getProductos'
+    })
+        .then(response => response.json())
+        .then(productos => {
+            // obtengo los checbox selecionados cada vez que hay un cambio de estado de estos.
+            const checkboxes = document.querySelectorAll('#filtro-categorias input[type="checkbox"]:checked');
+            const categoriasSeleccionadas = Array.from(checkboxes).map(checkbox => checkbox.value);
+
+            // console.log(productos);
+
+            const productosFiltrados = productos.filter(producto => {
+                if (categoriasSeleccionadas.length === 0) 
+                {
+                    console.log("No hay filtros selecionados");
+                    return true;
+                }
+
+                // comparo con los values de los checkbox selecionados, las categorias por las
+                // que se quiere filtrar.
+                return categoriasSeleccionadas.includes(producto.categoria_id.toString());
+            });
+
+            // console.log(productosFiltrados);
+            showProductos(productosFiltrados);
+        })
+        .catch(err => console.log(err));
+}
+
+function showProductos(productos) 
+{
     const container = document.getElementById('container-productos');
+    container.innerHTML = '';
 
     productos.forEach(producto => {
         let content = `
@@ -49,8 +88,5 @@ function showProductos(productos) {
         `;
 
         container.insertAdjacentHTML('beforeend', content);
-        // container.appendChild(content);
     });
 }
-
-
