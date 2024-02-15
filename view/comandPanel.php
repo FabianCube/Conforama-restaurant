@@ -49,9 +49,9 @@
                     </div>
                 </div>
             </div>
-            <div id="container-productos" class="row">
 
-            </div>
+            <!-- List of productos -->
+            <div id="container-productos" class="row"></div>
 
         </div>
     </section>
