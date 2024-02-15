@@ -61,9 +61,29 @@ class pedidoController
         }
         setcookie('ultimo-pedido', $pedido->getPrecio_total(), time() + 3600);
         
-        unset($_SESSION['items']);
-        unset($_SESSION['discount-applied']);
+        
+        
 
-        header("Location: " . URL);
+        header("Location: " . URL . "?controller=pedido&action=showQR");
+        //header("Location: " . URL);
+    }
+
+    public static function showQR()
+    {
+        $uid = $_SESSION['current_user']->getUsuario_id();
+        include_once 'view/nav.php';
+        include_once 'view/mostrarQR.php';
+        include_once 'view/footer.php';
+
+        //unset($_SESSION['items']);
+        unset($_SESSION['discount-applied']);
+    }
+
+    public static function infoQRpedido()
+    {
+        $pedido = PedidosDAO::getLastPedidoByUserId($_GET['uid']);
+        include_once 'view/nav.php';
+        include_once 'view/infoQRpedido.php';
+        include_once 'view/footer.php';
     }
 }

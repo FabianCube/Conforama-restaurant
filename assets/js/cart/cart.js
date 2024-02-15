@@ -112,6 +112,7 @@ triggerDiscount.addEventListener("click", async () => {
 
             document.getElementById('total-discount-money-applied').textContent = value
             sessionStorage.setItem("finalPrice", value) //! NO SE ACTUALIZA BIEN.
+            //TODO -------------------------------------------------------------
         });
 
     notie.alert({
