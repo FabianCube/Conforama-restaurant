@@ -19,8 +19,7 @@
             <div class="p-4 d-flex align-items-center header-category-filter" style="height: 70px;">
                 <p>Categorías</p>
             </div>
-
-            <div id="filtro-categorias">
+            <div id="filtro-categorias" class="p-4 custom-container-filter">
                 <input type="checkbox" id="cafes" value="0" onchange="filtrarProductos()"> <label for="cafes">Cafes</label><br>
                 <input type="checkbox" id="bocadillos" value="1" onchange="filtrarProductos()"> <label for="bocadillos">Bocadillos</label><br>
                 <input type="checkbox" id="smoothies" value="2" onchange="filtrarProductos()"> <label for="smoothies">Smoothies</label><br>
@@ -28,7 +27,6 @@
                 <input type="checkbox" id="batidos" value="4" onchange="filtrarProductos()"> <label for="batidos">Batidos</label><br>
                 <input type="checkbox" id="donuts" value="5" onchange="filtrarProductos()"> <label for="donuts">Donuts</label><br>
             </div>
-
         </div>
         <div class="col-9">
             <div class="d-flex flex-row justify-content-between">

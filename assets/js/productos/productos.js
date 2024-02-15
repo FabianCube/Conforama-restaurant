@@ -75,8 +75,8 @@ function showProductos(productos)
                         </div>
                     </div>
                     <div class="d-flex justify-content-end">
-                        <form action="" method="post">
-                            <input name="producto_id" value="" hidden>
+                        <form action="?controller=productos" method="post">
+                            <input name="producto_id" value="${producto.producto_id}" hidden>
                             <button class="btn btn-danger d-flex align-items-center justify-content-center custom-btn-add-cart" style="width: 55px; height: 55px; border-radius: 50px;" type="submit">
                                 <span class="material-symbols-outlined icon-cart" style="font-size: 36px;">add_shopping_cart</span>
                             </button>
