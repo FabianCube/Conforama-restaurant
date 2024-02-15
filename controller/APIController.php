@@ -3,8 +3,10 @@
 include_once __DIR__ . '/../model/OpinionesDAO.php';
 include_once __DIR__ . '/../model/UsuariosDAO.php';
 include_once __DIR__ . '/../model/PedidosDAO.php';
+include_once __DIR__ . '/../model/ProductoDAO.php';
 include_once __DIR__ . '/../utils/conversor_puntos.php';
 include_once __DIR__ . '/../controller/cartController.php';
+
 
 class APIController
 {
@@ -45,8 +47,7 @@ class APIController
             case 'add_review':
                 header('Content-Type: application/json');
 
-                if ($_SESSION['current_user'] != null) 
-                {
+                if ($_SESSION['current_user'] != null) {
                     $usuario_id = $_SESSION['current_user']->getUsuario_id();
                     $titulo_opinion = $_POST['titulo_opinion'];
                     $texto_opinion = $_POST['texto_opinion'];
@@ -64,9 +65,7 @@ class APIController
                     ];
 
                     echo json_encode($opinion);
-                }
-                else 
-                {
+                } else {
                     echo 'No hay una sesion iniciada para publicar una review';
                 }
 
@@ -130,29 +129,23 @@ class APIController
             case 'getPoints':
                 header('Content-Type: application/json');
 
-                if(isset($_SESSION['current_user']))
-                {
+                if (isset($_SESSION['current_user'])) {
                     $uid = $_SESSION['current_user']->getUsuario_id();
-                }
-                else
-                {
+                } else {
                     $uid = null;
                 }
 
                 $data = UsuariosDAO::getOneUserById($uid);
 
-                if($data instanceof Cliente)
-                {
+                if ($data instanceof Cliente) {
                     $return = [
                         "success" => "true",
                         "uid" => $data->getUsuario_id(),
                         "puntos" => (int) $data->getPuntos()
                     ];
-    
+
                     echo json_encode($return, JSON_UNESCAPED_UNICODE);
-                }
-                else
-                {
+                } else {
                     $return = [
                         "success" => "false",
                         "uid" => "",
@@ -161,7 +154,7 @@ class APIController
 
                     echo json_encode($return, JSON_UNESCAPED_UNICODE);
                 }
-                
+
                 break;
 
             case 'addPoints':
@@ -186,8 +179,7 @@ class APIController
                 $current_points = UsuariosDAO::getOneUserById($uid)->getPuntos();
                 $new_value = $current_points - $points;
 
-                if($new_value < 0)
-                {
+                if ($new_value < 0) {
                     $new_value = 0;
                 }
 
@@ -199,7 +191,7 @@ class APIController
                 ];
 
                 echo json_encode($return, JSON_UNESCAPED_UNICODE);
-                
+
                 break;
             case 'moneySpent':
                 header('Content-Type: application/json');
@@ -247,13 +239,33 @@ class APIController
 
                 break;
             case 'updateCartPrice':
-                
+
                 $value = $_POST['finalPrice'];
                 $_SESSION['discount-applied'] = $value;
 
                 break;
+            case 'getProductos':
+
+                $products = ProductoDAO::getAllProducts();
+
+                $response = [];
+
+                foreach ($products as $product) {
+                    $response[] = [
+                        "producto_id" => $product->getProducto_id(),
+                        "nombre_producto" => $product->getNombre_producto(),
+                        "descripcion" => $product->getDescripcion(),
+                        "precio_producto" => $product->getPrecio_producto(),
+                        "url_img" => $product->getUrl_img(),
+                        "categoria_id" => $product->getCategoria_id()
+                    ];
+                }
+
+                echo json_encode($response, JSON_UNESCAPED_UNICODE);
+
+                break;
             default:
-                echo 'Parámetro POST [ \''. $accion .' \'] no válido.';
+                echo 'Parámetro POST [\'' . $accion . ' \'] no válido.';
         }
     }
 }
