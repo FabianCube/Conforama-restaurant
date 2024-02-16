@@ -174,8 +174,32 @@ $withoutIva = cartController::getPriceWithoutIVA();
                     <p class="descuento">Descuento total: <span>0</span>€</p>
                 </div>
                 <div class="control-puntos">
-                    <button class="btn-control-puntos" id="trigger-discount">Aplicar</button>
+                    <button class="btn-control-puntos" id="trigger-discount" onclick="proceedComand()">Aplicar</button>
                     <button class="btn-control-puntos" onclick="closeModal()">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="container-modal-propina">
+            <div class="content-modal-propina">
+                <p class="title-modal">Dejar propina</p>
+                <div class="input-group d-flex flex-column">
+                    <label>Seleccione cantidad:</label>
+                    <div class="d-flex flex-row p-3">
+                        <input style="margin: 3px;" type="radio" name="tip" value="3" checked="checked"> 3%
+                        <input style="margin: 3px;" type="radio" name="tip" value="10"> 10%
+                        <input style="margin: 3px;" type="radio" name="tip" value="20"> 20%
+                        <input style="margin: 3px;" type="radio" name="tip" value="30"> 30%
+                        <input style="margin: 3px;" type="radio" name="tip" value="custom"> Personalizado
+                    </div>
+                </div>
+                <div class="input-group custom-tip m-3">
+                    <label>Ingrese el porcentaje personalizado:</label>
+                    <input id="custom-propina" type="number" name="custom_tip" min="0" step="0.01">
+                </div>
+                <div class="controls d-flex flex-row justify-content-end">
+                    <a class="btn btn-danger" href="<?= URL . "?controller=pedido&action=loginOrRegister" ?>">Continuar sin propina</a>
+                    <button class="btn btn-success" style="margin-left: 10px;" onclick="addPropina()">Aplicar propina</button>
                 </div>
             </div>
         </div>
@@ -243,12 +267,12 @@ $withoutIva = cartController::getPriceWithoutIVA();
         </div>
     </section>
 
-    <script src="assets/js/cart/cart.js"></script>
     <!-- Icons -->
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 
-    
+
     <script src="https://unpkg.com/notie"></script>
+    <script src="assets/js/cart/cart.js"></script>
 </body>
 
 </html>

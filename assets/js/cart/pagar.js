@@ -4,36 +4,64 @@ let totalSection = document.getElementById('discount-section-money-total');
 let valueDiscount = document.getElementById('total-discount');
 let finalPriceContainer = document.getElementById('total-discount-money-applied');
 
+let propinaSection = document.getElementById('propina-section');
+let textPropina = document.getElementById('text-propina');
+
 let usedPts = sessionStorage.getItem("usedPoints");
 let finalPrice = sessionStorage.getItem("finalPrice");
+let propinaSelecionada = sessionStorage.getItem("propinaSelecionada");
 
 function setUp()
 {
-    discSection.classList.remove('discount-hidden')
-    totalSection.classList.remove('discount-hidden')
-    valueDiscount.textContent = usedPts
-    finalPriceContainer.textContent = finalPrice
+    if(finalPrice !== "null")
+    {
+        console.log("[INFO] setUp: precio final: " + finalPrice);
+        
+        valueDiscount.textContent = usedPts
+        discSection.classList.remove('discount-hidden')
+        totalSection.classList.remove('discount-hidden')
+
+        finalPriceContainer.textContent = finalPrice;
+    }
+
+    if(propinaSelecionada !== "null")
+    {
+        console.log("[INFO] setUp: propina: " + propinaSelecionada);
+        propinaSection.classList.add('propinaActive');
+        textPropina.textContent = propinaSelecionada;
+    }
 }
 
-document.getElementById('finish-order').addEventListener("click", (event) => {
-    //event.preventDefault()
-    updateUserPoints(0, usedPts).then(() => exchangeUserPoints())
-    
+function endCommand()
+{
+    console.log("[INFO] endCommand: entrando en endCommand");
+    console.log("Puntos a usar : " + usedPts);
 
+    // elimino los puntos gastados then agrego los puntos ganados
+    console.log("[INFO] endCommand: entrando en exchangeUserPoints (delete)");
+    updateUserPoints(0, usedPts).then(exchangeUserPoints());
+    
     let data = new URLSearchParams({
         accion: 'updateCartPrice',
         finalPrice: finalPrice
     });
 
+    console.log("[INFO] endCommand: valor de data: " + data);
+
     fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: data
-    });
-    
+    })
+    .then(response => response.json())
+    .catch(err => console.log(err));
+
+    //console.log("[INFO] endCommand: Eliminando 'finalPrice'.");
     // sessionStorage.removeItem("finalPrice");
-    //window.location.href = event.target.href;
-});
+    
+    console.log("[INFO] endCommand: Clear session.");
+    sessionStorage.clear();
+}
 
 function exchangeUserPoints()
 {
@@ -43,3 +71,4 @@ function exchangeUserPoints()
         body: 'accion=moneySpent'
     }).then(response => response.json()).then(data => updateUserPoints(1, data.spent));
 }
+

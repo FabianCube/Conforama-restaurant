@@ -11,6 +11,7 @@ class Pedidos
     private $estado;
     private $hora_pedido;
     private $precio_total;
+    private $propina;
     private $review;
 
     public function __construct()
@@ -96,6 +97,26 @@ class Pedidos
     public function setReview($review)
     {
         $this->review = $review;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of propina
+     */ 
+    public function getPropina()
+    {
+        return $this->propina;
+    }
+
+    /**
+     * Set the value of propina
+     *
+     * @return  self
+     */ 
+    public function setPropina($propina)
+    {
+        $this->propina = $propina;
 
         return $this;
     }

@@ -43,13 +43,18 @@ class pedidoController
         // GUARDAR PRECIO TOTAL CON DESCUENTO
         if(isset($_SESSION['discount-applied']))
         {
-            $precio_total = $_SESSION['discount-applied'];
+            if(!$_SESSION['discount-applied'] === "null")
+            {
+                $precio_total = $_SESSION['discount-applied'];
+            }
+            else{
+                $precio_total = calculadora::calcularPrecioTotal($_SESSION['items']);
+            }
         }
         else
         {
             $precio_total = calculadora::calcularPrecioTotal($_SESSION['items']);
         }
-
 
         // Guardo la informacion del pedido en la base de datos..
         PedidosDAO::registrarPedido($user_id, EN_CURSO_ESTADO_PEDIDO, $date, $precio_total);
@@ -60,12 +65,11 @@ class pedidoController
             Pedido_ProductoDAO::setPedidoProductos($pedido->getPedido_id(), $value->getProducto_carrito()->getProducto_id(), $value->getCantidad());
         }
         setcookie('ultimo-pedido', $pedido->getPrecio_total(), time() + 3600);
-        
-        
-        
 
+        // elimino el descuento del pedido.
+        unset($_SESSION['discount-applied']);
+        
         header("Location: " . URL . "?controller=pedido&action=showQR");
-        //header("Location: " . URL);
     }
 
     public static function showQR()
@@ -73,10 +77,9 @@ class pedidoController
         $uid = $_SESSION['current_user']->getUsuario_id();
         include_once 'view/nav.php';
         include_once 'view/mostrarQR.php';
-        include_once 'view/footer.php';
+        include_once 'view/footer.php'; 
 
-        //unset($_SESSION['items']);
-        unset($_SESSION['discount-applied']);
+        unset($_SESSION['items']);
     }
 
     public static function infoQRpedido()

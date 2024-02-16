@@ -125,7 +125,7 @@ $withoutIva = cartController::getPriceWithoutIVA();
             <?php $pos++;
             } ?>
         </div>
-        <div class="col-3 p-3" style="max-height: 270px; background-color: white;">
+        <div class="col-3 p-3" style="height: auto; background-color: white;">
             <div class="col-12 pl-2 d-flex align-items-center custom-head-2">
                 <h3>Conforama</h3>
             </div>
@@ -144,6 +144,12 @@ $withoutIva = cartController::getPriceWithoutIVA();
                     <p style="font-size: 12px;">IVA (10%)</p>
                     <p style="font-size: 12px;"><?= $ivaProduct ?> €</p>
                 </div>
+
+                <div id="propina-section" class="col-12 d-flex justify-content-between">
+                    <p style="font-size: 12px;">Propina</p>
+                    <p style="font-size: 12px;"><span id="text-propina">0</span>€</p>
+                </div>
+
                 <div class="col-12 d-flex justify-content-between">
                     <p style="font-size: 12px;">Total (IVA inc.)</p>
                     <p style="font-size: 12px;"><?= $totalPrice ?> €</p>
@@ -159,7 +165,7 @@ $withoutIva = cartController::getPriceWithoutIVA();
                 </div>
 
                 <div class="col-12">
-                    <a id="finish-order" href="<?= URL . "?controller=pedido&action=realizarPedido"?>" class="custom-btn-tramitar">TRAMITAR PEDIDO <span><ion-icon name="arrow-dropright"></ion-icon></span></a>
+                    <a id="finish-order" href="<?= URL . "?controller=pedido&action=realizarPedido"?>" class="custom-btn-tramitar" onclick="endCommand()">TRAMITAR PEDIDO <span><ion-icon name="arrow-dropright"></ion-icon></span></a>
                 </div>
                 <div class="col-12 d-flex justify-content-center align-items-center flex-column mt-3" style="height: 150px; background-color: #EEEEEE;">
                 <p>Pago 100% seguro</p>

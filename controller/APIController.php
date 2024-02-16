@@ -161,13 +161,14 @@ class APIController
                 $uid = $_SESSION['current_user']->getUsuario_id();
                 $points = $_POST['pts'];
                 $current_points = UsuariosDAO::getOneUserById($uid)->getPuntos();
-                $new_value = $current_points + $points;
+                $new_value = ($current_points + $points);
 
                 UsuariosDAO::updateUserPoints($new_value, $uid);
+                $balance = UsuariosDAO::getOneUserById($uid)->getPuntos();
 
                 $return = [
                     "success" => "true",
-                    "new_balance" => UsuariosDAO::getOneUserById($uid)->getPuntos()
+                    "new_balance" => $balance
                 ];
 
                 echo json_encode($return, JSON_UNESCAPED_UNICODE);
@@ -177,17 +178,18 @@ class APIController
                 $uid = $_SESSION['current_user']->getUsuario_id();
                 $points = $_POST['pts'];
                 $current_points = UsuariosDAO::getOneUserById($uid)->getPuntos();
-                $new_value = $current_points - $points;
+                $new_value = ($current_points - $points);
 
                 if ($new_value < 0) {
                     $new_value = 0;
                 }
 
                 UsuariosDAO::updateUserPoints($new_value, $uid);
+                $balance = UsuariosDAO::getOneUserById($uid)->getPuntos();
 
                 $return = [
                     "success" => "true",
-                    "new_balance" => UsuariosDAO::getOneUserById($uid)->getPuntos()
+                    "new_balance" => $balance
                 ];
 
                 echo json_encode($return, JSON_UNESCAPED_UNICODE);
@@ -240,8 +242,21 @@ class APIController
                 break;
             case 'updateCartPrice':
 
-                $value = $_POST['finalPrice'];
-                $_SESSION['discount-applied'] = $value;
+                if(isset($_POST['finalPrice']))
+                {
+                    $value = $_POST['finalPrice'];
+                    $_SESSION['discount-applied'] = $value;
+                }
+                else{
+                    $value = cartController::getTotalValueOfProductsInCart();
+                }
+
+                $response = [
+                    "success" => "true",
+                    "finalPrice" => $value
+                ];
+
+                echo json_encode($response, JSON_UNESCAPED_UNICODE);
 
                 break;
             case 'getProductos':
