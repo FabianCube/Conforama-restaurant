@@ -242,18 +242,25 @@ class APIController
                 break;
             case 'updateCartPrice':
 
-                if(isset($_POST['finalPrice']))
+                if($_POST['precioFinal'] != "null")
                 {
-                    $value = $_POST['finalPrice'];
-                    $_SESSION['discount-applied'] = $value;
+                    $value = $_POST['precioFinal'];
+                    $_SESSION['discount-applied'] = floatval($value); // parsear float
                 }
                 else{
                     $value = cartController::getTotalValueOfProductsInCart();
                 }
 
+                if($_POST['propina'] != "0")
+                {
+                    $propina = $_POST['propina'];
+                    $_SESSION['propina'] = floatval($propina); // parsear a float
+                }
+
                 $response = [
                     "success" => "true",
-                    "finalPrice" => $value
+                    "finalPrice" => $value,
+                    "propina" => $propina
                 ];
 
                 echo json_encode($response, JSON_UNESCAPED_UNICODE);
@@ -277,6 +284,18 @@ class APIController
                 }
 
                 echo json_encode($response, JSON_UNESCAPED_UNICODE);
+            
+                break;
+            case 'setPropina':
+                $propina = $_POST['propina'];
+                $_SESSION['propina'] = $propina;
+
+                $response = [
+                    "success" => "true",
+                    "propina" => $propina
+                ];
+
+                echo json_encode($response);
 
                 break;
             default:

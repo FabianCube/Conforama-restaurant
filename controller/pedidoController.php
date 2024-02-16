@@ -38,12 +38,13 @@ class pedidoController
     {
         $user_id = $_SESSION['current_user']->getUsuario_id();
         $date = date('Y-m-d H:i:s');
+        $propina = 0;
 
         // incluir un if isset discountedPrice, $precio_total tiene el valor descontado.
         // GUARDAR PRECIO TOTAL CON DESCUENTO
         if(isset($_SESSION['discount-applied']))
         {
-            if(!$_SESSION['discount-applied'] === "null")
+            if($_SESSION['discount-applied'] !== "null")
             {
                 $precio_total = $_SESSION['discount-applied'];
             }
@@ -56,8 +57,17 @@ class pedidoController
             $precio_total = calculadora::calcularPrecioTotal($_SESSION['items']);
         }
 
+        if(isset($_SESSION['propina']))
+        {
+            if($_SESSION['propina'] != "null")
+            {
+                $propina = $_SESSION['propina'];
+                $precio_total += $propina;
+            }
+        }
+
         // Guardo la informacion del pedido en la base de datos..
-        PedidosDAO::registrarPedido($user_id, EN_CURSO_ESTADO_PEDIDO, $date, $precio_total);
+        PedidosDAO::registrarPedido($user_id, EN_CURSO_ESTADO_PEDIDO, $date, $precio_total, $propina);
         $pedido = PedidosDAO::getLastPedidoByUserId($user_id);
 
         foreach ($_SESSION['items'] as $value) {

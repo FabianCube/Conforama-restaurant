@@ -34,16 +34,30 @@ function setUp()
 
 function endCommand()
 {
+    let precioFinal = null;
+    let propinaFinal = 0;
+
     console.log("[INFO] endCommand: entrando en endCommand");
     console.log("Puntos a usar : " + usedPts);
 
     // elimino los puntos gastados then agrego los puntos ganados
     console.log("[INFO] endCommand: entrando en exchangeUserPoints (delete)");
     updateUserPoints(0, usedPts).then(exchangeUserPoints());
+
+    if(finalPrice !== "null")
+    {
+        precioFinal = finalPrice;
+    }
+
+    if(propinaSelecionada !== "null")
+    {
+        propinaFinal = propinaSelecionada;
+    }
     
     let data = new URLSearchParams({
         accion: 'updateCartPrice',
-        finalPrice: finalPrice
+        precioFinal: precioFinal,
+        propina: propinaFinal
     });
 
     console.log("[INFO] endCommand: valor de data: " + data);

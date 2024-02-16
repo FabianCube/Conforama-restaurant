@@ -30,11 +30,11 @@ class PedidosDAO
         return $pedidos;
     }
 
-    public static function registrarPedido($user_id, $estado, $hora, $precio_total)
+    public static function registrarPedido($user_id, $estado, $hora, $precio_total, $propina)
     {
         $conn = DataBase::connect();
-        $sql = $conn->prepare("INSERT INTO pedidos (usuario_id, estado, hora_pedido, precio_total) 
-            VALUES ($user_id, '$estado', '$hora', $precio_total)");
+        $sql = $conn->prepare("INSERT INTO pedidos (usuario_id, estado, hora_pedido, precio_total, propina) 
+            VALUES ($user_id, '$estado', '$hora', $precio_total, $propina)");
 
         if (!$sql->execute()) {
             echo 'error';
