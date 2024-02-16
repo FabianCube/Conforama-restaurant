@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Temps de generació: 14-12-2023 a les 17:15:09
+-- Temps de generació: 16-01-2024 a les 19:11:12
 -- Versió del servidor: 10.4.28-MariaDB
 -- Versió de PHP: 8.2.4
 
@@ -82,11 +82,43 @@ INSERT INTO `ingredientes` (`ingrediente_id`, `nombre_ingrediente`, `precio_ingr
 --
 
 CREATE TABLE `modificacion` (
-  `MODIFICACION_ID` int(4) NOT NULL,
-  `INGREDIENTE_ID` int(4) NOT NULL,
-  `ACCION` tinyint(1) NOT NULL,
-  `CANTIDAD_INGREDIENTE` int(4) NOT NULL
+  `modificacion_id` int(4) NOT NULL,
+  `ingrediente_id` int(4) NOT NULL,
+  `accion` tinyint(1) NOT NULL,
+  `cantidad_ingrediente` int(4) NOT NULL,
+  `precio_suplemento` decimal(3,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+--
+-- Bolcament de dades per a la taula `modificacion`
+--
+
+INSERT INTO `modificacion` (`modificacion_id`, `ingrediente_id`, `accion`, `cantidad_ingrediente`, `precio_suplemento`) VALUES
+(1, 5, 1, 1, 1.00),
+(2, 5, 1, 1, 0.55),
+(3, 5, 1, 1, 0.55),
+(4, 5, 1, 3, 0.55);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de la taula `opiniones`
+--
+
+CREATE TABLE `opiniones` (
+  `opinion_id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `opinion` varchar(999) NOT NULL,
+  `puntuacion` int(1) NOT NULL,
+  `fecha_opinion` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Bolcament de dades per a la taula `opiniones`
+--
+
+INSERT INTO `opiniones` (`opinion_id`, `usuario_id`, `opinion`, `puntuacion`, `fecha_opinion`) VALUES
+(1, 15, 'Mu wapo mucha grasia', 5, '2024-01-09');
 
 -- --------------------------------------------------------
 
@@ -107,13 +139,17 @@ CREATE TABLE `pedidos` (
 --
 
 INSERT INTO `pedidos` (`pedido_id`, `usuario_id`, `estado`, `hora_pedido`, `precio_total`) VALUES
-(24, 15, 'Realizado', '2023-12-04 17:57:46', 0.00),
-(25, 15, 'Realizado', '2023-12-04 18:33:48', 0.00),
-(26, 15, 'Realizado', '2023-12-04 19:14:56', 0.00),
-(27, 12, 'Realizado', '2023-12-04 20:05:37', 0.00),
-(28, 15, 'Realizado', '2023-12-04 20:08:03', 0.00),
 (29, 15, 'En curso', '2023-12-14 16:59:31', 1.99),
-(30, 15, 'En curso', '2023-12-14 17:00:08', 13.96);
+(30, 15, 'En curso', '2023-12-14 17:00:08', 13.96),
+(31, 15, 'En curso', '2023-12-18 17:20:43', 7.97),
+(32, 15, 'En curso', '2023-12-18 17:28:23', 14.97),
+(33, 15, 'En curso', '2023-12-18 17:33:48', 35.82),
+(34, 15, 'En curso', '2023-12-18 17:34:26', 13.96),
+(35, 15, 'En curso', '2024-01-06 19:35:27', 6.98),
+(36, 15, 'En curso', '2024-01-07 16:21:55', 3.98),
+(37, 15, 'En curso', '2024-01-07 18:03:26', 1.99),
+(38, 15, 'En curso', '2024-01-08 17:32:47', 1.99),
+(39, 15, 'En curso', '2024-01-09 17:55:32', 6.98);
 
 -- --------------------------------------------------------
 
@@ -157,7 +193,20 @@ INSERT INTO `pedido_producto` (`articulo_id`, `pedido_id`, `producto_id`, `modif
 (21, 29, 1, 0, 1),
 (22, 30, 1, 0, 1),
 (23, 30, 2, 0, 1),
-(24, 30, 3, 0, 1);
+(24, 30, 3, 0, 1),
+(25, 31, 6, 0, 1),
+(26, 31, 8, 0, 1),
+(27, 32, 2, 0, 3),
+(28, 33, 6, 0, 18),
+(29, 34, 3, 0, 2),
+(30, 34, 1, 0, 2),
+(31, 35, 3, 0, 1),
+(32, 35, 1, 0, 1),
+(33, 36, 1, 0, 2),
+(34, 37, 1, 0, 1),
+(35, 38, 1, 0, 1),
+(36, 39, 2, 0, 1),
+(37, 39, 1, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -179,7 +228,7 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`producto_id`, `nombre_producto`, `descripcion`, `precio_producto`, `url_img`, `categoria_id`) VALUES
-(1, 'Cafe solo', 'Café solo.', 1.99, 'coffe-1.png', 0),
+(1, 'Cafe solo', 'Café solo.nmnb', 1.99, 'coffe-1.png', 0),
 (2, 'Sandwich vegetal', 'Un delicioso Sandwich vegetal con lechuga, tomate, motzarela.', 4.99, 'sandwich-1.png', 1),
 (3, 'Sandwich de pollo', 'Sandwich de pollo con sobrasada preparado al momento.', 4.99, 'sandwich-2.png', 1),
 (4, 'Smoothie de frutos', 'Smootie de frutos del bosque con el toque perfecto de azúcar. ', 3.99, 'smoothie-1.png', 2),
@@ -190,7 +239,8 @@ INSERT INTO `productos` (`producto_id`, `nombre_producto`, `descripcion`, `preci
 (9, 'Milkshake de cereza', 'Milkshake de cereza.', 3.99, 'milkshake-2.png', 4),
 (10, 'Donut chocolate blanco', 'Donut de azúcar cubierto con chocolate blanco.', 1.99, 'donut-1.png', 5),
 (11, 'Donut chocolate', 'Donut de azúcar cubierto de chocolate.', 1.99, 'donut-2.png', 5),
-(14, 'Café con chocolate', 'Clásico café con chocolate para endulzar tus mañanas.', 2.99, 'coffe-2.png', 0);
+(14, 'Café con chocolate', 'Clásico café con chocolate para endulzar tus mañanas.', 2.99, 'coffe-2.png', 0),
+(15, 'cafe2', 'cafe2', 2.99, 'cafe3.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -199,17 +249,17 @@ INSERT INTO `productos` (`producto_id`, `nombre_producto`, `descripcion`, `preci
 --
 
 CREATE TABLE `productos_ingredientes` (
-  `PRODUCTOS_INGREDIENTES_ID` int(4) NOT NULL,
-  `PRODUCTO_ID` int(4) NOT NULL,
-  `INGREDIENTE_ID` int(4) NOT NULL,
-  `CANTIDAD` int(11) NOT NULL
+  `productos_ingredientes_id` int(4) NOT NULL,
+  `producto_id` int(4) NOT NULL,
+  `ingrediente_id` int(4) NOT NULL,
+  `cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
 -- Bolcament de dades per a la taula `productos_ingredientes`
 --
 
-INSERT INTO `productos_ingredientes` (`PRODUCTOS_INGREDIENTES_ID`, `PRODUCTO_ID`, `INGREDIENTE_ID`, `CANTIDAD`) VALUES
+INSERT INTO `productos_ingredientes` (`productos_ingredientes_id`, `producto_id`, `ingrediente_id`, `cantidad`) VALUES
 (1, 2, 7, 2),
 (2, 2, 8, 1),
 (3, 2, 9, 2),
@@ -219,7 +269,11 @@ INSERT INTO `productos_ingredientes` (`PRODUCTOS_INGREDIENTES_ID`, `PRODUCTO_ID`
 (7, 5, 12, 1),
 (8, 4, 12, 1),
 (9, 8, 13, 1),
-(10, 9, 13, 1);
+(10, 9, 13, 1),
+(11, 1, 1, 0),
+(12, 1, 2, 0),
+(13, 1, 3, 0),
+(14, 1, 5, 0);
 
 -- --------------------------------------------------------
 
@@ -255,19 +309,20 @@ CREATE TABLE `usuarios` (
   `email` varchar(150) NOT NULL,
   `password` varchar(255) NOT NULL,
   `telefono` int(9) NOT NULL,
-  `direccion` varchar(50) NOT NULL
+  `direccion` varchar(50) NOT NULL,
+  `nivel_cliente` int(11) NOT NULL,
+  `nivel_acceso` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
 -- Bolcament de dades per a la taula `usuarios`
 --
 
-INSERT INTO `usuarios` (`usuario_id`, `rol_id`, `nombre_usuario`, `apellido_usuario`, `email`, `password`, `telefono`, `direccion`) VALUES
-(11, 2, 'HASH', 'HASH', 'pruebahash@gmail.com', '$2y$10$B91Zt7HOw2XsK77Fe5HOC.7hdIpwv6iMtU3BbXbvmk5BS./PIGemK', 454, 'ooo'),
-(12, 2, 'algo', 'algo', 'algo@gmail.com', '$2y$10$KvU1b/xMTFDZulZD76DN0.owVS7HFvw84U.tGm0lWHuvYRjSLFiOq', 1234, 'algo'),
-(13, 0, 'admin', 'admin', 'admin@gmail.com', '$2y$10$EqpFsdK9pu4KHbALHgUcJORKnp8fjaveucRYy/yZmWJlyeEAURYw.', 666666666, 'Direccion del admin'),
-(14, 2, 'Juan', 'Algo', 'juan@gmail.com', '$2y$10$qb1PthdjYueIuerHbAm4LOHoYYV5p7VuqsbKYiBcMBaDKSadCj5dG', 123232323, 'Calle de Juan, 1234'),
-(15, 2, 'Fabian', 'Doizi', 'fabian@gmail.com', '$2y$10$Bnp7JCHmEMXAajOS5h4NCOiZN5rXzSKxlFJ7mEbt6xg/TneYybv0S', 657890085, 'Av. calle de envio 2');
+INSERT INTO `usuarios` (`usuario_id`, `rol_id`, `nombre_usuario`, `apellido_usuario`, `email`, `password`, `telefono`, `direccion`, `nivel_cliente`, `nivel_acceso`) VALUES
+(12, 2, 'algo', 'algo', 'algo@gmail.com', '$2y$10$KvU1b/xMTFDZulZD76DN0.owVS7HFvw84U.tGm0lWHuvYRjSLFiOq', 1234, 'algo', 0, 0),
+(13, 0, 'admin', 'admin', 'admin@gmail.com', '$2y$10$EqpFsdK9pu4KHbALHgUcJORKnp8fjaveucRYy/yZmWJlyeEAURYw.', 666666666, 'Direccion del admin', 0, 0),
+(14, 2, 'Juan', 'Algo', 'juan@gmail.com', '$2y$10$qb1PthdjYueIuerHbAm4LOHoYYV5p7VuqsbKYiBcMBaDKSadCj5dG', 123232323, 'Calle de Juan, 1234', 0, 0),
+(15, 2, 'Fabian', 'Doizi Bonilla', 'fabian@gmail.com', '$2y$10$Bnp7JCHmEMXAajOS5h4NCOiZN5rXzSKxlFJ7mEbt6xg/TneYybv0S', 657890085, 'Av. calle de envio 2', 0, 0);
 
 --
 -- Índexs per a les taules bolcades
@@ -289,7 +344,13 @@ ALTER TABLE `ingredientes`
 -- Índexs per a la taula `modificacion`
 --
 ALTER TABLE `modificacion`
-  ADD PRIMARY KEY (`MODIFICACION_ID`);
+  ADD PRIMARY KEY (`modificacion_id`);
+
+--
+-- Índexs per a la taula `opiniones`
+--
+ALTER TABLE `opiniones`
+  ADD PRIMARY KEY (`opinion_id`);
 
 --
 -- Índexs per a la taula `pedidos`
@@ -313,7 +374,7 @@ ALTER TABLE `productos`
 -- Índexs per a la taula `productos_ingredientes`
 --
 ALTER TABLE `productos_ingredientes`
-  ADD PRIMARY KEY (`PRODUCTOS_INGREDIENTES_ID`);
+  ADD PRIMARY KEY (`productos_ingredientes_id`);
 
 --
 -- Índexs per a la taula `roles`
@@ -347,31 +408,37 @@ ALTER TABLE `ingredientes`
 -- AUTO_INCREMENT per la taula `modificacion`
 --
 ALTER TABLE `modificacion`
-  MODIFY `MODIFICACION_ID` int(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `modificacion_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT per la taula `opiniones`
+--
+ALTER TABLE `opiniones`
+  MODIFY `opinion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT per la taula `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `pedido_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `pedido_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT per la taula `pedido_producto`
 --
 ALTER TABLE `pedido_producto`
-  MODIFY `articulo_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `articulo_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT per la taula `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `producto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `producto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT per la taula `productos_ingredientes`
 --
 ALTER TABLE `productos_ingredientes`
-  MODIFY `PRODUCTOS_INGREDIENTES_ID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `productos_ingredientes_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT per la taula `roles`

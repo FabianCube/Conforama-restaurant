@@ -13,12 +13,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body onload="getPuntos()">
     <section class="container pt-3" style="margin-top: 90px; max-width: 1170px; min-height: 65vh;">
         <div class="row">
             <div class="col-12">
                 <div class="d-flex align-items-center px-4 title-account">
                     <p class="account-name">Nombre: <?= $user->getNombre_usuario() . " " . $user->getApellido_usuario() ?></p>
+                    <p class="account-name" style="margin-left: 30px;">Puntos disponibles: <span id="points">0</span></p>
                 </div>
             </div>
             <div class="col-3">
@@ -131,6 +132,25 @@
         </div>
     </section>
     
+    <script>
+        function getPuntos()
+        {
+            fetch('http://localhost/conforama-restaurant/?controller=API&action=api', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'accion=getPoints'
+            }).then(response => response.json()).then(()=>showPoints(response))
+            .catch(function(err) { console.log(err) })
+        }
+        
+        function showPoints(points)
+        {
+            let container = document.getElementById("points").value
+            container.innerHTML = points;
+        }
+
+    </script>
+
     <!-- Icons -->
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 </body>

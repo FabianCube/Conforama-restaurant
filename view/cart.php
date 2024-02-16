@@ -15,9 +15,10 @@ $withoutIva = cartController::getPriceWithoutIVA();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
 </head>
 
-<body style="background-color: #F7F7F7;">
+<body onload="getUserPoints();setUp()" style="background-color: #F7F7F7;">
 
     <section class="container d-flex justify-content-center" style="margin-top: 95px;">
         <div>
@@ -82,7 +83,7 @@ $withoutIva = cartController::getPriceWithoutIVA();
 
             <?php if (count($_SESSION['items']) == 0) { ?>
                 <div class="container d-flex flex-column align-items-center mt-5" style="width: 100%;">
-                    <h2>Parece que aún no has añadido nada!</h2>
+                    <h2>¡Parece que aún no has añadido nada!</h2>
                     <p>Vuelve a la tienda y añade tu desayuno.</p>
                 </div>
             <?php }
@@ -121,7 +122,11 @@ $withoutIva = cartController::getPriceWithoutIVA();
                                         <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com 
                                         License - https://fontawesome.com/license (Commercial License) Copyright 
                                         2023 Fonticons, Inc. -->
-                                        <style>svg{fill:#474747}</style>
+                                        <style>
+                                            svg {
+                                                fill: #474747
+                                            }
+                                        </style>
                                         <path d="M471.6 
                                         21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9
                                         21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 
@@ -129,7 +134,7 @@ $withoutIva = cartController::getPriceWithoutIVA();
                                         21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 
                                         53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 
                                         32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 
-                                        32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/>
+                                        32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z" />
                                     </svg>
                                 </button>
                                 <br>
@@ -158,7 +163,53 @@ $withoutIva = cartController::getPriceWithoutIVA();
             <?php $pos++;
             } ?>
         </div>
-        <div class="col-3 p-3 mt-5" style="max-height: 300px; background-color: white;">
+
+        <div id="container-modal-puntos">
+            <div class="content-modal">
+                <p class="title-modal">Aplicar descuento</p>
+                <div class="info-puntos">
+                    <h2>Puntos disponibles: <span id="modal-points">0</span></h2>
+                    <p>Puntos a usar:</p>
+                    <input id="input-puntos" type="number" value="0" max="getUserPoints()">
+                    <p class="descuento">Descuento total: <span>0</span>€</p>
+                </div>
+                <div class="control-puntos">
+                    <button class="btn-control-puntos" id="trigger-discount" onclick="proceedComand()">Aplicar</button>
+                    <button class="btn-control-puntos" onclick="closeModal()">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="container-modal-propina">
+            <div class="content-modal-propina">
+                <p class="title-modal">Dejar propina</p>
+                <div class="input-group d-flex flex-column">
+                    <label>Seleccione cantidad:</label>
+                    <div class="d-flex flex-row p-3">
+                        <input style="margin: 3px;" type="radio" name="tip" value="3" checked="checked"> 3%
+                        <input style="margin: 3px;" type="radio" name="tip" value="10"> 10%
+                        <input style="margin: 3px;" type="radio" name="tip" value="20"> 20%
+                        <input style="margin: 3px;" type="radio" name="tip" value="30"> 30%
+                        <input style="margin: 3px;" type="radio" name="tip" value="custom"> Personalizado
+                    </div>
+                </div>
+                <div class="input-group custom-tip m-3">
+                    <label>Ingrese el porcentaje personalizado:</label>
+                    <input id="custom-propina" type="number" name="custom_tip" min="0" step="0.01">
+                </div>
+                <div class="controls d-flex flex-row justify-content-end">
+                    <a class="btn btn-danger" href="<?= URL . "?controller=pedido&action=loginOrRegister" ?>">Continuar sin propina</a>
+                    <button class="btn btn-success" style="margin-left: 10px;" onclick="addPropina()">Aplicar propina</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-3 p-3 mt-5" style="height: auto; background-color: white;">
+            <div id="container-puntos">
+                <p class="puntos">Tus puntos: <span id="points">0</span></p>
+                <button class="btn-puntos" onclick="openModal()">Usar puntos</button>
+            </div>
+
             <div class="col-12 pl-2 d-flex align-items-center custom-head-2">
                 <h3 style="font-size: 15px;">Conforama</h3>
             </div>
@@ -181,8 +232,22 @@ $withoutIva = cartController::getPriceWithoutIVA();
                     <p class="text-bill-cart">Total (IVA inc.)</p>
                     <p class="text-bill-cart"><?= $totalPrice ?> €</p>
                 </div>
+                <div id="discount-section" class="col-12 d-flex justify-content-between discount-hidden">
+                    <p class="text-bill-cart">Discount (pts.)</p>
+                    <p class="text-bill-cart">-<span id="total-discount"></span> pts.</p>
+                </div>
+
+                <div id="discount-section-money" class="col-12 d-flex justify-content-between discount-hidden">
+                    <p class="text-bill-cart">Discount (EUR)</p>
+                    <p class="text-bill-cart">-<span id="total-discount-money"></span> €</p>
+                </div>
+                <div id="discount-section-money-total" class="col-12 d-flex justify-content-between mb-3 discount-hidden">
+                    <p class="text-bill-cart">Total (Discount applied)</p>
+                    <p class="text-bill-cart">-<span id="total-discount-money-applied"></span> €</p>
+                </div>
+
                 <div class="col-12">
-                    <a type="button" href="<?= URL . "?controller=pedido&action=loginOrRegister"?>" class="custom-btn-tramitar">TRAMITAR PEDIDO <span><ion-icon name="arrow-dropright"></ion-icon></span></a>
+                    <a id="proceed-comand" type="button" href="<?= URL . "?controller=pedido&action=loginOrRegister" ?>" class="custom-btn-tramitar">TRAMITAR PEDIDO <span><ion-icon name="arrow-dropright"></ion-icon></span></a>
                 </div>
             </div>
 
@@ -190,7 +255,7 @@ $withoutIva = cartController::getPriceWithoutIVA();
                 <p class="mt-3" style="font-size: 14px;">¿Tienes un cupón/bono? ¡Úsalo aquí!</p>
                 <div class="d-flex">
                     <input class="input-text" type="text" placeholder="Escribe tu código">
-                    <input class="btn-aplicar" type="button" value="APLICAR">
+                    <input class="btn-aplicar" type="button" value="APLICAR" onclick="updateUserPoints(1, 200)">
                 </div>
             </div>
             <div class="col-12 d-flex justify-content-center align-items-center flex-column w-100 m-0 p-0" style="height: 150px; background-color: #EEEEEE;">
@@ -205,6 +270,9 @@ $withoutIva = cartController::getPriceWithoutIVA();
     <!-- Icons -->
     <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 
+
+    <script src="https://unpkg.com/notie"></script>
+    <script src="assets/js/cart/cart.js"></script>
 </body>
 
 </html>

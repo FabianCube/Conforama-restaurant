@@ -64,11 +64,11 @@ class UsuariosDAO
     {
         $conn = DataBase::connect();
 
-        $stmt = $conn->prepare("SELECT * FROM usuarios WHERE usuario_id = $id");
+        $stmt = $conn->prepare("SELECT * FROM usuarios WHERE usuario_id = $id AND rol_id = 2");
         $stmt->execute();
         $result = $stmt->get_result();
 
-        $user = $result->fetch_object('Usuarios');
+        $user = $result->fetch_object('Cliente');
         return $user;
     }
 
@@ -90,6 +90,18 @@ class UsuariosDAO
         $conn = DataBase::connect();
         $sql = $conn->prepare("UPDATE usuarios SET nombre_usuario = '$name', apellido_usuario = '$sndName',
             email = '$email', telefono = $tel, direccion = '$dir' WHERE usuario_id = $user_id");
+
+        if (!$sql->execute()) {
+            return false;
+        }
+
+        mysqli_close($conn);
+    }
+
+    public static function updateUserPoints($pts, $uid)
+    {
+        $conn = DataBase::connect();
+        $sql = $conn->prepare("UPDATE usuarios SET puntos = '$pts' WHERE usuario_id = $uid");
 
         if (!$sql->execute()) {
             return false;

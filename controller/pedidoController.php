@@ -38,11 +38,36 @@ class pedidoController
     {
         $user_id = $_SESSION['current_user']->getUsuario_id();
         $date = date('Y-m-d H:i:s');
-        $precio_total = calculadora::calcularPrecioTotal($_SESSION['items']);
+        $propina = 0;
 
-        
+        // incluir un if isset discountedPrice, $precio_total tiene el valor descontado.
+        // GUARDAR PRECIO TOTAL CON DESCUENTO
+        if(isset($_SESSION['discount-applied']))
+        {
+            if($_SESSION['discount-applied'] !== "null")
+            {
+                $precio_total = $_SESSION['discount-applied'];
+            }
+            else{
+                $precio_total = calculadora::calcularPrecioTotal($_SESSION['items']);
+            }
+        }
+        else
+        {
+            $precio_total = calculadora::calcularPrecioTotal($_SESSION['items']);
+        }
+
+        if(isset($_SESSION['propina']))
+        {
+            if($_SESSION['propina'] != "null")
+            {
+                $propina = $_SESSION['propina'];
+                $precio_total += $propina;
+            }
+        }
+
         // Guardo la informacion del pedido en la base de datos..
-        PedidosDAO::registrarPedido($user_id, EN_CURSO_ESTADO_PEDIDO, $date, $precio_total);
+        PedidosDAO::registrarPedido($user_id, EN_CURSO_ESTADO_PEDIDO, $date, $precio_total, $propina);
         $pedido = PedidosDAO::getLastPedidoByUserId($user_id);
 
         foreach ($_SESSION['items'] as $value) {
@@ -50,8 +75,28 @@ class pedidoController
             Pedido_ProductoDAO::setPedidoProductos($pedido->getPedido_id(), $value->getProducto_carrito()->getProducto_id(), $value->getCantidad());
         }
         setcookie('ultimo-pedido', $pedido->getPrecio_total(), time() + 3600);
-        unset($_SESSION['items']);
 
-        header("Location: " . URL);
+        // elimino el descuento del pedido.
+        unset($_SESSION['discount-applied']);
+        
+        header("Location: " . URL . "?controller=pedido&action=showQR");
+    }
+
+    public static function showQR()
+    {
+        $uid = $_SESSION['current_user']->getUsuario_id();
+        include_once 'view/nav.php';
+        include_once 'view/mostrarQR.php';
+        include_once 'view/footer.php'; 
+
+        unset($_SESSION['items']);
+    }
+
+    public static function infoQRpedido()
+    {
+        $pedido = PedidosDAO::getLastPedidoByUserId($_GET['uid']);
+        include_once 'view/nav.php';
+        include_once 'view/infoQRpedido.php';
+        include_once 'view/footer.php';
     }
 }

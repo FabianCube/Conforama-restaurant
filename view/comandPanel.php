@@ -1,15 +1,3 @@
-<?php
-include_once 'model/ProductoDAO.php';
-include_once 'config/parameters.php';
-
-
-if (!isset($_POST["categoria_id"])) {
-    $productos = ProductoDAO::getAllProducts();
-} else {
-    $productos = ProductoDAO::getProductsByCategory($_POST["categoria_id"]);
-}
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -25,57 +13,19 @@ if (!isset($_POST["categoria_id"])) {
     <title>Pedidos</title>
 </head>
 
-<body>
+<body onload="getProductos()">
     <section class="container pt-5 d-flex flex-row justify-content-between" style="margin-top: 55px; width: 1140px;">
         <div class="col-xl-3 col-lg-4 me-5" style="width: 270px;">
             <div class="p-4 d-flex align-items-center header-category-filter" style="height: 70px;">
                 <p>Categorías</p>
             </div>
-            <div class="container p-4 custom-container-filter">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <div class="filter-container">
-                        <form action=<?= URL . "?controller=productos" ?> method="post">
-                            <input name="no_filter" value="0" hidden>
-                            <button type="submit" class="filter-text">Todos</button>
-                        </form>
-                    </div>
-                    <div class="filter-container">
-                        <form action=<?= URL . "?controller=productos" ?> method="post">
-                            <input name="categoria_id" value="0" hidden>
-                            <button type="submit" class="filter-text">Cafés</button>
-                        </form>
-                    </div>
-                    <div class="filter-container">
-                        <form action=<?= URL . "?controller=productos" ?> method="post">
-                            <input name="categoria_id" value="2" hidden>
-                            <button type="submit" class="filter-text">Smoothies</button>
-                        </form>
-                    </div>
-                    <div class="filter-container">
-                        <form action=<?= URL . "?controller=productos" ?> method="post">
-                            <input name="categoria_id" value="3" hidden>
-                            <button type="submit" class="filter-text">Muffins</button>
-                        </form>
-                    </div>
-                    <div class="filter-container">
-                        <form action=<?= URL . "?controller=productos" ?> method="post">
-                            <input name="categoria_id" value="1" hidden>
-                            <button type="submit" class="filter-text">Sandwitchs</button>
-                        </form>
-                    </div>
-                    <div class="filter-container">
-                        <form action=<?= URL . "?controller=productos" ?> method="post">
-                            <input name="categoria_id" value="5" hidden>
-                            <button type="submit" class="filter-text">Donuts</button>
-                        </form>
-                    </div>
-                    <div class="filter-container">
-                        <form action=<?= URL . "?controller=productos" ?> method="post">
-                            <input name="categoria_id" value="4" hidden>
-                            <button type="submit" class="filter-text">Batidos</button>
-                        </form>
-                    </div>
-                </ul>
+            <div id="filtro-categorias" class="p-4 custom-container-filter">
+                <input type="checkbox" id="cafes" value="0" onchange="filtrarProductos()"> <label for="cafes">Cafes</label><br>
+                <input type="checkbox" id="bocadillos" value="1" onchange="filtrarProductos()"> <label for="bocadillos">Bocadillos</label><br>
+                <input type="checkbox" id="smoothies" value="2" onchange="filtrarProductos()"> <label for="smoothies">Smoothies</label><br>
+                <input type="checkbox" id="muffins" value="3" onchange="filtrarProductos()"> <label for="muffins">Muffins</label><br>
+                <input type="checkbox" id="batidos" value="4" onchange="filtrarProductos()"> <label for="batidos">Batidos</label><br>
+                <input type="checkbox" id="donuts" value="5" onchange="filtrarProductos()"> <label for="donuts">Donuts</label><br>
             </div>
         </div>
         <div class="col-9">
@@ -99,44 +49,14 @@ if (!isset($_POST["categoria_id"])) {
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <?php foreach ($productos as $producto) { ?>
-                    <div class="col-xl-4 col-lg-6">
-                        <div class="card mb-4 custom-card-hover" style="width: 256px; height: 468px;">
-                            <div class="container d-flex justify-content-center p-3" style="width: 200px; height: 180px;">
-                                <img src="assets/images/<?= $producto->getUrl_img() ?>" class="img-fluid" alt="Product image">
-                            </div>
-                            <div class="container d-flex justify-content-center">
-                                <div class="custom-label-recomendado d-flex justify-content-center" style="width: 150px;">
-                                    <p class="custom-txt-recomendado">RECOMENDADO DEL MES</p>
-                                </div>
-                            </div>
-                            <div class="card-body d-flex justify-content-between flex-column">
-                                <div class="d-flex flex-row">
-                                    <div class="col-8">
-                                        <h5 class="card-title custom-title-card"><?= $producto->getNombre_producto() ?></h5>
-                                        <p class="card-text custom-description-product"><?= $producto->getDescripcion() ?></p>
-                                        <p class="card-text custom-description-product-2">Vendido por Conforama</p>
-                                    </div>
-                                    <div class="col-4 d-flex justify-content-end">
-                                        <p class="card-text custom-product-price"><?= $producto->getPrecio_producto() ?>€</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-end">
-                                    <form action=<?= URL . "?controller=productos" ?> method="post">
-                                        <input name="producto_id" value="<?= $producto->getProducto_id() ?>" hidden>
-                                        <button class="btn btn-danger d-flex align-items-center justify-content-center custom-btn-add-cart" style="width: 55px; height: 55px; border-radius: 50px;" type="submit">
-                                            <span class="material-symbols-outlined icon-cart" style="font-size: 36px;">add_shopping_cart</span>
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-            </div>
+
+            <!-- List of productos -->
+            <div id="container-productos" class="row"></div>
+
         </div>
     </section>
+
+    <script src="assets/js/productos/productos.js"></script>
 </body>
 
 </html>

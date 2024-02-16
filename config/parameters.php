@@ -25,3 +25,7 @@ define("SMOOTHIES_CATEGORY_ID", 2);
 define("MUFFINS_CATEGORY_ID", 3);
 define("MILKSHAKE_CATEGORY_ID", 4);
 define("DONUTS_CATEGORY_ID", 5);
+
+// sistema de puntos
+define("COIN_VALUE", 100);
+define("EXCHANGE_VALUE", 0.1);

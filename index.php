@@ -10,6 +10,8 @@ include_once 'controller/cartController.php';
 include_once 'controller/loginController.php';
 include_once 'controller/pedidoController.php';
 include_once 'controller/accountController.php';
+include_once 'controller/opinionesController.php';
+include_once 'controller/APIController.php';
 include_once 'config/parameters.php';
 
 
