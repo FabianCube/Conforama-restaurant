@@ -42,4 +42,9 @@ class homeController
         include_once 'view/footer.php';
     }
 
+    public function redirectDetailsPedidoQR()
+	{
+		$pedido = PedidosDAO::getLastPedidoByUserId($_GET['uid']);
+		include_once 'view/infoQRpedido.php';
+	}
 }

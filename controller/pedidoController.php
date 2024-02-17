@@ -13,7 +13,9 @@ include_once 'utils/calculadora.php';
 class pedidoController
 {
     public function index()
-    { }
+    {
+        
+    }
 
     /**
      * Página para registrarse o loggearse antes de poder realizar el pedido.
