@@ -220,7 +220,7 @@ function showPedidosAvailables()
     return result;
 }
 
-function uploadOpinion() {
+async function uploadOpinion() {
 
     const titulo_opinion = document.getElementById("titulo_opinion").value;
     const texto_opinion = document.getElementById("opinion_usuario").value;
@@ -240,7 +240,7 @@ function uploadOpinion() {
     });
 
     // Le paso los parametros por "body", mediante POST.
-    let resultado = fetch("http://localhost/conforama-restaurant/?controller=API&action=api", {
+    let resultado = await fetch("http://localhost/conforama-restaurant/?controller=API&action=api", {
         method: "POST",
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: data
@@ -266,7 +266,7 @@ function uploadOpinion() {
     }
 
     console.log("[INFO] uploadOpinion: Lanzando cargarOpiniones()");
-    cargarOpiniones();
+    await cargarOpiniones();
 }
 
 function getUserData() 
