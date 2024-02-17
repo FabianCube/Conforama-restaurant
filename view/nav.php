@@ -49,7 +49,17 @@
                         <a class="nav-link" href="<?= URL . "?controller=cart" ?>">
                             Mi carrito
                             <span class="translate-middle badge rounded-pill bg-secondary">
-                                <?= count($_SESSION['items']); ?>
+                                <?php
+                                    if(isset($_SESSION['items']))
+                                    {
+                                        echo count($_SESSION['items']);
+                                    }
+                                    else
+                                    {
+                                        echo "0";
+                                    }
+                                
+                                ?>
                             </span>
                         </a>
                     </li>

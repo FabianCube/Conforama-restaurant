@@ -117,7 +117,14 @@ class APIController
                 header('Content-Type: application/json');
 
                 $user_id = $_SESSION['current_user']->getUsuario_id();
-                echo json_encode(PedidosDAO::getPedidosSinOpinionByUserId($user_id));
+                $pedidos = PedidosDAO::getPedidosSinOpinionByUserId($user_id);
+
+                $response = [
+                    "success" => "true",
+                    "pedidos" => $pedidos
+                ];
+
+                echo json_encode($response, JSON_UNESCAPED_UNICODE);
 
                 break;
 

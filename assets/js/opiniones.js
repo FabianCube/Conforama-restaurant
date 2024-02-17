@@ -201,7 +201,7 @@ function showPedidosAvailables()
 {
     let result = ``;
 
-    let pedidos = JSON.parse(localStorage.getItem("availablePedidos"));
+    let pedidos = localStorage.getItem("availablePedidos");
 
     if(pedidos === null)
     {
@@ -281,21 +281,24 @@ function getUserData()
 
 function getAvailablePedidos()
 {
+    console.log("Entrando en getAvailablePedidos");
     fetch("http://localhost/conforama-restaurant/?controller=API&action=api", {
         method: "POST",
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: "accion=availablePedidos"
-    }).then(response => response.json()).then(pedidos => loadAvailablePedidos(pedidos))
+    }).then(response => response.json()).then(data => loadAvailablePedidos(data.pedidos))
     .catch(function(err){ console.log(err) })
 }
 
 function loadAvailablePedidos(pedidos)
 {
-    if(pedidos != null)
+    if(pedidos)
     {
         console.log("[SUCCESS] loadAvailablePedidos: Cargando los pedidos disponibles.");
-
-        localStorage.setItem("availablePedidos", json_decode(pedidos));
+        
+        let ped = pedidos;
+        
+        localStorage.setItem("availablePedidos", "hola");
     }
     else
     {

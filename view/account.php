@@ -139,14 +139,16 @@
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: 'accion=getPoints'
-            }).then(response => response.json()).then(()=>showPoints(response))
-            .catch(function(err) { console.log(err) })
+            })
+            .then(response => response.json())
+            .then(data => showPoints(data.puntos));
         }
         
         function showPoints(points)
         {
-            let container = document.getElementById("points").value
-            container.innerHTML = points;
+            console.log("Mostrando puntos: " + points);
+            let container = document.getElementById("points");
+            container.textContent = points;
         }
 
     </script>
