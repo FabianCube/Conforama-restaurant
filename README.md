@@ -43,3 +43,5 @@ Para realizar el cambio de metodología se ha usado una **API** preparada en PHP
 
 Para realizar peticiones a nuestra API hemos usado **fetch** mediante POST. De esta manera se pueden cargar los datos dinamicamente. 
 
+Por ultimo, el QR ha presentado problemas a la hora se implementarse, en un principio no accedia correctamente e a la URL que se le pasaba, para solucionar esto se ha cambiado la ubicación del código PHP estando en el HTML. 
+
